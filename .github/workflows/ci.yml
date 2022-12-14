@@ -55,6 +55,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:unit
       - run: pnpm playwright install ${{ matrix.e2e-browser }}
+      - run: pnpm playwright install-deps
       - run: pnpm test:browser --project=${{ matrix.e2e-browser }}
       - name: Archive test results
         if: failure()

@@ -1,4 +1,7 @@
+import dotenv from 'dotenv';
 import { type PlaywrightTestConfig, devices } from '@playwright/test';
+
+dotenv.config({ path: './tests/.env' });
 
 const config: PlaywrightTestConfig = {
 	webServer: {

@@ -21,6 +21,7 @@
 		"@typescript-eslint/eslint-plugin": "5.48.0",
 		"@typescript-eslint/parser": "5.48.0",
 		"autoprefixer": "10.4.13",
+		"dotenv": "16.0.3",
 		"eslint": "8.31.0",
 		"eslint-config-prettier": "8.6.0",
 		"eslint-plugin-svelte3": "4.0.0",
@@ -40,5 +41,9 @@
 	"engines": {
 		"pnpm": "^7.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@supabase/auth-helpers-sveltekit": "0.8.6",
+		"@supabase/supabase-js": "2.2.1"
+	}
 }

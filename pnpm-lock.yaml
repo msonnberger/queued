@@ -19,6 +19,7 @@ specifiers:
   prettier-plugin-tailwindcss: 0.2.1
   svelte: 3.55.0
   svelte-check: 3.0.1
+  svelte-french-toast: 1.0.3
   tailwindcss: 3.2.4
   tslib: 2.4.1
   typescript: 4.9.4
@@ -28,6 +29,7 @@ specifiers:
 dependencies:
   '@supabase/auth-helpers-sveltekit': 0.8.6_qtvf6mjfeick7xf5purdyuznsu
   '@supabase/supabase-js': 2.2.3
+  svelte-french-toast: 1.0.3_svelte@3.55.0
 
 devDependencies:
   '@playwright/test': 1.29.2
@@ -2267,6 +2269,14 @@ packages:
       - sugarss
     dev: true
 
+  /svelte-french-toast/1.0.3_svelte@3.55.0:
+    resolution: {integrity: sha512-HBdutlqUx5FroucvcmMJstmTJDedXayiOSXubBYW6iL5x1PdHp+bOflGx5NxsOa6+EQckJnnVv1vJYgGsg7ngQ==}
+    dependencies:
+      svelte-writable-derived: 2.1.6_svelte@3.55.0
+    transitivePeerDependencies:
+      - svelte
+    dev: false
+
   /svelte-hmr/0.15.1_svelte@3.55.0:
     resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -2325,10 +2335,17 @@ packages:
       typescript: 4.9.4
     dev: true
 
+  /svelte-writable-derived/2.1.6_svelte@3.55.0:
+    resolution: {integrity: sha512-vqOXuiESMZyP/kt/RD+nOk2RVHNakDm1K1hmfeGAKc4jzcSp5hEkUi43MDbkVlMurkSBlcMVTQwRQy4LcBT2lw==}
+    peerDependencies:
+      svelte: ^3.2.1
+    dependencies:
+      svelte: 3.55.0
+    dev: false
+
   /svelte/3.55.0:
     resolution: {integrity: sha512-uGu2FVMlOuey4JoKHKrpZFkoYyj0VLjJdz47zX5+gVK5odxHM40RVhar9/iK2YFRVxvfg9FkhfVlR0sjeIrOiA==}
     engines: {node: '>= 8'}
-    dev: true
 
   /tailwindcss/3.2.4_postcss@8.4.21:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}

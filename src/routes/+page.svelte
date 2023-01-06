@@ -1,16 +1,33 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	import { supabaseClient } from '$lib/supabase';
+	import { enhance } from '$app/forms';
+	import type { ActionData, PageData } from './$types';
+	import toast, { Toaster } from 'svelte-french-toast';
 
 	export let data: PageData;
+	export let form: ActionData;
+
+	$: {
+		if (form?.error) {
+			toast.error(form.error, { position: 'top-right' });
+		}
+	}
 </script>
 
+<svelte:head>
+	<title>Queued</title>
+</svelte:head>
+
 <header class="self-end p-4">
+	<Toaster />
 	{#if data.session}
 		<h2>Hi, {data.session.user.email}</h2>
-		<button on:click={() => supabaseClient.auth.signOut()}>Logout</button>
+		<form action="?/logout" method="post" use:enhance>
+			<button type="submit">Logout</button>
+		</form>
 	{:else}
-		<button on:click={() => supabaseClient.auth.signInWithOAuth({ provider: 'spotify' })}>Continue with Spotify</button>
+		<form action="?/login" method="post" use:enhance>
+			<button type="submit">Continue with Spotify</button>
+		</form>
 	{/if}
 </header>
 

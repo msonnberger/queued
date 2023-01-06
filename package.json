@@ -44,6 +44,7 @@
 	"type": "module",
 	"dependencies": {
 		"@supabase/auth-helpers-sveltekit": "0.8.6",
-		"@supabase/supabase-js": "2.2.3"
+		"@supabase/supabase-js": "2.2.3",
+		"svelte-french-toast": "1.0.3"
 	}
 }

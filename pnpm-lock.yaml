@@ -31,6 +31,11 @@ dependencies:
   '@supabase/supabase-js': 2.2.3
   svelte-french-toast: 1.0.3_svelte@3.55.0
 
+dependencies:
+  '@supabase/auth-helpers-sveltekit': 0.8.6_qtvf6mjfeick7xf5purdyuznsu
+  '@supabase/supabase-js': 2.2.3
+  svelte-french-toast: 1.0.3_svelte@3.55.0
+
 devDependencies:
   '@playwright/test': 1.29.2
   '@sveltejs/adapter-vercel': 1.0.1_@sveltejs+kit@1.0.10
@@ -2746,6 +2751,7 @@ packages:
       tinyspy: 1.0.2
       vite: 4.0.4_@types+node@18.11.18
       vite-node: 0.27.0_@types+node@18.11.18
+
     transitivePeerDependencies:
       - less
       - sass

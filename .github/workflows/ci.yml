@@ -9,6 +9,10 @@ on:
 env:
   # we call `pnpm playwright install` instead
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+  PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+  PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
+  SPOTIFY_USER: ${{ secrets.SPOTIFY_USER }}
+  SPOTIFY_PASSWORD: ${{ secrets.SPOTIFY_PASSWORD }}
 
 # cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
@@ -54,6 +58,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:unit
+      - run: pnpm playwright install chromium
       - run: pnpm playwright install ${{ matrix.e2e-browser }}
       - run: pnpm playwright install-deps
       - run: pnpm test:browser --project=${{ matrix.e2e-browser }}

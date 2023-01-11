@@ -4,10 +4,6 @@ import { type PlaywrightTestConfig, devices } from '@playwright/test';
 dotenv.config({ path: './tests/.env' });
 
 const config: PlaywrightTestConfig = {
-	globalSetup: './tests/globalSetup',
-	use: {
-		storageState: './tests/storageState.json'
-	},
 	webServer: {
 		command: 'pnpm build && pnpm preview --port 5173',
 		port: 5173,

@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData, PageData } from './$types';
 	import toast, { Toaster } from 'svelte-french-toast';
+	import Counter from '$lib/components/Counter.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -33,4 +34,5 @@
 
 <div class="grow grid place-items-center">
 	<h1 class="text-5xl font-bold">Welcome to Queued</h1>
+	<Counter />
 </div>

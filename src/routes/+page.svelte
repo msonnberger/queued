@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	import { Button } from '$lib/components';
+	import { ThemeToggle } from '$lib/components';
 
 	export let data: PageData;
 </script>
@@ -10,6 +9,7 @@
 </svelte:head>
 
 <header class="self-end p-4">
+	<ThemeToggle />
 	{#if data.session}
 		<h2>Hi, {data.session.user.email}</h2>
 		<form action="/auth/logout" method="post">

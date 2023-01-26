@@ -4,11 +4,11 @@ import { env } from '$env/dynamic/private';
 
 export const actions = {
 	login: async ({ locals }) => {
-		const redirectTo = env.SITE_URL ?? (env.VERCEL_URL ? `https://${env.VERCEL_URL}/` : 'http://localhost:5173/');
+		const redirect_to = env.SITE_URL ?? (env.VERCEL_URL ? `https://${env.VERCEL_URL}/` : 'http://localhost:5173/');
 
 		const { data, error } = await locals.supabase.auth.signInWithOAuth({
 			provider: 'spotify',
-			options: { redirectTo }
+			options: { redirectTo: redirect_to }
 		});
 
 		if (error) {

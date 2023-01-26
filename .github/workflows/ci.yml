@@ -9,10 +9,6 @@ on:
 env:
   # we call `pnpm playwright install` instead
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
-  PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
-  PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
-  SPOTIFY_USER: ${{ secrets.SPOTIFY_USER }}
-  SPOTIFY_PASSWORD: ${{ secrets.SPOTIFY_PASSWORD }}
 
 # cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
@@ -36,18 +32,12 @@ jobs:
       - run: pnpm check
       - run: pnpm lint
   Tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18]
-        os: [ubuntu-latest]
-        e2e-browser: ['chromium', 'firefox', 'webkit']
-        include:
-          - node-version: 19
-            os: ubuntu-latest
-            e2e-browser: 'chromium'
+        node-version: [18, 19]
     steps:
       - run: git config --global core.autocrlf false
       - uses: actions/checkout@v3
@@ -56,20 +46,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
+      - name: 'Create .env file'
+        run: echo "${{ secrets.ENV_FILE }}" > .env
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:unit
-      - run: pnpm playwright install chromium
-      - run: pnpm playwright install ${{ matrix.e2e-browser }}
-      - run: pnpm playwright install-deps
-      - run: pnpm test:browser --project=${{ matrix.e2e-browser }}
-      - name: Archive test results
-        if: failure()
-        shell: bash
-        run: find packages -type d -name test-results -not -empty | tar -czf test-results.tar.gz --files-from=-
+      - run: pnpm playwright install chromium --with-deps
+      - run: pnpm test:browser
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v3
         with:
           retention-days: 3
-          name: test-failure-${{ github.run_id }}-${{ matrix.os }}-${{ matrix.node-version }}-${{ matrix.e2e-browser }}
-          path: test-results.tar.gz
+          name: test-failure-${{ github.run_id }}-${{ matrix.node-version }}
+          path: playwright-report/

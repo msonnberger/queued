@@ -15,3 +15,4 @@ yarn.lock
 
 /tests/storage-state.json
 /src/lib/api/spotify.ts
+/src/lib/api/supabase.types.ts

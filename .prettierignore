@@ -14,3 +14,4 @@ package-lock.json
 yarn.lock
 
 /tests/storage-state.json
+/src/lib/api/spotify.ts

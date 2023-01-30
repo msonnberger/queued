@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData, PageData } from './$types';
 	import toast, { Toaster } from 'svelte-french-toast';
-	import Counter from '$lib/components/Counter.svelte';
+	import { Counter } from '$lib/components';
 
 	export let data: PageData;
 	export let form: ActionData;

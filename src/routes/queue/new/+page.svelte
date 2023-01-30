@@ -22,3 +22,7 @@
 {:else}
 	<h2>HAS NO PREMIUM</h2>
 {/if}
+
+{#if form?.success}
+	<img src={`/queue/${form.queue.join_code}/qrcode.svg`} alt="Deine Mutter" />
+{/if}

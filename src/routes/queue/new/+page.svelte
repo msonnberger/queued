@@ -7,7 +7,7 @@
 	export let form: ActionData;
 
 	$: if (form?.success) {
-		toast.success(`Queue ${form.queue.name} created!`, { position: 'top-right' });
+		toast.success(`Queue ${form.queue?.name} created!`, { position: 'top-right' });
 	}
 </script>
 
@@ -24,5 +24,5 @@
 {/if}
 
 {#if form?.success}
-	<img src={`/queue/${form.queue.join_code}/qrcode.svg`} alt="Deine Mutter" />
+	<img src={`/queue/${form.queue?.join_code}/qrcode.svg`} alt="Deine Mutter" />
 {/if}

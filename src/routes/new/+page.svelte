@@ -1,8 +1,12 @@
-<script>
-	import { Button } from '$lib/components';
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
-<p>Wall of text - you need Spotify Premium to create a Queue</p>
-<form action="/auth/login?path=new" method="post">
-	<Button type="submit">Continue with Spotify</Button>
-</form>
+<h1>NEW</h1>
+{#if data.user_has_premium}
+	<h2>HAS PREMIUM</h2>
+{:else}
+	<h2>HAS NO PREMIUM</h2>
+{/if}

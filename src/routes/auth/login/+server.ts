@@ -8,7 +8,7 @@ export const POST = (async ({ locals, url }) => {
 
 	const { data, error: err } = await locals.supabase.auth.signInWithOAuth({
 		provider: 'spotify',
-		options: { redirectTo: redirect_to }
+		options: { redirectTo: redirect_to, scopes: 'user-read-private' }
 	});
 
 	if (err) {

@@ -20,7 +20,7 @@
 	export let variant: ButtonProps['variant'] = 'filled';
 	export let href: string | undefined = undefined;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
-	export let external: boolean = false;
+	export let external = false;
 
 	$: target = external ? '_blank' : '';
 	$: rel = external ? 'noopener noreferrer' : '';

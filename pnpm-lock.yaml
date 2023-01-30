@@ -11,6 +11,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.49.0
   '@typescript-eslint/parser': 5.49.0
   autoprefixer: 10.4.13
+  class-variance-authority: 0.4.0
   dotenv: 16.0.3
   eslint: 8.33.0
   eslint-config-prettier: 8.6.0
@@ -34,6 +35,7 @@ specifiers:
 dependencies:
   '@supabase/auth-helpers-sveltekit': 0.8.7_sycdk7p4bm6ahiipdl6thijlm4
   '@supabase/supabase-js': 2.5.0
+  class-variance-authority: 0.4.0_typescript@4.9.4
   oazapfts: 4.5.2_openapi-types@12.1.0
   svelte-french-toast: 1.0.3_svelte@3.55.1
 
@@ -1284,6 +1286,17 @@ packages:
     resolution: {integrity: sha512-4jYS4MOAaCIStSRwiuxc4B8MYhIe676yO1sYGzARnjXkWpmzZMMYxY6zu8WYWDhSuth5zhrQ1rhNSibyyvv4/w==}
     engines: {node: '>=8'}
     dev: true
+
+  /class-variance-authority/0.4.0_typescript@4.9.4:
+    resolution: {integrity: sha512-74enNN8O9ZNieycac/y8FxqgyzZhZbxmCitAtAeUrLPlxjSd5zA7LfpprmxEcOmQBnaGs5hYhiSGnJ0mqrtBLQ==}
+    peerDependencies:
+      typescript: '>= 4.5.5 < 5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 4.9.4
+    dev: false
 
   /cli-truncate/3.1.0:
     resolution: {integrity: sha512-wfOBkjXteqSnI59oPcJkcPl/ZmwvMMOj340qUIY1SKZCv0B9Cf4D4fAucRkIKQmsIuYK3x1rrgU7MeGRruiuiA==}

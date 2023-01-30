@@ -28,6 +28,7 @@
 		"eslint-config-prettier": "8.6.0",
 		"eslint-plugin-svelte3": "4.0.0",
 		"jsdom": "21.1.0",
+		"openapi-types": "12.1.0",
 		"postcss": "8.4.21",
 		"prettier": "2.8.3",
 		"prettier-plugin-svelte": "2.9.0",
@@ -48,6 +49,7 @@
 	"dependencies": {
 		"@supabase/auth-helpers-sveltekit": "0.8.7",
 		"@supabase/supabase-js": "2.5.0",
+		"oazapfts": "4.5.2",
 		"svelte-french-toast": "1.0.3"
 	}
 }

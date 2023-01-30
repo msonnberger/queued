@@ -1,17 +1,8 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import type { ActionData, PageData } from './$types';
-	import toast, { Toaster } from 'svelte-french-toast';
-	import { Counter } from '$lib/components';
+	import type { PageData } from './$types';
+	import { Button } from '$lib/components';
 
 	export let data: PageData;
-	export let form: ActionData;
-
-	$: {
-		if (form?.error) {
-			toast.error(form.error, { position: 'top-right' });
-		}
-	}
 </script>
 
 <svelte:head>
@@ -19,20 +10,19 @@
 </svelte:head>
 
 <header class="self-end p-4">
-	<Toaster />
 	{#if data.session}
 		<h2>Hi, {data.session.user.email}</h2>
-		<form action="?/logout" method="post" use:enhance>
-			<button type="submit">Logout</button>
+		<form action="/auth/logout" method="post">
+			<Button type="submit">Logout</Button>
 		</form>
 	{:else}
-		<form action="?/login" method="post" use:enhance>
-			<button type="submit">Continue with Spotify</button>
+		<form action="/auth/login" method="post">
+			<Button type="submit">Continue with Spotify</Button>
 		</form>
 	{/if}
 </header>
 
 <div class="grow grid place-items-center">
 	<h1 class="text-5xl font-bold">Welcome to Queued</h1>
-	<Counter />
+	<Button href="/new">Create Queue</Button>
 </div>

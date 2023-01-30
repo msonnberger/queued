@@ -4,7 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ locals }) => {
 	if (!locals.session) {
-		throw redirect(303, '/new/login');
+		throw redirect(303, '/queue/new/login');
 	}
 
 	const user_profile = await getMe({ headers: { Authorization: `Bearer ${locals.session.provider_token}` } });
@@ -18,7 +18,7 @@ export const load = (async ({ locals }) => {
 export const actions = {
 	create_queue: async ({ locals, request }) => {
 		if (!locals.session) {
-			throw redirect(303, '/new/login');
+			throw redirect(303, '/queue/new/login');
 		}
 
 		const data = await request.formData();

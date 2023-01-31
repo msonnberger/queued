@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export const actions = {
@@ -12,14 +12,15 @@ export const actions = {
 
 		const { data: queue, error: err } = await locals.supabase
 			.from('queue')
-			.insert({ name, owner_id: locals.session.user.id, join_code: get_random_string(6) })
+			.insert({ name, owner_id: locals.session.user.id, qid: get_random_string(6) })
 			.select()
 			.single();
 
-		return {
-			success: !err,
-			queue
-		};
+		if (err) {
+			throw error(500, err.message);
+		}
+
+		throw redirect(303, `/queue/${queue.qid}`);
 	}
 } satisfies Actions;
 

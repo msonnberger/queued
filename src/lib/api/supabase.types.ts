@@ -36,25 +36,25 @@ export interface Database {
           created_at: string
           current_track_id: number | null
           id: number
-          join_code: string
           name: string
           owner_id: string
+          qid: string
         }
         Insert: {
           created_at?: string
           current_track_id?: number | null
           id?: number
-          join_code: string
           name: string
           owner_id: string
+          qid: string
         }
         Update: {
           created_at?: string
           current_track_id?: number | null
           id?: number
-          join_code?: string
           name?: string
           owner_id?: string
+          qid?: string
         }
       }
     }

@@ -1,18 +1,11 @@
 <script lang="ts">
 	import { Button } from '$lib/components';
-	import type { ActionData, PageData } from './$types';
-	import toast, { Toaster } from 'svelte-french-toast';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
-	export let form: ActionData;
-
-	$: if (form?.success) {
-		toast.success(`Queue ${form.queue?.name} created!`, { position: 'top-right' });
-	}
 </script>
 
 <h1>NEW</h1>
-<Toaster />
 {#if data.user_has_premium}
 	<form action="?/create_queue" method="post" class="flex flex-col gap-5">
 		<label for="room_name">Queue name</label>
@@ -21,8 +14,4 @@
 	</form>
 {:else}
 	<h2>HAS NO PREMIUM</h2>
-{/if}
-
-{#if form?.success}
-	<img src={`/queue/${form.queue?.join_code}/qrcode.svg`} alt="Deine Mutter" />
 {/if}

@@ -11,7 +11,7 @@ export const actions = {
 		const name = data.get('queue_name') as string;
 
 		const { data: queue, error: err } = await locals.supabase
-			.from('queue')
+			.from('queues')
 			.insert({ name, owner_id: locals.session.user.id, qid: get_random_string(6) })
 			.select()
 			.single();

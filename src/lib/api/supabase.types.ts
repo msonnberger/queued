@@ -31,7 +31,7 @@ export interface Database {
   }
   public: {
     Tables: {
-      queue: {
+      queues: {
         Row: {
           created_at: string
           current_track_id: number | null
@@ -55,6 +55,49 @@ export interface Database {
           name?: string
           owner_id?: string
           qid?: string
+        }
+      }
+      tracks: {
+        Row: {
+          created_at: string | null
+          id: number
+          queue_id: number
+          spotify_uri: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          queue_id: number
+          spotify_uri: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          queue_id?: number
+          spotify_uri?: string
+        }
+      }
+      votes: {
+        Row: {
+          created_at: string | null
+          id: number
+          track_id: number
+          value: number
+          voter_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          track_id: number
+          value: number
+          voter_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          track_id?: number
+          value?: number
+          voter_id?: string
         }
       }
     }

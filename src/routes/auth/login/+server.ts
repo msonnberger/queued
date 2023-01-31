@@ -1,10 +1,8 @@
 import type { RequestHandler } from './$types';
-import { env } from '$env/dynamic/private';
 import { error, redirect } from '@sveltejs/kit';
 
 export const POST = (async ({ locals, url }) => {
-	let redirect_to = env.SITE_URL ?? (env.VERCEL_URL ? `https://${env.VERCEL_URL}/` : 'http://localhost:5173/');
-	redirect_to += url.searchParams.get('path') ?? '';
+	const redirect_to = `${url.origin}/${url.searchParams.get('path') ?? ''}`;
 
 	const { data, error: err } = await locals.supabase.auth.signInWithOAuth({
 		provider: 'spotify',

@@ -4,6 +4,7 @@
 import type { TypedSupabaseClient } from '@supabase/auth-helpers-sveltekit/dist/types';
 import type { Session } from '@supabase/supabase-js';
 import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
+import type { Database } from '$lib/api/supabase.types';
 
 // and what to do when importing types
 declare global {
@@ -17,6 +18,11 @@ declare global {
 			session: Session | null;
 		}
 		// interface Platform {}
+
+		interface Supabase {
+			Database: Database;
+			SchemaName: 'public';
+		}
 	}
 
 	type CustomMatchers<R = unknown> = TestingLibraryMatchers<typeof expect.stringContaining, R>;

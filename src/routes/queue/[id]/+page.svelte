@@ -62,7 +62,7 @@
 			<Track
 				title={track.name}
 				artist={track.artists ? track.artists[0].name : undefined}
-				id={track.id}
+				id={track.db_id}
 				uri={track.uri}
 				upvotes={track.votes.up}
 				downvotes={track.votes.down}

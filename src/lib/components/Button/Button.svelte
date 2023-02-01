@@ -1,12 +1,39 @@
 <script lang="ts">
 	import { type VariantProps, cva } from 'class-variance-authority';
 	const buttonVariants = cva(
-		['inline-flex', 'items-center', 'justify-center', 'rounded-md', 'text-sm', 'font-medium', 'h-10', 'py-2', 'px-4'],
+		[
+			'inline-flex',
+			'items-center',
+			'justify-center',
+			'rounded-md',
+			'text-sm',
+			'font-medium',
+			'h-10',
+			'py-2',
+			'px-4',
+			'transition-colors'
+		],
 		{
 			variants: {
 				variant: {
-					filled: ['bg-slate-900', 'text-slate-50', 'hover:bg-slate-800'],
-					outline: ['border', 'bg-transparent', 'border-slate-900', 'text-slate-900', 'hover:bg-slate-100']
+					filled: [
+						'bg-slate-900',
+						'text-slate-50',
+						'hover:bg-slate-800',
+						'dark:bg-slate-50',
+						'dark:text-slate-900',
+						'dark:hover:bg-slate-200'
+					],
+					outline: [
+						'border',
+						'bg-transparent',
+						'border-slate-900',
+						'text-slate-900',
+						'hover:bg-slate-100',
+						'dark:text-slate-50',
+						'dark:border-slate-50',
+						'dark:hover:bg-slate-800'
+					]
 				}
 			},
 			defaultVariants: {

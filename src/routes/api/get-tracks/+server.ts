@@ -1,21 +1,20 @@
-import type { RequestHandler } from './$types';
-import { search } from '$lib/api/spotify';
+import { getTracks } from '$lib/api/spotify';
 import { json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
 export const GET = (async ({ url, fetch }) => {
-	const q = url.searchParams.get('q');
+	const track_ids = url.searchParams.get('track_ids');
 
-	if (q === null) {
-		return json(undefined);
+	if (track_ids === null) {
+		return json([]);
 	}
 
 	const access_token_res = await fetch('/api/spotify-client-credentials');
 	const access_token = await access_token_res.text();
 
-	const result = await search(
-		q,
-		'track',
-		{ limit: 5 },
+	const tracks_res = await getTracks(
+		track_ids,
+		{},
 		{
 			headers: {
 				Authorization: `Bearer ${access_token}`
@@ -23,5 +22,5 @@ export const GET = (async ({ url, fetch }) => {
 		}
 	);
 
-	return json(result.tracks?.items);
+	return json(tracks_res.tracks);
 }) satisfies RequestHandler;

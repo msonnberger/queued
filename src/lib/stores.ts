@@ -9,7 +9,7 @@ type Queue = Database['public']['Tables']['queues']['Row'];
 interface QueueStore {
 	name: string;
 	id: number;
-	tracks: Array<TrackObject & { votes: { up: number; down: number } }>;
+	tracks: Array<Omit<TrackObject, 'id'> & { id: number; votes: { up: number; down: number } }>;
 }
 
 export const createQueueStore = async (queue: Queue) => {
@@ -30,6 +30,7 @@ export const createQueueStore = async (queue: Queue) => {
 			tracks?.map((track, i) => {
 				return {
 					...tracks_objects[i],
+					id: track.id,
 					votes: {
 						// TODO: fix this
 						up: track.votes

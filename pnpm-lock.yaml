@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@playwright/test': 1.30.0
   '@supabase/auth-helpers-sveltekit': 0.8.7
-  '@supabase/supabase-js': 2.6.0
+  '@supabase/supabase-js': 2.7.0
   '@sveltejs/adapter-vercel': 1.0.6
   '@sveltejs/kit': 1.3.7
   '@testing-library/jest-dom': 5.16.5
@@ -25,7 +25,7 @@ specifiers:
   prettier-plugin-svelte: 2.9.0
   prettier-plugin-tailwindcss: 0.2.2
   qrcode: 1.5.1
-  supabase: 1.35.4
+  supabase: 1.36.2
   svelte: 3.55.1
   svelte-check: 3.0.3
   svelte-french-toast: 1.0.3
@@ -36,8 +36,8 @@ specifiers:
   vitest: 0.28.3
 
 dependencies:
-  '@supabase/auth-helpers-sveltekit': 0.8.7_aqybtw76xuzzxibjpmwuom3dpm
-  '@supabase/supabase-js': 2.6.0
+  '@supabase/auth-helpers-sveltekit': 0.8.7_cuu76bm7225ei4sq5x2iikmd2y
+  '@supabase/supabase-js': 2.7.0
   class-variance-authority: 0.4.0_typescript@4.9.5
   oazapfts: 4.5.2_openapi-types@12.1.0
   qrcode: 1.5.1
@@ -63,7 +63,7 @@ devDependencies:
   prettier: 2.8.3
   prettier-plugin-svelte: 2.9.0_kdmmghgdi3ngrsq6otxkjilbry
   prettier-plugin-tailwindcss: 0.2.2_2x43trzvpzis5oa6w3yxl4exgi
-  supabase: 1.35.4
+  supabase: 1.36.2
   svelte: 3.55.1
   svelte-check: 3.0.3_pehl75e5jsy22vp33udjja4soi
   tailwindcss: 3.2.4_postcss@8.4.21
@@ -487,21 +487,21 @@ packages:
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
     dev: true
 
-  /@supabase/auth-helpers-shared/0.2.4_aqybtw76xuzzxibjpmwuom3dpm:
+  /@supabase/auth-helpers-shared/0.2.4_cuu76bm7225ei4sq5x2iikmd2y:
     resolution: {integrity: sha512-c+hi3N6DhjPTzjXGOokre4gmMZOqt0f1ORrwZwi2s07pk3cbkmn77DwwVtlYMNi3oZNYRQqAfxJu83UzpJrrmg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/supabase-js': 2.6.0
+      '@supabase/supabase-js': 2.7.0
     dev: false
 
-  /@supabase/auth-helpers-sveltekit/0.8.7_aqybtw76xuzzxibjpmwuom3dpm:
+  /@supabase/auth-helpers-sveltekit/0.8.7_cuu76bm7225ei4sq5x2iikmd2y:
     resolution: {integrity: sha512-sFXWaeyTVWK70Aekw+plqN+f8si2MqV4PbcEunqZ1H/QfujxxnDfG26j+O+eQ/ue84UFrJutNY+iB3DsTlXlCg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/auth-helpers-shared': 0.2.4_aqybtw76xuzzxibjpmwuom3dpm
-      '@supabase/supabase-js': 2.6.0
+      '@supabase/auth-helpers-shared': 0.2.4_cuu76bm7225ei4sq5x2iikmd2y
+      '@supabase/supabase-js': 2.7.0
     dev: false
 
   /@supabase/functions-js/2.0.0:
@@ -545,8 +545,8 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/supabase-js/2.6.0:
-    resolution: {integrity: sha512-ufCpXqqsJF/+zvqZCHosRK1NMmPNmYysOqWJWgw3WZG0CCmSjmBlHyiyaMVsSALB9UThN8IDHtB0SX7YfRveYQ==}
+  /@supabase/supabase-js/2.7.0:
+    resolution: {integrity: sha512-0Ry6rcxeya0VRbPh6fHfgPcmH7X9gMILon7/PWoVJSjYsQntv7EGUNNeHtLutBlm8St74s5Q4sjsqJOPslDG4Q==}
     dependencies:
       '@supabase/functions-js': 2.0.0
       '@supabase/gotrue-js': 2.10.2
@@ -3714,8 +3714,8 @@ packages:
       acorn: 8.8.1
     dev: true
 
-  /supabase/1.35.4:
-    resolution: {integrity: sha512-wwuD/jFlqmluSQLo1JpqRWqHuO/bvQL9BUHX4C7VY0vvKBEfjJ7bpAEurkJCFxfNbl9BtZ21uW+TDIDDn4QKrA==}
+  /supabase/1.36.2:
+    resolution: {integrity: sha512-RKIU9T1SMUQNgTLmqhxrxlx6EjcjzcUUalCU7mDJPd25gR/wer+sR6OID/UVSH68bv3l+R6SK18uXR79nBpVTA==}
     hasBin: true
     requiresBuild: true
     dependencies:

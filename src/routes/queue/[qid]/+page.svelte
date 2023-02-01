@@ -12,8 +12,6 @@
 	export let data: PageData;
 	let search_results: TrackObject[] = [];
 
-	$: console.log($queue);
-
 	const handle_change = debounce(async (e: Event) => {
 		const input = e.target as HTMLInputElement;
 
@@ -27,7 +25,7 @@
 </script>
 
 <h1>{$queue.name}</h1>
-<img src={`/queue/${qid}/qrcode.svg`} alt="QR Code" class="w-80" />
+<img src={`/queue/${qid}/qrcode.svg`} alt="QR Code" class="w-80 dark:invert" />
 <input type="text" name="" id="" on:input={handle_change} class="border border-slate-900" />
 <ul>
 	{#each search_results as { name, album, uri }}

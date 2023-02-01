@@ -6,14 +6,12 @@ import { supabase } from '$lib/api/supabase';
 
 type Queue = Database['public']['Tables']['queues']['Row'];
 
-interface QueueStore {
-	name: string;
-	id: number;
+interface QueueStore extends Pick<Queue, 'name' | 'id'> {
 	tracks: Array<Omit<TrackObject, 'id'> & { id: number; votes: { up: number; down: number } }>;
 }
 
 export const createQueueStore = async (queue: Queue) => {
-	const { data: tracks, error: err } = await supabase.from('tracks').select('*, votes (*)').eq('queue_id', queue.id);
+	const { data: tracks, error: err } = await supabase.from('tracks').select('*, votes(*)').eq('qid', queue.id);
 
 	if (err) {
 		throw error(500, err.message);

@@ -12,7 +12,7 @@ export const actions = {
 
 		const { data: queue, error: err } = await locals.supabase
 			.from('queues')
-			.insert({ name, owner_id: locals.session.user.id, qid: get_random_string(6) })
+			.insert({ name, owner_id: locals.session.user.id, id: get_random_string(7) })
 			.select()
 			.single();
 
@@ -20,7 +20,7 @@ export const actions = {
 			throw error(500, err.message);
 		}
 
-		throw redirect(303, `/queue/${queue.qid}`);
+		throw redirect(303, `/queue/${queue.id}`);
 	}
 } satisfies Actions;
 

@@ -7,7 +7,7 @@ export const load = (async (event) => {
 	const { params } = event;
 	const { supabaseClient } = await getSupabase(event);
 
-	const { data, error: err } = await supabaseClient.from('queues').select().eq('qid', params.qid).single();
+	const { data, error: err } = await supabaseClient.from('queues').select().eq('id', params.id).single();
 
 	if (err || !data) {
 		throw error(404, 'This Queue does not exist.');

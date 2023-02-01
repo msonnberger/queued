@@ -11,6 +11,8 @@
 	export let data: PageData;
 	let tracks: TrackObject[] = [];
 
+	$: console.log($queue);
+
 	const handle_change = debounce(async (e: Event) => {
 		const input = e.target as HTMLInputElement;
 

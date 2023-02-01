@@ -23,6 +23,7 @@ export const createQueueStore = async (queue: Queue) => {
 	const initial_value: QueueStore = { name: queue.name, id: queue.id, tracks: [] };
 
 	if (track_ids) {
+		// TODO: correct hostname based on environment
 		const tracks_response = await fetch(`http://localhost:5173/api/get-tracks?track_ids=${track_ids}`);
 		const tracks_objects = (await tracks_response.json()) as TrackObject[];
 

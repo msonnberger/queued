@@ -25,6 +25,7 @@ specifiers:
   prettier-plugin-svelte: 2.9.0
   prettier-plugin-tailwindcss: 0.2.2
   pusher: 5.1.2
+  pusher-js: 8.0.1
   qrcode: 1.5.1
   supabase: 1.35.4
   svelte: 3.55.1
@@ -42,6 +43,7 @@ dependencies:
   class-variance-authority: 0.4.0_typescript@4.9.5
   oazapfts: 4.5.2_openapi-types@12.1.0
   pusher: 5.1.2
+  pusher-js: 8.0.1
   qrcode: 1.5.1
   svelte-french-toast: 1.0.3_svelte@3.55.1
 
@@ -683,6 +685,14 @@ packages:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
     dev: true
 
+  /@types/express-serve-static-core/4.17.28:
+    resolution: {integrity: sha512-P1BJAEAW3E2DJUlkgq4tOL3RyMunoWXqbSCygWo5ZIWTjUgN1YnaXWW4VWl/oc8vs/XoYibEGBKP0uZyF4AHig==}
+    dependencies:
+      '@types/node': 18.11.18
+      '@types/qs': 6.9.7
+      '@types/range-parser': 1.2.4
+    dev: false
+
   /@types/istanbul-lib-coverage/2.0.4:
     resolution: {integrity: sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==}
     dev: true
@@ -717,6 +727,10 @@ packages:
       form-data: 3.0.1
     dev: false
 
+  /@types/node/14.18.36:
+    resolution: {integrity: sha512-FXKWbsJ6a1hIrRxv+FoukuHnGTgEzKYGi7kilfMae96AL9UNkPFNWJEEYWzdRI9ooIkbr4AKldyuSTLql06vLQ==}
+    dev: false
+
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
 
@@ -733,6 +747,14 @@ packages:
     dependencies:
       '@types/node': 18.11.18
     dev: true
+
+  /@types/qs/6.9.7:
+    resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
+    dev: false
+
+  /@types/range-parser/1.2.4:
+    resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
+    dev: false
 
   /@types/sass/1.43.1:
     resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
@@ -3327,6 +3349,14 @@ packages:
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
     engines: {node: '>=6'}
+
+  /pusher-js/8.0.1:
+    resolution: {integrity: sha512-DbhfDfghqCF94gb+TFHZAgauXFT7k6onWXcd3Q4vnk/C2f5bC7/qKV14rvdoAAB8FCIBb11ZL0YX7N/oQPVxXA==}
+    dependencies:
+      '@types/express-serve-static-core': 4.17.28
+      '@types/node': 14.18.36
+      tweetnacl: 1.0.3
+    dev: false
 
   /pusher/5.1.2:
     resolution: {integrity: sha512-uQTIVPUVrV78g/PnUT1gNBA63cKPCwEXlWlkdCuvL4Xo4QmWQyKsnkPIcIm7ArLkaTLDrtFPPK//NzHxm4N+cg==}

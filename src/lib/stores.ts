@@ -3,6 +3,7 @@ import type { Database } from './api/supabase.types';
 import type { TrackObject } from './api/spotify';
 import { error } from '@sveltejs/kit';
 import { supabase } from '$lib/api/supabase';
+import { pusher_client } from './api/pusher/client';
 
 type Queue = Database['public']['Tables']['queues']['Row'];
 
@@ -49,5 +50,14 @@ export const createQueueStore = async (queue: Queue) => {
 			}) ?? [];
 	}
 
-	return readable(initial_value);
+	const queue_store = readable(initial_value, (set) => {
+		const channel = pusher_client.subscribe(`queue-${queue.id}`);
+		channel.bind('track-added', (data: TrackObject) => {
+			// TODO: fix this
+			//set({ ...get(queue_store), tracks: [...get(queue_store).tracks, { ...data, id: 0, votes: { up: 0, down: 0 } }] });
+			console.log(data);
+		});
+	});
+
+	return queue_store;
 };

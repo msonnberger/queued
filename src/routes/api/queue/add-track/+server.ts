@@ -22,7 +22,7 @@ export const POST = (async (event) => {
 		throw error(500, err.message);
 	}
 
-	pusher.trigger(`queue-${queue_id}`, 'track-added', { track });
+	pusher.trigger(`queue-${queue_id}`, 'track-added', track);
 
 	return text('OK');
 }) satisfies RequestHandler;

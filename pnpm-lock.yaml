@@ -3,9 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@playwright/test': 1.30.0
   '@supabase/auth-helpers-sveltekit': 0.8.7
-  '@supabase/supabase-js': 2.6.0
+  '@supabase/supabase-js': 2.7.0
   '@sveltejs/adapter-vercel': 1.0.6
-  '@sveltejs/kit': 1.3.7
+  '@sveltejs/kit': 1.3.9
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2
   '@types/qrcode': 1.5.0
@@ -28,7 +28,7 @@ specifiers:
   pusher: 5.1.2
   pusher-js: 8.0.1
   qrcode: 1.5.1
-  supabase: 1.35.4
+  supabase: 1.36.3
   svelte: 3.55.1
   svelte-check: 3.0.3
   svelte-french-toast: 1.0.3
@@ -39,8 +39,8 @@ specifiers:
   vitest: 0.28.3
 
 dependencies:
-  '@supabase/auth-helpers-sveltekit': 0.8.7_aqybtw76xuzzxibjpmwuom3dpm
-  '@supabase/supabase-js': 2.6.0
+  '@supabase/auth-helpers-sveltekit': 0.8.7_cuu76bm7225ei4sq5x2iikmd2y
+  '@supabase/supabase-js': 2.7.0
   class-variance-authority: 0.4.0_typescript@4.9.5
   lucide-svelte: 0.109.0_svelte@3.55.1
   oazapfts: 4.5.2_openapi-types@12.1.0
@@ -51,8 +51,8 @@ dependencies:
 
 devDependencies:
   '@playwright/test': 1.30.0
-  '@sveltejs/adapter-vercel': 1.0.6_@sveltejs+kit@1.3.7
-  '@sveltejs/kit': 1.3.7_svelte@3.55.1+vite@4.0.4
+  '@sveltejs/adapter-vercel': 1.0.6_@sveltejs+kit@1.3.9
+  '@sveltejs/kit': 1.3.9_svelte@3.55.1+vite@4.0.4
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.55.1
   '@types/qrcode': 1.5.0
@@ -69,7 +69,7 @@ devDependencies:
   prettier: 2.8.3
   prettier-plugin-svelte: 2.9.0_kdmmghgdi3ngrsq6otxkjilbry
   prettier-plugin-tailwindcss: 0.2.2_2x43trzvpzis5oa6w3yxl4exgi
-  supabase: 1.35.4
+  supabase: 1.36.3
   svelte: 3.55.1
   svelte-check: 3.0.3_pehl75e5jsy22vp33udjja4soi
   tailwindcss: 3.2.4_postcss@8.4.21
@@ -493,21 +493,21 @@ packages:
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
     dev: true
 
-  /@supabase/auth-helpers-shared/0.2.4_aqybtw76xuzzxibjpmwuom3dpm:
+  /@supabase/auth-helpers-shared/0.2.4_cuu76bm7225ei4sq5x2iikmd2y:
     resolution: {integrity: sha512-c+hi3N6DhjPTzjXGOokre4gmMZOqt0f1ORrwZwi2s07pk3cbkmn77DwwVtlYMNi3oZNYRQqAfxJu83UzpJrrmg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/supabase-js': 2.6.0
+      '@supabase/supabase-js': 2.7.0
     dev: false
 
-  /@supabase/auth-helpers-sveltekit/0.8.7_aqybtw76xuzzxibjpmwuom3dpm:
+  /@supabase/auth-helpers-sveltekit/0.8.7_cuu76bm7225ei4sq5x2iikmd2y:
     resolution: {integrity: sha512-sFXWaeyTVWK70Aekw+plqN+f8si2MqV4PbcEunqZ1H/QfujxxnDfG26j+O+eQ/ue84UFrJutNY+iB3DsTlXlCg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/auth-helpers-shared': 0.2.4_aqybtw76xuzzxibjpmwuom3dpm
-      '@supabase/supabase-js': 2.6.0
+      '@supabase/auth-helpers-shared': 0.2.4_cuu76bm7225ei4sq5x2iikmd2y
+      '@supabase/supabase-js': 2.7.0
     dev: false
 
   /@supabase/functions-js/2.0.0:
@@ -551,8 +551,8 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/supabase-js/2.6.0:
-    resolution: {integrity: sha512-ufCpXqqsJF/+zvqZCHosRK1NMmPNmYysOqWJWgw3WZG0CCmSjmBlHyiyaMVsSALB9UThN8IDHtB0SX7YfRveYQ==}
+  /@supabase/supabase-js/2.7.0:
+    resolution: {integrity: sha512-0Ry6rcxeya0VRbPh6fHfgPcmH7X9gMILon7/PWoVJSjYsQntv7EGUNNeHtLutBlm8St74s5Q4sjsqJOPslDG4Q==}
     dependencies:
       '@supabase/functions-js': 2.0.0
       '@supabase/gotrue-js': 2.10.2
@@ -565,12 +565,12 @@ packages:
       - supports-color
     dev: false
 
-  /@sveltejs/adapter-vercel/1.0.6_@sveltejs+kit@1.3.7:
+  /@sveltejs/adapter-vercel/1.0.6_@sveltejs+kit@1.3.9:
     resolution: {integrity: sha512-fo6aaEygPd/6B5Jms4Ff7R4jbADnppuLvKOWBNTGe5MGB7ZRUkl+gxHWMQx2av2knyEZkA6V8y5M6R3ML5yN4g==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
-      '@sveltejs/kit': 1.3.7_svelte@3.55.1+vite@4.0.4
+      '@sveltejs/kit': 1.3.9_svelte@3.55.1+vite@4.0.4
       '@vercel/nft': 0.22.6
       esbuild: 0.16.14
     transitivePeerDependencies:
@@ -578,8 +578,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.3.7_svelte@3.55.1+vite@4.0.4:
-    resolution: {integrity: sha512-H0V8qpd7sax/f/i90lSBEVjubuCkex9M1KvARdptwirLDL9qtJXRUClK25zrDi9IpqIMtbxYnZmfiaaTLcxTGQ==}
+  /@sveltejs/kit/1.3.9_svelte@3.55.1+vite@4.0.4:
+    resolution: {integrity: sha512-yHJV95SZ5uj4GIyi3UoMYbxy0NUXhqdhXHstQzKKEYcPAPcrzotiNgQLKGgeKmji2aK01joCnwiIHholmtLspw==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -3797,8 +3797,8 @@ packages:
       acorn: 8.8.1
     dev: true
 
-  /supabase/1.35.4:
-    resolution: {integrity: sha512-wwuD/jFlqmluSQLo1JpqRWqHuO/bvQL9BUHX4C7VY0vvKBEfjJ7bpAEurkJCFxfNbl9BtZ21uW+TDIDDn4QKrA==}
+  /supabase/1.36.3:
+    resolution: {integrity: sha512-R7Tsid5nqhhHJV55T+PxShnKr5lTHwhOtYRU6RrS5wh36gRQmMx513cOypb6vgQ3JnZmVXUMHf+PgmHDeA4wQQ==}
     hasBin: true
     requiresBuild: true
     dependencies:

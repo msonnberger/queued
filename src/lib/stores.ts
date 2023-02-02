@@ -1,55 +1,25 @@
-import { readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import type { Database } from './api/supabase.types';
 import type { TrackObject } from './api/spotify';
-import { error } from '@sveltejs/kit';
-import { supabase } from '$lib/api/supabase';
+import { pusher_client } from './api/pusher/client';
 
 type Queue = Database['public']['Tables']['queues']['Row'];
 
-interface QueueStore {
-	name: string;
-	id: number;
-	tracks: Array<Omit<TrackObject, 'id'> & { id: number; votes: { up: number; down: number } }>;
+export interface QueueStore extends Pick<Queue, 'name' | 'id'> {
+	tracks: Array<TrackObject & { supabase_id: number; votes: { up: number; down: number } }>;
 }
 
-export const createQueueStore = async (queue: Queue) => {
-	const { data: tracks, error: err } = await supabase.from('tracks').select('*, votes (*)').eq('queue_id', queue.id);
+export const createQueueStore = async (initial_value: QueueStore) => {
+	const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 
-	if (err) {
-		throw error(500, err.message);
-	}
+	channel.bind('track-added', (data: TrackObject & { supabase_id: number }) => {
+		const new_track = { ...data, votes: { up: 0, down: 0 } };
+		update((value) => ({ ...value, tracks: [...value.tracks, new_track] }));
+	});
 
-	const track_ids = tracks?.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
-	const initial_value: QueueStore = { name: queue.name, id: queue.id, tracks: [] };
+	const { subscribe, update } = writable<QueueStore>(initial_value, () => {
+		return () => channel.unbind('track-added');
+	});
 
-	if (track_ids) {
-		// TODO: correct hostname based on environment
-		const tracks_response = await fetch(`http://localhost:5173/api/get-tracks?track_ids=${track_ids}`);
-		const tracks_objects = (await tracks_response.json()) as TrackObject[];
-
-		initial_value.tracks =
-			tracks?.map((track, i) => {
-				return {
-					...tracks_objects[i],
-					id: track.id,
-					votes: {
-						// TODO: fix this
-						up: track.votes
-							// @ts-expect-error wrong supabase type
-							?.map((vote) => vote.value)
-							// @ts-expect-error wrong supabase type
-							.filter((value) => value > 0)
-							.reduce((acc: number, curr: number) => acc + curr, 0),
-						down: track.votes
-							// @ts-expect-error wrong supabase type
-							?.map((vote) => vote.value)
-							// @ts-expect-error wrong supabase type
-							.filter((value) => value < 0)
-							.reduce((acc: number, curr: number) => acc + curr, 0)
-					}
-				};
-			}) ?? [];
-	}
-
-	return readable(initial_value);
+	return { subscribe };
 };

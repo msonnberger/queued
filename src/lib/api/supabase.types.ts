@@ -35,45 +35,42 @@ export interface Database {
         Row: {
           created_at: string
           current_track_id: number | null
-          id: number
+          id: string
           name: string
           owner_id: string
-          qid: string
         }
         Insert: {
           created_at?: string
           current_track_id?: number | null
-          id?: number
+          id: string
           name: string
           owner_id: string
-          qid: string
         }
         Update: {
           created_at?: string
           current_track_id?: number | null
-          id?: number
+          id?: string
           name?: string
           owner_id?: string
-          qid?: string
         }
       }
       tracks: {
         Row: {
           created_at: string | null
           id: number
-          queue_id: number
+          qid: string | null
           spotify_uri: string
         }
         Insert: {
           created_at?: string | null
           id?: number
-          queue_id: number
+          qid?: string | null
           spotify_uri: string
         }
         Update: {
           created_at?: string | null
           id?: number
-          queue_id?: number
+          qid?: string | null
           spotify_uri?: string
         }
       }

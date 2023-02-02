@@ -2,7 +2,7 @@ import type { RequestHandler } from './$types';
 import QRCode from 'qrcode';
 
 export const GET = (async ({ params, url }) => {
-	const queue_url = new URL('/queue/' + params.qid, url);
+	const queue_url = new URL('/queue/' + params.id, url);
 	const svg = await QRCode.toString(queue_url.href, {
 		type: 'svg',
 		errorCorrectionLevel: 'H',

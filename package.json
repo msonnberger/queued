@@ -54,6 +54,8 @@
 		"@supabase/supabase-js": "2.7.0",
 		"class-variance-authority": "0.4.0",
 		"oazapfts": "4.5.2",
+		"pusher": "5.1.2",
+		"pusher-js": "8.0.1",
 		"qrcode": "1.5.1",
 		"svelte-french-toast": "1.0.3"
 	}

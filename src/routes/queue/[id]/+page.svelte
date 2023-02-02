@@ -57,12 +57,13 @@
 </ul>
 
 <ul>
-	{#each $queue.tracks as track (track.id)}
+	{#each $queue.tracks as track (track.supabase_id)}
 		<li>
+			{track.supabase_id}
 			<Track
 				title={track.name}
 				artist={track.artists ? track.artists[0].name : undefined}
-				id={track.db_id}
+				id={track.supabase_id}
 				uri={track.uri}
 				upvotes={track.votes.up}
 				downvotes={track.votes.down}

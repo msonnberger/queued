@@ -13,16 +13,20 @@ export const POST = (async (event) => {
 
 	const { supabaseClient } = await getSupabase(event);
 
-	const { error: err } = await supabaseClient.from('tracks').insert({
-		spotify_uri: track.uri,
-		qid: queue_id
-	});
+	const { data, error: err } = await supabaseClient
+		.from('tracks')
+		.insert({
+			spotify_uri: track.uri,
+			qid: queue_id
+		})
+		.select('id')
+		.single();
 
 	if (err) {
 		throw error(500, err.message);
 	}
 
-	pusher.trigger(`queue-${queue_id}`, 'track-added', track);
+	pusher.trigger(`queue-${queue_id}`, 'track-added', { ...track, supabase_id: data.id });
 
 	return text('OK');
 }) satisfies RequestHandler;

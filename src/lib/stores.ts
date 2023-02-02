@@ -1,23 +1,17 @@
 import { writable } from 'svelte/store';
-import type { Database } from './api/supabase.types';
-import type { TrackObject } from './api/spotify';
 import { pusher_client } from './api/pusher/client';
-
-type Queue = Database['public']['Tables']['queues']['Row'];
-
-export interface QueueStore extends Pick<Queue, 'name' | 'id'> {
-	tracks: Array<TrackObject & { supabase_id: number; votes: { up: number; down: number } }>;
-}
+import type { QueueStore, QueueTrack } from './types';
+import { sorted_queue } from './utils';
 
 export const createQueueStore = async (initial_value: QueueStore) => {
 	const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 
-	channel.bind('track-added', (data: TrackObject & { supabase_id: number }) => {
+	channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
 		const new_track = { ...data, votes: { up: 0, down: 0 } };
-		update((value) => ({ ...value, tracks: [...value.tracks, new_track] }));
+		update((value) => sorted_queue({ ...value, tracks: [...value.tracks, new_track] }));
 	});
 
-	channel.bind('vote', (data: { supabase_track_id: number; value: number }) => {
+	channel.bind('vote', (data: { supabase_track_id: number; up_value: number; down_value: number }) => {
 		update((value) => {
 			const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
 
@@ -25,13 +19,14 @@ export const createQueueStore = async (initial_value: QueueStore) => {
 				return value;
 			}
 
-			value.tracks[track_index].votes[data.value > 0 ? 'up' : 'down'] += data.value;
-			value.tracks.sort((a, b) => b.votes.up + b.votes.down - (a.votes.up + a.votes.down));
-			return value;
+			value.tracks[track_index].votes.up += data.up_value;
+			value.tracks[track_index].votes.down += data.down_value;
+
+			return sorted_queue(value);
 		});
 	});
 
-	const { subscribe, update } = writable<QueueStore>(initial_value, () => {
+	const { subscribe, update } = writable<QueueStore>(sorted_queue(initial_value), () => {
 		return () => channel.unbind_all();
 	});
 

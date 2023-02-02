@@ -25,7 +25,7 @@
 
 <div class="flex justify-between gap-3 m-3 bg-slate-200 dark:bg-slate-700 p-4 rounded-md">
 	<div>
-		<p>{title}</p>
+		<p class="font-bold">{title}</p>
 		<p>{artist}</p>
 	</div>
 	<div class="flex gap-2">

@@ -11,7 +11,7 @@ export const createQueueStore = async (initial_value: QueueStore) => {
 		update((value) => sorted_queue({ ...value, tracks: [...value.tracks, new_track] }));
 	});
 
-	channel.bind('vote', (data: { supabase_track_id: number; value: number }) => {
+	channel.bind('vote', (data: { supabase_track_id: number; up_value: number; down_value: number }) => {
 		update((value) => {
 			const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
 
@@ -19,7 +19,8 @@ export const createQueueStore = async (initial_value: QueueStore) => {
 				return value;
 			}
 
-			value.tracks[track_index].votes[data.value > 0 ? 'up' : 'down'] += data.value;
+			value.tracks[track_index].votes.up += data.up_value;
+			value.tracks[track_index].votes.down += data.down_value;
 
 			return sorted_queue(value);
 		});

@@ -1,8 +1,9 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { createQueueStore, type QueueStore } from '$lib/stores';
+import { createQueueStore } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
+import type { QueueStore } from '$lib/types';
 
 export const load = (async (event) => {
 	const { params, fetch } = event;

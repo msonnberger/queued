@@ -5,6 +5,7 @@
 	import { Button } from '$lib/components';
 	import type { TrackObject } from '$lib/api/spotify';
 	import { Track } from '$lib/components/queue';
+	import { flip } from 'svelte/animate';
 
 	$: ({ id } = $page.params);
 	$: ({ queue } = data);
@@ -58,8 +59,7 @@
 
 <ul>
 	{#each $queue.tracks as track (track.supabase_id)}
-		<li>
-			{track.supabase_id}
+		<li animate:flip={{ duration: 300 }}>
 			<Track
 				title={track.name}
 				artist={track.artists ? track.artists[0].name : undefined}

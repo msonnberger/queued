@@ -18,6 +18,7 @@ specifiers:
   eslint-config-prettier: 8.6.0
   eslint-plugin-svelte3: 4.0.0
   jsdom: 21.1.0
+  lucide-svelte: 0.109.0
   oazapfts: 4.5.2
   openapi-types: 12.1.0
   postcss: 8.4.21
@@ -41,6 +42,7 @@ dependencies:
   '@supabase/auth-helpers-sveltekit': 0.8.7_cuu76bm7225ei4sq5x2iikmd2y
   '@supabase/supabase-js': 2.7.0
   class-variance-authority: 0.4.0_typescript@4.9.5
+  lucide-svelte: 0.109.0_svelte@3.55.1
   oazapfts: 4.5.2_openapi-types@12.1.0
   pusher: 5.1.2
   pusher-js: 8.0.1
@@ -2707,6 +2709,14 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lucide-svelte/0.109.0_svelte@3.55.1:
+    resolution: {integrity: sha512-ScmxLv96uAQtWSuo3nApr0YTni14gfpb3AN8kosI7ZGTGYuH2yJFRsizDksMIwF1n9yPwHzNNKPnk+lnKWdMwg==}
+    peerDependencies:
+      svelte: ^3.49.0
+    dependencies:
+      svelte: 3.55.1
+    dev: false
 
   /lz-string/1.4.4:
     resolution: {integrity: sha512-0ckx7ZHRPqb0oUm8zNr+90mtf9DQB60H1wMCjBtfi62Kl3a7JbHob6gA2bC+xRvZoOL+1hzUK8jeuEIQE8svEQ==}

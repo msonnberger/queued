@@ -56,5 +56,5 @@
 {#if href}
 	<a {href} class={buttonVariants({ variant })} {target} {rel}><slot /></a>
 {:else}
-	<button {type} class={buttonVariants({ variant })}><slot /></button>
+	<button {type} class={buttonVariants({ variant })} on:click><slot /></button>
 {/if}

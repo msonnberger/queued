@@ -5,7 +5,7 @@ specifiers:
   '@supabase/auth-helpers-sveltekit': 0.8.7
   '@supabase/supabase-js': 2.7.0
   '@sveltejs/adapter-vercel': 1.0.6
-  '@sveltejs/kit': 1.3.7
+  '@sveltejs/kit': 1.3.9
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2
   '@types/qrcode': 1.5.0
@@ -25,7 +25,7 @@ specifiers:
   prettier-plugin-svelte: 2.9.0
   prettier-plugin-tailwindcss: 0.2.2
   qrcode: 1.5.1
-  supabase: 1.36.2
+  supabase: 1.36.3
   svelte: 3.55.1
   svelte-check: 3.0.3
   svelte-french-toast: 1.0.3
@@ -45,8 +45,8 @@ dependencies:
 
 devDependencies:
   '@playwright/test': 1.30.0
-  '@sveltejs/adapter-vercel': 1.0.6_@sveltejs+kit@1.3.7
-  '@sveltejs/kit': 1.3.7_svelte@3.55.1+vite@4.0.4
+  '@sveltejs/adapter-vercel': 1.0.6_@sveltejs+kit@1.3.9
+  '@sveltejs/kit': 1.3.9_svelte@3.55.1+vite@4.0.4
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.55.1
   '@types/qrcode': 1.5.0
@@ -63,7 +63,7 @@ devDependencies:
   prettier: 2.8.3
   prettier-plugin-svelte: 2.9.0_kdmmghgdi3ngrsq6otxkjilbry
   prettier-plugin-tailwindcss: 0.2.2_2x43trzvpzis5oa6w3yxl4exgi
-  supabase: 1.36.2
+  supabase: 1.36.3
   svelte: 3.55.1
   svelte-check: 3.0.3_pehl75e5jsy22vp33udjja4soi
   tailwindcss: 3.2.4_postcss@8.4.21
@@ -559,12 +559,12 @@ packages:
       - supports-color
     dev: false
 
-  /@sveltejs/adapter-vercel/1.0.6_@sveltejs+kit@1.3.7:
+  /@sveltejs/adapter-vercel/1.0.6_@sveltejs+kit@1.3.9:
     resolution: {integrity: sha512-fo6aaEygPd/6B5Jms4Ff7R4jbADnppuLvKOWBNTGe5MGB7ZRUkl+gxHWMQx2av2knyEZkA6V8y5M6R3ML5yN4g==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
-      '@sveltejs/kit': 1.3.7_svelte@3.55.1+vite@4.0.4
+      '@sveltejs/kit': 1.3.9_svelte@3.55.1+vite@4.0.4
       '@vercel/nft': 0.22.6
       esbuild: 0.16.14
     transitivePeerDependencies:
@@ -572,8 +572,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.3.7_svelte@3.55.1+vite@4.0.4:
-    resolution: {integrity: sha512-H0V8qpd7sax/f/i90lSBEVjubuCkex9M1KvARdptwirLDL9qtJXRUClK25zrDi9IpqIMtbxYnZmfiaaTLcxTGQ==}
+  /@sveltejs/kit/1.3.9_svelte@3.55.1+vite@4.0.4:
+    resolution: {integrity: sha512-yHJV95SZ5uj4GIyi3UoMYbxy0NUXhqdhXHstQzKKEYcPAPcrzotiNgQLKGgeKmji2aK01joCnwiIHholmtLspw==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -3714,8 +3714,8 @@ packages:
       acorn: 8.8.1
     dev: true
 
-  /supabase/1.36.2:
-    resolution: {integrity: sha512-RKIU9T1SMUQNgTLmqhxrxlx6EjcjzcUUalCU7mDJPd25gR/wer+sR6OID/UVSH68bv3l+R6SK18uXR79nBpVTA==}
+  /supabase/1.36.3:
+    resolution: {integrity: sha512-R7Tsid5nqhhHJV55T+PxShnKr5lTHwhOtYRU6RrS5wh36gRQmMx513cOypb6vgQ3JnZmVXUMHf+PgmHDeA4wQQ==}
     hasBin: true
     requiresBuild: true
     dependencies:

@@ -1,4 +1,5 @@
 import type { RequestHandler } from './$types';
+import Colors from 'tailwindcss/colors';
 import QRCode from 'qrcode';
 
 export const GET = (async ({ params, url }) => {
@@ -7,7 +8,7 @@ export const GET = (async ({ params, url }) => {
 		type: 'svg',
 		errorCorrectionLevel: 'H',
 		color: {
-			dark: '#0f172a',
+			dark: Colors.slate[900],
 			light: '#00000000'
 		}
 	});

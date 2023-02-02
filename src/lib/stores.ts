@@ -17,8 +17,22 @@ export const createQueueStore = async (initial_value: QueueStore) => {
 		update((value) => ({ ...value, tracks: [...value.tracks, new_track] }));
 	});
 
+	channel.bind('vote', (data: { supabase_track_id: number; value: number }) => {
+		update((value) => {
+			const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
+
+			if (track_index === undefined) {
+				return value;
+			}
+
+			value.tracks[track_index].votes[data.value > 0 ? 'up' : 'down'] += data.value;
+			value.tracks.sort((a, b) => b.votes.up + b.votes.down - (a.votes.up + a.votes.down));
+			return value;
+		});
+	});
+
 	const { subscribe, update } = writable<QueueStore>(initial_value, () => {
-		return () => channel.unbind('track-added');
+		return () => channel.unbind_all();
 	});
 
 	return { subscribe };

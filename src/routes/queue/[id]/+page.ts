@@ -6,7 +6,7 @@ import type { TrackObject } from '$lib/api/spotify';
 import type { QueueStore } from '$lib/types';
 
 export const load = (async (event) => {
-	const { params, fetch } = event;
+	const { params, fetch, data } = event;
 	const { supabaseClient } = await getSupabase(event);
 
 	const { data: queue, error: err } = await supabaseClient.from('queues').select().eq('id', params.id).single();
@@ -50,7 +50,11 @@ export const load = (async (event) => {
 							?.map((vote) => vote.value)
 							// @ts-expect-error wrong supabase type
 							.filter((value) => value < 0)
-							.reduce((acc: number, curr: number) => acc + curr, 0)
+							.reduce((acc: number, curr: number) => acc + curr, 0),
+						// @ts-expect-error wrong supabase type
+						has_upvoted: supabase_track.votes.some((vote) => vote.value > 0 && vote.voter_id === data.voter_id),
+						// @ts-expect-error wrong supabase type
+						has_downvoted: supabase_track.votes.some((vote) => vote.value < 0 && vote.voter_id === data.voter_id)
 					}
 				};
 			}) ?? [];

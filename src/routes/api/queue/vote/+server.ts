@@ -1,4 +1,5 @@
 import { pusher } from '$lib/api/pusher/server';
+import type { PusherVoteEvent } from '$lib/types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error, text, type RequestHandler } from '@sveltejs/kit';
 
@@ -15,6 +16,7 @@ export const POST = (async (event) => {
 
 	let up_value = value > 0 ? value : 0;
 	let down_value = value < 0 ? value : 0;
+	let type_voted: 'up' | 'down' | null = value > 0 ? 'up' : 'down';
 
 	if (err) {
 		if (err.code !== '23505') {
@@ -38,8 +40,10 @@ export const POST = (async (event) => {
 		// TODO: REFACTOR THIS!!!
 		if (data.value > 0 && value > 0) {
 			up_value = -data.value;
+			type_voted = null;
 		} else if (data.value < 0 && value < 0) {
 			down_value = -data.value;
+			type_voted = null;
 		} else if (data.value > 0 && value < 0) {
 			up_value = -data.value;
 			down_value = value;
@@ -61,7 +65,15 @@ export const POST = (async (event) => {
 		}
 	}
 
-	pusher.trigger(`queue-${queue_id}`, 'vote', { supabase_track_id: supabase_id, up_value, down_value });
+	const data: PusherVoteEvent = {
+		supabase_track_id: supabase_id,
+		up_value,
+		down_value,
+		type_voted,
+		voter_id
+	};
+
+	pusher.trigger(`queue-${queue_id}`, 'vote', data);
 
 	return text('OK');
 }) satisfies RequestHandler;

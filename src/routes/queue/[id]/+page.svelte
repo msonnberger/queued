@@ -24,7 +24,7 @@
 		search_results = (await res.json()) as TrackObject[];
 	}, 300);
 
-	const handle_add_song = async (track: TrackObject) => {
+	const handle_add_track = async (track: TrackObject) => {
 		const res = await fetch('/api/queue/add-track', {
 			method: 'POST',
 			headers: {
@@ -49,7 +49,7 @@
 <ul>
 	{#each search_results as result}
 		<li>
-			<form method="post" on:submit|preventDefault={() => handle_add_song(result)}>
+			<form method="post" on:submit|preventDefault={() => handle_add_track(result)}>
 				<p>{result.name} - {result.album?.name}</p>
 				<Button type="submit">Add</Button>
 			</form>
@@ -60,16 +60,7 @@
 <ul class="flex flex-col gap-5 mt-8">
 	{#each $queue.tracks as track (track.supabase_id)}
 		<li animate:flip={{ duration: 300 }}>
-			<Track
-				title={track.name}
-				artist={track.artists ? track.artists[0].name : undefined}
-				id={track.supabase_id}
-				uri={track.uri}
-				upvotes={track.votes.up}
-				downvotes={track.votes.down}
-				has_upvoted={track.votes.has_upvoted}
-				has_downvoted={track.votes.has_downvoted}
-			/>
+			<Track {track} handle_vote={queue.handle_vote} />
 		</li>
 	{/each}
 </ul>

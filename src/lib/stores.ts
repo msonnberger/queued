@@ -7,7 +7,7 @@ export const createQueueStore = async (initial_value: QueueStore) => {
 	const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 
 	channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
-		const new_track = { ...data, votes: { up: 0, down: 0 } };
+		const new_track = { ...data, votes: { up: 0, down: 0, has_upvoted: false, has_downvoted: false } };
 		queue_writable.update((value) => ({ ...value, tracks: [...value.tracks, new_track] }));
 	});
 

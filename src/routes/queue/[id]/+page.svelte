@@ -57,7 +57,7 @@
 	{/each}
 </ul>
 
-<ul>
+<ul class="flex flex-col gap-5 mt-8">
 	{#each $queue.tracks as track (track.supabase_id)}
 		<li animate:flip={{ duration: 300 }}>
 			<Track
@@ -67,6 +67,8 @@
 				uri={track.uri}
 				upvotes={track.votes.up}
 				downvotes={track.votes.down}
+				has_upvoted={track.votes.has_upvoted}
+				has_downvoted={track.votes.has_downvoted}
 			/>
 		</li>
 	{/each}

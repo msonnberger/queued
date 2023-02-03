@@ -44,7 +44,7 @@
 </script>
 
 <h1>{$queue.name}</h1>
-<img src={`/queue/${id}/qrcode.svg`} alt="QR Code" class="w-80 dark:invert" />
+<img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 dark:invert" />
 <input type="text" name="" id="" on:input={handle_change} class="border border-slate-900" />
 <ul>
 	{#each search_results as result}

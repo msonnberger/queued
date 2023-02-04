@@ -1,60 +1,63 @@
 <script lang="ts">
 	import { type VariantProps, cva } from 'class-variance-authority';
-	const buttonVariants = cva(['inline-flex', 'items-center', 'justify-center', 'font-medium', 'transition-colors'], {
-		variants: {
-			variant: {
-				filled: [
-					'bg-slate-900',
-					'text-slate-50',
-					'hover:bg-slate-800',
-					'dark:bg-slate-50',
-					'dark:text-slate-900',
-					'dark:hover:bg-slate-200'
-				],
-				outline: [
-					'border-2',
-					'bg-slate-50',
-					'border-slate-900',
-					'text-slate-900',
-					'hover:bg-slate-100',
-					'dark:text-slate-50',
-					'dark:border-slate-50',
-					'dark:hover:bg-slate-800'
-				]
+	const buttonVariants = cva(
+		['inline-flex', 'items-center', 'justify-center', 'rounded-md', 'font-medium', 'transition-colors'],
+		{
+			variants: {
+				variant: {
+					filled: [
+						'bg-slate-900',
+						'text-slate-50',
+						'hover:bg-slate-800',
+						'dark:bg-slate-50',
+						'dark:text-slate-900',
+						'dark:hover:bg-slate-200'
+					],
+					outline: [
+						'border-2',
+						'bg-slate-50',
+						'border-slate-900',
+						'text-slate-900',
+						'hover:bg-slate-100',
+						'dark:text-slate-900',
+						'dark:border-slate-50',
+						'dark:hover:bg-slate-800'
+					]
+				},
+				circle: {
+					true: ['rounded-full'],
+					false: ['rounded-md']
+				},
+				size: {
+					sm: ['h-8', 'px-3', 'py-1', 'text-xs'],
+					md: ['h-10', 'px-4', 'py-2', 'text-sm'],
+					lg: ['h-12', 'px-6', 'py-3', 'text-base']
+				}
 			},
-			circle: {
-				true: ['rounded-full'],
-				false: ['rounded-md']
+			defaultVariants: {
+				variant: 'filled',
+				circle: false,
+				size: 'md'
 			},
-			size: {
-				sm: ['h-8', 'px-3', 'py-1', 'text-xs'],
-				md: ['h-10', 'px-4', 'py-2', 'text-sm'],
-				lg: ['h-12', 'px-6', 'py-3', 'text-base']
-			}
-		},
-		defaultVariants: {
-			variant: 'filled',
-			circle: false,
-			size: 'md'
-		},
-		compoundVariants: [
-			{
-				circle: true,
-				size: 'sm',
-				class: ['w-8', 'p-1']
-			},
-			{
-				circle: true,
-				size: 'md',
-				class: ['w-10', 'p-2']
-			},
-			{
-				circle: true,
-				size: 'lg',
-				class: ['w-12', 'p-3']
-			}
-		]
-	});
+			compoundVariants: [
+				{
+					circle: true,
+					size: 'sm',
+					class: ['w-8', 'p-1']
+				},
+				{
+					circle: true,
+					size: 'md',
+					class: ['w-10', 'p-2']
+				},
+				{
+					circle: true,
+					size: 'lg',
+					class: ['w-12', 'p-3']
+				}
+			]
+		}
+	);
 
 	type ButtonProps = VariantProps<typeof buttonVariants>;
 

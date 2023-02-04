@@ -58,19 +58,19 @@ export interface Database {
         Row: {
           created_at: string | null
           id: number
-          qid: string | null
+          qid: string
           spotify_uri: string
         }
         Insert: {
           created_at?: string | null
           id?: number
-          qid?: string | null
+          qid: string
           spotify_uri: string
         }
         Update: {
           created_at?: string | null
           id?: number
-          qid?: string | null
+          qid?: string
           spotify_uri?: string
         }
       }

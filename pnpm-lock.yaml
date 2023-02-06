@@ -4,7 +4,7 @@ specifiers:
   '@playwright/test': 1.30.0
   '@supabase/auth-helpers-sveltekit': 0.8.7
   '@supabase/supabase-js': 2.7.1
-  '@sveltejs/adapter-vercel': 1.0.6
+  '@sveltejs/adapter-vercel': 2.0.1
   '@sveltejs/kit': 1.5.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2
@@ -50,7 +50,7 @@ dependencies:
 
 devDependencies:
   '@playwright/test': 1.30.0
-  '@sveltejs/adapter-vercel': 1.0.6_@sveltejs+kit@1.5.0
+  '@sveltejs/adapter-vercel': 2.0.1_@sveltejs+kit@1.5.0
   '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.55.1
@@ -563,10 +563,10 @@ packages:
       - supports-color
     dev: false
 
-  /@sveltejs/adapter-vercel/1.0.6_@sveltejs+kit@1.5.0:
-    resolution: {integrity: sha512-fo6aaEygPd/6B5Jms4Ff7R4jbADnppuLvKOWBNTGe5MGB7ZRUkl+gxHWMQx2av2knyEZkA6V8y5M6R3ML5yN4g==}
+  /@sveltejs/adapter-vercel/2.0.1_@sveltejs+kit@1.5.0:
+    resolution: {integrity: sha512-pIFUcOui3jFGA12hvsgcCYWDhQc1XlvLZ/VScAxoRBvSgnGvIhXELmzB01AAm36MYZG16HZPn5LRA0TOwcjpcg==}
     peerDependencies:
-      '@sveltejs/kit': ^1.0.0
+      '@sveltejs/kit': ^1.5.0
     dependencies:
       '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
       '@vercel/nft': 0.22.6

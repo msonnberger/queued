@@ -6,6 +6,8 @@ import type { TrackObject } from '$lib/api/spotify';
 import type { QueueStore } from '$lib/types';
 import type { Database } from '$lib/api/supabase.types';
 
+export const ssr = false;
+
 export const load = (async (event) => {
 	const { params, fetch, data } = event;
 	const { supabaseClient } = await getSupabase(event);

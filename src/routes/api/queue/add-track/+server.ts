@@ -1,7 +1,13 @@
 import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
+import type { Config } from '@sveltejs/adapter-vercel';
 import { error, text, type RequestHandler } from '@sveltejs/kit';
+
+export const config: Config = {
+	runtime: 'nodejs18.x',
+	regions: ['fra1']
+};
 
 export const POST = (async (event) => {
 	const body = await event.request.json();

@@ -8,7 +8,10 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			runtime: 'edge',
+			regions: ['arn1', 'cdg1', 'dub1', 'fra1', 'lhr1'] // European regions only
+		})
 	}
 };
 

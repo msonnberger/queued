@@ -4,6 +4,9 @@ import type { PageLoad } from './$types';
 import { createQueueStore } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
 import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
+import { browser } from '$app/environment';
+
+let queue_store: any;
 
 export const load = (async (event) => {
 	const { params, fetch, data } = event;
@@ -54,6 +57,8 @@ export const load = (async (event) => {
 	}
 
 	return {
-		queue: createQueueStore(initial_value, data.voter_id)
+		queue: browser
+			? queue_store || (queue_store = createQueueStore(initial_value, data.voter_id))
+			: createQueueStore(initial_value, data.voter_id)
 	};
 }) satisfies PageLoad;

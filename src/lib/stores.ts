@@ -31,9 +31,7 @@ export const createQueueStore = (initial_value: Omit<QueueStore, 'handle_vote'>,
 		});
 	});
 
-	const queue_writable = writable<QueueStore>(initial_value as QueueStore, () => {
-		return () => channel.unbind_all();
-	});
+	const queue_writable = writable<QueueStore>(initial_value as QueueStore);
 
 	const { subscribe } = derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
 

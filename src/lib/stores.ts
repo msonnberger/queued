@@ -4,6 +4,10 @@ import type { PusherVoteEvent, QueueStore, QueueTrack } from './types';
 import { sorted_queue } from './utils';
 
 export const createQueueStore = async (initial_value: Omit<QueueStore, 'handle_vote'>, current_voter_id: string) => {
+	pusher_client.connection.bind('state_change', (states: any) => {
+		console.log('Channels current state is ' + states.current);
+	});
+
 	const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 
 	channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {

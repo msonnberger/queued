@@ -12,6 +12,7 @@ export const createQueueStore = async (initial_value: Omit<QueueStore, 'handle_v
 	});
 
 	channel.bind('vote', (data: PusherVoteEvent) => {
+		console.log(data);
 		queue_writable.update((value) => {
 			const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
 

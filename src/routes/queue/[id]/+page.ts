@@ -5,12 +5,6 @@ import { createQueueStore } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
 import type { QueueStore } from '$lib/types';
 import type { Database } from '$lib/api/supabase.types';
-import type { Config } from '@sveltejs/adapter-vercel';
-
-export const config: Config = {
-	runtime: 'nodejs18.x',
-	regions: ['fra1']
-};
 
 export const load = (async (event) => {
 	const { params, fetch, data } = event;

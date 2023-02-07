@@ -1,9 +1,19 @@
 import { derived, writable } from 'svelte/store';
-import { pusher_client } from './api/pusher/client';
 import type { PusherVoteEvent, QueueStore, QueueTrack } from './types';
 import { sorted_queue } from './utils';
+import { PUBLIC_PUSHER_CLUSTER, PUBLIC_PUSHER_KEY } from '$env/static/public';
+import Pusher from 'pusher-js';
 
 export const createQueueStore = (initial_value: Omit<QueueStore, 'handle_vote'>, current_voter_id: string) => {
+	const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
+		cluster: PUBLIC_PUSHER_CLUSTER,
+		wsHost: 'ws.queued.live',
+		wsPort: 80,
+		wssPort: 443,
+		enabledTransports: ['ws', 'wss'],
+		forceTLS: true
+	});
+
 	const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 
 	channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
@@ -12,7 +22,6 @@ export const createQueueStore = (initial_value: Omit<QueueStore, 'handle_vote'>,
 	});
 
 	channel.bind('vote', (data: PusherVoteEvent) => {
-		console.log(data);
 		queue_writable.update((value) => {
 			const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
 

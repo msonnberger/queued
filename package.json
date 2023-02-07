@@ -54,7 +54,7 @@
 		"class-variance-authority": "0.4.0",
 		"lucide-svelte": "0.112.0",
 		"oazapfts": "4.5.2",
-		"pusher": "5.1.2",
+		"pusher-http-edge": "0.3.0",
 		"pusher-js": "8.0.1",
 		"qrcode": "1.5.1",
 		"svelte-french-toast": "1.0.3"

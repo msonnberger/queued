@@ -41,6 +41,13 @@
 			throw new Error('Failed to add track');
 		}
 	};
+
+	const handle_vote = (track_id: number, value: 1 | -1) => {
+		fetch('/api/queue/vote', {
+			method: 'POST',
+			body: JSON.stringify({ supabase_id: track_id, value, queue_id: id })
+		});
+	};
 </script>
 
 <h1>{$queue.name}</h1>
@@ -60,7 +67,7 @@
 <ul class="flex flex-col gap-5 mt-8">
 	{#each $queue.tracks as track (track.supabase_id)}
 		<li animate:flip={{ duration: 300 }}>
-			<Track {track} handle_vote={queue.handle_vote} />
+			<Track {track} {handle_vote} />
 		</li>
 	{/each}
 </ul>

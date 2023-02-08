@@ -42,18 +42,5 @@ export const createQueueStore = (initial_value: Omit<QueueStore, 'handle_vote'>,
 
 	const queue_writable = writable<QueueStore>(initial_value as QueueStore);
 
-	const { subscribe } = derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
-
-	return {
-		subscribe,
-		handle_vote: async (id: number, value: 1 | -1) => {
-			await fetch('/api/queue/vote', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ supabase_id: id, value, queue_id: initial_value.id })
-			});
-		}
-	};
+	return derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
 };

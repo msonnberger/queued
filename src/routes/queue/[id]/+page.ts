@@ -5,8 +5,9 @@ import { createQueueStore } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
 import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
 import { browser } from '$app/environment';
+import type { Readable } from 'svelte/store';
 
-let queue_store: any;
+let queue_store: Readable<QueueStore>;
 
 export const load = (async (event) => {
 	const { params, fetch, data } = event;

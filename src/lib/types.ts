@@ -2,6 +2,8 @@ import type { TrackObject } from './api/spotify';
 import type { Database } from './api/supabase.types';
 
 export type SupabaseQueue = Database['public']['Tables']['queues']['Row'];
+export type SupabaseTrack = Database['public']['Tables']['tracks']['Row'];
+export type SupabaseVote = Database['public']['Tables']['votes']['Row'];
 
 export interface QueueTrack extends TrackObject {
 	supabase_id: number;
@@ -10,7 +12,7 @@ export interface QueueTrack extends TrackObject {
 
 export interface QueueStore extends Pick<SupabaseQueue, 'name' | 'id'> {
 	tracks: Array<QueueTrack>;
-	handle_vote: (id: number, value: 1 | -1) => Promise<void>;
+	handle_vote: (id: number, value: 1 | -1) => void;
 }
 
 export interface PusherVoteEvent {

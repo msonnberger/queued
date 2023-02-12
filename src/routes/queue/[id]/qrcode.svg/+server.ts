@@ -1,6 +1,12 @@
 import type { RequestHandler } from './$types';
 import Colors from 'tailwindcss/colors';
 import QRCode from 'qrcode';
+import type { Config } from '@sveltejs/adapter-vercel';
+
+export const config: Config = {
+	runtime: 'edge',
+	regions: 'all'
+};
 
 export const GET = (async ({ params, url }) => {
 	const queue_url = new URL('/queue/' + params.id, url);

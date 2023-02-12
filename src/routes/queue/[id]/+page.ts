@@ -3,29 +3,27 @@ import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { createQueueStore } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
-import type { QueueStore } from '$lib/types';
-import type { Database } from '$lib/api/supabase.types';
+import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
+import { browser } from '$app/environment';
+import type { Readable } from 'svelte/store';
+
+let queue_store: Readable<QueueStore>;
 
 export const load = (async (event) => {
 	const { params, fetch, data } = event;
 	const { supabaseClient } = await getSupabase(event);
 
-	const { data: queue, error: err } = await supabaseClient.from('queues').select().eq('id', params.id).single();
+	const { data: queue, error: err } = await supabaseClient
+		.from('queues')
+		.select('*, tracks!tracks_qid_fkey(*, votes(*))')
+		.eq('id', params.id)
+		.single();
 
 	if (err || !queue) {
 		throw error(404, 'This Queue does not exist.');
 	}
 
-	// TODO: combine into one query if possible
-	const { data: supabase_tracks, error: err2 } = await supabaseClient
-		.from('tracks')
-		.select('*, votes(*)')
-		.eq('qid', queue.id);
-
-	if (err2) {
-		throw error(500, err2.message);
-	}
-
+	const supabase_tracks = queue.tracks as Array<SupabaseTrack & { votes: Array<SupabaseVote> }>;
 	const spotify_track_ids = supabase_tracks?.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
 	const initial_value: Omit<QueueStore, 'handle_vote'> = { name: queue.name, id: queue.id, tracks: [] };
 
@@ -35,7 +33,7 @@ export const load = (async (event) => {
 
 		initial_value.tracks =
 			supabase_tracks?.map((supabase_track, i) => {
-				const votes = supabase_track.votes as Array<Database['public']['Tables']['votes']['Row']>;
+				const votes = supabase_track.votes;
 				return {
 					...spotify_tracks[i],
 					supabase_id: supabase_track.id,
@@ -60,6 +58,8 @@ export const load = (async (event) => {
 	}
 
 	return {
-		queue: createQueueStore(initial_value, data.voter_id)
+		queue: browser
+			? queue_store || (queue_store = createQueueStore(initial_value, data.voter_id))
+			: createQueueStore(initial_value, data.voter_id)
 	};
 }) satisfies PageLoad;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
-	import { debounce } from '$lib/utils';
+	import { debounce, format_artists } from '$lib/utils';
 	import { Button } from '$lib/components';
 	import type { TrackObject } from '$lib/api/spotify';
 	import { Track } from '$lib/components/queue';
@@ -55,9 +55,12 @@
 <input type="text" name="" id="" on:input={handle_change} class="border border-slate-900" />
 <ul>
 	{#each search_results as result}
-		<li>
-			<form method="post" on:submit|preventDefault={() => handle_add_track(result)}>
-				<p>{result.name} - {result.album?.name}</p>
+		<li class="m-4">
+			<form method="post" on:submit|preventDefault={() => handle_add_track(result)} class="flex justify-between">
+				<div>
+					<p>{result.name}</p>
+					<p>{format_artists(result.artists)}</p>
+				</div>
 				<Button type="submit">Add</Button>
 			</form>
 		</li>

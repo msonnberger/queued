@@ -13,7 +13,7 @@ const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
 	forceTLS: true
 });
 
-export const createQueueStore = (initial_value: Omit<QueueStore, 'handle_vote'>, current_voter_id: string) => {
+export const create_queue_store = (initial_value: Omit<QueueStore, 'handle_vote'>, current_voter_id: string) => {
 	const queue_writable = writable<QueueStore>(initial_value as QueueStore, () => {
 		const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 

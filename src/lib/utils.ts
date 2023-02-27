@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { QueueStore } from './types';
+import type { ArtistObject } from '$lib/api/spotify';
 
 export const debounce = <Params extends any[]>(
 	func: (...args: Params) => any,
@@ -30,4 +31,15 @@ export const sorted_queue = (queue: QueueStore) => {
 	queue.tracks = sorted;
 
 	return queue;
+};
+
+export const format_artists = (artists: ArtistObject[] | undefined) => {
+	if (artists === undefined) {
+		return '';
+	}
+
+	return artists
+		.map((artist) => artist.name)
+		.filter(Boolean)
+		.join(' & ');
 };

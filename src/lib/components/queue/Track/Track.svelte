@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { VoteButton } from '$lib/components/queue';
 	import type { QueueStore, QueueTrack } from '$lib/types';
+	import { format_artists } from '$lib/utils';
 
 	export let track: QueueTrack;
 	export let handle_vote: QueueStore['handle_vote'];
@@ -9,7 +10,7 @@
 <div class="flex justify-between gap-3 bg-slate-200 dark:bg-slate-700 p-4 rounded-md shadow-md">
 	<div>
 		<p class="font-bold">{track.name}</p>
-		<p>{track.artists?.[0].name ?? ''}</p>
+		<p>{format_artists(track.artists)}</p>
 	</div>
 	<div class="flex gap-2">
 		<VoteButton

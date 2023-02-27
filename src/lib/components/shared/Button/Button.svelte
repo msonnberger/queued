@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type VariantProps, cva } from 'class-variance-authority';
-	const buttonVariants = cva(
+	const button_variants = cva(
 		['inline-flex', 'items-center', 'justify-center', 'rounded-md', 'font-medium', 'transition-colors'],
 		{
 			variants: {
@@ -60,7 +60,7 @@
 		}
 	);
 
-	type ButtonProps = VariantProps<typeof buttonVariants>;
+	type ButtonProps = VariantProps<typeof button_variants>;
 
 	export let variant: ButtonProps['variant'] = 'filled';
 	export let circle: ButtonProps['circle'] = false;
@@ -80,10 +80,10 @@
 	<a
 		{href}
 		class:pointer-events-none={disabled}
-		class="{buttonVariants({ variant, circle, size })} {klass}"
+		class="{button_variants({ variant, circle, size })} {klass}"
 		{target}
 		{rel}><slot /></a
 	>
 {:else}
-	<button {type} {disabled} class="{buttonVariants({ variant, circle, size })} {klass}" on:click><slot /></button>
+	<button {type} {disabled} class="{button_variants({ variant, circle, size })} {klass}" on:click><slot /></button>
 {/if}

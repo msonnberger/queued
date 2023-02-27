@@ -4,11 +4,11 @@
 	import { debounce, format_artists } from '$lib/utils';
 	import { Button } from '$lib/components';
 	import type { TrackObject } from '$lib/api/spotify';
-	import { Track } from '$lib/components/queue';
+	import { Player, Track } from '$lib/components/queue';
 	import { flip } from 'svelte/animate';
 
 	$: ({ id } = $page.params);
-	$: ({ queue } = data);
+	$: ({ queue, session } = data);
 
 	export let data: PageData;
 	let search_results: TrackObject[] = [];
@@ -74,3 +74,7 @@
 		</li>
 	{/each}
 </ul>
+
+{#if typeof session?.provider_token === 'string'}
+	<Player spotify_token={session.provider_token} />
+{/if}

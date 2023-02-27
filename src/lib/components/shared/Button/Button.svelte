@@ -19,7 +19,8 @@
 						'border-slate-900',
 						'text-slate-900',
 						'hover:bg-slate-100',
-						'dark:text-slate-900',
+						'dark:text-slate-50',
+						'dark:bg-slate-900',
 						'dark:border-slate-50',
 						'dark:hover:bg-slate-800'
 					]

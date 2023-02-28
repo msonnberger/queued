@@ -13,7 +13,11 @@ const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
 	forceTLS: true
 });
 
-export const create_queue_store = (initial_value: Omit<QueueStore, 'handle_vote'>, current_voter_id: string) => {
+export const create_queue_store = (initial_value: Partial<QueueStore>, current_voter_id: string) => {
+	initial_value.remove_track = (uri: string) => {
+		queue_writable.update((old) => ({ ...old, tracks: old.tracks.filter((track) => track.uri !== uri) }));
+	};
+
 	const queue_writable = writable<QueueStore>(initial_value as QueueStore, () => {
 		const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 

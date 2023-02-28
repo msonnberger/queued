@@ -3,12 +3,15 @@
 	import { Button } from '$lib/components';
 	import type { PlayerStore, QueueStore } from '$lib/types';
 	import type { SpotifyPlayerCallback, WebPlaybackPlayer } from '$lib/types/web-player';
+	import { format_artists } from '$lib/utils';
+	import { Pause, Play } from 'lucide-svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
 	export let spotify_token: string;
 	export let player_store: Writable<PlayerStore>;
 	export let queue_tracks: QueueStore['tracks'];
+	export let remove_track: QueueStore['remove_track'];
 
 	let player: WebPlaybackPlayer | undefined;
 
@@ -16,8 +19,6 @@
 
 	$: {
 		if (should_play_next && queue_tracks[0].uri && $player_store.device_id) {
-			console.log(queue_tracks[0]);
-
 			try {
 				postMePlayerQueue(
 					queue_tracks[0].uri,
@@ -28,6 +29,8 @@
 						}
 					}
 				);
+
+				remove_track(queue_tracks[0].uri);
 			} catch (error) {
 				console.error(error);
 			}
@@ -35,10 +38,9 @@
 	}
 
 	$: should_play_next =
-		($player_store.track === null ||
-			($player_store.duration !== null &&
-				$player_store.position !== null &&
-				$player_store.duration - $player_store.position < 10000)) &&
+		$player_store.duration !== null &&
+		$player_store.position !== null &&
+		$player_store.duration - $player_store.position < 10000 &&
 		queue_tracks.length > 0;
 
 	onMount(() => {
@@ -83,21 +85,51 @@
 	});
 
 	onDestroy(() => player?.disconnect());
+
+	const init_playback = async () => {
+		if (queue_tracks[0].uri === undefined || $player_store.device_id === null) {
+			return;
+		}
+
+		try {
+			await putMePlayerPlay(
+				{ uris: [queue_tracks[0].uri] },
+				{ deviceId: $player_store.device_id },
+				{
+					headers: {
+						Authorization: `Bearer ${spotify_token}`
+					}
+				}
+			);
+
+			remove_track(queue_tracks[0].uri);
+			player?.togglePlay();
+		} catch (error) {
+			console.error(error);
+		}
+	};
 </script>
 
 <h2>Player</h2>
-<Button
-	on:click={() =>
-		putMePlayerPlay(
-			{ uris: ['spotify:track:4P0osvTXoSYZZC2n8IFH3c'] },
-			{ deviceId: $player_store.device_id ?? undefined },
-			{
-				headers: {
-					Authorization: `Bearer ${spotify_token}`
-				}
-			}
-		)}>Play Payphone</Button
->
-<Button on:click={() => player && player.togglePlay()}>{$player_store.is_playing ? 'Pause' : 'Play'}</Button>
-<input bind:value={$player_store.volume} type="range" name="volume" id="volume" min="0" max="1" step="0.01" />
-<label for="volume">Volume</label>
+<div class="flex">
+	{#if $player_store.track === null}
+		<Button on:click={init_playback} disabled={queue_tracks.length === 0 || $player_store.device_id === null}>
+			Init
+		</Button>
+	{:else}
+		<Button on:click={() => player && player.togglePlay()} circle size="lg">
+			{#if $player_store.is_playing}
+				<Pause size={24} fill="white" strokeWidth="1" />
+			{:else}
+				<Play size={24} fill="#fff" strokeWidth="1" class="translate-x-0.5" />
+			{/if}
+		</Button>
+		<div>
+			<strong>{$player_store.track?.name}</strong>
+			{format_artists($player_store.track?.artists)}
+		</div>
+	{/if}
+
+	<input bind:value={$player_store.volume} type="range" name="volume" id="volume" min="0" max="1" step="0.01" />
+	<label for="volume">Volume</label>
+</div>

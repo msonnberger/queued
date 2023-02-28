@@ -5,9 +5,12 @@
 	import { onMount } from 'svelte';
 
 	export let spotify_token: string;
-	let player: WebPlaybackPlayer;
+	let player: WebPlaybackPlayer | undefined;
 	let device_id: string;
 	let is_playing = false;
+	let volume = 0.5;
+
+	$: player && player.setVolume(volume);
 
 	onMount(() => {
 		const script = document.createElement('script');
@@ -18,8 +21,12 @@
 			player = new window.Spotify.Player({
 				name: 'Queued Web Player',
 				getOAuthToken: (cb: SpotifyPlayerCallback) => cb(spotify_token),
-				volume: 0.5
+				volume: volume
 			});
+
+			if (!player) {
+				return;
+			}
 
 			player.addListener('ready', (state) => {
 				device_id = state.device_id;
@@ -37,7 +44,7 @@
 		};
 
 		window.onkeydown = (event) => {
-			if (event.key === ' ') {
+			if (event.key === ' ' && player) {
 				player.togglePlay();
 			}
 		};
@@ -55,6 +62,8 @@
 					Authorization: `Bearer ${spotify_token}`
 				}
 			}
-		)}>Play I Gotta Feeling</Button
+		)}>Play Payphone</Button
 >
-<Button on:click={() => player.togglePlay()}>{is_playing ? 'Pause' : 'Play'}</Button>
+<Button on:click={() => player && player.togglePlay()}>{is_playing ? 'Pause' : 'Play'}</Button>
+<input bind:value={volume} type="range" name="volume" id="volume" min="0" max="1" step="0.01" />
+<label for="volume">Volume</label>

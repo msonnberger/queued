@@ -10,7 +10,6 @@ specifiers:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2
   '@types/qrcode': 1.5.0
-  '@types/spotify-web-playback-sdk': ^0.1.15
   '@typescript-eslint/eslint-plugin': 5.54.0
   '@typescript-eslint/parser': 5.54.0
   autoprefixer: 10.4.13
@@ -58,7 +57,6 @@ devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.55.1
   '@types/qrcode': 1.5.0
-  '@types/spotify-web-playback-sdk': 0.1.15
   '@typescript-eslint/eslint-plugin': 5.54.0_6mj2wypvdnknez7kws2nfdgupi
   '@typescript-eslint/parser': 5.54.0_ycpbpc6yetojsgtrx3mwntkhsu
   autoprefixer: 10.4.13_postcss@8.4.21
@@ -776,10 +774,6 @@ packages:
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
-    dev: true
-
-  /@types/spotify-web-playback-sdk/0.1.15:
-    resolution: {integrity: sha512-DBXmPajTtrm4Ykf2waHZAW6UR6Jqv8fKRTTDfXcSkse2VzF9uDdj7gb4mcwKMxdDrjJ4npy4EbnxH/xxuiKtoQ==}
     dev: true
 
   /@types/stack-utils/2.0.1:

@@ -1,5 +1,5 @@
-import type { TrackObject } from './api/spotify';
-import type { Database } from './api/supabase.types';
+import type { TrackObject } from '../api/spotify';
+import type { Database } from './supabase';
 
 export type SupabaseQueue = Database['public']['Tables']['queues']['Row'];
 export type SupabaseTrack = Database['public']['Tables']['tracks']['Row'];

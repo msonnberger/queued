@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { putMePlayerPlay } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
+	import type { SpotifyPlayerCallback, WebPlaybackPlayer } from '$lib/types/web-player';
 	import { onMount } from 'svelte';
 
 	export let spotify_token: string;
-	let player;
-	let device_id;
+	let player: WebPlaybackPlayer;
+	let device_id: string;
 	let is_playing = false;
 
 	onMount(() => {
@@ -14,11 +15,9 @@
 		document.head.appendChild(script);
 
 		window.onSpotifyWebPlaybackSDKReady = () => {
-			player = new Spotify.Player({
-				name: 'Queued Player',
-				getOAuthToken: (cb) => {
-					cb(spotify_token);
-				},
+			player = new window.Spotify.Player({
+				name: 'Queued Web Player',
+				getOAuthToken: (cb: SpotifyPlayerCallback) => cb(spotify_token),
 				volume: 0.5
 			});
 
@@ -27,7 +26,6 @@
 			});
 
 			player.addListener('player_state_changed', (state) => {
-				console.log(state);
 				if (!state) {
 					return;
 				}

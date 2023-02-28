@@ -15,7 +15,10 @@
 
 	let player: WebPlaybackPlayer | undefined;
 
-	$: player && player.setVolume($player_store.volume);
+	const interval = setInterval(async () => {
+		const state = await player?.getCurrentState();
+		$player_store.position = state?.position ?? null;
+	}, 1000);
 
 	$: {
 		if (should_play_next && queue_tracks[0].uri && $player_store.device_id) {
@@ -130,6 +133,15 @@
 		</div>
 	{/if}
 
-	<input bind:value={$player_store.volume} type="range" name="volume" id="volume" min="0" max="1" step="0.01" />
+	<input
+		bind:value={$player_store.volume}
+		on:change={() => player?.setVolume($player_store.volume)}
+		type="range"
+		name="volume"
+		id="volume"
+		min="0"
+		max="1"
+		step="0.01"
+	/>
 	<label for="volume">Volume</label>
 </div>

@@ -116,7 +116,7 @@ interface WebPlaybackImage {
 	width: number;
 }
 
-interface WebPlaybackTrack {
+export interface WebPlaybackTrack {
 	album: WebPlaybackAlbum;
 	artists: WebPlaybackArtist[];
 	duration_ms: number;

@@ -8,7 +8,7 @@
 	import { flip } from 'svelte/animate';
 
 	$: ({ id } = $page.params);
-	$: ({ queue, session } = data);
+	$: ({ queue, player, session } = data);
 
 	export let data: PageData;
 	let search_results: TrackObject[] = [];
@@ -76,5 +76,5 @@
 </ul>
 
 {#if typeof session?.provider_token === 'string'}
-	<Player spotify_token={session.provider_token} />
+	<Player player_store={player} queue_tracks={$queue.tracks} spotify_token={session.provider_token} />
 {/if}

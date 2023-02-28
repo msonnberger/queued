@@ -1,5 +1,6 @@
 import type { TrackObject } from '../api/spotify';
 import type { Database } from './supabase';
+import type { WebPlaybackTrack } from './web-player';
 
 export type SupabaseQueue = Database['public']['Tables']['queues']['Row'];
 export type SupabaseTrack = Database['public']['Tables']['tracks']['Row'];
@@ -12,7 +13,17 @@ export interface QueueTrack extends TrackObject {
 
 export interface QueueStore extends Pick<SupabaseQueue, 'name' | 'id'> {
 	tracks: Array<QueueTrack>;
+	// TODO: add handle_vote and add_track to store and remove from components
 	handle_vote: (id: number, value: 1 | -1) => void;
+}
+
+export interface PlayerStore {
+	device_id: string | null;
+	duration: number | null;
+	position: number | null;
+	track: WebPlaybackTrack | null;
+	is_playing: boolean;
+	volume: number;
 }
 
 export interface PusherVoteEvent {

@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store';
-import type { PusherVoteEvent, QueueStore, QueueTrack } from './types';
+import type { PlayerStore, PusherVoteEvent, QueueStore, QueueTrack } from './types';
 import { sorted_queue } from './utils';
 import { PUBLIC_PUSHER_CLUSTER, PUBLIC_PUSHER_KEY } from '$env/static/public';
 import Pusher from 'pusher-js';
@@ -46,3 +46,13 @@ export const create_queue_store = (initial_value: Omit<QueueStore, 'handle_vote'
 
 	return derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
 };
+
+export const create_player_store = () =>
+	writable<PlayerStore>({
+		device_id: null,
+		duration: null,
+		position: null,
+		track: null,
+		is_playing: false,
+		volume: 1
+	});

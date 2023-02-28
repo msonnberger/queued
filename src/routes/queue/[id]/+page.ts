@@ -1,7 +1,7 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { create_queue_store } from '$lib/stores';
+import { create_player_store, create_queue_store } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
 import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
 import { browser } from '$app/environment';
@@ -60,6 +60,7 @@ export const load = (async (event) => {
 	return {
 		queue: browser
 			? queue_store || (queue_store = create_queue_store(initial_value, data.voter_id))
-			: create_queue_store(initial_value, data.voter_id)
+			: create_queue_store(initial_value, data.voter_id),
+		player: create_player_store()
 	};
 }) satisfies PageLoad;

@@ -43,3 +43,10 @@ export const format_artists = (artists: ArtistObject[] | undefined) => {
 		.filter(Boolean)
 		.join(' & ');
 };
+
+export const ms_to_min_sec = (ms: number) => {
+	const min = Math.floor(ms / (1000 * 60));
+	const sec = ((ms % 60000) / 1000).toFixed(0);
+
+	return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+};

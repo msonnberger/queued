@@ -13,7 +13,6 @@
 	export let queue_store: Readable<QueueStore>;
 
 	let player: WebPlaybackPlayer | undefined;
-	let up_next_uri: string | null = null;
 
 	// TODO: pause interval on player pause
 	setInterval(async () => {
@@ -36,7 +35,7 @@
 			$player_store.duration - $player_store.position > 10000 ||
 			$queue_store.tracks.length === 0 ||
 			$player_store.device_id === null ||
-			up_next_uri !== null
+			$player_store.up_next_uri !== null
 		) {
 			return;
 		}
@@ -58,7 +57,7 @@
 				}
 			);
 
-			up_next_uri = uri;
+			$player_store.up_next_uri = uri;
 		} catch (error) {
 			console.error(error);
 		}
@@ -96,9 +95,9 @@
 				$player_store.track = track_window.current_track;
 				$player_store.is_playing = !paused;
 
-				if ($player_store.track.uri === up_next_uri) {
-					$queue_store.remove_track(up_next_uri);
-					up_next_uri = null;
+				if ($player_store.track.uri === $player_store.up_next_uri) {
+					$queue_store.remove_track($player_store.up_next_uri);
+					$player_store.up_next_uri = null;
 				}
 			});
 
@@ -141,7 +140,6 @@
 </script>
 
 <h2>Player</h2>
-Up Next: {up_next_uri}
 <div class="flex">
 	{#if $player_store.track === null}
 		<Button on:click={init_playback} disabled={$queue_store.tracks.length === 0 || $player_store.device_id === null}>

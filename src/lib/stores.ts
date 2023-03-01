@@ -67,6 +67,7 @@ export const create_player_store = () =>
 		duration: null,
 		position: null,
 		track: null,
+		up_next_uri: null,
 		is_playing: false,
 		volume: 1
 	});

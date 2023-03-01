@@ -23,6 +23,7 @@ export interface PlayerStore {
 	duration: number | null;
 	position: number | null;
 	track: WebPlaybackTrack | null;
+	up_next_uri: string | null;
 	is_playing: boolean;
 	volume: number;
 }

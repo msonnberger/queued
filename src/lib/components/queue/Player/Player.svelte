@@ -4,7 +4,7 @@
 	import type { PlayerStore, QueueStore } from '$lib/types';
 	import type { SpotifyPlayerCallback, WebPlaybackPlayer } from '$lib/types/web-player';
 	import { format_artists, ms_to_min_sec } from '$lib/utils';
-	import { Pause, Play } from 'lucide-svelte';
+	import { Pause, Play, Volume, Volume1, Volume2 } from 'lucide-svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import type { Readable, Writable } from 'svelte/store';
 	import ProgressBar from './ProgressBar/ProgressBar.svelte';
@@ -142,102 +142,77 @@
 			console.error(error);
 		}
 	};
-
-	$: progress = (($player_store.position ?? 0) / ($player_store.duration ?? 1)) * 100;
 </script>
 
-<h2>Player</h2>
-<div class="flex">
-	<input
-		bind:value={$player_store.volume}
-		on:change={() => player?.setVolume($player_store.volume)}
-		type="range"
-		name="volume"
-		id="volume"
-		min="0"
-		max="1"
-		step="0.01"
-	/>
-	<label for="volume">Volume</label>
-</div>
-<!-- <ProgressBar progress_percentage={($player_store.position / $player_store.duration) * 100} /> -->
-
-<div class="fixed inset-x-0 bottom-0 z-10 lg:left-112 xl:left-120">
+<div class="fixed inset-x-0 bottom-0 z-10">
 	<div
-		class="flex items-center gap-6 bg-white/90  pr-6 shadow shadow-slate-200/80 ring-1 ring-slate-900/5 backdrop-blur-sm "
+		class="flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 shadow shadow-slate-200/80 ring-1 ring-slate-900/5 backdrop-blur-sm"
 	>
 		<div class="block aspect-square w-40 bg-indigo-200" />
-		<div class="flex flex-1 flex-col gap-3 overflow-hidden p-1">
-			<div class="flex w-full justify-between">
+		<div class="flex flex-1 flex-col gap-4 overflow-hidden p-1">
+			<div class="flex w-full justify-between items-center">
 				<div class="flex flex-col w-full">
-					<span class="truncate text-center text-sm font-bold leading-6 md:text-left"
-						>{$player_store.track?.name ?? ''}</span
-					>
-					<span class="truncate text-center text-sm font-normal text-slate-500 md:text-left"
+					<span class="truncate text-base font-bold leading-6 ">{$player_store.track?.name ?? ''}</span>
+					<span class="truncate text-sm font-normal text-slate-500 dark:text-slate-400"
 						>{format_artists($player_store.track?.artists)}
 					</span>
 				</div>
 
 				<Button
-					on:click={$player_store.track === null ? init_playback : () => player && player.togglePlay()}
+					on:click={$player_store.track === null ? init_playback : () => player?.togglePlay()}
 					disabled={$player_store.device_id === null}
 					circle
 					size="lg"
+					class="mx-4"
 				>
 					{#if $player_store.is_playing}
-						<Pause size={24} fill="white" strokeWidth="1" />
+						<Pause size={24} class="fill-white dark:fill-slate-900" strokeWidth="1" />
 					{:else}
-						<Play size={24} fill="#fff" strokeWidth="1" class="translate-x-0.5" />
+						<Play
+							size={24}
+							strokeWidth="1"
+							class="fill-white dark:fill-slate-900 dark:stroke-slate-900 translate-x-0.5"
+						/>
 					{/if}
 				</Button>
-				<div class="w-full" />
+				<div class="w-full">
+					<div class="flex gap-2">
+						<label for="toggle_volume_slider" class="cursor-pointer">
+							{#if $player_store.volume === 0}
+								<Volume />
+							{:else if $player_store.volume < 0.5}
+								<Volume1 />
+							{:else}
+								<Volume2 />
+							{/if}
+						</label>
+						<input type="checkbox" id="toggle_volume_slider" class="peer sr-only" />
+
+						<input
+							bind:value={$player_store.volume}
+							on:change={() => player?.setVolume($player_store.volume)}
+							type="range"
+							name="volume"
+							id="volume"
+							min="0"
+							max="1"
+							step="0.01"
+							class="accent-slate-900 dark:accent-slate-100 hidden peer-checked:block"
+						/>
+					</div>
+				</div>
 			</div>
 
 			<div class="flex justify-between gap-4">
 				<output
-					for="react-aria9214282547-2-0"
-					aria-live="off"
-					class="hidden rounded-md py-0.5 tracking-wide font-mono text-sm leading-6 md:block text-slate-500"
+					class="block rounded-md py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
 					>{ms_to_min_sec($player_store.position ?? 0)}</output
 				>
-				<div
-					role="group"
-					id="react-aria9214282547-1"
-					aria-labelledby="react-aria9214282547-2"
-					class="absolute inset-x-0 bottom-full flex flex-auto touch-none items-center gap-6 md:relative"
+				<ProgressBar progress={(($player_store.position ?? 0) / ($player_store.duration ?? 1)) * 100} />
+				<span
+					class="block rounded-md px-1 py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
+					>{ms_to_min_sec($player_store.duration ?? 0)}</span
 				>
-					<label class="sr-only" id="react-aria9214282547-2">Current time</label>
-					<div class="relative w-full bg-slate-100 md:rounded-full" style="position: relative; touch-action: none;">
-						<div class="h-2 md:rounded-r-md md:rounded-l-xl bg-slate-900" style="width: calc({progress}% - 0.25rem);" />
-						<div class="absolute top-1/2 -translate-x-1/2" style="left: {progress}%;">
-							<div
-								class="h-4 rounded-full w-1 bg-slate-900"
-								style="position: absolute; transform: translate(-50%, -50%); touch-action: none; left: {progress}%;"
-							>
-								<div
-									style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
-								>
-									<input
-										tabindex="0"
-										id="react-aria9214282547-2-0"
-										aria-labelledby="react-aria9214282547-2"
-										type="range"
-										min="0"
-										max="64"
-										step="1"
-										aria-orientation="horizontal"
-										aria-valuetext="0 hours, 0 minutes, 10 seconds"
-										value="10"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<span class="hidden rounded-md px-1 py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 md:block"
-						>{ms_to_min_sec($player_store.duration ?? 0)}</span
-					>
-				</div>
 			</div>
 		</div>
 	</div>

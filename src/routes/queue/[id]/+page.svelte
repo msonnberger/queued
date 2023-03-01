@@ -76,10 +76,5 @@
 </ul>
 
 {#if typeof session?.provider_token === 'string'}
-	<Player
-		player_store={player}
-		queue_tracks={$queue.tracks}
-		remove_track={$queue.remove_track}
-		spotify_token={session.provider_token}
-	/>
+	<Player player_store={player} queue_store={queue} spotify_token={session.provider_token} />
 {/if}

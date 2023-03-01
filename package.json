@@ -60,6 +60,7 @@
 		"pusher-js": "8.0.1",
 		"qrcode": "1.5.1",
 		"svelte-french-toast": "1.0.3",
-		"tailwind-merge": "^1.10.0"
+		"tailwind-merge": "^1.10.0",
+		"zod": "^3.20.6"
 	}
 }

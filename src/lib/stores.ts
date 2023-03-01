@@ -15,7 +15,10 @@ const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
 
 export const create_queue_store = (initial_value: Partial<QueueStore>, current_voter_id: string) => {
 	initial_value.remove_track = (uri: string) => {
-		queue_writable.update((old) => ({ ...old, tracks: old.tracks.filter((track) => track.uri !== uri) }));
+		fetch('/api/queue/remove-track', {
+			method: 'DELETE',
+			body: JSON.stringify({ uri, queue_id: initial_value.id })
+		});
 	};
 
 	const queue_writable = writable<QueueStore>(initial_value as QueueStore, () => {
@@ -24,6 +27,13 @@ export const create_queue_store = (initial_value: Partial<QueueStore>, current_v
 		channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
 			const new_track = { ...data, votes: { up: 0, down: 0, own_vote: null } };
 			queue_writable.update((value) => ({ ...value, tracks: [...value.tracks, new_track] }));
+		});
+
+		channel.bind('track-removed', (data: { uri: string }) => {
+			queue_writable.update((old) => ({
+				...old,
+				tracks: old.tracks.filter((track) => track.uri !== data.uri)
+			}));
 		});
 
 		channel.bind('vote', (data: PusherVoteEvent) => {

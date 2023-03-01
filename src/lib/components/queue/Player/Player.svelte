@@ -6,12 +6,11 @@
 	import { format_artists } from '$lib/utils';
 	import { Pause, Play } from 'lucide-svelte';
 	import { onDestroy, onMount } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import type { Readable, Writable } from 'svelte/store';
 
 	export let spotify_token: string;
 	export let player_store: Writable<PlayerStore>;
-	export let queue_tracks: QueueStore['tracks'];
-	export let remove_track: QueueStore['remove_track'];
+	export let queue_store: Readable<QueueStore>;
 
 	let player: WebPlaybackPlayer | undefined;
 	let up_next_uri: string | null = null;
@@ -35,14 +34,14 @@
 
 		if (
 			$player_store.duration - $player_store.position > 10000 ||
-			queue_tracks.length === 0 ||
+			$queue_store.tracks.length === 0 ||
 			$player_store.device_id === null ||
 			up_next_uri !== null
 		) {
 			return;
 		}
 
-		const uri = queue_tracks[0].uri;
+		const uri = $queue_store.tracks[0].uri;
 
 		if (uri === undefined) {
 			return;
@@ -98,7 +97,7 @@
 				$player_store.is_playing = !paused;
 
 				if ($player_store.track.uri === up_next_uri) {
-					remove_track(up_next_uri);
+					$queue_store.remove_track(up_next_uri);
 					up_next_uri = null;
 				}
 			});
@@ -116,13 +115,15 @@
 	onDestroy(() => player?.disconnect());
 
 	const init_playback = async () => {
-		if (queue_tracks[0].uri === undefined || $player_store.device_id === null) {
+		const uri = $queue_store.tracks[0].uri;
+
+		if (uri === undefined || $player_store.device_id === null) {
 			return;
 		}
 
 		try {
 			await putMePlayerPlay(
-				{ uris: [queue_tracks[0].uri] },
+				{ uris: [uri] },
 				{ deviceId: $player_store.device_id },
 				{
 					headers: {
@@ -131,7 +132,7 @@
 				}
 			);
 
-			remove_track(queue_tracks[0].uri);
+			$queue_store.remove_track(uri);
 			player?.togglePlay();
 		} catch (error) {
 			console.error(error);
@@ -143,7 +144,7 @@
 Up Next: {up_next_uri}
 <div class="flex">
 	{#if $player_store.track === null}
-		<Button on:click={init_playback} disabled={queue_tracks.length === 0 || $player_store.device_id === null}>
+		<Button on:click={init_playback} disabled={$queue_store.tracks.length === 0 || $player_store.device_id === null}>
 			Init
 		</Button>
 	{:else}

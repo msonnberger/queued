@@ -38,6 +38,7 @@ specifiers:
   typescript: 4.9.5
   vite: 4.1.4
   vitest: 0.29.2
+  zod: ^3.20.6
 
 dependencies:
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.1
@@ -51,6 +52,7 @@ dependencies:
   qrcode: 1.5.1
   svelte-french-toast: 1.0.3_svelte@3.55.1
   tailwind-merge: 1.10.0
+  zod: 3.20.6
 
 devDependencies:
   '@playwright/test': 1.31.1
@@ -4502,3 +4504,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+  /zod/3.20.6:
+    resolution: {integrity: sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==}
+    dev: false

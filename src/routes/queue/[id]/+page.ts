@@ -25,7 +25,7 @@ export const load = (async (event) => {
 
 	const supabase_tracks = queue.tracks as Array<SupabaseTrack & { votes: Array<SupabaseVote> }>;
 	const spotify_track_ids = supabase_tracks?.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
-	const initial_value: Partial<QueueStore> = { name: queue.name, id: queue.id, tracks: [] };
+	const initial_value: Partial<QueueStore> = { name: queue.name, id: queue.id, owner_id: queue.owner_id, tracks: [] };
 
 	if (spotify_track_ids) {
 		const spotify_tracks_response = await fetch(`/api/get-tracks?track_ids=${spotify_track_ids}`);

@@ -11,7 +11,7 @@ export interface QueueTrack extends TrackObject {
 	votes: { up: number; down: number; own_vote: 'up' | 'down' | null };
 }
 
-export interface QueueStore extends Pick<SupabaseQueue, 'name' | 'id'> {
+export interface QueueStore extends Pick<SupabaseQueue, 'name' | 'id' | 'owner_id'> {
 	tracks: Array<QueueTrack>;
 	// TODO: add handle_vote and add_track to store and remove from components
 	handle_vote: (id: number, value: 1 | -1) => void;

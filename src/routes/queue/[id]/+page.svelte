@@ -75,6 +75,6 @@
 	{/each}
 </ul>
 
-{#if typeof session?.provider_token === 'string'}
+{#if typeof session?.provider_token === 'string' && $queue.owner_id === session.user.id}
 	<Player player_store={player} queue_store={queue} spotify_token={session.provider_token} />
 {/if}

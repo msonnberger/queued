@@ -14,28 +14,35 @@
 	export let remove_track: QueueStore['remove_track'];
 
 	let player: WebPlaybackPlayer | undefined;
+	let up_next_uri: string | null = null;
 
 	const interval = setInterval(async () => {
 		const state = await player?.getCurrentState();
-		$player_store.position = state?.position ?? null;
+		if (state?.position !== undefined) {
+			$player_store.position = state.position;
+		}
 	}, 1000);
 
 	$: {
 		if (should_play_next && queue_tracks[0].uri && $player_store.device_id) {
-			try {
-				postMePlayerQueue(
-					queue_tracks[0].uri,
-					{ deviceId: $player_store.device_id },
-					{
-						headers: {
-							Authorization: `Bearer ${spotify_token}`
-						}
-					}
-				);
+			const uri = queue_tracks[0].uri;
 
-				remove_track(queue_tracks[0].uri);
-			} catch (error) {
-				console.error(error);
+			if (up_next_uri === null) {
+				try {
+					postMePlayerQueue(
+						uri,
+						{ deviceId: $player_store.device_id },
+						{
+							headers: {
+								Authorization: `Bearer ${spotify_token}`
+							}
+						}
+					);
+
+					up_next_uri = uri;
+				} catch (error) {
+					console.error(error);
+				}
 			}
 		}
 	}
@@ -75,6 +82,11 @@
 				$player_store.duration = state.duration;
 				$player_store.track = state.track_window.current_track;
 				$player_store.is_playing = !state.paused;
+
+				if (state.track_window.current_track.uri === up_next_uri) {
+					remove_track(up_next_uri);
+					up_next_uri = null;
+				}
 			});
 
 			player.connect();
@@ -114,6 +126,7 @@
 </script>
 
 <h2>Player</h2>
+Up Next: {up_next_uri}
 <div class="flex">
 	{#if $player_store.track === null}
 		<Button on:click={init_playback} disabled={queue_tracks.length === 0 || $player_store.device_id === null}>

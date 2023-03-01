@@ -16,42 +16,54 @@
 	let player: WebPlaybackPlayer | undefined;
 	let up_next_uri: string | null = null;
 
-	const interval = setInterval(async () => {
+	// TODO: pause interval on player pause
+	setInterval(async () => {
 		const state = await player?.getCurrentState();
-		if (state?.position !== undefined) {
-			$player_store.position = state.position;
+		const volume = await player?.getVolume();
+		if (!state) {
+			return;
+		}
+
+		const { position, duration } = state;
+
+		$player_store.position = position;
+		$player_store.duration = duration;
+
+		if (volume !== undefined) {
+			$player_store.volume = volume;
+		}
+
+		if (
+			$player_store.duration - $player_store.position > 10000 ||
+			queue_tracks.length === 0 ||
+			$player_store.device_id === null ||
+			up_next_uri !== null
+		) {
+			return;
+		}
+
+		const uri = queue_tracks[0].uri;
+
+		if (uri === undefined) {
+			return;
+		}
+
+		try {
+			postMePlayerQueue(
+				uri,
+				{ deviceId: $player_store.device_id },
+				{
+					headers: {
+						Authorization: `Bearer ${spotify_token}`
+					}
+				}
+			);
+
+			up_next_uri = uri;
+		} catch (error) {
+			console.error(error);
 		}
 	}, 1000);
-
-	$: {
-		if (should_play_next && queue_tracks[0].uri && $player_store.device_id) {
-			const uri = queue_tracks[0].uri;
-
-			if (up_next_uri === null) {
-				try {
-					postMePlayerQueue(
-						uri,
-						{ deviceId: $player_store.device_id },
-						{
-							headers: {
-								Authorization: `Bearer ${spotify_token}`
-							}
-						}
-					);
-
-					up_next_uri = uri;
-				} catch (error) {
-					console.error(error);
-				}
-			}
-		}
-	}
-
-	$: should_play_next =
-		$player_store.duration !== null &&
-		$player_store.position !== null &&
-		$player_store.duration - $player_store.position < 10000 &&
-		queue_tracks.length > 0;
 
 	onMount(() => {
 		const script = document.createElement('script');
@@ -78,12 +90,14 @@
 					return;
 				}
 
-				$player_store.position = state.position;
-				$player_store.duration = state.duration;
-				$player_store.track = state.track_window.current_track;
-				$player_store.is_playing = !state.paused;
+				const { position, duration, track_window, paused } = state;
 
-				if (state.track_window.current_track.uri === up_next_uri) {
+				$player_store.position = position;
+				$player_store.duration = duration;
+				$player_store.track = track_window.current_track;
+				$player_store.is_playing = !paused;
+
+				if ($player_store.track.uri === up_next_uri) {
 					remove_track(up_next_uri);
 					up_next_uri = null;
 				}

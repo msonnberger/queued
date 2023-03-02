@@ -71,3 +71,8 @@ export const create_player_store = () =>
 		is_playing: false,
 		volume: 1
 	});
+
+export const spotify_tokens = writable<{ access_token: string | null; refresh_token: string | null }>({
+	access_token: null,
+	refresh_token: null
+});

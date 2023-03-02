@@ -6,6 +6,7 @@
 	import type { TrackObject } from '$lib/api/spotify';
 	import { Player, Track } from '$lib/components/queue';
 	import { flip } from 'svelte/animate';
+	import { spotify_tokens } from '$lib/stores';
 
 	$: ({ id } = $page.params);
 	$: ({ queue, player, session } = data);
@@ -75,6 +76,6 @@
 	{/each}
 </ul>
 
-{#if typeof session?.provider_token === 'string' && $queue.owner_id === session.user.id}
-	<Player player_store={player} queue_store={queue} spotify_token={session.provider_token} />
+{#if $spotify_tokens.access_token && $queue.owner_id === session?.user.id}
+	<Player player_store={player} queue_store={queue} />
 {/if}

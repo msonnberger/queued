@@ -9,8 +9,8 @@
 	import type { Readable, Writable } from 'svelte/store';
 	import ProgressBar from './ProgressBar/ProgressBar.svelte';
 	import toast from 'svelte-french-toast';
+	import { spotify_tokens } from '$lib/stores';
 
-	export let spotify_token: string;
 	export let player_store: Writable<PlayerStore>;
 	export let queue_store: Readable<QueueStore>;
 
@@ -49,15 +49,7 @@
 		}
 
 		try {
-			postMePlayerQueue(
-				uri,
-				{ deviceId: $player_store.device_id },
-				{
-					headers: {
-						Authorization: `Bearer ${spotify_token}`
-					}
-				}
-			);
+			postMePlayerQueue(uri, { deviceId: $player_store.device_id });
 
 			$player_store.up_next_uri = uri;
 		} catch (error) {
@@ -73,7 +65,7 @@
 		window.onSpotifyWebPlaybackSDKReady = () => {
 			player = new window.Spotify.Player({
 				name: 'Queued Web Player',
-				getOAuthToken: (cb: SpotifyPlayerCallback) => cb(spotify_token),
+				getOAuthToken: (cb: SpotifyPlayerCallback) => cb($spotify_tokens.access_token as string),
 				volume: $player_store.volume
 			});
 
@@ -127,15 +119,7 @@
 		}
 
 		try {
-			await putMePlayerPlay(
-				{ uris: [uri] },
-				{ deviceId: $player_store.device_id },
-				{
-					headers: {
-						Authorization: `Bearer ${spotify_token}`
-					}
-				}
-			);
+			await putMePlayerPlay({ uris: [uri] }, { deviceId: $player_store.device_id });
 
 			$queue_store.remove_track(uri);
 			player?.togglePlay();

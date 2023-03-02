@@ -9,7 +9,7 @@
 		"test:browser": "playwright test",
 		"test:unit": "vitest run",
 		"test": "pnpm test:unit && pnpm test:browser",
-		"gen:types": "pnpm dlx supabase gen types typescript --linked > ./src/lib/api/supabase.types.ts",
+		"gen:types": "pnpm dlx supabase gen types typescript --linked > ./src/lib/types/supabase.ts",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",

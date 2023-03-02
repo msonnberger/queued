@@ -38,6 +38,16 @@
 	};
 </script>
 
+{#if $queue?.currently_playing?.name}
+	<div class="flex items-center gap-2">
+		<span class="relative flex h-2 w-2">
+			<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+			<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+		</span>
+		<span>Currently playing: {$queue.currently_playing.name}</span>
+	</div>
+{/if}
+
 <h1>{$queue.name}</h1>
 <img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 dark:invert" />
 

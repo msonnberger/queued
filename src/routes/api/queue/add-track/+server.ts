@@ -21,7 +21,8 @@ export const POST = (async (event) => {
 		})
 		.select('id')
 		.single();
-
+	
+	// Check for duplicate entry in Supabase
 	if (err?.code === '23505') {
 		throw error(409, err.message);
 	} else if (err) {

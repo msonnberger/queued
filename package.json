@@ -62,7 +62,7 @@
 		"svelte-french-toast": "1.0.3",
 		"svelte-headlessui": "0.0.15",
 		"svelte-transition": "0.0.7",
-		"tailwind-merge": "^1.10.0",
-		"zod": "^3.20.6"
+		"tailwind-merge": "1.10.0",
+		"zod": "3.20.6"
 	}
 }

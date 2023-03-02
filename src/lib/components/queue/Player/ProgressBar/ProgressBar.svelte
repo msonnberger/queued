@@ -5,10 +5,10 @@
 <div class="relative inset-x-0 bottom-full flex flex-auto touch-none items-center gap-6">
 	<div class="relative w-full bg-slate-100 dark:bg-slate-700 rounded-full touch-none">
 		<div
-			class="h-2 rounded-r-md rounded-l-xl bg-slate-900 dark:bg-slate-200"
+			class="h-2 rounded-r-md rounded-l-xl bg-slate-900 dark:bg-slate-200 transition-all duration-500 ease-linear"
 			style="width: calc({progress}% - 0.25rem);"
 		/>
-		<div class="absolute top-1/2 -translate-x-1/2" style="left: {progress}%;">
+		<div class="absolute top-1/2 -translate-x-1/2 transition-all duration-500 ease-linear" style="left: {progress}%;">
 			<div
 				class="absolute touch-none h-4 rounded-full w-1 bg-slate-900 dark:bg-slate-200 -translate-x-1/2 -translate-y-1/2"
 				style="left: {progress}%;"

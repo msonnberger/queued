@@ -63,7 +63,7 @@
 		} catch (error) {
 			console.error(error);
 		}
-	}, 1000);
+	}, 500);
 
 	onMount(() => {
 		const script = document.createElement('script');

@@ -9,6 +9,7 @@
 
 	export let id: string;
 	let search_results: TrackObject[] = [];
+	let input_value = '';
 
 	const handle_change = debounce(async (e: Event) => {
 		const input = e.target as HTMLInputElement;
@@ -45,7 +46,7 @@
 
 	const combobox = createCombobox({ label: 'Tracks', selected: { name: '' } });
 
-	const onSelect = (e: Event) => {
+	const on_select = (e: Event) => {
 		const selected = (e as CustomEvent).detail?.selected ?? null;
 
 		if (selected) {
@@ -63,8 +64,9 @@
 			>
 				<input
 					use:combobox.input
-					on:select={onSelect}
+					on:select={on_select}
 					on:input={handle_change}
+					bind:value={input_value}
 					class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 outline-0"
 				/>
 				<button use:combobox.button class="absolute inset-y-0 right-0 flex items-center pr-2" type="button">
@@ -72,60 +74,62 @@
 				</button>
 			</div>
 
-			<Transition
-				show={$combobox.expanded}
-				leave="transition ease-in duration-100"
-				leaveFrom="opacity-100"
-				leaveTo="opacity-0"
-				on:after-leave={() => combobox.reset()}
-			>
-				<ul
-					use:combobox.items
-					class="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+			{#if input_value.length > 3}
+				<Transition
+					show={$combobox.expanded}
+					leave="transition ease-in duration-100"
+					leaveFrom="opacity-100"
+					leaveTo="opacity-0"
+					on:after-leave={() => combobox.reset()}
 				>
-					{#each search_results as result}
-						{@const active = $combobox.active === result}
-						{@const selected = $combobox.selected === result}
+					<ul
+						use:combobox.items
+						class="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+					>
+						{#each search_results as result}
+							{@const active = $combobox.active === result}
+							{@const selected = $combobox.selected === result}
 
-						<li class="relative select-none flex justify-between items-center pl-4 pr-4 py-2">
-							<img src={result?.album?.images[2].url} alt="Album cover" />
-							<div class="truncate pl-2 w-full">
-								<span class="block truncate text-base font-bold leading-6 {selected ? 'font-medium' : 'font-normal'}">
-									{result.name}
-								</span>
-								<span
-									class="block truncate text-sm text-slate-500 dark:text-slate-400 {selected
-										? 'font-medium'
-										: 'font-normal'}"
-								>
-									{format_artists(result.artists)}
-								</span>
-							</div>
-							<div class="pl-2" use:combobox.item={{ value: result }}>
-								<Button circle size="sm">
-									{#if selected}
-										<Check class="hover:cursor-pointer" />
-									{:else}
-										<Plus class="hover:cursor-pointer" />
-									{/if}
-								</Button>
-							</div>
+							<li class="relative select-none flex justify-between items-center pl-4 pr-4 py-2">
+								<img src={result?.album?.images[2].url} alt="Album cover" />
+								<div class="truncate pl-2 w-full">
+									<span class="block truncate text-base font-bold leading-6 {selected ? 'font-medium' : 'font-normal'}">
+										{result.name}
+									</span>
+									<span
+										class="block truncate text-sm text-slate-500 dark:text-slate-400 {selected
+											? 'font-medium'
+											: 'font-normal'}"
+									>
+										{format_artists(result.artists)}
+									</span>
+								</div>
+								<div class="pl-2" use:combobox.item={{ value: result }}>
+									<Button circle size="sm">
+										{#if selected}
+											<Check class="hover:cursor-pointer" />
+										{:else}
+											<Plus class="hover:cursor-pointer" />
+										{/if}
+									</Button>
+								</div>
 
-							{#if selected}
-								<span
-									class="absolute inset-y-0 left-0 flex items-center pl-3 {active ? 'text-white' : 'text-teal-600'}"
-								>
-									<Check class="h-5 w-5" />
-								</span>
-							{/if}
-						</li>
-					{:else}
-						<li class="relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900">
-							<span class="block truncate font-normal">Nothing found</span>
-						</li>
-					{/each}
-				</ul>
-			</Transition>
+								{#if selected}
+									<span
+										class="absolute inset-y-0 left-0 flex items-center pl-3 {active ? 'text-white' : 'text-teal-600'}"
+									>
+										<Check class="h-5 w-5" />
+									</span>
+								{/if}
+							</li>
+						{:else}
+							<li class="relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900">
+								<span class="block truncate font-normal">Nothing found</span>
+							</li>
+						{/each}
+					</ul>
+				</Transition>
+			{/if}
 		</div>
 	</div>
 </div>

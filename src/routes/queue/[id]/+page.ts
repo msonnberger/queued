@@ -1,7 +1,7 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { create_queue_store } from '$lib/stores';
+import { create_player_store, create_queue_store } from '$lib/stores';
 import type { TrackObject } from '$lib/api/spotify';
 import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
 import { browser } from '$app/environment';
@@ -25,7 +25,7 @@ export const load = (async (event) => {
 
 	const supabase_tracks = queue.tracks as Array<SupabaseTrack & { votes: Array<SupabaseVote> }>;
 	const spotify_track_ids = supabase_tracks?.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
-	const initial_value: Omit<QueueStore, 'handle_vote'> = { name: queue.name, id: queue.id, tracks: [] };
+	const initial_value: Partial<QueueStore> = { name: queue.name, id: queue.id, owner_id: queue.owner_id, tracks: [] };
 
 	if (spotify_track_ids) {
 		const spotify_tracks_response = await fetch(`/api/get-tracks?track_ids=${spotify_track_ids}`);
@@ -60,6 +60,7 @@ export const load = (async (event) => {
 	return {
 		queue: browser
 			? queue_store || (queue_store = create_queue_store(initial_value, data.voter_id))
-			: create_queue_store(initial_value, data.voter_id)
+			: create_queue_store(initial_value, data.voter_id),
+		player: create_player_store()
 	};
 }) satisfies PageLoad;

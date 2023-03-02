@@ -26,6 +26,7 @@
 					type="text"
 					name="qid"
 					placeholder="ABCDEFG"
+					autocomplete="off"
 					bind:value={qid}
 				/>
 				<Button disabled={qid.length < 7} href="/queue/{qid}" circle size="sm" class="absolute top-1 right-1 group">

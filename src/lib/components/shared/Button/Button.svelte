@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { type VariantProps, cva } from 'class-variance-authority';
+	import { twMerge } from 'tailwind-merge';
+
 	const button_variants = cva(['inline-flex', 'items-center', 'justify-center', 'font-medium', 'transition-colors'], {
 		variants: {
 			variant: {
@@ -66,8 +68,8 @@
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let external = false;
 	export let disabled = false;
-	let klass = '';
-	export { klass as class };
+	let classNames = '';
+	export { classNames as class };
 
 	$: target = external ? '_blank' : '';
 	$: rel = external ? 'noopener noreferrer' : '';
@@ -77,10 +79,12 @@
 	<a
 		{href}
 		class:pointer-events-none={disabled}
-		class="{button_variants({ variant, circle, size })} {klass}"
+		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
 		{target}
 		{rel}><slot /></a
 	>
 {:else}
-	<button {type} {disabled} class="{button_variants({ variant, circle, size })} {klass}" on:click><slot /></button>
+	<button {type} {disabled} class="{twMerge(button_variants({ variant, circle, size }))} {classNames}" on:click>
+		<slot />
+	</button>
 {/if}

@@ -4,11 +4,11 @@
 	import { debounce, format_artists } from '$lib/utils';
 	import { Button } from '$lib/components';
 	import type { TrackObject } from '$lib/api/spotify';
-	import { Track } from '$lib/components/queue';
+	import { Player, Track } from '$lib/components/queue';
 	import { flip } from 'svelte/animate';
 
 	$: ({ id } = $page.params);
-	$: ({ queue } = data);
+	$: ({ queue, player, session } = data);
 
 	export let data: PageData;
 	let search_results: TrackObject[] = [];
@@ -70,7 +70,11 @@
 <ul class="flex flex-col gap-5 mt-8">
 	{#each $queue.tracks as track (track.supabase_id)}
 		<li animate:flip={{ duration: 300 }}>
-			<Track {track} {handle_vote} />
+			<Track {track} {handle_vote} is_up_next={track.uri === $player.up_next_uri} />
 		</li>
 	{/each}
 </ul>
+
+{#if typeof session?.provider_token === 'string' && $queue.owner_id === session.user.id}
+	<Player player_store={player} queue_store={queue} spotify_token={session.provider_token} />
+{/if}

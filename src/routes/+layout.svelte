@@ -3,6 +3,7 @@
 	import { supabase } from '$lib/api/supabase';
 	import { Button, ThemeToggle } from '$lib/components';
 	import { onMount } from 'svelte';
+	import { Toaster } from 'svelte-french-toast';
 	import '../app.css';
 	import type { PageData } from './$types';
 
@@ -17,6 +18,7 @@
 	export let data: PageData;
 </script>
 
+<Toaster />
 <header class="self-end p-4 flex gap-5">
 	<Button href="/">Home</Button>
 	<ThemeToggle />

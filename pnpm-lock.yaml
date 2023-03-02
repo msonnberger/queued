@@ -32,6 +32,8 @@ specifiers:
   svelte: 3.55.1
   svelte-check: 3.0.4
   svelte-french-toast: 1.0.3
+  svelte-headlessui: 0.0.15
+  svelte-transition: 0.0.7
   tailwind-merge: ^1.10.0
   tailwindcss: 3.2.7
   tslib: 2.5.0
@@ -51,6 +53,8 @@ dependencies:
   pusher-js: 8.0.1
   qrcode: 1.5.1
   svelte-french-toast: 1.0.3_svelte@3.55.1
+  svelte-headlessui: 0.0.15
+  svelte-transition: 0.0.7
   tailwind-merge: 1.10.0
   zod: 3.20.6
 
@@ -3788,6 +3792,12 @@ packages:
       - svelte
     dev: false
 
+  /svelte-headlessui/0.0.15:
+    resolution: {integrity: sha512-yIRD2Wg8pqUOq7cbSgu4RKQ2FXf8vM2ORD3a8/d9rSxDWlBr8Ojt58VpFgdn9Fy0zUeI9By3qFRUaL+wD+Jf4A==}
+    dependencies:
+      svelte-transition: 0.0.7
+    dev: false
+
   /svelte-hmr/0.15.1_svelte@3.55.1:
     resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -3845,6 +3855,10 @@ packages:
       svelte: 3.55.1
       typescript: 4.9.5
     dev: true
+
+  /svelte-transition/0.0.7:
+    resolution: {integrity: sha512-YMbl+eIkzeYKBz6E/I8KI8RMezhqB38t2B/Mx8BotmtiN+5wnKath7CWDc+8U9zKGJ/iUYHmx4MwQjIzo05nVg==}
+    dev: false
 
   /svelte-writable-derived/2.1.6_svelte@3.55.1:
     resolution: {integrity: sha512-vqOXuiESMZyP/kt/RD+nOk2RVHNakDm1K1hmfeGAKc4jzcSp5hEkUi43MDbkVlMurkSBlcMVTQwRQy4LcBT2lw==}

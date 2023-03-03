@@ -57,7 +57,7 @@
 </script>
 
 <div class="flex w-full flex-col items-center justify-center">
-	<div class="min-w-[25rem] fixed top-16 w-72">
+	<div class="min-w-[25rem] w-72">
 		<div class="relative mt-1">
 			<div
 				class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"

@@ -176,7 +176,7 @@
 			<div class="flex w-full justify-between items-center">
 				<div class="flex w-1/2 justify-between">
 					<div class="flex flex-col w-4/5">
-						<span class="truncate text-base font-bold leading-6 ">{$player_store.track?.name ?? ''}</span>
+						<span class="truncate text-base font-bold leading-6">{$player_store.track?.name ?? ''}</span>
 						<span class="truncate text-sm font-normal text-slate-500 dark:text-slate-400"
 							>{format_artists($player_store.track?.artists)}
 						</span>

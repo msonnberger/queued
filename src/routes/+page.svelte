@@ -1,11 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components';
-	import { ArrowRight } from 'lucide-svelte';
 	import spotify_logo from '$lib/assets/spotify-logo.png';
-
-	let qid = '';
-	let input_hidden = true;
-	$: qid = qid.toUpperCase().slice(0, 7);
+	import { JoinQueue } from '$lib/components/landing-page';
 </script>
 
 <svelte:head>
@@ -13,38 +9,27 @@
 </svelte:head>
 
 <div class="grow grid place-items-center">
-	<h1 class="text-5xl font-bold">Welcome to Queued</h1>
-	<div class="flex gap-3">
-		<Button href="/queue/new">Create Queue</Button>
-		<div class="relative">
-			<div
-				class="absolute top-0 transition-opacity duration-300"
-				class:opacity-0={input_hidden}
-				class:pointer-events-none={input_hidden}
-			>
-				<input
-					class="block h-10 w-36 border-2 border-slate-900 bg-slate-50 px-2 font-mono rounded-r-3xl rounded-l-md"
-					type="text"
-					name="qid"
-					placeholder="ABCDEFG"
-					autocomplete="off"
-					bind:value={qid}
-				/>
-				<Button disabled={qid.length < 7} href="/queue/{qid}" circle size="sm" class="absolute top-1 right-1 group">
-					<span class="group-hover:translate-x-0.5 transition-transform">
-						<ArrowRight size={16} />
-					</span>
-				</Button>
-				<label for="qid" class="text-sm pl-2">Queue ID</label>
-			</div>
-			<Button variant="outline" class={input_hidden ? '' : 'invisible'} on:click={() => (input_hidden = false)}>
-				Join Queue
-			</Button>
+	<div class="max-w-2xl text-center">
+		<h1 class="text-5xl sm:text-7xl font-extrabold mb-10">Meet Queued, your collaborative DJ.</h1>
+		<h2 class="text-xl text-slate-500 mb-10">
+			Tired of one guy playing their playlist the whole night? With Queued, everyone votes on which song comes next so
+			that the next track will always be the best one.
+		</h2>
+		<div class="flex gap-3 justify-center">
+			<Button size="lg" href="/queue/new">Create Queue</Button>
+			<JoinQueue />
 		</div>
 	</div>
 </div>
 
-<footer class="w-screen bg-white flex justify-between items-center px-8 py-4">
-	<a class="font-semibold text-sm text-slate-600 underline" href="/privacy">Privacy</a>
-	<img alt="Spotify Logo" src={spotify_logo} class="w-28" />
+<footer class="w-screen bg-white flex justify-between items-center px-8 py-4 text-sm text-slate-500">
+	<nav class="flex gap-5 items-center">
+		<a class="hover:text-slate-700" href="/privacy">Privacy</a>
+		<a class="hover:text-slate-700" href="/imprint">Imprint</a>
+	</nav>
+
+	<div class="flex gap-3 items-center">
+		<span>All data provided by</span>
+		<img alt="Spotify Logo" src={spotify_logo} class="w-28" />
+	</div>
 </footer>

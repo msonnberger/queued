@@ -1,19 +1,16 @@
 import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error, text, type RequestHandler } from '@sveltejs/kit';
 
-export const POST = (async (event) => {
-	const body = await event.request.json();
+export const POST = (async ({ request, locals }) => {
+	const body = await request.json();
 	const { track, queue_id }: { track: TrackObject; queue_id: string } = body;
 
 	if (track.uri === undefined) {
 		throw error(400, 'Missing track URI');
 	}
 
-	const { supabaseClient } = await getSupabase(event);
-
-	const { data, error: err } = await supabaseClient
+	const { data, error: err } = await locals.supabase
 		.from('tracks')
 		.insert({
 			spotify_uri: track.uri,

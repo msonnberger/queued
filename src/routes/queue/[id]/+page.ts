@@ -1,4 +1,3 @@
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { create_player_store, create_queue_store } from '$lib/stores';
@@ -9,11 +8,10 @@ import type { Readable } from 'svelte/store';
 
 let queue_store: Readable<QueueStore>;
 
-export const load = (async (event) => {
-	const { params, fetch, data } = event;
-	const { supabaseClient } = await getSupabase(event);
+export const load = (async ({ params, fetch, data, parent }) => {
+	const { supabase } = await parent();
 
-	const { data: queue, error: err } = await supabaseClient
+	const { data: queue, error: err } = await supabase
 		.from('queues')
 		.select('*, tracks!tracks_qid_fkey(*, votes(*))')
 		.eq('id', params.id)

@@ -1,14 +1,12 @@
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error, text, type RequestHandler } from '@sveltejs/kit';
 
-export const POST = (async (event) => {
-	const { value, supabase_id, queue_id } = await event.request.json();
-	const { supabaseClient } = await getSupabase(event);
-	const voter_id = event.cookies.get('voter-id') ?? 'undefined';
+export const POST = (async ({ request, locals, cookies }) => {
+	const { value, supabase_id, queue_id } = await request.json();
+	const voter_id = cookies.get('voter-id') ?? 'undefined';
 
-	const { error: err } = await supabaseClient.from('votes').insert({
+	const { error: err } = await locals.supabase.from('votes').insert({
 		track_id: supabase_id,
 		value,
 		voter_id
@@ -25,7 +23,7 @@ export const POST = (async (event) => {
 
 		// err.code === '23505' => duplicate key error
 		// check for duplicate key error and remove that particular vote
-		const { data, error: delete_err } = await supabaseClient
+		const { data, error: delete_err } = await locals.supabase
 			.from('votes')
 			.delete()
 			.eq('track_id', supabase_id)
@@ -48,7 +46,7 @@ export const POST = (async (event) => {
 			up_value = -data.value;
 			down_value = value;
 
-			await supabaseClient.from('votes').insert({
+			await locals.supabase.from('votes').insert({
 				track_id: supabase_id,
 				value: value,
 				voter_id
@@ -57,7 +55,7 @@ export const POST = (async (event) => {
 			up_value = value;
 			down_value = -data.value;
 
-			await supabaseClient.from('votes').insert({
+			await locals.supabase.from('votes').insert({
 				track_id: supabase_id,
 				value: value,
 				voter_id

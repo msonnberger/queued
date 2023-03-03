@@ -98,12 +98,6 @@
 
 			player.connect();
 		};
-
-		window.onkeydown = (event) => {
-			if (event.key === ' ' && player) {
-				player.togglePlay();
-			}
-		};
 	});
 
 	onDestroy(() => player?.disconnect());

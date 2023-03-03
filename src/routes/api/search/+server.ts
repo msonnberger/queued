@@ -15,7 +15,7 @@ export const GET = (async ({ url, fetch }) => {
 	const result = await search(
 		q,
 		'track',
-		{ limit: 5 },
+		{ limit: 5, market: 'AT' },
 		{
 			headers: {
 				Authorization: `Bearer ${access_token}`

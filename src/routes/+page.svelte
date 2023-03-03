@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components';
 	import { ArrowRight } from 'lucide-svelte';
+	import spotify_logo from '$lib/assets/spotify-logo.png';
 
 	let qid = '';
 	let input_hidden = true;
@@ -42,3 +43,8 @@
 		</div>
 	</div>
 </div>
+
+<footer class="w-screen bg-white flex justify-between items-center px-8 py-4">
+	<a class="font-semibold text-sm text-slate-600 underline" href="/privacy">Privacy</a>
+	<img alt="Spotify Logo" src={spotify_logo} class="w-28" />
+</footer>

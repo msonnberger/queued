@@ -1,10 +1,9 @@
 import { pusher } from '$lib/api/pusher/server';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error, text, type RequestHandler } from '@sveltejs/kit';
 import { z } from 'zod';
 
-export const DELETE = (async (event) => {
-	const body = await event.request.json();
+export const DELETE = (async ({ request, locals }) => {
+	const body = await request.json();
 	const body_schema = z.object({
 		uri: z.string(),
 		queue_id: z.string().length(7)
@@ -16,9 +15,7 @@ export const DELETE = (async (event) => {
 		throw error(400, result.error.toString());
 	}
 
-	const { supabaseClient } = await getSupabase(event);
-
-	const { error: err } = await supabaseClient
+	const { error: err } = await locals.supabase
 		.from('tracks')
 		.delete()
 		.eq('spotify_uri', result.data.uri)

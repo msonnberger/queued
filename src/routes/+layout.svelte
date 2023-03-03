@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
-	import { supabase } from '$lib/api/supabase';
 	import { Button, ThemeToggle } from '$lib/components';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
@@ -10,10 +8,6 @@
 	import { spotify_tokens } from '$lib/stores';
 
 	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange(() => {
-			invalidateAll();
-		});
-
 		spotify_api.defaults.fetch = async (...args) => {
 			const [resource, config] = args;
 			let response = await fetch(resource, config);
@@ -34,11 +28,7 @@
 
 			return response;
 		};
-
-		return () => data.subscription.unsubscribe();
 	});
-
-	export let data: PageData;
 
 	$: {
 		$spotify_tokens.access_token = data.session?.provider_token ?? $spotify_tokens.access_token;
@@ -52,6 +42,8 @@
 			};
 		}
 	}
+
+	export let data: PageData;
 </script>
 
 <Toaster />

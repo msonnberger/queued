@@ -13,8 +13,8 @@
 	class:bg-red-200={is_up_next}
 >
 	<div>
-		<p class="font-bold">{track.name}</p>
-		<p>{format_artists(track.artists)}</p>
+		<p class="truncate font-bold">{track.name}</p>
+		<p class="truncate">{format_artists(track.artists)}</p>
 	</div>
 	<div class="flex gap-2">
 		<VoteButton

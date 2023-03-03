@@ -174,8 +174,8 @@
 		</div>
 		<div class="flex flex-1 flex-col gap-4 overflow-hidden p-1">
 			<div class="flex w-full justify-between items-center">
-				<div class="flex w-full justify-between">
-					<div class="flex flex-col">
+				<div class="flex w-1/2 justify-between">
+					<div class="flex flex-col w-4/5">
 						<span class="truncate text-base font-bold leading-6 ">{$player_store.track?.name ?? ''}</span>
 						<span class="truncate text-sm font-normal text-slate-500 dark:text-slate-400"
 							>{format_artists($player_store.track?.artists)}
@@ -203,7 +203,7 @@
 						/>
 					{/if}
 				</Button>
-				<div class="w-full flex gap-4 items-center">
+				<div class="w-1/2 flex gap-4 items-center">
 					<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
 						<SkipForward size={28} />
 					</button>
@@ -242,7 +242,7 @@
 				<ProgressBar progress={(($player_store.position ?? 0) / ($player_store.duration ?? 1)) * 100} />
 				<span
 					class="block rounded-md px-1 py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
-					>{ms_to_min_sec($player_store.duration ?? 0)}</span
+					>-{ms_to_min_sec(($player_store.duration ?? 0) - ($player_store.position ?? 0))}</span
 				>
 			</div>
 		</div>

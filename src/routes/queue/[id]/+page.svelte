@@ -33,7 +33,7 @@
 
 <TrackSearch {id} />
 
-<ul class="flex flex-col gap-5 mt-8">
+<ul class="flex flex-col gap-5 mt-8 w-full max-w-md">
 	{#each $queue.tracks as track (track.supabase_id)}
 		<li animate:flip={{ duration: 300 }}>
 			<Track {track} {handle_vote} is_up_next={track.uri === $player.up_next_uri} />

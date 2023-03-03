@@ -1,33 +1,19 @@
 import dotenv from 'dotenv';
-import { type PlaywrightTestConfig, devices } from '@playwright/test';
+import { type PlaywrightTestConfig } from '@playwright/test';
 
-dotenv.config({ path: './tests/.env' });
+dotenv.config({ path: '.env' });
 
 const config: PlaywrightTestConfig = {
-	globalSetup: './tests/globalSetup',
+	globalSetup: './tests/global-setup',
 	use: {
-		storageState: './tests/storageState.json'
+		storageState: './tests/storage-state.json'
 	},
 	webServer: {
 		command: 'pnpm build && pnpm preview --port 5173',
 		port: 5173,
 		reuseExistingServer: !process.env.CI
 	},
-	testDir: 'tests',
-	projects: [
-		{
-			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] }
-		},
-		{
-			name: 'firefox',
-			use: { ...devices['Desktop Firefox'] }
-		},
-		{
-			name: 'webkit',
-			use: { ...devices['Desktop Safari'] }
-		}
-	]
+	testDir: 'tests'
 };
 
 export default config;

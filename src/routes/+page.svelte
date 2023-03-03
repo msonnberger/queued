@@ -1,36 +1,50 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import type { ActionData, PageData } from './$types';
-	import toast, { Toaster } from 'svelte-french-toast';
+	import { Button } from '$lib/components';
+	import { ArrowRight } from 'lucide-svelte';
+	import spotify_logo from '$lib/assets/spotify-logo.png';
 
-	export let data: PageData;
-	export let form: ActionData;
-
-	$: {
-		if (form?.error) {
-			toast.error(form.error, { position: 'top-right' });
-		}
-	}
+	let qid = '';
+	let input_hidden = true;
+	$: qid = qid.toUpperCase().slice(0, 7);
 </script>
 
 <svelte:head>
 	<title>Queued</title>
 </svelte:head>
 
-<header class="self-end p-4">
-	<Toaster />
-	{#if data.session}
-		<h2>Hi, {data.session.user.email}</h2>
-		<form action="?/logout" method="post" use:enhance>
-			<button type="submit">Logout</button>
-		</form>
-	{:else}
-		<form action="?/login" method="post" use:enhance>
-			<button type="submit">Continue with Spotify</button>
-		</form>
-	{/if}
-</header>
-
 <div class="grow grid place-items-center">
 	<h1 class="text-5xl font-bold">Welcome to Queued</h1>
+	<div class="flex gap-3">
+		<Button href="/queue/new">Create Queue</Button>
+		<div class="relative">
+			<div
+				class="absolute top-0 transition-opacity duration-300"
+				class:opacity-0={input_hidden}
+				class:pointer-events-none={input_hidden}
+			>
+				<input
+					class="block h-10 w-36 border-2 border-slate-900 bg-slate-50 px-2 font-mono rounded-r-3xl rounded-l-md"
+					type="text"
+					name="qid"
+					placeholder="ABCDEFG"
+					autocomplete="off"
+					bind:value={qid}
+				/>
+				<Button disabled={qid.length < 7} href="/queue/{qid}" circle size="sm" class="absolute top-1 right-1 group">
+					<span class="group-hover:translate-x-0.5 transition-transform">
+						<ArrowRight size={16} />
+					</span>
+				</Button>
+				<label for="qid" class="text-sm pl-2">Queue ID</label>
+			</div>
+			<Button variant="outline" class={input_hidden ? '' : 'invisible'} on:click={() => (input_hidden = false)}>
+				Join Queue
+			</Button>
+		</div>
+	</div>
 </div>
+
+<footer class="w-screen bg-white flex justify-between items-center px-8 py-4">
+	<a class="font-semibold text-sm text-slate-600 underline" href="/privacy">Privacy</a>
+	<img alt="Spotify Logo" src={spotify_logo} class="w-28" />
+</footer>

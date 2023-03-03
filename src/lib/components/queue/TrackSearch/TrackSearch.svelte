@@ -57,7 +57,7 @@
 </script>
 
 <div class="flex w-full flex-col items-center justify-center">
-	<div class="min-w-[25rem] fixed top-16 w-72">
+	<div class="min-w-[25rem] w-72">
 		<div class="relative mt-1">
 			<div
 				class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
@@ -68,6 +68,7 @@
 					on:input={handle_change}
 					bind:value={input_value}
 					class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 outline-0"
+					autocomplete="off"
 				/>
 				<button use:combobox.button class="absolute inset-y-0 right-0 flex items-center pr-2" type="button">
 					<ChevronsUpDown class="h-5 w-5 text-gray-400" />

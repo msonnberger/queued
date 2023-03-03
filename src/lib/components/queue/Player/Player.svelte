@@ -91,6 +91,7 @@
 
 				if ($player_store.track.uri === $player_store.up_next_uri) {
 					$queue_store.remove_track($player_store.up_next_uri);
+					$queue_store.update_current_track($player_store.up_next_uri);
 					$player_store.up_next_uri = null;
 				}
 			});
@@ -122,6 +123,8 @@
 			await putMePlayerPlay({ uris: [uri] }, { deviceId: $player_store.device_id });
 
 			$queue_store.remove_track(uri);
+			$queue_store.update_current_track(uri);
+
 			player?.togglePlay();
 		} catch (error) {
 			console.error(error);

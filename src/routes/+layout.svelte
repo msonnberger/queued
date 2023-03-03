@@ -56,7 +56,6 @@
 
 <Toaster />
 <header class="self-end p-4 flex gap-5">
-	<Button on:click={() => supabase.auth.refreshSession()}>Refresh Session</Button>
 	<Button href="/">Home</Button>
 	<ThemeToggle />
 	{#if data.session}

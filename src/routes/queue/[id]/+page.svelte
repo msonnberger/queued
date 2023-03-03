@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
-	import { Button } from '$lib/components';
-	import type { TrackObject } from '$lib/api/spotify';
 	import { Player, Track, TrackSearch } from '$lib/components/queue';
 	import { flip } from 'svelte/animate';
 	import { spotify_tokens } from '$lib/stores';
@@ -12,24 +10,6 @@
 
 	export let data: PageData;
 
-	const handle_add_track = async (track: TrackObject) => {
-		const res = await fetch('/api/queue/add-track', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				track,
-				queue_id: id
-			})
-		});
-
-		// TODO: error handling
-		if (!res.ok) {
-			throw new Error('Failed to add track');
-		}
-	};
-
 	const handle_vote = (track_id: number, value: 1 | -1) => {
 		fetch('/api/queue/vote', {
 			method: 'POST',
@@ -37,6 +17,16 @@
 		});
 	};
 </script>
+
+{#if $queue?.currently_playing?.name}
+	<div class="flex items-center gap-2">
+		<span class="relative flex h-2 w-2">
+			<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+			<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+		</span>
+		<span>Currently playing: {$queue.currently_playing.name}</span>
+	</div>
+{/if}
 
 <h1>{$queue.name}</h1>
 <img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 dark:invert" />

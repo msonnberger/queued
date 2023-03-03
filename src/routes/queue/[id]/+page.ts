@@ -24,12 +24,24 @@ export const load = (async (event) => {
 	}
 
 	const supabase_tracks = queue.tracks as Array<SupabaseTrack & { votes: Array<SupabaseVote> }>;
-	const spotify_track_ids = supabase_tracks?.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
+	const currently_playing_id = queue.current_track_uri?.split(':').at(-1);
+	let spotify_track_ids = supabase_tracks?.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
+
+	if (currently_playing_id) {
+		spotify_track_ids = spotify_track_ids ? `${currently_playing_id},${spotify_track_ids}` : currently_playing_id;
+	}
+
 	const initial_value: Partial<QueueStore> = { name: queue.name, id: queue.id, owner_id: queue.owner_id, tracks: [] };
+	let currently_playing_track: TrackObject | undefined;
 
 	if (spotify_track_ids) {
 		const spotify_tracks_response = await fetch(`/api/get-tracks?track_ids=${spotify_track_ids}`);
-		const spotify_tracks = (await spotify_tracks_response.json()) as TrackObject[];
+		let spotify_tracks = (await spotify_tracks_response.json()) as TrackObject[];
+
+		if (currently_playing_id) {
+			currently_playing_track = spotify_tracks[0];
+			spotify_tracks = spotify_tracks.slice(1);
+		}
 
 		initial_value.tracks =
 			supabase_tracks?.map((supabase_track, i) => {
@@ -56,6 +68,8 @@ export const load = (async (event) => {
 				};
 			}) ?? [];
 	}
+
+	initial_value.currently_playing = currently_playing_track;
 
 	return {
 		queue: browser

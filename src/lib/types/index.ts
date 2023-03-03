@@ -17,6 +17,7 @@ export interface QueueStore extends Pick<SupabaseQueue, 'name' | 'id' | 'owner_i
 	// TODO: add handle_vote and add_track to store and remove from components
 	handle_vote: (id: number, value: 1 | -1) => void;
 	remove_track: (uri: string) => void;
+	update_current_track: (uri: string) => void;
 }
 
 export interface PlayerStore {

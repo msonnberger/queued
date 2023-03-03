@@ -41,8 +41,6 @@
 	{/each}
 </ul>
 
-
-
 {#if $spotify_tokens.access_token && $queue.owner_id === session?.user.id}
 	<Player player_store={player} queue_store={queue} />
 {/if}

@@ -1,12 +1,12 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@playwright/test': 1.31.1
+  '@playwright/test': 1.31.2
   '@rgossiaux/svelte-headlessui': 1.0.2
   '@supabase/auth-helpers-sveltekit': 0.8.7
-  '@supabase/supabase-js': 2.8.0
-  '@sveltejs/adapter-vercel': 2.2.0
-  '@sveltejs/kit': 1.9.1
+  '@supabase/supabase-js': 2.10.0
+  '@sveltejs/adapter-vercel': 2.2.1
+  '@sveltejs/kit': 1.9.3
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2
   '@types/qrcode': 1.5.0
@@ -19,13 +19,13 @@ specifiers:
   eslint-config-prettier: 8.6.0
   eslint-plugin-svelte3: 4.0.0
   jsdom: 21.1.0
-  lucide-svelte: 0.118.0
+  lucide-svelte: 0.121.0
   oazapfts: 4.5.2
   openapi-types: 12.1.0
   postcss: 8.4.21
   prettier: 2.8.4
   prettier-plugin-svelte: 2.9.0
-  prettier-plugin-tailwindcss: 0.2.3
+  prettier-plugin-tailwindcss: 0.2.4
   pusher-http-edge: 0.3.0
   pusher-js: 8.0.1
   qrcode: 1.5.1
@@ -44,10 +44,10 @@ specifiers:
 
 dependencies:
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.1
-  '@supabase/auth-helpers-sveltekit': 0.8.7_h4fmw4dd6b3xkulak4k3c7hqqu
-  '@supabase/supabase-js': 2.8.0
+  '@supabase/auth-helpers-sveltekit': 0.8.7_ku2vntnma2imfrsyohnkxzette
+  '@supabase/supabase-js': 2.10.0
   class-variance-authority: 0.4.0_typescript@4.9.5
-  lucide-svelte: 0.118.0_svelte@3.55.1
+  lucide-svelte: 0.121.0_svelte@3.55.1
   oazapfts: 4.5.2_openapi-types@12.1.0
   pusher-http-edge: 0.3.0
   pusher-js: 8.0.1
@@ -59,9 +59,9 @@ dependencies:
   zod: 3.20.6
 
 devDependencies:
-  '@playwright/test': 1.31.1
-  '@sveltejs/adapter-vercel': 2.2.0_@sveltejs+kit@1.9.1
-  '@sveltejs/kit': 1.9.1_svelte@3.55.1+vite@4.1.4
+  '@playwright/test': 1.31.2
+  '@sveltejs/adapter-vercel': 2.2.1_@sveltejs+kit@1.9.3
+  '@sveltejs/kit': 1.9.3_svelte@3.55.1+vite@4.1.4
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.55.1
   '@types/qrcode': 1.5.0
@@ -77,7 +77,7 @@ devDependencies:
   postcss: 8.4.21
   prettier: 2.8.4
   prettier-plugin-svelte: 2.9.0_jrsxveqmsx2uadbqiuq74wlc4u
-  prettier-plugin-tailwindcss: 0.2.3_yjdjpc7im5hvpskij45owfsns4
+  prettier-plugin-tailwindcss: 0.2.4_yjdjpc7im5hvpskij45owfsns4
   svelte: 3.55.1
   svelte-check: 3.0.4_pehl75e5jsy22vp33udjja4soi
   tailwindcss: 3.2.7_postcss@8.4.21
@@ -481,13 +481,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test/1.31.1:
-    resolution: {integrity: sha512-IsytVZ+0QLDh1Hj83XatGp/GsI1CDJWbyDaBGbainsh0p2zC7F4toUocqowmjS6sQff2NGT3D9WbDj/3K2CJiA==}
+  /@playwright/test/1.31.2:
+    resolution: {integrity: sha512-BYVutxDI4JeZKV1+ups6dt5WiqKhjBtIYowyZIJ3kBDmJgsuPKsqqKNIMFbUePLSCmp2cZu+BDL427RcNKTRYw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.31.1
+      playwright-core: 1.31.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -516,25 +516,25 @@ packages:
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
     dev: true
 
-  /@supabase/auth-helpers-shared/0.2.4_h4fmw4dd6b3xkulak4k3c7hqqu:
+  /@supabase/auth-helpers-shared/0.2.4_ku2vntnma2imfrsyohnkxzette:
     resolution: {integrity: sha512-c+hi3N6DhjPTzjXGOokre4gmMZOqt0f1ORrwZwi2s07pk3cbkmn77DwwVtlYMNi3oZNYRQqAfxJu83UzpJrrmg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/supabase-js': 2.8.0
+      '@supabase/supabase-js': 2.10.0
     dev: false
 
-  /@supabase/auth-helpers-sveltekit/0.8.7_h4fmw4dd6b3xkulak4k3c7hqqu:
+  /@supabase/auth-helpers-sveltekit/0.8.7_ku2vntnma2imfrsyohnkxzette:
     resolution: {integrity: sha512-sFXWaeyTVWK70Aekw+plqN+f8si2MqV4PbcEunqZ1H/QfujxxnDfG26j+O+eQ/ue84UFrJutNY+iB3DsTlXlCg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
-      '@supabase/auth-helpers-shared': 0.2.4_h4fmw4dd6b3xkulak4k3c7hqqu
-      '@supabase/supabase-js': 2.8.0
+      '@supabase/auth-helpers-shared': 0.2.4_ku2vntnma2imfrsyohnkxzette
+      '@supabase/supabase-js': 2.10.0
     dev: false
 
-  /@supabase/functions-js/2.0.0:
-    resolution: {integrity: sha512-ozb7bds2yvf5k7NM2ZzUkxvsx4S4i2eRKFSJetdTADV91T65g4gCzEs9L3LUXSrghcGIkUaon03VPzOrFredqg==}
+  /@supabase/functions-js/2.1.0:
+    resolution: {integrity: sha512-vRziB+AqRXRaGHjEFHwBo0kuNDTuAxI7VUeqU24Fe86ISoD8YEQm0dGdpleJEcqgDGWaO6pxT1tfj1BRY5PwMg==}
     dependencies:
       cross-fetch: 3.1.5
     transitivePeerDependencies:
@@ -566,34 +566,34 @@ packages:
       - supports-color
     dev: false
 
-  /@supabase/storage-js/2.1.0:
-    resolution: {integrity: sha512-bRMLWCbkkx84WDAtHAAMN7FAWuayrGZtTHj/WMUK6PsAWuonovvEa5s34a5iux61qJSn+ls3tFkyQgqxunl5ww==}
+  /@supabase/storage-js/2.3.1:
+    resolution: {integrity: sha512-BaPIvyvjuZW1V0CnfGKUZyzpBUXnsh0XD8eqTOYd+MdiGPmIPI0vtwnT4fAoK8mipp1vpcN62EVQaqeUnWXPtQ==}
     dependencies:
       cross-fetch: 3.1.5
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@supabase/supabase-js/2.8.0:
-    resolution: {integrity: sha512-uzf4J+qAKdUMhB2tnJl6BrQRUQBinwjJ2eWo2ZsDw9EUUP5JcHsxTamiq6p91DpqzmTIRg3xRAT+bItTzbfa0w==}
+  /@supabase/supabase-js/2.10.0:
+    resolution: {integrity: sha512-/vkpPxGDyLfTASWnVHL8vdgQxn9SX/Cs+BotTxFhLSIeGFSazC6rpQSMKu6RqzO7gjBD1KqTv0h3auWfClWs+Q==}
     dependencies:
-      '@supabase/functions-js': 2.0.0
+      '@supabase/functions-js': 2.1.0
       '@supabase/gotrue-js': 2.12.1
       '@supabase/postgrest-js': 1.1.1
       '@supabase/realtime-js': 2.4.0
-      '@supabase/storage-js': 2.1.0
+      '@supabase/storage-js': 2.3.1
       cross-fetch: 3.1.5
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@sveltejs/adapter-vercel/2.2.0_@sveltejs+kit@1.9.1:
-    resolution: {integrity: sha512-asyVXHOXnBJYr1/FCjEGJyJFvqY4X3jpLwi8oAqXokGy0ac7QGylxKTKGoIv4UjCLgPIsS/wIEpouPeGzkt1ow==}
+  /@sveltejs/adapter-vercel/2.2.1_@sveltejs+kit@1.9.3:
+    resolution: {integrity: sha512-W8+qytNSvFTr56CC4RLC/PeSuzB8m/LnnZlZD3v23qlgRrHHcYyN5mZJHaZmQvQeqsue7rby+LKfqqZiElstlg==}
     peerDependencies:
       '@sveltejs/kit': ^1.5.0
     dependencies:
-      '@sveltejs/kit': 1.9.1_svelte@3.55.1+vite@4.1.4
+      '@sveltejs/kit': 1.9.3_svelte@3.55.1+vite@4.1.4
       '@vercel/nft': 0.22.6
       esbuild: 0.16.14
     transitivePeerDependencies:
@@ -601,8 +601,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.9.1_svelte@3.55.1+vite@4.1.4:
-    resolution: {integrity: sha512-SC2pTnaloAL+6744tWl1/b1zGAhZX2zmgmUmKV4Y6nx/y5gP6+MTzY6SC74PYUWSlOPumi8wZ40hQ2RExCFuhg==}
+  /@sveltejs/kit/1.9.3_svelte@3.55.1+vite@4.1.4:
+    resolution: {integrity: sha512-rh9FbGfS8w328JZSZmG/ahabBbE50TisHvfz4sVNU3IM3AOhgUAv3EhAJ2dij9R8uARbDHRTY8jOQbIPjcKBZQ==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -2670,8 +2670,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-svelte/0.118.0_svelte@3.55.1:
-    resolution: {integrity: sha512-MO5IN++5ZfSoTpdRXkmBnDLoaVIpSUjXU/nKReqYaie8ND0VBo3is2YBMl5eFva7XwLLzugmNhkwlWLhnZzQ6Q==}
+  /lucide-svelte/0.121.0_svelte@3.55.1:
+    resolution: {integrity: sha512-1U/63nxL5yfMdoMOIpKaxQqnDtgHMqmzOSc5BP0BU5BtRQTAd79I6mYv5hTTy3RF1XcsQFbl+mXQB5B+2BSbUA==}
     peerDependencies:
       svelte: ^3.49.0
     dependencies:
@@ -3124,8 +3124,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core/1.31.1:
-    resolution: {integrity: sha512-JTyX4kV3/LXsvpHkLzL2I36aCdml4zeE35x+G5aPc4bkLsiRiQshU5lWeVpHFAuC8xAcbI6FDcw/8z3q2xtJSQ==}
+  /playwright-core/1.31.2:
+    resolution: {integrity: sha512-a1dFgCNQw4vCsG7bnojZjDnPewZcw7tZUNFN0ZkcLYKj+mPmXvg4MpaaKZ5SgqPsOmqIf2YsVRkgqiRDxD+fDQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -3225,8 +3225,8 @@ packages:
       svelte: 3.55.1
     dev: true
 
-  /prettier-plugin-tailwindcss/0.2.3_yjdjpc7im5hvpskij45owfsns4:
-    resolution: {integrity: sha512-s2N5Dh7Ao5KTV1mao5ZBnn8EKtUcDPJEkGViZIjI0Ij9TTI5zgTz4IHOxW33jOdjHKa8CSjM88scelUiC5TNRQ==}
+  /prettier-plugin-tailwindcss/0.2.4_yjdjpc7im5hvpskij45owfsns4:
+    resolution: {integrity: sha512-wMyugRI2yD8gqmMpZSS8kTA0gGeKozX/R+w8iWE+yiCZL09zY0SvfiHfHabNhjGhzxlQ2S2VuTxPE3T72vppCQ==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'

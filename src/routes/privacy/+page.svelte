@@ -1,3 +1,7 @@
+<script>
+	import { Link } from '$lib/components';
+</script>
+
 <main class="w-full max-w-2xl mb-20 mt-10">
 	<h1 class="font-bold text-6xl mt-4 mb-8">Privacy Policy</h1>
 	<p>
@@ -51,6 +55,6 @@
 		We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. We
 		encourage you to review this policy periodically for any updates. Contact us If you have any questions or concerns
 		about our Privacy Policy or our handling of your personal information, please contact us at
-		<a href="mailto:contact@queued.live">contact@queued.live</a>.
+		<Link href="mailto:contact@queued.live">contact@queued.live</Link>.
 	</p>
 </main>

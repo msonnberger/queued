@@ -77,14 +77,26 @@
 
 {#if href}
 	<a
+		on:click
+		on:mouseenter
+		on:touchstart
 		{href}
+		{target}
+		{rel}
 		class:pointer-events-none={disabled}
 		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
-		{target}
-		{rel}><slot /></a
 	>
+		<slot />
+	</a>
 {:else}
-	<button {type} {disabled} class="{twMerge(button_variants({ variant, circle, size }))} {classNames}" on:click>
+	<button
+		on:click
+		on:mouseenter
+		on:touchstart
+		{type}
+		{disabled}
+		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
+	>
 		<slot />
 	</button>
 {/if}

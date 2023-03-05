@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, ThemeToggle } from '$lib/components';
+	import { ThemeToggle, UserMenu } from '$lib/components';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
 	import '../app.css';
@@ -48,17 +48,7 @@
 
 <Toaster />
 <header class="self-end p-4 flex gap-5">
-	<Button href="/">Home</Button>
 	<ThemeToggle />
-	{#if data.session}
-		<h2>Hi, {data.session.user.email}</h2>
-		<form action="/auth/logout" method="post">
-			<Button type="submit">Logout</Button>
-		</form>
-	{:else}
-		<form action="/auth/login" method="post">
-			<Button type="submit">Continue with Spotify</Button>
-		</form>
-	{/if}
+	<UserMenu session={data.session} />
 </header>
 <slot />

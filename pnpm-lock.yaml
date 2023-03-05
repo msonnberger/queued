@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@playwright/test': 1.31.2
-  '@rgossiaux/svelte-headlessui': 1.0.2
   '@supabase/auth-helpers-sveltekit': 0.9.0
   '@supabase/supabase-js': 2.10.0
   '@sveltejs/adapter-vercel': 2.2.1
@@ -43,7 +42,6 @@ specifiers:
   zod: 3.20.6
 
 dependencies:
-  '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.1
   '@supabase/auth-helpers-sveltekit': 0.9.0_3cgsigfo36rql76gfm2zr7ccre
   '@supabase/supabase-js': 2.10.0
   class-variance-authority: 0.4.0_typescript@4.9.5
@@ -471,14 +469,6 @@ packages:
 
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
-
-  /@rgossiaux/svelte-headlessui/1.0.2_svelte@3.55.1:
-    resolution: {integrity: sha512-sauopYTSivhzXe1kAvgawkhyYJcQlK8Li3p0d2OtcCIVprOzdbard5lbqWB4xHDv83zAobt2mR08oizO2poHLQ==}
-    peerDependencies:
-      svelte: ^3.44.0
-    dependencies:
-      svelte: 3.55.1
-    dev: false
 
   /@rollup/pluginutils/4.2.1:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}

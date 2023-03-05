@@ -46,12 +46,10 @@
 		set_mode((e as CustomEvent).detail.selected.toLowerCase());
 	}
 
-	const groups = [
-		[
-			{ icon: SunDim, text: 'Light' },
-			{ icon: Moon, text: 'Dark' },
-			{ icon: MonitorSmartphone, text: 'System' }
-		]
+	const options = [
+		{ icon: SunDim, text: 'Light' },
+		{ icon: Moon, text: 'Dark' },
+		{ icon: MonitorSmartphone, text: 'System' }
 	];
 </script>
 
@@ -73,7 +71,11 @@
 	<div class="relative text-right">
 		<div class="relative inline-block text-left">
 			<button use:menu.button on:select={on_select} disabled={switch_disabled} class:invisible={switch_disabled}>
-				<svelte:component this={is_dark_shown ? Moon : SunDim} class="stroke-slate-700 dark:stroke-slate-300" />
+				<svelte:component
+					this={is_dark_shown ? Moon : SunDim}
+					class="stroke-slate-700 dark:stroke-slate-300"
+					size={is_dark_shown ? 23 : 26}
+				/>
 			</button>
 
 			<Transition
@@ -89,27 +91,26 @@
 					use:menu.items
 					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 				>
-					{#each groups as group}
-						<div class="px-1 py-1">
-							{#each group as option}
-								{@const selected = selected_theme === option.text.toLowerCase()}
-								{@const active = $menu.active === option.text || (!$menu.active && selected)}
-								<button
-									use:menu.item
-									class="group flex rounded-md items-center w-full pl-2 pr-7 py-1.5 text-sm font-semibold
+					<div class="px-1 py-1">
+						{#each options as option}
+							{@const selected = selected_theme === option.text.toLowerCase()}
+							{@const active = $menu.active === option.text || (!$menu.active && selected)}
+							<button
+								use:menu.item
+								type="button"
+								class="group flex rounded-md items-center w-full pl-2 pr-7 py-2 text-sm font-semibold
 										{selected ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-800 dark:text-slate-100'}"
-									class:bg-slate-100={active}
-									class:dark:bg-slate-700={active}
-								>
-									<svelte:component
-										this={option.icon}
-										class="w-5 h-5 mr-3 {selected ? 'stroke-indigo-600 dark:stroke-indigo-400' : 'stroke-slate-400'}"
-									/>
-									{option.text}
-								</button>
-							{/each}
-						</div>
-					{/each}
+								class:bg-slate-100={active}
+								class:dark:bg-slate-700={active}
+							>
+								<svelte:component
+									this={option.icon}
+									class="w-5 h-5 mr-3 {selected ? 'stroke-indigo-600 dark:stroke-indigo-400' : 'stroke-slate-400'}"
+								/>
+								{option.text}
+							</button>
+						{/each}
+					</div>
 				</div>
 			</Transition>
 		</div>

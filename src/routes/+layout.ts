@@ -12,8 +12,10 @@ export const load = (async ({ fetch, data, depends }) => {
 		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
 		event: { fetch },
 		serverSession: data.session,
-		onAuthStateChange() {
-			invalidate('supabase:auth');
+		onAuthStateChange(event) {
+			if (event !== 'SIGNED_IN') {
+				invalidate('supabase:auth');
+			}
 		}
 	});
 

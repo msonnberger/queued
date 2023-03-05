@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ThemeToggle } from '$lib/components';
+	import { ThemeToggle, UserMenu } from '$lib/components';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
 	import '../app.css';
@@ -49,5 +49,6 @@
 <Toaster />
 <header class="self-end p-4 flex gap-5">
 	<ThemeToggle />
+	<UserMenu session={data.session} />
 </header>
 <slot />

@@ -10,7 +10,7 @@ const global_setup = async () => {
 
 	page.context().addCookies([
 		{
-			name: 'supabase-auth-token',
+			name: 'sb-auth-token',
 			value: JSON.stringify([
 				access_token,
 				refresh_token,

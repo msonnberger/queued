@@ -9,9 +9,9 @@ const config: PlaywrightTestConfig = {
 		storageState: './tests/storage-state.json'
 	},
 	webServer: {
-		command: 'pnpm build && pnpm preview --port 5173',
-		port: 5173,
-		reuseExistingServer: !process.env.CI
+		command: 'pnpm build && pnpm preview',
+		port: 4173,
+		reuseExistingServer: false
 	},
 	testDir: 'tests'
 };

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ArtistObject } from '$lib/api/spotify';
-import type { QueueStore } from './types';
+import type { Queue } from './types';
 
 export const debounce = <Params extends any[]>(
 	func: (...args: Params) => any,
@@ -15,7 +15,7 @@ export const debounce = <Params extends any[]>(
 	};
 };
 
-export const sorted_queue = (queue: QueueStore) => {
+export const sorted_queue = (queue: Queue) => {
 	const sorted = [...queue.tracks];
 	sorted.sort((a, b) => {
 		const diff = b.votes.up + b.votes.down - (a.votes.up + a.votes.down);

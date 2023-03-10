@@ -9,16 +9,9 @@
 	$: ({ queue, player, session } = data);
 
 	export let data;
-
-	const handle_vote = (track_id: number, value: 1 | -1) => {
-		fetch('/api/queue/vote', {
-			method: 'POST',
-			body: JSON.stringify({ supabase_id: track_id, value, queue_id: id })
-		});
-	};
 </script>
 
-{#if $queue?.currently_playing?.name}
+{#if $queue.currently_playing?.name}
 	<div class="flex items-center gap-2">
 		<span class="relative flex h-2 w-2">
 			<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
@@ -31,12 +24,12 @@
 <h1>{$queue.name}</h1>
 <img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 dark:invert" />
 
-<TrackSearch {id} />
+<TrackSearch add_track={queue.add_track} />
 
 <ul class="flex flex-col gap-5 mt-8 w-full max-w-md">
 	{#each $queue.tracks as track (track.supabase_id)}
 		<li animate:flip={{ duration: 300 }}>
-			<Track {track} {handle_vote} is_up_next={track.uri === $player.up_next_uri} />
+			<Track {track} add_vote={queue.add_vote} is_up_next={track.uri === $player.up_next_uri} />
 		</li>
 	{/each}
 </ul>

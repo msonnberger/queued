@@ -1,4 +1,4 @@
-import type { QueueStore } from './types';
+import type { Queue } from './types';
 import { debounce, format_artists, ms_to_min_sec, sorted_queue } from './utils';
 
 test('ms_to_min_sec', () => {
@@ -27,13 +27,10 @@ test('format_artists', () => {
 });
 
 test('sorted_queue', () => {
-	const queue: QueueStore = {
+	const queue: Queue = {
 		name: '',
 		id: '',
 		owner_id: '',
-		handle_vote: (id, value) => {}, // eslint-disable-line
-		remove_track: (uri) => {}, // eslint-disable-line
-		update_current_track: (uri) => {}, // eslint-disable-line
 		tracks: []
 	};
 

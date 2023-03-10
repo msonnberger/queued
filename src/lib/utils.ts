@@ -44,8 +44,12 @@ export const format_artists = (artists: ArtistObject[] | undefined) => {
 };
 
 export const ms_to_min_sec = (ms: number) => {
-	const min = Math.floor(ms / (1000 * 60));
+	if (ms < 0) {
+		throw new Error('`ms` must be positive.');
+	}
+
+	const min = Math.floor(ms / (1000 * 60)).toString();
 	const sec = ((ms % 60000) / 1000).toFixed(0);
 
-	return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+	return `${min.padStart(2, '0')}:${sec.padStart(2, '0')}`;
 };

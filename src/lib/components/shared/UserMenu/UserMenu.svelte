@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { Session } from '@supabase/supabase-js';
+	import { LogIn, LogOut, User, UserCog } from 'lucide-svelte';
 	import { createMenu } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
-	import { User, UserCog, LogIn, LogOut } from 'lucide-svelte';
-	import type { Session } from '@supabase/supabase-js';
 
 	const menu = createMenu({ label: 'User Menu' });
 

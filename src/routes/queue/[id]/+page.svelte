@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { PageData } from './$types';
-	import { Player, Track, TrackSearch } from '$lib/components/queue';
 	import { flip } from 'svelte/animate';
+
+	import type { PageData } from './$types';
+	import { page } from '$app/stores';
+	import { Player, Track, TrackSearch } from '$lib/components/queue';
 	import { spotify_tokens } from '$lib/stores';
 
 	$: ({ id } = $page.params);

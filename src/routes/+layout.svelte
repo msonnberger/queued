@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { ThemeToggle, UserMenu } from '$lib/components';
+	import '../app.css';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import '../app.css';
+
 	import type { PageData } from './$types';
 	import * as spotify_api from '$lib/api/spotify';
+	import { ThemeToggle, UserMenu } from '$lib/components';
 	import { spotify_tokens } from '$lib/stores';
 
 	onMount(() => {

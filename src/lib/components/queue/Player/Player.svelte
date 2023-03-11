@@ -1,15 +1,16 @@
 <script lang="ts">
+	import { Pause, Play, SkipBack, SkipForward, Volume, Volume1, Volume2 } from 'lucide-svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import toast from 'svelte-french-toast';
+	import type { Readable, Writable } from 'svelte/store';
+
 	import { postMePlayerQueue, putMePlayerPlay } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
+	import { spotify_tokens } from '$lib/stores';
 	import type { PlayerStore, QueueStore } from '$lib/types';
 	import type { SpotifyPlayerCallback, WebPlaybackPlayer } from '$lib/types/web-player';
 	import { format_artists, ms_to_min_sec } from '$lib/utils';
-	import { Pause, Play, SkipBack, SkipForward, Volume, Volume1, Volume2 } from 'lucide-svelte';
-	import { onDestroy, onMount } from 'svelte';
-	import type { Readable, Writable } from 'svelte/store';
 	import ProgressBar from './ProgressBar/ProgressBar.svelte';
-	import toast from 'svelte-french-toast';
-	import { spotify_tokens } from '$lib/stores';
 
 	export let player_store: Writable<PlayerStore>;
 	export let queue_store: Readable<QueueStore>;

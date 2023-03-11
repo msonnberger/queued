@@ -1,6 +1,7 @@
+import { json } from '@sveltejs/kit';
+
 import type { RequestHandler } from './$types';
 import { search } from '$lib/api/spotify';
-import { json } from '@sveltejs/kit';
 
 export const GET = (async ({ url, fetch }) => {
 	const q = url.searchParams.get('q');

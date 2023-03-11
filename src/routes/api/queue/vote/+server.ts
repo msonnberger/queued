@@ -1,6 +1,7 @@
+import { error, text, type RequestHandler } from '@sveltejs/kit';
+
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
-import { error, text, type RequestHandler } from '@sveltejs/kit';
 
 export const POST = (async ({ request, locals, cookies }) => {
 	const { value, supabase_id, queue_id } = await request.json();

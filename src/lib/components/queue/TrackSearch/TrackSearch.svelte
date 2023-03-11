@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { createCombobox } from 'svelte-headlessui';
-	import Transition from 'svelte-transition';
-	import { Button } from '$lib/components';
-	import { debounce, format_artists } from '$lib/utils';
-	import type { TrackObject } from '$lib/api/spotify';
 	import { Check, ChevronsUpDown, Plus } from 'lucide-svelte';
 	import toast from 'svelte-french-toast';
+	import { createCombobox } from 'svelte-headlessui';
+	import Transition from 'svelte-transition';
+
+	import type { TrackObject } from '$lib/api/spotify';
+	import { Button } from '$lib/components';
+	import { debounce, format_artists } from '$lib/utils';
 
 	export let id: string;
 	let search_results: TrackObject[] = [];

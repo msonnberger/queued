@@ -1,6 +1,7 @@
-import { pusher } from '$lib/api/pusher/server';
 import { error, text, type RequestHandler } from '@sveltejs/kit';
 import { z } from 'zod';
+
+import { pusher } from '$lib/api/pusher/server';
 
 export const DELETE = (async ({ request, locals }) => {
 	const body = await request.json();

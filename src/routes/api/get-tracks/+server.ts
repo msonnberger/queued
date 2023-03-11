@@ -1,6 +1,7 @@
-import { getTracks } from '$lib/api/spotify';
 import { json } from '@sveltejs/kit';
+
 import type { RequestHandler } from './$types';
+import { getTracks } from '$lib/api/spotify';
 
 export const GET = (async ({ url, fetch }) => {
 	const track_ids = url.searchParams.get('track_ids');

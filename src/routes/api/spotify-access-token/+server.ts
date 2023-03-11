@@ -1,6 +1,7 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { error, text } from '@sveltejs/kit';
+
 import type { RequestHandler } from './$types';
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
 export const POST = (async ({ request, fetch }) => {
 	const { refresh_token } = await request.json();

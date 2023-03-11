@@ -1,6 +1,7 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { text } from '@sveltejs/kit';
+
 import type { RequestHandler } from './$types';
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
 export const GET = (async ({ fetch }) => {
 	const token_res = await fetch('https://accounts.spotify.com/api/token', {

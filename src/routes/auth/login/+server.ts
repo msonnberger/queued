@@ -1,5 +1,6 @@
-import type { RequestHandler } from './$types';
 import { error, redirect } from '@sveltejs/kit';
+
+import type { RequestHandler } from './$types';
 
 export const POST = (async ({ locals, url }) => {
 	const redirect_to = `${url.origin}/${url.searchParams.get('path') ?? ''}`;

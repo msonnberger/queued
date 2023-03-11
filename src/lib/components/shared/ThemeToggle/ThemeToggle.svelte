@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { MonitorSmartphone, Moon, SunDim } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { createMenu } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
-	import { SunDim, Moon, MonitorSmartphone } from 'lucide-svelte';
 
 	let switch_disabled = true;
 	let is_dark_shown: boolean;

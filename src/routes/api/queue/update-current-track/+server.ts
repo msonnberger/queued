@@ -1,7 +1,8 @@
+import { error, text } from '@sveltejs/kit';
+
+import type { RequestHandler } from './$types';
 import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
-import { error, text } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
 
 export const POST = (async ({ request, locals, fetch }) => {
 	const { uri, qid } = await request.json();

@@ -1,6 +1,7 @@
-import { getMe } from '$lib/api/spotify';
 import { redirect } from '@sveltejs/kit';
+
 import type { PageLoad } from './$types';
+import { getMe } from '$lib/api/spotify';
 
 export const load = (async ({ parent }) => {
 	const { session } = await parent();

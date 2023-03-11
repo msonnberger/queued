@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('authentication with spotify', () => {
 	test('login works', async ({ page }) => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type VariantProps, cva } from 'class-variance-authority';
+	import { cva, type VariantProps } from 'class-variance-authority';
 	import { twMerge } from 'tailwind-merge';
 
 	const button_variants = cva(['inline-flex', 'items-center', 'justify-center', 'font-medium', 'transition-colors'], {

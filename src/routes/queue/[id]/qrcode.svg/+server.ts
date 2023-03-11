@@ -1,7 +1,8 @@
-import type { RequestHandler } from './$types';
-import Colors from 'tailwindcss/colors';
-import QRCode from 'qrcode';
 import type { Config } from '@sveltejs/adapter-vercel';
+import QRCode from 'qrcode';
+import Colors from 'tailwindcss/colors';
+
+import type { RequestHandler } from './$types';
 
 export const config: Config = {
 	runtime: 'edge',

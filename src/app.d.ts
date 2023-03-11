@@ -1,8 +1,8 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-
-import type { SupabaseClient, Session } from '@supabase/supabase-js';
+import type { Session, SupabaseClient } from '@supabase/supabase-js';
 import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
+
 import type { Database } from '$lib/types/supabase';
 import type { WebPlaybackPlayer } from '/types/web-player';
 

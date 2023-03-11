@@ -1,10 +1,11 @@
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
-import { create_player_store, create_queue_store } from '$lib/stores';
-import type { TrackObject } from '$lib/api/spotify';
-import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
-import { browser } from '$app/environment';
 import type { Readable } from 'svelte/store';
+
+import type { PageLoad } from './$types';
+import { browser } from '$app/environment';
+import type { TrackObject } from '$lib/api/spotify';
+import { create_player_store, create_queue_store } from '$lib/stores';
+import type { QueueStore, SupabaseTrack, SupabaseVote } from '$lib/types';
 
 let queue_store: Readable<QueueStore>;
 

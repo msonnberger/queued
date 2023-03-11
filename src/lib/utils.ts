@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type { QueueStore } from './types';
 import type { ArtistObject } from '$lib/api/spotify';
+import type { QueueStore } from './types';
 
 export const debounce = <Params extends any[]>(
 	func: (...args: Params) => any,

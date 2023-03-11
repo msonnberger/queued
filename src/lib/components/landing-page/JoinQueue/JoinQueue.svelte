@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { ArrowRight } from 'lucide-svelte';
-	import { Button } from '$lib/components';
+
 	import { goto, preloadData } from '$app/navigation';
+	import { Button } from '$lib/components';
 
 	let qid = '';
 	let input_hidden = true;

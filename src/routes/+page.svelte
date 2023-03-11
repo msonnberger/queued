@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '$lib/components';
 	import spotify_logo from '$lib/assets/spotify-logo.png';
+	import { Button } from '$lib/components';
 	import { JoinQueue } from '$lib/components/landing-page';
 </script>
 

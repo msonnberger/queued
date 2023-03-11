@@ -1,9 +1,8 @@
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import type { Handle } from '@sveltejs/kit';
 
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
 
-export const handle = (async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
 	event.locals.supabase = createSupabaseServerClient({
 		supabaseUrl: PUBLIC_SUPABASE_URL,
 		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
@@ -21,4 +20,4 @@ export const handle = (async ({ event, resolve }) => {
 			return name === 'content-range';
 		}
 	});
-}) satisfies Handle;
+}

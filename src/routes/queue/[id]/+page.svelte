@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { flip } from 'svelte/animate';
 
-	import type { PageData } from './$types';
 	import { page } from '$app/stores';
 	import { Player, Track, TrackSearch } from '$lib/components/queue';
 	import { spotify_tokens } from '$lib/stores';
@@ -9,7 +8,7 @@
 	$: ({ id } = $page.params);
 	$: ({ queue, player, session } = data);
 
-	export let data: PageData;
+	export let data;
 
 	const handle_vote = (track_id: number, value: 1 | -1) => {
 		fetch('/api/queue/vote', {

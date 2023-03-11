@@ -1,9 +1,9 @@
-import { error, text, type RequestHandler } from '@sveltejs/kit';
+import { error, text } from '@sveltejs/kit';
 
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
 
-export const POST = (async ({ request, locals, cookies }) => {
+export async function POST({ request, locals, cookies }) {
 	const { value, supabase_id, queue_id } = await request.json();
 	const voter_id = cookies.get('voter-id') ?? 'undefined';
 
@@ -75,4 +75,4 @@ export const POST = (async ({ request, locals, cookies }) => {
 	pusher.trigger(`queue-${queue_id}`, 'vote', data);
 
 	return text('OK');
-}) satisfies RequestHandler;
+}

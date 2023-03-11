@@ -1,10 +1,9 @@
 import { error, text } from '@sveltejs/kit';
 
-import type { RequestHandler } from './$types';
 import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
 
-export const POST = (async ({ request, locals, fetch }) => {
+export async function POST({ request, locals, fetch }) {
 	const { uri, qid } = await request.json();
 
 	const { data, error: err } = await locals.supabase
@@ -24,4 +23,4 @@ export const POST = (async ({ request, locals, fetch }) => {
 	pusher.trigger(`queue-${qid}`, 'current-track-updated', tracks[0]);
 
 	return text('OK');
-}) satisfies RequestHandler;
+}

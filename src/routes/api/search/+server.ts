@@ -1,9 +1,8 @@
 import { json } from '@sveltejs/kit';
 
-import type { RequestHandler } from './$types';
 import { search } from '$lib/api/spotify';
 
-export const GET = (async ({ url, fetch }) => {
+export async function GET({ url, fetch }) {
 	const q = url.searchParams.get('q');
 
 	if (q === null) {
@@ -25,4 +24,4 @@ export const GET = (async ({ url, fetch }) => {
 	);
 
 	return json(result.tracks?.items);
-}) satisfies RequestHandler;
+}

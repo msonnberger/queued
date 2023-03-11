@@ -1,7 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { Readable } from 'svelte/store';
 
-import type { PageLoad } from './$types';
 import { browser } from '$app/environment';
 import type { TrackObject } from '$lib/api/spotify';
 import { create_player_store, create_queue_store } from '$lib/stores';
@@ -9,7 +8,7 @@ import type { QueueStore, SupabaseTrack, SupabaseVote } from '$lib/types';
 
 let queue_store: Readable<QueueStore>;
 
-export const load = (async ({ params, fetch, data, parent }) => {
+export async function load({ params, fetch, data, parent }) {
 	const { supabase } = await parent();
 
 	const { data: queue, error: err } = await supabase
@@ -76,4 +75,4 @@ export const load = (async ({ params, fetch, data, parent }) => {
 			: create_queue_store(initial_value, data.voter_id),
 		player: create_player_store()
 	};
-}) satisfies PageLoad;
+}

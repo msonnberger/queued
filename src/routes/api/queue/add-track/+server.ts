@@ -1,9 +1,9 @@
-import { error, text, type RequestHandler } from '@sveltejs/kit';
+import { error, text } from '@sveltejs/kit';
 
 import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
 
-export const POST = (async ({ request, locals }) => {
+export async function POST({ request, locals }) {
 	const body = await request.json();
 	const { track, queue_id }: { track: TrackObject; queue_id: string } = body;
 
@@ -30,4 +30,4 @@ export const POST = (async ({ request, locals }) => {
 	pusher.trigger(`queue-${queue_id}`, 'track-added', { ...track, supabase_id: data.id });
 
 	return text('OK');
-}) satisfies RequestHandler;
+}

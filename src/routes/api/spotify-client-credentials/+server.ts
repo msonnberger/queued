@@ -1,9 +1,8 @@
 import { text } from '@sveltejs/kit';
 
-import type { RequestHandler } from './$types';
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
-export const GET = (async ({ fetch }) => {
+export async function GET({ fetch }) {
 	const token_res = await fetch('https://accounts.spotify.com/api/token', {
 		method: 'POST',
 		headers: {
@@ -16,4 +15,4 @@ export const GET = (async ({ fetch }) => {
 	const { access_token } = await token_res.json();
 
 	return text(access_token);
-}) satisfies RequestHandler;
+}

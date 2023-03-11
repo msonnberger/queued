@@ -5,9 +5,6 @@ dotenv.config({ path: '.env' });
 
 const config: PlaywrightTestConfig = {
 	globalSetup: './tests/global-setup',
-	use: {
-		storageState: './tests/storage-state.json'
-	},
 	webServer: {
 		command: 'pnpm build && pnpm preview',
 		port: 4173,

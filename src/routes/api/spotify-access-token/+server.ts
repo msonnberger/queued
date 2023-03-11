@@ -1,9 +1,8 @@
 import { error, text } from '@sveltejs/kit';
 
-import type { RequestHandler } from './$types';
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
-export const POST = (async ({ request, fetch }) => {
+export async function POST({ request, fetch }) {
 	const { refresh_token } = await request.json();
 	const token_res = await fetch('https://accounts.spotify.com/api/token', {
 		method: 'POST',
@@ -24,4 +23,4 @@ export const POST = (async ({ request, fetch }) => {
 	}
 
 	return text(access_token);
-}) satisfies RequestHandler;
+}

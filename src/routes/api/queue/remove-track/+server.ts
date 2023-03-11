@@ -1,9 +1,9 @@
-import { error, text, type RequestHandler } from '@sveltejs/kit';
+import { error, text } from '@sveltejs/kit';
 import { z } from 'zod';
 
 import { pusher } from '$lib/api/pusher/server';
 
-export const DELETE = (async ({ request, locals }) => {
+export async function DELETE({ request, locals }) {
 	const body = await request.json();
 	const body_schema = z.object({
 		uri: z.string(),
@@ -29,4 +29,4 @@ export const DELETE = (async ({ request, locals }) => {
 	pusher.trigger(`queue-${result.data.queue_id}`, 'track-removed', { uri: result.data.uri });
 
 	return text('OK');
-}) satisfies RequestHandler;
+}

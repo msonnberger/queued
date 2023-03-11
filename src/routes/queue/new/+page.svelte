@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import { Button } from '$lib/components';
 
-	export let data: PageData;
+	export let data;
 </script>
 
 <h1>NEW</h1>

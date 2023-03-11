@@ -1,7 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
 
-import type { Actions } from './$types';
-
 export const actions = {
 	create_queue: async ({ locals, request }) => {
 		const session = await locals.getSession();
@@ -25,7 +23,7 @@ export const actions = {
 
 		throw redirect(303, `/queue/${queue.id}`);
 	}
-} satisfies Actions;
+};
 
 const get_random_string = (length: number) => {
 	const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

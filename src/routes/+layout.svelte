@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
 
-	import type { PageData } from './$types';
 	import * as spotify_api from '$lib/api/spotify';
 	import { ThemeToggle, UserMenu } from '$lib/components';
 	import { spotify_tokens } from '$lib/stores';
@@ -44,7 +43,7 @@
 		}
 	}
 
-	export let data: PageData;
+	export let data;
 </script>
 
 <Toaster />

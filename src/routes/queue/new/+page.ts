@@ -1,9 +1,8 @@
 import { redirect } from '@sveltejs/kit';
 
-import type { PageLoad } from './$types';
 import { getMe } from '$lib/api/spotify';
 
-export const load = (async ({ parent }) => {
+export async function load({ parent }) {
 	const { session } = await parent();
 
 	if (!session) {
@@ -15,4 +14,4 @@ export const load = (async ({ parent }) => {
 	return {
 		user_has_premium: user_profile.product === 'premium'
 	};
-}) satisfies PageLoad;
+}

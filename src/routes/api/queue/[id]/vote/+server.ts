@@ -3,9 +3,10 @@ import { error, text } from '@sveltejs/kit';
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
 
-export async function POST({ request, locals, cookies }) {
-	const { value, supabase_id, queue_id } = await request.json();
+export async function POST({ request, locals, cookies, params }) {
+	const { value, supabase_id } = await request.json();
 	const voter_id = cookies.get('voter-id') ?? 'undefined';
+	const qid = params.id;
 
 	const { error: err } = await locals.supabase.from('votes').insert({
 		track_id: supabase_id,
@@ -72,7 +73,7 @@ export async function POST({ request, locals, cookies }) {
 		voter_id
 	};
 
-	pusher.trigger(`queue-${queue_id}`, 'vote', data);
+	pusher.trigger(`queue-${qid}`, 'vote', data);
 
 	return text('OK');
 }

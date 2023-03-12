@@ -3,12 +3,13 @@ import { z } from 'zod';
 
 import { pusher } from '$lib/api/pusher/server';
 
-export async function DELETE({ request, locals }) {
+export async function DELETE({ request, locals, params }) {
 	const body = await request.json();
 	const body_schema = z.object({
-		uri: z.string(),
-		queue_id: z.string().length(7)
+		uri: z.string()
 	});
+
+	const qid = params.id;
 
 	const result = body_schema.safeParse(body);
 
@@ -20,13 +21,13 @@ export async function DELETE({ request, locals }) {
 		.from('tracks')
 		.delete()
 		.eq('spotify_uri', result.data.uri)
-		.eq('qid', result.data.queue_id);
+		.eq('qid', qid);
 
 	if (err) {
 		throw error(500, err.message);
 	}
 
-	pusher.trigger(`queue-${result.data.queue_id}`, 'track-removed', { uri: result.data.uri });
+	pusher.trigger(`queue-${qid}`, 'track-removed', { uri: result.data.uri });
 
 	return text('OK');
 }

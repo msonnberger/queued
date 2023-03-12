@@ -3,8 +3,9 @@ import { error, text } from '@sveltejs/kit';
 import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
 
-export async function POST({ request, locals, fetch }) {
-	const { uri, qid } = await request.json();
+export async function POST({ request, locals, fetch, params }) {
+	const { uri } = await request.json();
+	const qid = params.id;
 
 	const { data, error: err } = await locals.supabase
 		.from('queues')

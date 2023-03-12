@@ -22,7 +22,7 @@
 {/if}
 
 <h1>{$queue.name}</h1>
-<img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 dark:invert" />
+<img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 h-80 dark:invert" />
 
 <TrackSearch add_track={queue.add_track} />
 

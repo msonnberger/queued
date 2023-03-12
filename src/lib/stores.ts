@@ -16,8 +16,10 @@ const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
 });
 
 export const create_queue_store = (initial_value: Queue, current_voter_id: string): QueueStore => {
+	const qid = initial_value.id;
+
 	const queue_writable = writable<Queue>(initial_value, () => {
-		const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
+		const channel = pusher_client.subscribe(`queue-${qid}`);
 
 		channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
 			const new_track = { ...data, votes: { up: 0, down: 0, own_vote: null } };
@@ -65,33 +67,27 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 	return {
 		subscribe,
 		add_track: async (track: TrackObject) => {
-			return fetch('/api/queue/add-track', {
+			return fetch(`/api/queue/${qid}/add-track`, {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					track,
-					queue_id: initial_value.id
-				})
+				body: JSON.stringify({ track })
 			});
 		},
 		add_vote: async (track_id: number, value: 1 | -1) => {
-			return fetch('/api/queue/vote', {
+			return fetch(`/api/queue/${qid}/vote`, {
 				method: 'POST',
-				body: JSON.stringify({ supabase_id: track_id, value, queue_id: initial_value.id })
+				body: JSON.stringify({ supabase_id: track_id, value })
 			});
 		},
 		update_current_track: async (uri: string) => {
-			return fetch('/api/queue/update-current-track', {
+			return fetch(`/api/queue/${qid}/update-current-track`, {
 				method: 'POST',
-				body: JSON.stringify({ uri, qid: initial_value.id })
+				body: JSON.stringify({ uri })
 			});
 		},
 		remove_track: async (uri: string) => {
-			return fetch('/api/queue/remove-track', {
+			return fetch(`/api/queue/${qid}/remove-track`, {
 				method: 'DELETE',
-				body: JSON.stringify({ uri, queue_id: initial_value.id })
+				body: JSON.stringify({ uri })
 			});
 		}
 	};

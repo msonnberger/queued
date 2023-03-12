@@ -1,13 +1,21 @@
+import type { Config } from '@sveltejs/adapter-vercel';
 import { error, text } from '@sveltejs/kit';
 
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
 
-export async function POST({ request, locals, cookies }) {
-	const { value, supabase_id, queue_id } = await request.json();
-	const voter_id = cookies.get('voter-id') ?? 'undefined';
+export const config: Config = {
+	runtime: 'edge',
+	// european regions only to reduce latency for DB calls
+	regions: ['arn1', 'cdg1', 'dub1', 'fra1', 'lhr1']
+};
 
-	const { error: err } = await locals.supabase.from('votes').insert({
+export async function POST({ request, locals, cookies, params }) {
+	const { value, supabase_id } = await request.json();
+	const voter_id = cookies.get('voter-id') ?? 'undefined';
+	const qid = params.id;
+
+	const { error: err } = await locals.supabase_admin.from('votes').insert({
 		track_id: supabase_id,
 		value,
 		voter_id
@@ -24,7 +32,7 @@ export async function POST({ request, locals, cookies }) {
 
 		// err.code === '23505' => duplicate key error
 		// check for duplicate key error and remove that particular vote
-		const { data, error: delete_err } = await locals.supabase
+		const { data, error: delete_err } = await locals.supabase_admin
 			.from('votes')
 			.delete()
 			.eq('track_id', supabase_id)
@@ -47,7 +55,7 @@ export async function POST({ request, locals, cookies }) {
 			up_value = -data.value;
 			down_value = value;
 
-			await locals.supabase.from('votes').insert({
+			await locals.supabase_admin.from('votes').insert({
 				track_id: supabase_id,
 				value: value,
 				voter_id
@@ -56,7 +64,7 @@ export async function POST({ request, locals, cookies }) {
 			up_value = value;
 			down_value = -data.value;
 
-			await locals.supabase.from('votes').insert({
+			await locals.supabase_admin.from('votes').insert({
 				track_id: supabase_id,
 				value: value,
 				voter_id
@@ -72,7 +80,7 @@ export async function POST({ request, locals, cookies }) {
 		voter_id
 	};
 
-	pusher.trigger(`queue-${queue_id}`, 'vote', data);
+	await pusher.trigger(`queue-${qid}`, 'vote', data);
 
 	return text('OK');
 }

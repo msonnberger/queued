@@ -1,16 +1,14 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './lib/playwright.js';
 
-import { auth } from './helpers.js';
-
-test('login works', async ({ page, context }) => {
-	await auth.login(context, { premium: false });
+test('login works', async ({ page, auth }) => {
+	await auth.login({ premium: false });
 	await page.goto('/');
 	await page.getByText('Toggle User menu').click();
 	await expect(page.getByText(process.env.TEST_NAME + "'s Account")).toBeVisible();
 });
 
-test('logout works', async ({ page, context }) => {
-	await auth.login(context, { premium: false });
+test('logout works', async ({ page, auth }) => {
+	await auth.login({ premium: false });
 	await page.goto('/');
 	const user_menu_toggle = await page.getByText('Toggle User menu');
 	await user_menu_toggle.click();

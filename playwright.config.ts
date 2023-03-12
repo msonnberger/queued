@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
 const config: PlaywrightTestConfig = {
-	globalSetup: './tests/global-setup',
+	globalSetup: './tests/lib/global-setup',
 	webServer: {
 		command: 'pnpm build && pnpm preview',
 		port: 4173,

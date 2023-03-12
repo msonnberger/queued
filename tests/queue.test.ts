@@ -1,6 +1,4 @@
-import { expect, test } from '@playwright/test';
-
-import { auth } from './helpers.js';
+import { expect, test } from './lib/playwright.js';
 
 test.describe('create Queue', () => {
 	test('logged out user sees login button', async ({ page }) => {
@@ -10,16 +8,16 @@ test.describe('create Queue', () => {
 		await expect(page.getByText('Continue with Spotify')).toBeVisible();
 	});
 
-	test('non-premium user sees hint for premium', async ({ page, context }) => {
-		await auth.login(context, { premium: false });
+	test('non-premium user sees hint for premium', async ({ page, auth }) => {
+		await auth.login({ premium: false });
 		await page.goto('/');
 		await page.getByText('Create Queue').click();
 		await expect(page).not.toHaveURL(/.*login/);
 		await expect(page.getByText('HAS NO PREMIUM')).toBeVisible();
 	});
 
-	test('premium user can create Queue', async ({ page, context }) => {
-		await auth.login(context, { premium: true });
+	test('premium user can create Queue', async ({ page, auth }) => {
+		await auth.login({ premium: true });
 		await page.goto('/');
 		await page.getByText('Create Queue').click();
 		await expect(page.locator('#queue_name')).toBeVisible();

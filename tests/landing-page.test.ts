@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './lib/playwright.js';
 
 test.beforeEach(async ({ page }) => await page.goto('/'));
 

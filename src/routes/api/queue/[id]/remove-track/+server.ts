@@ -34,7 +34,7 @@ export async function DELETE({ request, locals, params }) {
 		throw error(500, err.message);
 	}
 
-	pusher.trigger(`queue-${qid}`, 'track-removed', { uri: result.data.uri });
+	await pusher.trigger(`queue-${qid}`, 'track-removed', { uri: result.data.uri });
 
 	return text('OK');
 }

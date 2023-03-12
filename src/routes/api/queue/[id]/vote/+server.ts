@@ -80,7 +80,7 @@ export async function POST({ request, locals, cookies, params }) {
 		voter_id
 	};
 
-	pusher.trigger(`queue-${qid}`, 'vote', data);
+	await pusher.trigger(`queue-${qid}`, 'vote', data);
 
 	return text('OK');
 }

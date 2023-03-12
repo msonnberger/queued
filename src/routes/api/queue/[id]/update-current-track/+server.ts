@@ -28,7 +28,7 @@ export async function POST({ request, locals, fetch, params }) {
 	const tracks_response = await fetch(`/api/get-tracks?track_ids=${data.current_track_uri.split(':').at(-1)}`);
 	const tracks = (await tracks_response.json()) as TrackObject[];
 
-	pusher.trigger(`queue-${qid}`, 'current-track-updated', tracks[0]);
+	await pusher.trigger(`queue-${qid}`, 'current-track-updated', tracks[0]);
 
 	return text('OK');
 }

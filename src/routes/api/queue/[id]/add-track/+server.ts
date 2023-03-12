@@ -35,7 +35,7 @@ export async function POST({ request, locals, params }) {
 		throw error(500, err.message);
 	}
 
-	pusher.trigger(`queue-${qid}`, 'track-added', { ...track, supabase_id: data.id });
+	await pusher.trigger(`queue-${qid}`, 'track-added', { ...track, supabase_id: data.id });
 
 	return text('OK');
 }

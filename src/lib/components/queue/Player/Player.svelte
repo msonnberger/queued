@@ -2,7 +2,7 @@
 	import { Pause, Play, SkipBack, SkipForward, Volume, Volume1, Volume2 } from 'lucide-svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import toast from 'svelte-french-toast';
-	import type { Readable, Writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
 
 	import { postMePlayerQueue, putMePlayerPlay } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
@@ -13,7 +13,7 @@
 	import ProgressBar from './ProgressBar/ProgressBar.svelte';
 
 	export let player_store: Writable<PlayerStore>;
-	export let queue_store: Readable<QueueStore>;
+	export let queue_store: QueueStore;
 
 	let player: WebPlaybackPlayer | undefined;
 
@@ -91,8 +91,8 @@
 				$player_store.is_playing = !paused;
 
 				if ($player_store.track.uri === $player_store.up_next_uri) {
-					$queue_store.remove_track($player_store.up_next_uri);
-					$queue_store.update_current_track($player_store.up_next_uri);
+					queue_store.remove_track($player_store.up_next_uri);
+					queue_store.update_current_track($player_store.up_next_uri);
 					$player_store.up_next_uri = null;
 				}
 			});
@@ -117,8 +117,8 @@
 		try {
 			await putMePlayerPlay({ uris: [uri] }, { deviceId: $player_store.device_id });
 
-			$queue_store.remove_track(uri);
-			$queue_store.update_current_track(uri);
+			queue_store.remove_track(uri);
+			queue_store.update_current_track(uri);
 
 			player?.togglePlay();
 		} catch (error) {

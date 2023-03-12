@@ -1,3 +1,5 @@
+import type { Readable } from 'svelte/store';
+
 import type { TrackObject } from '../api/spotify';
 import type { Database } from './supabase';
 import type { WebPlaybackTrack } from './web-player';
@@ -11,13 +13,16 @@ export interface QueueTrack extends TrackObject {
 	votes: { up: number; down: number; own_vote: 'up' | 'down' | null };
 }
 
-export interface QueueStore extends Pick<SupabaseQueue, 'name' | 'id' | 'owner_id'> {
+export interface Queue extends Pick<SupabaseQueue, 'name' | 'id' | 'owner_id'> {
 	tracks: Array<QueueTrack>;
 	currently_playing?: TrackObject;
-	// TODO: add handle_vote and add_track to store and remove from components
-	handle_vote: (id: number, value: 1 | -1) => void;
-	remove_track: (uri: string) => void;
-	update_current_track: (uri: string) => void;
+}
+
+export interface QueueStore extends Readable<Queue> {
+	add_track: (track: TrackObject) => Promise<Response>;
+	add_vote: (id: number, value: 1 | -1) => Promise<Response>;
+	remove_track: (uri: string) => Promise<Response>;
+	update_current_track: (uri: string) => Promise<Response>;
 }
 
 export interface PlayerStore {

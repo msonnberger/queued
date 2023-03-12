@@ -6,9 +6,11 @@
 
 	import type { TrackObject } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
+	import type { QueueStore } from '$lib/types';
 	import { debounce, format_artists } from '$lib/utils';
 
-	export let id: string;
+	export let add_track: QueueStore['add_track'];
+
 	let search_results: TrackObject[] = [];
 	let input_value = '';
 
@@ -23,36 +25,23 @@
 		search_results = (await res.json()) as TrackObject[];
 	}, 300);
 
-	const handle_add_track = async (track: TrackObject) => {
-		const res = await fetch('/api/queue/add-track', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				track,
-				queue_id: id
-			})
-		});
-
-		// TODO: error handling
-		if (res.ok) {
-			toast.success(`${track.name} added to Queue`, { duration: 2000 });
-		} else if (res.status === 409) {
-			toast.error(`${track.name} is already in Queue`, { duration: 2000 });
-		} else {
-			throw new Error('Failed to add track');
-		}
-	};
-
 	const combobox = createCombobox({ label: 'Tracks', selected: { name: '' } });
 
-	const on_select = (e: Event) => {
+	const on_select = async (e: Event) => {
 		const selected = (e as CustomEvent).detail?.selected ?? null;
 
 		if (selected) {
 			const track: TrackObject = selected;
-			handle_add_track(track);
+			const res = await add_track(track);
+
+			// TODO: error handling
+			if (res.ok) {
+				toast.success(`${track.name} added to Queue`, { duration: 2000 });
+			} else if (res.status === 409) {
+				toast.error(`${track.name} is already in Queue`, { duration: 2000 });
+			} else {
+				throw new Error('Failed to add track');
+			}
 		}
 	};
 </script>

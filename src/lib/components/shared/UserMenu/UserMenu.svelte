@@ -14,6 +14,7 @@
 		<div class="relative inline-block text-left">
 			<button use:menu.button>
 				<User class="stroke-slate-700 dark:stroke-slate-300" />
+				<span class="sr-only">Toggle User menu</span>
 			</button>
 
 			<Transition
@@ -36,7 +37,7 @@
 									type="submit"
 									class="flex rounded-md items-center w-full pl-2 pr-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
 								>
-									<LogIn class="w-5 h-5 mr-3 " />
+									<LogIn class="w-5 h-5 mr-3" aria-hidden="true" />
 									Log in with Spotify
 								</button>
 							</form>
@@ -46,7 +47,7 @@
 								class="flex rounded-md items-center w-full pl-2 pr-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
 								href="/account"
 							>
-								<UserCog class="w-5 h-5 mr-3 " />
+								<UserCog class="w-5 h-5 mr-3" aria-hidden="true" />
 								{session.user.user_metadata.name}'s Account
 							</a>
 							<form use:menu.item action="/auth/logout" method="post">
@@ -54,7 +55,7 @@
 									type="submit"
 									class="flex rounded-md items-center w-full pl-2 pr-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
 								>
-									<LogOut class="w-5 h-5 mr-3 " />
+									<LogOut class="w-5 h-5 mr-3" aria-hidden="true" />
 									Log out
 								</button>
 							</form>

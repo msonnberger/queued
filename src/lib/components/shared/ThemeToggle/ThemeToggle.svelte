@@ -22,7 +22,7 @@
 	});
 
 	const handle_system_theme_change = () => {
-		if (localStorage.theme === 'system') {
+		if (!localStorage.theme || localStorage.theme === 'system') {
 			set_mode('system');
 		}
 	};
@@ -75,7 +75,9 @@
 					this={is_dark_shown ? Moon : SunDim}
 					class="stroke-slate-700 dark:stroke-slate-300"
 					size={is_dark_shown ? 23 : 26}
+					aria-hidden="true"
 				/>
+				<span class="sr-only">Toggle Theme menu</span>
 			</button>
 
 			<Transition
@@ -105,6 +107,7 @@
 							>
 								<svelte:component
 									this={option.icon}
+									aria-hidden="true"
 									class="w-5 h-5 mr-3 {selected ? 'stroke-indigo-600 dark:stroke-indigo-400' : 'stroke-slate-400'}"
 								/>
 								{option.text}

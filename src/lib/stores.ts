@@ -3,7 +3,7 @@ import { derived, writable } from 'svelte/store';
 
 import { PUBLIC_PUSHER_CLUSTER, PUBLIC_PUSHER_KEY } from '$env/static/public';
 import type { TrackObject } from './api/spotify';
-import type { PlayerStore, PusherVoteEvent, QueueStore, QueueTrack } from './types';
+import type { PlayerStore, PusherVoteEvent, Queue, QueueStore, QueueTrack } from './types';
 import { sorted_queue } from './utils';
 
 const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
@@ -15,22 +15,8 @@ const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
 	forceTLS: true
 });
 
-export const create_queue_store = (initial_value: Partial<QueueStore>, current_voter_id: string) => {
-	initial_value.remove_track = (uri: string) => {
-		fetch('/api/queue/remove-track', {
-			method: 'DELETE',
-			body: JSON.stringify({ uri, queue_id: initial_value.id })
-		});
-	};
-
-	initial_value.update_current_track = (uri: string) => {
-		fetch('/api/queue/update-current-track', {
-			method: 'POST',
-			body: JSON.stringify({ uri, qid: initial_value.id })
-		});
-	};
-
-	const queue_writable = writable<QueueStore>(initial_value as QueueStore, () => {
+export const create_queue_store = (initial_value: Queue, current_voter_id: string): QueueStore => {
+	const queue_writable = writable<Queue>(initial_value, () => {
 		const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
 
 		channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
@@ -74,7 +60,41 @@ export const create_queue_store = (initial_value: Partial<QueueStore>, current_v
 		return () => channel.unbind_all();
 	});
 
-	return derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
+	const { subscribe } = derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
+
+	return {
+		subscribe,
+		add_track: async (track: TrackObject) => {
+			return fetch('/api/queue/add-track', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					track,
+					queue_id: initial_value.id
+				})
+			});
+		},
+		add_vote: async (track_id: number, value: 1 | -1) => {
+			return fetch('/api/queue/vote', {
+				method: 'POST',
+				body: JSON.stringify({ supabase_id: track_id, value, queue_id: initial_value.id })
+			});
+		},
+		update_current_track: async (uri: string) => {
+			return fetch('/api/queue/update-current-track', {
+				method: 'POST',
+				body: JSON.stringify({ uri, qid: initial_value.id })
+			});
+		},
+		remove_track: async (uri: string) => {
+			return fetch('/api/queue/remove-track', {
+				method: 'DELETE',
+				body: JSON.stringify({ uri, queue_id: initial_value.id })
+			});
+		}
+	};
 };
 
 export const create_player_store = () =>

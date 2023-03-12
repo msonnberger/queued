@@ -5,7 +5,7 @@
 
 	export let track: QueueTrack;
 	export let is_up_next = false;
-	export let handle_vote: QueueStore['handle_vote'];
+	export let add_vote: QueueStore['add_vote'];
 </script>
 
 <div
@@ -21,13 +21,13 @@
 	</div>
 	<div class="flex gap-2">
 		<VoteButton
-			on:click={() => handle_vote(track.supabase_id, 1)}
+			on:click={() => add_vote(track.supabase_id, 1)}
 			vote_type="up"
 			value={track.votes.up}
 			has_voted={track.votes.own_vote === 'up'}
 		/>
 		<VoteButton
-			on:click={() => handle_vote(track.supabase_id, -1)}
+			on:click={() => add_vote(track.supabase_id, -1)}
 			vote_type="down"
 			value={-track.votes.down}
 			has_voted={track.votes.own_vote === 'down'}

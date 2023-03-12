@@ -16,15 +16,15 @@ test('landing page has expected links', async ({ page }) => {
 	);
 });
 
-test.describe('dark mode', () => {
-	test('default to light mode', async ({ page }) => {
+test.describe.only('dark mode', () => {
+	test('default to light mode with no preference', async ({ page }) => {
 		await expect(page.locator('html')).not.toHaveClass('dark');
 	});
 
-	test('default to system changes', async ({ page }) => {
-		await page.goto('/');
+	test('listen to system changes per default', async ({ page }) => {
 		await expect(page.locator('html')).not.toHaveClass('dark');
 		await page.emulateMedia({ colorScheme: 'dark' });
+		await page.waitForTimeout(500);
 		await expect(page.locator('html')).toHaveClass('dark');
 		await page.emulateMedia({ colorScheme: 'light' });
 		await expect(page.locator('html')).not.toHaveClass('dark');

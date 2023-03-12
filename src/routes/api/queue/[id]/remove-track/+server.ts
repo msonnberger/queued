@@ -1,7 +1,14 @@
+import type { Config } from '@sveltejs/adapter-vercel';
 import { error, text } from '@sveltejs/kit';
 import { z } from 'zod';
 
 import { pusher } from '$lib/api/pusher/server';
+
+export const config: Config = {
+	runtime: 'edge',
+	// european regions only to reduce latency for DB calls
+	regions: ['arn', 'bru', 'cdg', 'dub', 'fra', 'lhr']
+};
 
 export async function DELETE({ request, locals, params }) {
 	const body = await request.json();

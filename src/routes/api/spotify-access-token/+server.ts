@@ -1,6 +1,12 @@
+import type { Config } from '@sveltejs/adapter-vercel';
 import { error, text } from '@sveltejs/kit';
 
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
+
+export const config: Config = {
+	runtime: 'edge',
+	regions: 'all'
+};
 
 export async function POST({ request, fetch }) {
 	const { refresh_token } = await request.json();
@@ -8,7 +14,7 @@ export async function POST({ request, fetch }) {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
-			Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`
+			Authorization: `Basic ${btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`)}`
 		},
 		body: new URLSearchParams({
 			grant_type: 'refresh_token',

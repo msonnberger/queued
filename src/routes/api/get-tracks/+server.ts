@@ -1,6 +1,12 @@
+import type { Config } from '@sveltejs/adapter-vercel';
 import { json } from '@sveltejs/kit';
 
 import { getTracks } from '$lib/api/spotify';
+
+export const config: Config = {
+	runtime: 'edge',
+	regions: 'all'
+};
 
 export async function GET({ url, fetch }) {
 	const track_ids = url.searchParams.get('track_ids');

@@ -1,7 +1,14 @@
+import type { Config } from '@sveltejs/adapter-vercel';
 import { error, text } from '@sveltejs/kit';
 
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
+
+export const config: Config = {
+	runtime: 'edge',
+	// european regions only to reduce latency for DB calls
+	regions: ['arn', 'bru', 'cdg', 'dub', 'fra', 'lhr']
+};
 
 export async function POST({ request, locals, cookies, params }) {
 	const { value, supabase_id } = await request.json();

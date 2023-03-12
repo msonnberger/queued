@@ -17,7 +17,7 @@ export async function DELETE({ request, locals, params }) {
 		throw error(400, result.error.toString());
 	}
 
-	const { error: err } = await locals.supabase
+	const { error: err } = await locals.supabase_admin
 		.from('tracks')
 		.delete()
 		.eq('spotify_uri', result.data.uri)

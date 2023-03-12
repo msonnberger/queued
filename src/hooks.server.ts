@@ -1,5 +1,6 @@
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 
+import { SUPABASE_SERVICE_KEY } from '$env/static/private';
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
 
 export async function handle({ event, resolve }) {
@@ -9,7 +10,13 @@ export async function handle({ event, resolve }) {
 		event
 	});
 
-	event.locals.getSession = async () => {
+	event.locals.supabase_admin = createSupabaseServerClient({
+		supabaseUrl: PUBLIC_SUPABASE_URL,
+		supabaseKey: SUPABASE_SERVICE_KEY,
+		event
+	});
+
+	event.locals.get_session = async () => {
 		const { data } = await event.locals.supabase.auth.getSession();
 		return data.session;
 	};

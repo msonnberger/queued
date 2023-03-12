@@ -12,7 +12,8 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			supabase: SupabaseClient<Database>;
-			getSession: () => Promise<Session | null>;
+			supabase_admin: SupabaseClient<Database>;
+			get_session: () => Promise<Session | null>;
 		}
 		interface PageData {
 			session: Session | null;

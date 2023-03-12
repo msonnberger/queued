@@ -12,7 +12,7 @@ export async function POST({ request, locals, params }) {
 		throw error(400, 'Missing track URI');
 	}
 
-	const { data, error: err } = await locals.supabase
+	const { data, error: err } = await locals.supabase_admin
 		.from('tracks')
 		.insert({
 			spotify_uri: track.uri,

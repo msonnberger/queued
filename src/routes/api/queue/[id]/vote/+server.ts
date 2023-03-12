@@ -8,7 +8,7 @@ export async function POST({ request, locals, cookies, params }) {
 	const voter_id = cookies.get('voter-id') ?? 'undefined';
 	const qid = params.id;
 
-	const { error: err } = await locals.supabase.from('votes').insert({
+	const { error: err } = await locals.supabase_admin.from('votes').insert({
 		track_id: supabase_id,
 		value,
 		voter_id
@@ -25,7 +25,7 @@ export async function POST({ request, locals, cookies, params }) {
 
 		// err.code === '23505' => duplicate key error
 		// check for duplicate key error and remove that particular vote
-		const { data, error: delete_err } = await locals.supabase
+		const { data, error: delete_err } = await locals.supabase_admin
 			.from('votes')
 			.delete()
 			.eq('track_id', supabase_id)
@@ -48,7 +48,7 @@ export async function POST({ request, locals, cookies, params }) {
 			up_value = -data.value;
 			down_value = value;
 
-			await locals.supabase.from('votes').insert({
+			await locals.supabase_admin.from('votes').insert({
 				track_id: supabase_id,
 				value: value,
 				voter_id
@@ -57,7 +57,7 @@ export async function POST({ request, locals, cookies, params }) {
 			up_value = value;
 			down_value = -data.value;
 
-			await locals.supabase.from('votes').insert({
+			await locals.supabase_admin.from('votes').insert({
 				track_id: supabase_id,
 				value: value,
 				voter_id

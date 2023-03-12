@@ -7,7 +7,7 @@ export async function POST({ request, locals, fetch, params }) {
 	const { uri } = await request.json();
 	const qid = params.id;
 
-	const { data, error: err } = await locals.supabase
+	const { data, error: err } = await locals.supabase_admin
 		.from('queues')
 		.update({ current_track_uri: uri })
 		.eq('id', qid)

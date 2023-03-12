@@ -1,19 +1,9 @@
-import Pusher from 'pusher-js';
 import { derived, writable } from 'svelte/store';
 
-import { PUBLIC_PUSHER_CLUSTER, PUBLIC_PUSHER_KEY } from '$env/static/public';
+import { pusher_client } from './api/pusher/client';
 import type { TrackObject } from './api/spotify';
 import type { PlayerStore, PusherVoteEvent, Queue, QueueStore, QueueTrack } from './types';
 import { sorted_queue } from './utils';
-
-const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
-	cluster: PUBLIC_PUSHER_CLUSTER,
-	wsHost: 'ws.queued.live',
-	wsPort: 80,
-	wssPort: 443,
-	enabledTransports: ['ws', 'wss'],
-	forceTLS: true
-});
 
 export const create_queue_store = (initial_value: Queue, current_voter_id: string): QueueStore => {
 	const qid = initial_value.id;

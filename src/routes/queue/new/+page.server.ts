@@ -2,7 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 
 export const actions = {
 	create_queue: async ({ locals, request }) => {
-		const session = await locals.getSession();
+		const session = await locals.get_session();
 
 		if (!session) {
 			throw error(401, 'Unauthorized');

@@ -1,5 +1,6 @@
 import type { Config } from '@sveltejs/adapter-vercel';
-import { error, text } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
+import { z } from 'zod';
 
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
@@ -11,76 +12,90 @@ export const config: Config = {
 };
 
 export async function POST({ request, locals, cookies, params }) {
-	const { value, supabase_id } = await request.json();
-	const voter_id = cookies.get('voter-id') ?? 'undefined';
-	const qid = params.id;
+	const body_scheme = z.object({
+		value: z.union([z.literal(1), z.literal(-1)]),
+		supabase_track_id: z.number().int().positive()
+	});
 
-	const { error: err } = await locals.supabase_admin.from('votes').insert({
-		track_id: supabase_id,
+	const body = await request.json();
+	const parsed = body_scheme.safeParse(body);
+
+	if (!parsed.success) {
+		throw error(400, 'Invalid data');
+	}
+
+	const { supabase_track_id, value } = parsed.data;
+	const voter_id = cookies.get('voter-id');
+
+	if (voter_id === undefined) {
+		throw error(500, 'No Voter ID provided');
+	}
+
+	const { error: insert_err } = await locals.supabase_admin.from('votes').insert({
+		track_id: supabase_track_id,
 		value,
 		voter_id
 	});
 
-	let up_value = value > 0 ? value : 0;
-	let down_value = value < 0 ? value : 0;
+	// throw if not an duplicate key error
+	if (insert_err && insert_err.code !== '23505') {
+		throw error(500, 'Vote could not be saved');
+	}
+
+	let up_value = Math.max(value, 0);
+	let down_value = Math.min(value, 0);
 	let type_voted: 'up' | 'down' | null = value > 0 ? 'up' : 'down';
 
-	if (err) {
-		if (err.code !== '23505') {
-			throw error(500, err.message);
-		}
-
-		// err.code === '23505' => duplicate key error
-		// check for duplicate key error and remove that particular vote
-		const { data, error: delete_err } = await locals.supabase_admin
+	// err.code === '23505' => duplicate key error
+	// check for duplicate key error and remove that particular vote
+	if (insert_err && insert_err.code === '23505') {
+		const { data: deleted_vote, error: delete_err } = await locals.supabase_admin
 			.from('votes')
 			.delete()
-			.eq('track_id', supabase_id)
+			.eq('track_id', supabase_track_id)
 			.eq('voter_id', voter_id)
 			.select()
 			.single();
 
 		if (delete_err) {
-			throw error(500, delete_err.message);
+			throw error(500, 'Vote could not be saved');
 		}
 
-		// TODO: REFACTOR THIS!!!
-		if (data.value > 0 && value > 0) {
-			up_value = -data.value;
-			type_voted = null;
-		} else if (data.value < 0 && value < 0) {
-			down_value = -data.value;
-			type_voted = null;
-		} else if (data.value > 0 && value < 0) {
-			up_value = -data.value;
-			down_value = value;
+		const old_value = deleted_vote.value;
+		const new_value = value;
 
-			await locals.supabase_admin.from('votes').insert({
-				track_id: supabase_id,
-				value: value,
+		if (old_value > 0 && new_value > 0) {
+			up_value = -old_value;
+			type_voted = null;
+		} else if (old_value < 0 && new_value < 0) {
+			down_value = -old_value;
+			type_voted = null;
+		} else {
+			const { error: insert_err } = await locals.supabase_admin.from('votes').insert({
+				track_id: supabase_track_id,
+				value: new_value,
 				voter_id
 			});
-		} else if (data.value < 0 && value > 0) {
-			up_value = value;
-			down_value = -data.value;
 
-			await locals.supabase_admin.from('votes').insert({
-				track_id: supabase_id,
-				value: value,
-				voter_id
-			});
+			if (insert_err) {
+				throw error(500, 'Vote could not be saved');
+			}
+
+			if (new_value < 0) {
+				up_value = -old_value;
+				down_value = new_value;
+			} else {
+				up_value = new_value;
+				down_value = -old_value;
+			}
 		}
 	}
 
-	const data: PusherVoteEvent = {
-		supabase_track_id: supabase_id,
+	return pusher.trigger(`queue-${params.id}`, 'vote', {
+		supabase_track_id,
 		up_value,
 		down_value,
 		type_voted,
 		voter_id
-	};
-
-	await pusher.trigger(`queue-${qid}`, 'vote', data);
-
-	return text('OK');
+	} satisfies PusherVoteEvent);
 }

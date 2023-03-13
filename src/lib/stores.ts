@@ -65,7 +65,7 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 		add_vote: async (track_id: number, value: 1 | -1) => {
 			return fetch(`/api/queue/${qid}/vote`, {
 				method: 'POST',
-				body: JSON.stringify({ supabase_id: track_id, value })
+				body: JSON.stringify({ supabase_track_id: track_id, value })
 			});
 		},
 		update_current_track: async (uri: string) => {

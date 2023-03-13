@@ -6,8 +6,8 @@ import { pusher } from '$lib/api/pusher/server';
 
 export const config: Config = {
 	runtime: 'edge',
-	// european regions only to reduce latency for DB calls
-	regions: ['arn1', 'cdg1', 'dub1', 'fra1', 'lhr1']
+	// frankfurt only to reduce latency for DB calls
+	regions: ['fra1']
 };
 
 export async function DELETE({ request, locals, params }) {

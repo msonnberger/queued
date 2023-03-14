@@ -20,9 +20,9 @@ export interface Queue extends Pick<SupabaseQueue, 'name' | 'id' | 'owner_id'> {
 
 export interface QueueStore extends Readable<Queue> {
 	add_track: (track: TrackObject) => Promise<Response>;
+	delete_track: (uri: string) => Promise<Response>;
 	add_vote: (id: number, value: 1 | -1, is_vote_flipped: boolean) => Promise<Response>;
 	delete_vote: (track_id: number) => Promise<Response>;
-	remove_track: (uri: string) => Promise<Response>;
 	update_current_track: (uri: string) => Promise<Response>;
 }
 

@@ -57,9 +57,15 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 	return {
 		subscribe,
 		add_track: async (track: TrackObject) => {
-			return fetch(`/api/queue/${qid}/add-track`, {
+			return fetch(`/api/queue/${qid}/track`, {
 				method: 'POST',
 				body: JSON.stringify({ track })
+			});
+		},
+		delete_track: async (uri: string) => {
+			return fetch(`/api/queue/${qid}/track`, {
+				method: 'DELETE',
+				body: JSON.stringify({ uri })
 			});
 		},
 		add_vote: async (track_id: number, value: 1 | -1, is_vote_flipped: boolean) => {
@@ -77,12 +83,6 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 		update_current_track: async (uri: string) => {
 			return fetch(`/api/queue/${qid}/update-current-track`, {
 				method: 'POST',
-				body: JSON.stringify({ uri })
-			});
-		},
-		remove_track: async (uri: string) => {
-			return fetch(`/api/queue/${qid}/remove-track`, {
-				method: 'DELETE',
 				body: JSON.stringify({ uri })
 			});
 		}

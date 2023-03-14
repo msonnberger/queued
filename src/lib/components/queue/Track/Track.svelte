@@ -12,7 +12,7 @@
 		if (type === own_vote) {
 			delete_vote(track_id);
 		} else {
-			const is_vote_flipped = type !== null;
+			const is_vote_flipped = own_vote !== null;
 			add_vote(track_id, type === 'up' ? 1 : -1, is_vote_flipped);
 		}
 	}

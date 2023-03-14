@@ -1,5 +1,5 @@
 import type { Config } from '@sveltejs/adapter-vercel';
-import { error, json, type Cookies } from '@sveltejs/kit';
+import { error, type Cookies } from '@sveltejs/kit';
 import { z } from 'zod';
 
 import { pusher } from '$lib/api/pusher/server';
@@ -11,9 +11,8 @@ export const config: Config = {
 	regions: ['fra1']
 };
 
-const body_scheme = z.object({
-	supabase_track_id: z.number().int().positive(),
-	is_vote_flipped: z.boolean().optional()
+const track_id_scheme = z.object({
+	supabase_track_id: z.number().int().positive()
 });
 
 function get_voter_id(cookies: Cookies) {
@@ -28,13 +27,13 @@ function get_voter_id(cookies: Cookies) {
 
 export async function DELETE({ request, locals, cookies, params }) {
 	const body = await request.json();
-	const parsed = body_scheme.safeParse(body);
+	const parsed = track_id_scheme.safeParse(body);
 
 	if (!parsed.success) {
 		throw error(400, 'Invalid data');
 	}
 
-	const { supabase_track_id, is_vote_flipped } = parsed.data;
+	const { supabase_track_id } = parsed.data;
 	const voter_id = get_voter_id(cookies);
 
 	const { data: deleted_vote, error: delete_err } = await locals.supabase_admin
@@ -49,10 +48,6 @@ export async function DELETE({ request, locals, cookies, params }) {
 		throw error(500, 'Vote could not be removed');
 	}
 
-	if (is_vote_flipped) {
-		return json(deleted_vote);
-	}
-
 	return pusher.trigger(`queue-${params.id}`, 'vote', {
 		supabase_track_id,
 		up_value: -Math.max(deleted_vote.value, 0),
@@ -62,10 +57,13 @@ export async function DELETE({ request, locals, cookies, params }) {
 	} satisfies PusherVoteEvent);
 }
 
-export async function POST({ request, locals, cookies, params, fetch, url }) {
-	const scheme = body_scheme.extend({ value: z.union([z.literal(1), z.literal(-1)]) });
+export async function POST({ request, locals, cookies, params }) {
+	const body_scheme = track_id_scheme.extend({
+		value: z.union([z.literal(1), z.literal(-1)]),
+		is_vote_flipped: z.boolean().optional()
+	});
 	const body = await request.json();
-	const parsed = scheme.safeParse(body);
+	const parsed = body_scheme.safeParse(body);
 
 	if (!parsed.success) {
 		throw error(400, 'Invalid data');
@@ -74,27 +72,7 @@ export async function POST({ request, locals, cookies, params, fetch, url }) {
 	const { supabase_track_id, value, is_vote_flipped } = parsed.data;
 	const voter_id = get_voter_id(cookies);
 
-	let up_value = Math.max(value, 0);
-	let down_value = Math.min(value, 0);
-
-	if (is_vote_flipped) {
-		const delete_res = await fetch(url.pathname, {
-			method: 'DELETE',
-			body: JSON.stringify({ supabase_track_id, is_vote_flipped })
-		});
-
-		const deleted_vote = await delete_res.json();
-
-		if (value < 0) {
-			up_value = -deleted_vote.value;
-			down_value = value;
-		} else {
-			up_value = value;
-			down_value = -deleted_vote.value;
-		}
-	}
-
-	const { error: insert_err } = await locals.supabase_admin.from('votes').insert({
+	const { error: insert_err } = await locals.supabase_admin.from('votes').upsert({
 		track_id: supabase_track_id,
 		value,
 		voter_id
@@ -106,8 +84,8 @@ export async function POST({ request, locals, cookies, params, fetch, url }) {
 
 	return pusher.trigger(`queue-${params.id}`, 'vote', {
 		supabase_track_id,
-		up_value,
-		down_value,
+		up_value: is_vote_flipped ? value : Math.max(value, 0),
+		down_value: is_vote_flipped ? value : Math.min(value, 0),
 		type_voted: value > 0 ? 'up' : 'down',
 		voter_id
 	} satisfies PusherVoteEvent);

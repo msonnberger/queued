@@ -62,10 +62,16 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 				body: JSON.stringify({ track })
 			});
 		},
-		add_vote: async (track_id: number, value: 1 | -1) => {
+		add_vote: async (track_id: number, value: 1 | -1, is_vote_flipped: boolean) => {
 			return fetch(`/api/queue/${qid}/vote`, {
 				method: 'POST',
-				body: JSON.stringify({ supabase_track_id: track_id, value })
+				body: JSON.stringify({ supabase_track_id: track_id, value, is_vote_flipped })
+			});
+		},
+		delete_vote: async (track_id: number) => {
+			return fetch(`/api/queue/${qid}/vote`, {
+				method: 'DELETE',
+				body: JSON.stringify({ supabase_track_id: track_id })
 			});
 		},
 		update_current_track: async (uri: string) => {

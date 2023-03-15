@@ -57,26 +57,32 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 	return {
 		subscribe,
 		add_track: async (track: TrackObject) => {
-			return fetch(`/api/queue/${qid}/add-track`, {
+			return fetch(`/api/queue/${qid}/track`, {
 				method: 'POST',
 				body: JSON.stringify({ track })
 			});
 		},
-		add_vote: async (track_id: number, value: 1 | -1) => {
+		delete_track: async (uri: string) => {
+			return fetch(`/api/queue/${qid}/track`, {
+				method: 'DELETE',
+				body: JSON.stringify({ uri })
+			});
+		},
+		add_vote: async (track_id: number, value: 1 | -1, is_vote_flipped: boolean) => {
 			return fetch(`/api/queue/${qid}/vote`, {
 				method: 'POST',
-				body: JSON.stringify({ supabase_id: track_id, value })
+				body: JSON.stringify({ supabase_track_id: track_id, value, is_vote_flipped })
+			});
+		},
+		delete_vote: async (track_id: number) => {
+			return fetch(`/api/queue/${qid}/vote`, {
+				method: 'DELETE',
+				body: JSON.stringify({ supabase_track_id: track_id })
 			});
 		},
 		update_current_track: async (uri: string) => {
 			return fetch(`/api/queue/${qid}/update-current-track`, {
 				method: 'POST',
-				body: JSON.stringify({ uri })
-			});
-		},
-		remove_track: async (uri: string) => {
-			return fetch(`/api/queue/${qid}/remove-track`, {
-				method: 'DELETE',
 				body: JSON.stringify({ uri })
 			});
 		}

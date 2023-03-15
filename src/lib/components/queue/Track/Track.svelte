@@ -6,6 +6,16 @@
 	export let track: QueueTrack;
 	export let is_up_next = false;
 	export let add_vote: QueueStore['add_vote'];
+	export let delete_vote: QueueStore['delete_vote'];
+
+	function handle_vote(track_id: number, type: 'up' | 'down', own_vote: QueueTrack['votes']['own_vote']) {
+		if (type === own_vote) {
+			delete_vote(track_id);
+		} else {
+			const is_vote_flipped = own_vote !== null;
+			add_vote(track_id, type === 'up' ? 1 : -1, is_vote_flipped);
+		}
+	}
 </script>
 
 <div
@@ -21,13 +31,13 @@
 	</div>
 	<div class="flex gap-2">
 		<VoteButton
-			on:click={() => add_vote(track.supabase_id, 1)}
+			on:click={() => handle_vote(track.supabase_id, 'up', track.votes.own_vote)}
 			vote_type="up"
 			value={track.votes.up}
 			has_voted={track.votes.own_vote === 'up'}
 		/>
 		<VoteButton
-			on:click={() => add_vote(track.supabase_id, -1)}
+			on:click={() => handle_vote(track.supabase_id, 'down', track.votes.own_vote)}
 			vote_type="down"
 			value={-track.votes.down}
 			has_voted={track.votes.own_vote === 'down'}

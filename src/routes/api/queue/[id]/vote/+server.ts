@@ -1,86 +1,92 @@
 import type { Config } from '@sveltejs/adapter-vercel';
-import { error, text } from '@sveltejs/kit';
+import { error, type Cookies } from '@sveltejs/kit';
+import { z } from 'zod';
 
 import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
 
 export const config: Config = {
 	runtime: 'edge',
-	// european regions only to reduce latency for DB calls
-	regions: ['arn1', 'cdg1', 'dub1', 'fra1', 'lhr1']
+	// frankfurt only to reduce latency for DB calls
+	regions: ['fra1']
 };
 
-export async function POST({ request, locals, cookies, params }) {
-	const { value, supabase_id } = await request.json();
-	const voter_id = cookies.get('voter-id') ?? 'undefined';
-	const qid = params.id;
+const track_id_scheme = z.object({
+	supabase_track_id: z.number().int().positive()
+});
 
-	const { error: err } = await locals.supabase_admin.from('votes').insert({
-		track_id: supabase_id,
+function get_voter_id(cookies: Cookies) {
+	const voter_id = cookies.get('voter-id');
+
+	if (voter_id === undefined) {
+		throw error(500, 'No Voter ID provided');
+	}
+
+	return voter_id;
+}
+
+export async function DELETE({ request, locals, cookies, params }) {
+	const body = await request.json();
+	const parsed = track_id_scheme.safeParse(body);
+
+	if (!parsed.success) {
+		throw error(400, 'Invalid data');
+	}
+
+	const { supabase_track_id } = parsed.data;
+	const voter_id = get_voter_id(cookies);
+
+	const { data: deleted_vote, error: delete_err } = await locals.supabase_admin
+		.from('votes')
+		.delete()
+		.eq('track_id', supabase_track_id)
+		.eq('voter_id', voter_id)
+		.select()
+		.single();
+
+	if (delete_err) {
+		throw error(500, 'Vote could not be removed');
+	}
+
+	return pusher.trigger(`queue-${params.id}`, 'vote', {
+		supabase_track_id,
+		up_value: -Math.max(deleted_vote.value, 0),
+		down_value: -Math.min(deleted_vote.value, 0),
+		type_voted: null,
+		voter_id
+	} satisfies PusherVoteEvent);
+}
+
+export async function POST({ request, locals, cookies, params }) {
+	const body_scheme = track_id_scheme.extend({
+		value: z.union([z.literal(1), z.literal(-1)]),
+		is_vote_flipped: z.boolean().optional()
+	});
+	const body = await request.json();
+	const parsed = body_scheme.safeParse(body);
+
+	if (!parsed.success) {
+		throw error(400, 'Invalid data');
+	}
+
+	const { supabase_track_id, value, is_vote_flipped } = parsed.data;
+	const voter_id = get_voter_id(cookies);
+
+	const { error: insert_err } = await locals.supabase_admin.from('votes').upsert({
+		track_id: supabase_track_id,
 		value,
 		voter_id
 	});
 
-	let up_value = value > 0 ? value : 0;
-	let down_value = value < 0 ? value : 0;
-	let type_voted: 'up' | 'down' | null = value > 0 ? 'up' : 'down';
-
-	if (err) {
-		if (err.code !== '23505') {
-			throw error(500, err.message);
-		}
-
-		// err.code === '23505' => duplicate key error
-		// check for duplicate key error and remove that particular vote
-		const { data, error: delete_err } = await locals.supabase_admin
-			.from('votes')
-			.delete()
-			.eq('track_id', supabase_id)
-			.eq('voter_id', voter_id)
-			.select()
-			.single();
-
-		if (delete_err) {
-			throw error(500, delete_err.message);
-		}
-
-		// TODO: REFACTOR THIS!!!
-		if (data.value > 0 && value > 0) {
-			up_value = -data.value;
-			type_voted = null;
-		} else if (data.value < 0 && value < 0) {
-			down_value = -data.value;
-			type_voted = null;
-		} else if (data.value > 0 && value < 0) {
-			up_value = -data.value;
-			down_value = value;
-
-			await locals.supabase_admin.from('votes').insert({
-				track_id: supabase_id,
-				value: value,
-				voter_id
-			});
-		} else if (data.value < 0 && value > 0) {
-			up_value = value;
-			down_value = -data.value;
-
-			await locals.supabase_admin.from('votes').insert({
-				track_id: supabase_id,
-				value: value,
-				voter_id
-			});
-		}
+	if (insert_err) {
+		throw error(500, 'Vote could not be saved');
 	}
 
-	const data: PusherVoteEvent = {
-		supabase_track_id: supabase_id,
-		up_value,
-		down_value,
-		type_voted,
+	return pusher.trigger(`queue-${params.id}`, 'vote', {
+		supabase_track_id,
+		up_value: is_vote_flipped ? value : Math.max(value, 0),
+		down_value: is_vote_flipped ? value : Math.min(value, 0),
+		type_voted: value > 0 ? 'up' : 'down',
 		voter_id
-	};
-
-	await pusher.trigger(`queue-${qid}`, 'vote', data);
-
-	return text('OK');
+	} satisfies PusherVoteEvent);
 }

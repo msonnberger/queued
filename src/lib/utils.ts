@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { browser } from '$app/environment';
 import type { ArtistObject } from '$lib/api/spotify';
 import type { Queue } from './types';
 
@@ -60,3 +61,11 @@ export const get_focusable_elements = (element?: HTMLElement | Document) =>
 			'a[href], area[href], input, select, textarea, button, details, iframe, object, embed, [tabindex]:not([tabindex="-1"], [contenteditable]'
 		)
 	].filter((el) => !el.hasAttribute('disabled'));
+
+export const is_mobile_browser = () => {
+	if (!browser) {
+		return false;
+	}
+
+	return /Android|iPhone|Windows Phone|BlackBerry/i.test(navigator.userAgent);
+};

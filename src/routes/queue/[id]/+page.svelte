@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { QrCodeIcon } from 'lucide-svelte';
 	import { flip } from 'svelte/animate';
 
 	import { page } from '$app/stores';
-	import { Player, Track, TrackSearch } from '$lib/components/queue';
+	import { Player, ShareSheet, Track, TrackSearch } from '$lib/components/queue';
 	import { spotify_tokens } from '$lib/stores';
 
-	$: ({ id } = $page.params);
 	$: ({ queue, player, session } = data);
+	let show_share_sheet = $page.url.searchParams.get('share') === 'true';
 
 	export let data;
 </script>
@@ -22,7 +23,10 @@
 {/if}
 
 <h1>{$queue.name}</h1>
-<img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 h-80 dark:invert" />
+<button class="my-20 flex gap-2" on:click={() => (show_share_sheet = true)}>
+	<QrCodeIcon />
+	<span>Share</span>
+</button>
 
 <TrackSearch add_track={queue.add_track} />
 
@@ -42,3 +46,5 @@
 {#if $spotify_tokens.access_token && $queue.owner_id === session?.user.id}
 	<Player player_store={player} queue_store={queue} />
 {/if}
+
+<ShareSheet bind:open={show_share_sheet} />

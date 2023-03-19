@@ -33,6 +33,7 @@ export async function POST({ request, locals, params }) {
 	if (err?.code === '23505') {
 		throw error(409, err.message);
 	} else if (err) {
+		console.log(err);
 		throw error(500, err.message);
 	}
 

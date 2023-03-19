@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ClipboardCopy, CopyIcon, Files, XIcon } from 'lucide-svelte';
+	import { Files, XIcon } from 'lucide-svelte';
 	import { fade, fly } from 'svelte/transition';
 
 	import { page } from '$app/stores';
@@ -68,7 +68,7 @@
 		<div
 			on:click={() => (open = false)}
 			transition:fade={{ duration: 200 }}
-			class="bg-black/70 fixed inset-0 flex items-end justify-center"
+			class="bg-black/70 fixed z-50 inset-0 flex items-end justify-center"
 		>
 			<div
 				use:trap_focus
@@ -87,21 +87,22 @@
 						<XIcon size={20} />
 					</button>
 				</div>
-				<div class="flex flex-wrap mb-5 mt-6 gap-3 items-stretch justify-center">
+				<div class="flex flex-col sm:flex-row mb-5 mt-6 gap-3 items-stretch justify-center">
 					<img
 						src="{$page.url.pathname}/qrcode.svg"
 						alt="QR Code"
-						class="w-full max-w-[16rem] sm:max-w-[12rem] aspect-square p-6 bg-slate-200 dark:bg-slate-600 rounded-2xl"
+						class="w-full max-w-[16rem] sm:max-w-[12rem] aspect-square p-6 pb-4 sm:pr-4 dark:invert"
 					/>
-					<div class="py-6 px-8 bg-slate-200 dark:bg-slate-600 rounded-2xl flex flex-col justify-center">
+					<div class="bg-slate-300 dark:bg-slate-500 w-auto sm:w-[1.5px] sm:h-auto h-[1.5px] sm:mx-4 my-4" />
+					<div class="py-6 px-4 flex flex-col justify-center">
 						<p
 							title="Queue ID"
 							id="queue-id"
-							class="cursor-default px-4 text-center bg-slate-100 dark:bg-slate-500 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-900 border-2 rounded-xl font-mono font-medium text-xl tracking-[0.2em] h-14 leading-[3.5rem]"
+							class="cursor-default px-4 text-center bg-slate-100 dark:bg-slate-500 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-100 border-2 rounded-xl font-mono font-medium text-xl tracking-[0.2em] h-14 leading-[3.5rem]"
 						>
 							{$page.params.id}
 						</p>
-						<div class="flex gap-3 mt-3 items-start h-min">
+						<div class="flex gap-3 mt-3 items-start h-min justify-between">
 							<a href={whatsapp_url} target="_blank" class="block p-2.5 rounded-xl bg-emerald-500 w-14 h-14">
 								<WhatsApp />
 							</a>

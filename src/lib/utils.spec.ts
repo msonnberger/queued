@@ -1,5 +1,5 @@
 import type { Queue } from './types';
-import { debounce, format_artists, ms_to_min_sec, sorted_queue } from './utils';
+import { debounce, format_artists, get_focusable_elements, ms_to_min_sec, sorted_queue } from './utils';
 
 test('ms_to_min_sec', () => {
 	expect(ms_to_min_sec(0)).toEqual('00:00');
@@ -73,4 +73,19 @@ test('debounce', async () => {
 	expect(executed).toBeFalsy();
 	await new Promise((resolve) => setTimeout(resolve, 100));
 	expect(executed).toBeTruthy();
+});
+
+describe('get_focusable_elements', () => {
+	test('<a> with href is focusable', () => {
+		const el = document.createElement('a');
+		el.href = 'example.com';
+		document.body.appendChild(el);
+		expect(get_focusable_elements()).toContain(el);
+	});
+
+	test('<a> without href is not focusable', () => {
+		const el = document.createElement('a');
+		document.body.appendChild(el);
+		expect(get_focusable_elements()).not.toContain(el);
+	});
 });

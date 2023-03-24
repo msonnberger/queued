@@ -11,6 +11,7 @@ export async function GET({ params, url }) {
 	const svg = await QRCode.toString(queue_url.href, {
 		type: 'svg',
 		errorCorrectionLevel: 'H',
+		margin: 0,
 		color: {
 			dark: Colors.slate[900],
 			light: '#00000000'

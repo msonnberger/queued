@@ -21,7 +21,7 @@ export const actions = {
 			throw error(500, err.message);
 		}
 
-		throw redirect(303, `/queue/${queue.id}`);
+		throw redirect(303, `/queue/${queue.id}?share=true`);
 	}
 };
 

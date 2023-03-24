@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Session } from '@supabase/supabase-js';
-	import { LogIn, LogOut, User, UserCog } from 'lucide-svelte';
+	import { Fingerprint, LogOut, User, UserCog } from 'lucide-svelte';
 	import { createMenu } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
 
@@ -37,7 +37,7 @@
 									type="submit"
 									class="flex rounded-md items-center w-full pl-2 pr-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
 								>
-									<LogIn class="w-5 h-5 mr-3" aria-hidden="true" />
+									<Fingerprint class="w-5 h-5 mr-3" aria-hidden="true" />
 									Log in with Spotify
 								</button>
 							</form>

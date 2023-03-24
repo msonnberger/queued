@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { browser } from '$app/environment';
 import type { ArtistObject } from '$lib/api/spotify';
 import type { Queue } from './types';
 
@@ -52,4 +53,19 @@ export const ms_to_min_sec = (ms: number) => {
 	const sec = ((ms % 60000) / 1000).toFixed(0);
 
 	return `${min.padStart(2, '0')}:${sec.padStart(2, '0')}`;
+};
+
+export const get_focusable_elements = (element?: HTMLElement | Document) =>
+	[
+		...(element ?? document).querySelectorAll(
+			'a[href], area[href], input, select, textarea, button, details, iframe, object, embed, [tabindex]:not([tabindex="-1"], [contenteditable]'
+		)
+	].filter((el) => !el.hasAttribute('disabled'));
+
+export const is_mobile_browser = () => {
+	if (!browser) {
+		return false;
+	}
+
+	return /Android|iPhone|Windows Phone|BlackBerry/i.test(navigator.userAgent);
 };

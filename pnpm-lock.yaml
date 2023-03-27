@@ -1,12 +1,12 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@ianvs/prettier-plugin-sort-imports': 3.7.1
-  '@playwright/test': 1.32.0
+  '@ianvs/prettier-plugin-sort-imports': 3.7.2
+  '@playwright/test': 1.32.1
   '@supabase/auth-helpers-sveltekit': 0.9.0
   '@supabase/supabase-js': 2.12.1
-  '@sveltejs/adapter-vercel': 2.4.0
-  '@sveltejs/kit': 1.13.0
+  '@sveltejs/adapter-vercel': 2.4.1
+  '@sveltejs/kit': 1.14.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2
   '@types/qrcode': 1.5.0
@@ -43,7 +43,7 @@ specifiers:
   zod: 3.21.4
 
 dependencies:
-  '@supabase/auth-helpers-sveltekit': 0.9.0_3aepqsg2ad4oed5glms6y7g27q
+  '@supabase/auth-helpers-sveltekit': 0.9.0_vgwjcaif2quup3ru7l7hzhre5u
   '@supabase/supabase-js': 2.12.1
   class-variance-authority: 0.4.0_typescript@5.0.2
   lucide-svelte: 0.127.0_svelte@3.57.0
@@ -58,10 +58,10 @@ dependencies:
   zod: 3.21.4
 
 devDependencies:
-  '@ianvs/prettier-plugin-sort-imports': 3.7.1_prettier@2.8.7
-  '@playwright/test': 1.32.0
-  '@sveltejs/adapter-vercel': 2.4.0_@sveltejs+kit@1.13.0
-  '@sveltejs/kit': 1.13.0_svelte@3.57.0+vite@4.2.1
+  '@ianvs/prettier-plugin-sort-imports': 3.7.2_prettier@2.8.7
+  '@playwright/test': 1.32.1
+  '@sveltejs/adapter-vercel': 2.4.1_@sveltejs+kit@1.14.0
+  '@sveltejs/kit': 1.14.0_svelte@3.57.0+vite@4.2.1
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.2_svelte@3.57.0
   '@types/qrcode': 1.5.0
@@ -77,7 +77,7 @@ devDependencies:
   postcss: 8.4.21
   prettier: 2.8.7
   prettier-plugin-svelte: 2.10.0_5ir2xprf4ygk6mygilwnltaw3a
-  prettier-plugin-tailwindcss: 0.2.5_i62i765rcek4y2qiolgv254fou
+  prettier-plugin-tailwindcss: 0.2.5_qkthd3jhlr7qpdrw5gsthcn26u
   svelte: 3.57.0
   svelte-check: 3.1.4_sd5d5bwhwct4qrvp7ra4wv5wou
   tailwindcss: 3.2.7_postcss@8.4.21
@@ -165,15 +165,6 @@ packages:
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@babel/generator/7.17.7:
-    resolution: {integrity: sha512-oLcVCTeIFadUoArDTwpluncplrYBmTCCZZgXCbgNGvOBBiSDDK3eWO4b/+eOTli5tKv1lg+a5/NAXg+nTcei1w==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/types': 7.17.0
-      jsesc: 2.5.2
-      source-map: 0.5.7
     dev: true
 
   /@babel/generator/7.21.1:
@@ -297,7 +288,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.21.2
     dev: true
 
   /@babel/runtime/7.20.7:
@@ -316,24 +307,6 @@ packages:
       '@babel/types': 7.21.2
     dev: true
 
-  /@babel/traverse/7.17.3:
-    resolution: {integrity: sha512-5irClVky7TxRWIRtxlh2WPUUOLhcPN06AGgaQSB8AEwuyEBgJVuJ5imdHm5zxk8w0QS5T+tDfnDxAlhWjpb7cw==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.17.7
-      '@babel/helper-environment-visitor': 7.18.9
-      '@babel/helper-function-name': 7.21.0
-      '@babel/helper-hoist-variables': 7.18.6
-      '@babel/helper-split-export-declaration': 7.18.6
-      '@babel/parser': 7.21.2
-      '@babel/types': 7.17.0
-      debug: 4.3.4
-      globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@babel/traverse/7.21.2:
     resolution: {integrity: sha512-ts5FFU/dSUPS13tv8XiEObDu9K+iagEKME9kAbaP7r0Y9KtZJZ+NGndDvWoRAYNpeWafbpFeki3q9QoMD6gxyw==}
     engines: {node: '>=6.9.0'}
@@ -350,14 +323,6 @@ packages:
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@babel/types/7.17.0:
-    resolution: {integrity: sha512-TmKSNO4D5rzhL5bjWFcVHHLETzfQ/AmbKpKPOSjlP0WoHZ6L911fgoOKY4Alp/emzG4cHJdyN49zpgkbXFEHHw==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/helper-validator-identifier': 7.19.1
-      to-fast-properties: 2.0.0
     dev: true
 
   /@babel/types/7.21.2:
@@ -804,8 +769,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@ianvs/prettier-plugin-sort-imports/3.7.1_prettier@2.8.7:
-    resolution: {integrity: sha512-XDnBUUruJY9KgNd7T2ZHnVPWo5B9NzVDCLEMm7HjXTA3rTtMg5Q46gYRjLvampDXSmN8+icu54aRE3IIT8U+1w==}
+  /@ianvs/prettier-plugin-sort-imports/3.7.2_prettier@2.8.7:
+    resolution: {integrity: sha512-bVckKToJM8XV2wTOG1VpeXrSmfAG49esVrikbxeFbY51RJdNke9AdMANJtGuACB59uo+pGlz0wBdWFrRzWyO1A==}
     peerDependencies:
       '@vue/compiler-sfc': '>=3.0.0'
       prettier: 2.x
@@ -814,9 +779,9 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.21.0
-      '@babel/generator': 7.17.7
+      '@babel/generator': 7.21.1
       '@babel/parser': 7.21.2
-      '@babel/traverse': 7.17.3
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
       javascript-natural-sort: 0.7.1
       lodash.clone: 4.5.0
@@ -932,13 +897,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test/1.32.0:
-    resolution: {integrity: sha512-zOdGloaF0jeec7hqoLqM5S3L2rR4WxMJs6lgiAeR70JlH7Ml54ZPoIIf3X7cvnKde3Q9jJ/gaxkFh8fYI9s1rg==}
+  /@playwright/test/1.32.1:
+    resolution: {integrity: sha512-FTwjCuhlm1qHUGf4hWjfr64UMJD/z0hXYbk+O387Ioe6WdyZQ+0TBDAc6P+pHjx2xCv1VYNgrKbYrNixFWy4Dg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.32.0
+      playwright-core: 1.32.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -966,7 +931,7 @@ packages:
       '@supabase/supabase-js': 2.12.1
     dev: false
 
-  /@supabase/auth-helpers-sveltekit/0.9.0_3aepqsg2ad4oed5glms6y7g27q:
+  /@supabase/auth-helpers-sveltekit/0.9.0_vgwjcaif2quup3ru7l7hzhre5u:
     resolution: {integrity: sha512-Czdiv2/fwCMW552btgk69Ufxb+X/FU6mOXBXABekDYNdpkllPmm3R3GCofuf88RcBQZB3gIiio8DdxN4vKP/pw==}
     peerDependencies:
       '@supabase/supabase-js': ^2.7.1
@@ -974,7 +939,7 @@ packages:
     dependencies:
       '@supabase/auth-helpers-shared': 0.3.0_pz5pnydt2nehkak4aetyy3l46i
       '@supabase/supabase-js': 2.12.1
-      '@sveltejs/kit': 1.13.0_svelte@3.57.0+vite@4.2.1
+      '@sveltejs/kit': 1.14.0_svelte@3.57.0+vite@4.2.1
     dev: false
 
   /@supabase/functions-js/2.1.0:
@@ -1033,12 +998,12 @@ packages:
       - supports-color
     dev: false
 
-  /@sveltejs/adapter-vercel/2.4.0_@sveltejs+kit@1.13.0:
-    resolution: {integrity: sha512-ygf15bCi64QGJPMDBIe+56G2fPGTMZaP2cXRHCDguf/VPXu3jhZ6yMVXd2ewl1MLL1PUWnHWNN7w0f2dsxqrfA==}
+  /@sveltejs/adapter-vercel/2.4.1_@sveltejs+kit@1.14.0:
+    resolution: {integrity: sha512-7YOHBq8onxqD5ZshQhveuSzJg9ZOicKoNZQtOnAj++0MJmPElxQ5Mjqp6aQfIhHAHl8tn5UbacCpvR39mPejgw==}
     peerDependencies:
       '@sveltejs/kit': ^1.5.0
     dependencies:
-      '@sveltejs/kit': 1.13.0_svelte@3.57.0+vite@4.2.1
+      '@sveltejs/kit': 1.14.0_svelte@3.57.0+vite@4.2.1
       '@vercel/nft': 0.22.6
       esbuild: 0.16.14
     transitivePeerDependencies:
@@ -1046,8 +1011,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.13.0_svelte@3.57.0+vite@4.2.1:
-    resolution: {integrity: sha512-t44xqlSTn/k+BridiJFTD8dCRPNd9msCSSPLZT+/3P9deNp/al6ed396MSpsskK7r2kevYmmxywK16qtn6Rvjw==}
+  /@sveltejs/kit/1.14.0_svelte@3.57.0+vite@4.2.1:
+    resolution: {integrity: sha512-4e/cZT0z4IppEkqNvMrurGz6VE1gScukFU7XqwTL/yrGJGXHqS9D7RvsOcE1hASsgrMu6w/fKTIhxT5oN0K1Jw==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -3599,8 +3564,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core/1.32.0:
-    resolution: {integrity: sha512-Z9Ij17X5Z3bjpp6XKujGBp9Gv4eViESac9aDmwgQFUEJBW0K80T21m/Z+XJQlu4cNsvPygw33b6V1Va6Bda5zQ==}
+  /playwright-core/1.32.1:
+    resolution: {integrity: sha512-KZYUQC10mXD2Am1rGlidaalNGYk3LU1vZqqNk0gT4XPty1jOqgup8KDP8l2CUlqoNKhXM5IfGjWgW37xvGllBA==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -3699,7 +3664,7 @@ packages:
       svelte: 3.57.0
     dev: true
 
-  /prettier-plugin-tailwindcss/0.2.5_i62i765rcek4y2qiolgv254fou:
+  /prettier-plugin-tailwindcss/0.2.5_qkthd3jhlr7qpdrw5gsthcn26u:
     resolution: {integrity: sha512-vZ/iKieyCx0WTxHbkf5E1rBlv/ybFk8WTT4hL5W2jlVxum2Zbe0jMUpuQdDrpa4z2vnPiJ5KIWCqL/kd16fKYg==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
@@ -3751,7 +3716,7 @@ packages:
       prettier-plugin-twig-melody:
         optional: true
     dependencies:
-      '@ianvs/prettier-plugin-sort-imports': 3.7.1_prettier@2.8.7
+      '@ianvs/prettier-plugin-sort-imports': 3.7.2_prettier@2.8.7
       prettier: 2.8.7
       prettier-plugin-svelte: 2.10.0_5ir2xprf4ygk6mygilwnltaw3a
     dev: true
@@ -4106,11 +4071,6 @@ packages:
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
-
-  /source-map/0.5.7:
-    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
-    engines: {node: '>=0.10.0'}
-    dev: true
 
   /source-map/0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}

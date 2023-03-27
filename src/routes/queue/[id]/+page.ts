@@ -72,6 +72,7 @@ export async function load({ params, fetch, data, parent }) {
 		queue: browser
 			? queue_store || (queue_store = create_queue_store(initial_value, data.voter_id))
 			: create_queue_store(initial_value, data.voter_id),
-		player: create_player_store()
+		player: create_player_store(),
+		spotify_access_token: data.spotify_access_token
 	};
 }

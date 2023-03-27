@@ -9,8 +9,8 @@
 
 	function trap_focus(element: HTMLElement) {
 		const focusable_elements = get_focusable_elements(element);
-		const first_focusable_element = focusable_elements[0] as HTMLElement;
-		const last_focusable_element = focusable_elements[focusable_elements.length - 1] as HTMLElement;
+		const first_focusable_element = focusable_elements.at(0) as HTMLElement;
+		const last_focusable_element = focusable_elements.at(-1) as HTMLElement;
 		const previously_focused_element = document.activeElement as HTMLElement | null;
 
 		if (focusable_elements[1] && first_focusable_element.classList.contains('share-sheet-close-button')) {
@@ -27,11 +27,11 @@
 			}
 
 			if (e.shiftKey) {
-				/* shift + tab */ if (document.activeElement === first_focusable_element) {
+				if (document.activeElement === first_focusable_element) {
 					last_focusable_element.focus();
 					e.preventDefault();
 				}
-			} /* tab */ else {
+			} else {
 				if (document.activeElement === last_focusable_element) {
 					first_focusable_element.focus();
 					e.preventDefault();

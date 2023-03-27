@@ -94,7 +94,7 @@
 								</span>
 							</div>
 							<div class="pl-2" use:combobox.item={{ value: result }}>
-								<Button circle size="sm">
+								<Button circle size="sm" data-testid="add-track-button">
 									{#if selected}
 										<Check class="hover:cursor-pointer" />
 									{:else}

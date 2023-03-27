@@ -36,6 +36,7 @@
 				circle
 				size="md"
 				class="absolute top-1 right-1 group"
+				data-testid="join-queue-arrow"
 			>
 				<span class="group-hover:translate-x-0.5 transition-transform">
 					<ArrowRight size={20} />

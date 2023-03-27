@@ -85,6 +85,7 @@
 		{rel}
 		class:pointer-events-none={disabled}
 		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
+		{...$$restProps}
 	>
 		<slot />
 	</a>
@@ -96,6 +97,7 @@
 		{type}
 		{disabled}
 		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
+		{...$$restProps}
 	>
 		<slot />
 	</button>

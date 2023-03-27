@@ -16,7 +16,7 @@ test('landing page has expected links', async ({ page }) => {
 	);
 });
 
-test.describe.only('dark mode', () => {
+test.describe('dark mode', () => {
 	test('default to light mode with no preference', async ({ page }) => {
 		await expect(page.locator('html')).not.toHaveClass('dark');
 	});

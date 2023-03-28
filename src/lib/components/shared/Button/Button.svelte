@@ -23,7 +23,8 @@
 					'dark:bg-slate-900',
 					'dark:border-slate-50',
 					'dark:hover:bg-slate-800'
-				]
+				],
+				danger: ['bg-red-600', 'hover:bg-red-800', 'text-red-50']
 			},
 			circle: {
 				true: ['rounded-full'],

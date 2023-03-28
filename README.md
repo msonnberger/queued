@@ -1,7 +1,7 @@
 <p align="center">
     <h3 align="center">Queued</h3>
-
-    <p align="center">
+</p>
+<p align="center">
     	Your collaborative music player.
     	<br />
     	<a href="https://queued.live"><strong>Learn more »</strong></a>
@@ -11,14 +11,6 @@
     	·
     	<a href="https://github.com/msonnberger/queued/issues">Issues</a>
     </p>
-    	<br />
-    	<br />
-
-</p>
-
-# Meet Queued, your collaborative DJ.
-
-Tired of one person playing their playlist the whole night? With Queued, everyone votes on which song comes next so that the next track will always be the best one.
 
 ## About the Project
 

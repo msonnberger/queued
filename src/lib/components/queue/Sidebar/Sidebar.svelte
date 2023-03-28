@@ -27,22 +27,40 @@
 				{$page.params.id}
 			</p>
 
+			<section>
+				<h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>
 
+				<ul class="mt-2">
+					<li class="flex">
+						<a href={whatsapp_url} target="_blank" class="flex items-center py-3 px-5 rounded-lg hover:bg-slate-100">
+							<WhatsApp width={25} height={25} />
+							<span class="ml-3">WhatsApp</span></a
+						>
+					</li>
+					<li class="flex">
+						<a href={sms_url} target="_blank" class="flex items-center py-3 px-5 rounded-lg hover:bg-slate-100">
+							<Messages width={25} height={25} />
+							<span class="ml-3">Messages</span></a
+						>
+					</li>
 
-			<div class="flex gap-3 mt-3 items-start h-min justify-between">
-				<a href={whatsapp_url} target="_blank" class="block p-2.5 rounded-xl bg-emerald-500 w-14 h-14">
-					<WhatsApp />
-				</a>
-				<a href={sms_url} target="_blank" class="block aspect-square w-14 h-14">
-					<Messages />
-				</a>
-				<button
-					class="bg-slate-400 rounded-xl p-3 block aspect-square w-14 h-14"
-					on:click={() => navigator.clipboard.writeText(decodeURIComponent(encoded_text))}
-				>
-					<Files color="#fff" class="w-full h-full" />
-				</button>
-			</div>
+					<!-- bg-slate-400 rounded-xl p-3 block aspect-square w-14 h-14 -->
+
+					<li class="flex">
+						<button
+							class="flex px-5 py-3 rounded-lg hover:bg-slate-100"
+							on:click={() => navigator.clipboard.writeText(decodeURIComponent(encoded_text))}
+						>
+							<Files  class="w-full h-full slate-500" />
+							<span class="ml-3">Copy</span>
+						</button>
+					</li>
+
+					<!--
+					<li>
+					</li> -->
+				</ul>
+			</section>
 		</div>
 	</div>
 </aside>

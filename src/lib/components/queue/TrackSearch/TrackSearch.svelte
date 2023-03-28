@@ -6,8 +6,10 @@
 
 	import type { TrackObject } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
+	import { add_track_store } from '$lib/stores';
 	import type { QueueStore } from '$lib/types';
 	import { debounce, format_artists } from '$lib/utils';
+	import AddTrackToast from './AddTrackToast/AddTrackToast.svelte';
 
 	export let add_track: QueueStore['add_track'];
 
@@ -34,9 +36,10 @@
 
 			// TODO: error handling
 			if (res.ok) {
-				toast.success(`${track.name} added to Queue`, { duration: 2000 });
+				$add_track_store = track;
+				toast(AddTrackToast, { position: 'top-right', duration: 2000 });
 			} else if (res.status === 409) {
-				toast.error(`${track.name} is already in Queue`, { duration: 2000 });
+				toast.error(`${track.name} is already in Queue`, { position: 'top-right', duration: 2000 });
 			} else {
 				throw new Error('Failed to add track');
 			}

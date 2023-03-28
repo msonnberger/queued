@@ -21,7 +21,7 @@
 	export let data;
 </script>
 
-<div class="flex flex-col min-h-screen supports-[min-height:100dvh]:min-h-[100dvh]">
+<div class="flex flex-col items-center min-h-screen supports-[min-height:100dvh]:min-h-[100dvh]">
 	<Toaster />
 	<header class="flex self-end p-4 gap-5">
 		<ThemeToggle />

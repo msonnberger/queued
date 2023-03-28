@@ -4,9 +4,8 @@
 
 	import { page } from '$app/stores';
 	import { Player, ShareSheet, Track, TrackSearch } from '$lib/components/queue';
-	import { spotify_tokens } from '$lib/stores';
 
-	$: ({ queue, player, session } = data);
+	$: ({ queue, player, session, spotify_access_token } = data);
 	let show_share_sheet = $page.url.searchParams.get('share') === 'true';
 
 	export let data;
@@ -44,8 +43,8 @@
 		{/each}
 	</ul>
 
-	{#if $spotify_tokens.access_token && $queue.owner_id === session?.user.id}
-		<Player player_store={player} queue_store={queue} />
+	{#if spotify_access_token && $queue.owner_id === session?.user.id}
+		<Player player_store={player} queue_store={queue} {spotify_access_token} />
 	{/if}
 
 	<ShareSheet bind:open={show_share_sheet} />

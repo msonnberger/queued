@@ -6,7 +6,6 @@
 
 	import { postMePlayerQueue, putMePlayerPlay } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
-	import { spotify_tokens } from '$lib/stores';
 	import type { PlayerStore, QueueStore } from '$lib/types';
 	import type { SpotifyPlayerCallback, WebPlaybackPlayer } from '$lib/types/web-player';
 	import { format_artists, ms_to_min_sec } from '$lib/utils';
@@ -14,6 +13,7 @@
 
 	export let player_store: Writable<PlayerStore>;
 	export let queue_store: QueueStore;
+	export let spotify_access_token: string;
 
 	let player: WebPlaybackPlayer | undefined;
 
@@ -50,7 +50,11 @@
 		}
 
 		try {
-			postMePlayerQueue(uri, { deviceId: $player_store.device_id });
+			postMePlayerQueue(
+				uri,
+				{ deviceId: $player_store.device_id },
+				{ headers: { Authorization: `Bearer ${spotify_access_token}` } }
+			);
 
 			$player_store.up_next_uri = uri;
 		} catch (error) {
@@ -66,7 +70,7 @@
 		window.onSpotifyWebPlaybackSDKReady = () => {
 			player = new window.Spotify.Player({
 				name: 'Queued Web Player',
-				getOAuthToken: (cb: SpotifyPlayerCallback) => cb($spotify_tokens.access_token as string),
+				getOAuthToken: (cb: SpotifyPlayerCallback) => cb(spotify_access_token),
 				volume: $player_store.volume
 			});
 
@@ -115,7 +119,11 @@
 		}
 
 		try {
-			await putMePlayerPlay({ uris: [uri] }, { deviceId: $player_store.device_id });
+			await putMePlayerPlay(
+				{ uris: [uri] },
+				{ deviceId: $player_store.device_id },
+				{ headers: { Authorization: `Bearer ${spotify_access_token}` } }
+			);
 
 			queue_store.delete_track(uri);
 			queue_store.update_current_track(uri);

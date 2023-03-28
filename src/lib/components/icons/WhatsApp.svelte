@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let width: number = 10;
-	export let height: number = 10;
+	export let width = 10;
+	export let height = 10;
 </script>
 
 <svg class="w-full h-full" {width} {height} viewBox="0 0 360 362" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -18,6 +18,7 @@ export async function load({ parent, fetch }) {
 	const user_profile = await getMe({ headers: { Authorization: `Bearer ${spotify_access_token}` } });
 
 	return {
+		user_name: session.user.user_metadata.name,
 		user_has_premium: user_profile.product === 'premium'
 	};
 }

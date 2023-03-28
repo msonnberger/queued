@@ -9,8 +9,8 @@
 	onMount(() => {
 		const {
 			data: { subscription }
-		} = data.supabase.auth.onAuthStateChange((event) => {
-			if (event !== 'SIGNED_IN') {
+		} = data.supabase.auth.onAuthStateChange((_, _session) => {
+			if (_session?.expires_at !== data.session?.expires_at) {
 				invalidate('supabase:auth');
 			}
 		});

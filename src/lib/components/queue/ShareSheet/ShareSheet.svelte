@@ -1,3 +1,4 @@
+<!-- TODO: Eventuell component löschen -->
 <script lang="ts">
 	import { Files, XIcon } from 'lucide-svelte';
 	import { fade, fly } from 'svelte/transition';

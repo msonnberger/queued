@@ -1,9 +1,14 @@
+<script lang="ts">
+	export let width = 10;
+	export let height = 10;
+</script>
+
 <svg
 	class="w-full h-full"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="66.1"
-	height="66.1"
+	{width}
+	{height}
 	viewBox="0 0 66.1 66.1"
 	version="1.1"
 >

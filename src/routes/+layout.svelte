@@ -21,9 +21,11 @@
 	export let data;
 </script>
 
-<Toaster />
-<header class="self-end p-4 flex gap-5">
-	<ThemeToggle />
-	<UserMenu session={data.session} />
-</header>
-<slot />
+<div class="flex flex-col items-center min-h-screen supports-[min-height:100dvh]:min-h-[100dvh]">
+	<Toaster />
+	<header class="flex self-end p-4 gap-5">
+		<ThemeToggle />
+		<UserMenu session={data.session} />
+	</header>
+	<slot />
+</div>

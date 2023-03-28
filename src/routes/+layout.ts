@@ -13,9 +13,5 @@ export async function load({ fetch, data, depends }) {
 		serverSession: data.session
 	});
 
-	const {
-		data: { session }
-	} = await supabase.auth.getSession();
-
-	return { ...data, supabase, session };
+	return { supabase, spotify_refresh_token: data.spotify_refresh_token, session: data.session };
 }

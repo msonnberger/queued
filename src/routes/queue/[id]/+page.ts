@@ -1,11 +1,8 @@
 import { error } from '@sveltejs/kit';
 
-import { browser } from '$app/environment';
 import type { TrackObject } from '$lib/api/spotify';
 import { create_player_store, create_queue_store } from '$lib/stores';
-import type { Queue, QueueStore, SupabaseTrack, SupabaseVote } from '$lib/types';
-
-let queue_store: QueueStore;
+import type { Queue, SupabaseTrack, SupabaseVote } from '$lib/types';
 
 export async function load({ params, fetch, data, parent }) {
 	const { supabase } = await parent();
@@ -69,9 +66,7 @@ export async function load({ params, fetch, data, parent }) {
 	initial_value.currently_playing = currently_playing_track;
 
 	return {
-		queue: browser
-			? queue_store || (queue_store = create_queue_store(initial_value, data.voter_id))
-			: create_queue_store(initial_value, data.voter_id),
+		queue: create_queue_store(initial_value, data.voter_id),
 		player: create_player_store(),
 		spotify_access_token: data.spotify_access_token
 	};

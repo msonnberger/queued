@@ -66,7 +66,7 @@
 			</button>
 		</div>
 
-		{#if $combobox.filter.length > 3}
+		{#if $combobox.filter.length > 2}
 			<Transition
 				show={$combobox.expanded}
 				leave="transition ease-in duration-100"

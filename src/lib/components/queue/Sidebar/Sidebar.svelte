@@ -2,11 +2,13 @@
 	import { Files } from 'lucide-svelte';
 
 	import { page } from '$app/stores';
+	import type { TrackObject } from '$lib/api/spotify';
 	import Messages from '$lib/components/icons/Messages.svelte';
 	import WhatsApp from '$lib/components/icons/WhatsApp.svelte';
 	import { is_mobile_browser } from '$lib/utils';
 
 	export let queue_name: string;
+	export let queue_currently_playing: TrackObject | undefined;
 
 	$: encoded_text = encodeURIComponent('Join my Queue!\n' + $page.url.href);
 	$: whatsapp_url = `https://${is_mobile_browser() ? 'api' : 'web'}.whatsapp.com/send?text=${encoded_text}`;
@@ -26,6 +28,21 @@
 			>
 				{$page.params.id}
 			</p>
+
+			<div class="flex items-center gap-2 mt-6">
+				<span class="relative flex h-2 w-2">
+					<span
+						class:animate-ping={queue_currently_playing}
+						class="absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"
+					/>
+					<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+				</span>
+				{#if queue_currently_playing?.name}
+					<span>Current song: {queue_currently_playing?.name}</span>
+				{:else}
+					<span>Currently nothing is playing</span>
+				{/if}
+			</div>
 
 			<section class="mt-4">
 				<h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>

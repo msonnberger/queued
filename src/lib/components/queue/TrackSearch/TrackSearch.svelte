@@ -51,7 +51,7 @@
 <div class="flex w-full max-w-md flex-col items-center justify-center">
 	<div class="relative mt-1 w-full">
 		<div
-			class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300"
+			class="relative w-full cursor-default overflow-hidden rounded-lg text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300"
 		>
 			<input
 				bind:this={input}
@@ -59,7 +59,7 @@
 				on:select={on_select}
 				on:input={handle_change}
 				placeholder="Search Songs"
-				class="w-full border-none py-3 pl-4 pr-10 leading-5 text-gray-900 focus:ring-0 outline-0"
+				class="w-full border-none py-3 pl-4 pr-10 leading-5 text-gray-900 bg-slate-100 dark:bg-slate-700 dark:text-slate-100 focus:ring-0 outline-0"
 				autocomplete="off"
 			/>
 			<button use:combobox.button class="absolute inset-y-0 right-0 flex items-center pr-2" type="button">
@@ -76,7 +76,7 @@
 			>
 				<ul
 					use:combobox.items
-					class="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+					class="absolute mt-1 w-full overflow-auto rounded-md bg-slate-100 dark:bg-slate-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 				>
 					{#each search_results as result}
 						{@const active = $combobox.active === result}
@@ -116,7 +116,7 @@
 						</li>
 					{:else}
 						<li class="relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900">
-							<span class="block truncate font-normal">Nothing found</span>
+							<span class="block truncate font-normal text-slate-900 dark:text-slate-100">Nothing found</span>
 						</li>
 					{/each}
 				</ul>

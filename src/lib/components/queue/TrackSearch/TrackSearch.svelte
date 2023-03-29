@@ -69,7 +69,6 @@
 				leave="transition ease-in duration-100"
 				leaveFrom="opacity-100"
 				leaveTo="opacity-0"
-				on:after-leave={() => combobox.reset()}
 			>
 				<ul
 					use:combobox.items

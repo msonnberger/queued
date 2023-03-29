@@ -38,7 +38,7 @@
 			// TODO: error handling
 			if (res.ok) {
 				$add_track_store = { track, delete_track };
-				toast(AddTrackToast, { position: 'top-right', duration: 2000 });
+				toast(AddTrackToast, { position: 'top-right', duration: 20000 });
 			} else if (res.status === 409) {
 				toast.error(`${track.name} is already in Queue`, { position: 'top-right', duration: 2000 });
 			} else {

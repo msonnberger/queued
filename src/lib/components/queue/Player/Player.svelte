@@ -4,6 +4,7 @@
 	import toast from 'svelte-french-toast';
 	import type { Writable } from 'svelte/store';
 
+	import { browser } from '$app/environment';
 	import { postMePlayerQueue, putMePlayerPlay } from '$lib/api/spotify';
 	import { Button } from '$lib/components';
 	import type { PlayerStore, QueueStore } from '$lib/types';
@@ -91,10 +92,16 @@
 
 				$player_store.position = position;
 				$player_store.duration = duration;
-				$player_store.track = track_window.current_track;
 				$player_store.is_playing = !paused;
 
-				if ($player_store.track.uri === $player_store.up_next_uri) {
+				if ($player_store.track?.uri === track_window.current_track.uri && paused && position === 0) {
+					$player_store.track = null;
+					queue_store.update_current_track(null);
+				} else {
+					$player_store.track = track_window.current_track;
+				}
+
+				if ($player_store.track?.uri === $player_store.up_next_uri) {
 					queue_store.delete_track($player_store.up_next_uri);
 					queue_store.update_current_track($player_store.up_next_uri);
 					$player_store.up_next_uri = null;
@@ -105,7 +112,13 @@
 		};
 	});
 
-	onDestroy(() => player?.disconnect());
+	onDestroy(async () => {
+		player?.disconnect();
+
+		if (browser) {
+			await queue_store.update_current_track(null);
+		}
+	});
 
 	const init_playback = async () => {
 		if ($queue_store.tracks.length === 0) {
@@ -133,6 +146,8 @@
 			console.error(error);
 		}
 	};
+
+	$: player?.setVolume($player_store.volume);
 </script>
 
 <div class="fixed inset-x-0 bottom-0 z-10">
@@ -224,7 +239,6 @@
 
 						<input
 							bind:value={$player_store.volume}
-							on:change={() => player?.setVolume($player_store.volume)}
 							type="range"
 							name="volume"
 							id="volume"

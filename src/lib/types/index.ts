@@ -23,7 +23,7 @@ export interface QueueStore extends Readable<Queue> {
 	delete_track: (uri: string) => Promise<Response>;
 	add_vote: (id: number, value: 1 | -1, is_vote_flipped: boolean) => Promise<Response>;
 	delete_vote: (track_id: number) => Promise<Response>;
-	update_current_track: (uri: string) => Promise<Response>;
+	update_current_track: (uri: string | null) => Promise<Response>;
 }
 
 export interface PlayerStore {

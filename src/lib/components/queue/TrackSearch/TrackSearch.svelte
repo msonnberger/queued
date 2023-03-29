@@ -12,6 +12,7 @@
 	import AddTrackToast from './AddTrackToast/AddTrackToast.svelte';
 
 	export let add_track: QueueStore['add_track'];
+	export let delete_track: QueueStore['delete_track'];
 
 	let search_results: TrackObject[] = [];
 	let input: HTMLInputElement;
@@ -36,7 +37,7 @@
 
 			// TODO: error handling
 			if (res.ok) {
-				$add_track_store = track;
+				$add_track_store = { track, delete_track };
 				toast(AddTrackToast, { position: 'top-right', duration: 2000 });
 			} else if (res.status === 409) {
 				toast.error(`${track.name} is already in Queue`, { position: 'top-right', duration: 2000 });

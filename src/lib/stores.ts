@@ -100,4 +100,6 @@ export const create_player_store = () =>
 		volume: 1
 	});
 
-export const add_track_store = writable<TrackObject | null>(null);
+export const add_track_store = writable<{ track: TrackObject | null; delete_track?: QueueStore['delete_track'] }>({
+	track: null
+});

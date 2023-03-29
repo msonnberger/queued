@@ -27,7 +27,7 @@
 				{$page.params.id}
 			</p>
 
-			<section>
+			<section class="mt-4">
 				<h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>
 
 				<ul class="mt-2">

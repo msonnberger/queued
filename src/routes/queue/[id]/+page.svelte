@@ -27,7 +27,7 @@
 				{/if}
 			</div>
 
-			<TrackSearch add_track={queue.add_track} />
+			<TrackSearch add_track={queue.add_track} delete_track={queue.delete_track} />
 
 			<ul class="flex flex-col gap-5 mt-8 w-full max-w-md">
 				{#each $queue.tracks as track (track.supabase_id)}

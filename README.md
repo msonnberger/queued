@@ -1,38 +1,86 @@
-# create-svelte
+<p align="center">
+    <h3 align="center">Queued</h3>
+</p>
+<p align="center">
+    	Your interactive playlist
+    	<br />
+    	<a href="https://queued.live"><strong>Learn more »</strong></a>
+    	<br />
+    	<br />
+    	<a href="https://queued.live">Website</a>
+    	·
+    	<a href="https://github.com/msonnberger/queued/issues">Issues</a>
+    </p>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## About the Project
 
-## Creating a project
+Queued is an interactive playlist, which lets you and your friends decide together on
+the upcomming song. A host with a Spotify Premium account can create a Queue
+and invite others to join them. All participants can add song suggestions and vote for each suggestion
+with upvotes and downvotes. The songs with the highest upvote ratio automatically plays next.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Queued was done as a final year project for the
+[MultiMediaTechnology](https://www.fh-salzburg.ac.at/en/study/ct/multimediatechnology-bachelor) Bachelor's degree program at Salzburg University of Applied Sciences and is developed by:
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- [Martin Sonnberger](https://msonnberger.com)
+- Maximilian Hajek
+- Simon Hagn
 
-# create a new project in my-app
-npm create svelte@latest my-app
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Here is what you need to be able to run Queued:
+
+- Node.js (Version 18 or higher)
+- Supabase Project
+- Spotify OAuth App
+- Pusher Server
+- pnpm _(recommended)_
+
+## Development
+
+### Setup
+
+1. Clone the repo
+
+   ```sh
+   git clone https://github.com/msonnberger/queued.git
+   ```
+
+1. Go to the project folder
+
+   ```sh
+   cd queued
+   ```
+
+1. Install packages with pnpm
+
+   ```sh
+   pnpm install
+   ```
+
+1. Set up your .env file
+
+   - Duplicate `.env.example` to `.env`
+   - Fill in values for Supabase, Spotify and Pusher API keys
+
+1. Start dev server
+
+   ```sh
+   pnpm dev
+   ```
+
+### Testing
+
+Make sure you set all environment variables mentioned in `.env.example`
+
+```sh
+# Unit tests
+pnpm test:unit
+
+# E2E tests
+pnpm test:browser
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

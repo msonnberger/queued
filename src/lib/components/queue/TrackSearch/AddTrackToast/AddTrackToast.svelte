@@ -6,7 +6,7 @@
 	export let toast: Toast;
 </script>
 
-<span>
-	{$add_track_store?.name} added to Queue
-	<button on:click={() => toast_.dismiss(toast.id)} class="text-red-800">Undo</button>
-</span>
+<div>
+	<span>{$add_track_store?.name} added to Queue</span>
+	<button on:click={() => toast_.dismiss(toast.id)} class="text-red-900">Undo</button>
+</div>

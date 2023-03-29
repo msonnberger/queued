@@ -51,7 +51,7 @@
 							class="flex px-5 py-3 rounded-lg hover:bg-slate-100"
 							on:click={() => navigator.clipboard.writeText(decodeURIComponent(encoded_text))}
 						>
-							<Files  class="w-full h-full slate-500" />
+							<Files class="w-full h-full slate-500" />
 							<span class="ml-3">Copy</span>
 						</button>
 					</li>

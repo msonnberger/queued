@@ -80,7 +80,7 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 				body: JSON.stringify({ supabase_track_id: track_id })
 			});
 		},
-		update_current_track: async (uri: string) => {
+		update_current_track: async (uri: string | null) => {
 			return fetch(`/api/queue/${qid}/update-current-track`, {
 				method: 'POST',
 				body: JSON.stringify({ uri })

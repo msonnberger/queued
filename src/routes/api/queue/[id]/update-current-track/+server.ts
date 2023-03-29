@@ -21,14 +21,19 @@ export async function POST({ request, locals, fetch, params }) {
 		.select()
 		.single();
 
-	if (err || !data.current_track_uri) {
+	if (err) {
 		throw error(500, 'Something went wrong.');
 	}
 
-	const tracks_response = await fetch(`/api/get-tracks?track_ids=${data.current_track_uri.split(':').at(-1)}`);
-	const tracks = (await tracks_response.json()) as TrackObject[];
+	let current_track = null;
 
-	await pusher.trigger(`queue-${qid}`, 'current-track-updated', tracks[0]);
+	if (data.current_track_uri) {
+		const tracks_response = await fetch(`/api/get-tracks?track_ids=${data.current_track_uri.split(':').at(-1)}`);
+		const tracks = (await tracks_response.json()) as TrackObject[];
+		current_track = tracks[0];
+	}
+
+	await pusher.trigger(`queue-${qid}`, 'current-track-updated', current_track);
 
 	return text('OK');
 }

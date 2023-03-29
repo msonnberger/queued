@@ -12,15 +12,20 @@
 	<Sidebar queue_name={$queue.name} />
 	<main class="ml-[30rem] min-h-full">
 		<div class="flex flex-col items-center">
-			{#if $queue.currently_playing?.name}
-				<div class="flex items-center gap-2">
-					<span class="relative flex h-2 w-2">
-						<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-						<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
-					</span>
-					<span>Currently playing: {$queue.currently_playing.name}</span>
-				</div>
-			{/if}
+			<div class="flex items-center gap-2">
+				<span class="relative flex h-2 w-2">
+					<span
+						class:animate-ping={$queue.currently_playing}
+						class="absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"
+					/>
+					<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+				</span>
+				{#if $queue.currently_playing?.name}
+					<span>Current song: {$queue.currently_playing.name}</span>
+				{:else}
+					<span>Currently nothing playing</span>
+				{/if}
+			</div>
 
 			<TrackSearch add_track={queue.add_track} />
 

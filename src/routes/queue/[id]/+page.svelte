@@ -23,7 +23,7 @@
 				{#if $queue.currently_playing?.name}
 					<span>Current song: {$queue.currently_playing.name}</span>
 				{:else}
-					<span>Currently nothing playing</span>
+					<span>Currently nothing is playing</span>
 				{/if}
 			</div>
 

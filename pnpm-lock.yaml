@@ -11,8 +11,8 @@ dependencies:
     specifier: 0.4.0
     version: 0.4.0(typescript@5.0.2)
   lucide-svelte:
-    specifier: 0.128.0
-    version: 0.128.0(svelte@3.57.0)
+    specifier: 0.129.0
+    version: 0.129.0(svelte@3.57.0)
   oazapfts:
     specifier: 4.6.0
     version: 4.6.0(openapi-types@12.1.0)
@@ -3153,8 +3153,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-svelte@0.128.0(svelte@3.57.0):
-    resolution: {integrity: sha512-LqVqUNBGl24pIeHgH3oz09CvxHWu+YNRt5fVREUNk/MyLKVrQ5GV3cq50W+h52/ZaE5i7Dul9HO1VGfs1ur0Rg==}
+  /lucide-svelte@0.129.0(svelte@3.57.0):
+    resolution: {integrity: sha512-WSmxgL+B/3p7K1d86nk9O/xw8t8MxtLubHCkxFlimmo4NSCDLZuGGQifwKNC0NJ1n10BAVFdPW+SMI1611ucuQ==}
     peerDependencies:
       svelte: ^3.49.0
     dependencies:

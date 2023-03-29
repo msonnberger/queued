@@ -12,14 +12,16 @@
 		toast_.dismiss(toast.id);
 
 		if (track?.uri && delete_track) {
-			const res = await delete_track(track.uri);
-
+			await delete_track(track.uri);
 			// TODO: error handling
 		}
 	}
 </script>
 
 <div>
-	<span>{$add_track_store?.track?.name} added to Queue</span>
-	<button on:click={() => undo_track()} class="text-red-900">Undo</button>
+	<span class="font-bold">{$add_track_store?.track?.name}</span>
+	<span class="mr-6">added to Queue</span>
+	<button on:click={() => undo_track()} class="p-1.5 rounded-md font-medium text-red-800 hover:bg-red-50">
+		Undo
+	</button>
 </div>

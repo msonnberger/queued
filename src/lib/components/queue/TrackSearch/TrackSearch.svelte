@@ -18,7 +18,7 @@
 	const combobox = createCombobox({ label: 'Tracks', selected: { name: '' } });
 
 	const handle_change = debounce(async () => {
-		if ($combobox.filter.length <= 3) {
+		if ($combobox.filter.length <= 2) {
 			return;
 		}
 

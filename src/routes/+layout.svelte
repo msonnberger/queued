@@ -27,7 +27,7 @@
 <Toaster />
 
 <div class="flex flex-col min-h-screen supports-[min-height:100dvh]:min-h-[100dvh]">
-	<header class="flex py-4 px-8 bg-slate-200 justify-between" class:ml-sidebar={is_queue_page}>
+	<header class="flex justify-between items-center px-8 py-4" class:ml-sidebar={is_queue_page}>
 		<a href="/" class="font-extrabold text-3xl">Q</a>
 		<div class="flex gap-5">
 			<ThemeToggle />
@@ -40,6 +40,6 @@
 	</div>
 
 	{#if !is_queue_page}
-		<Footer {is_queue_page} />
+		<Footer />
 	{/if}
 </div>

@@ -28,7 +28,7 @@
 			{/each}
 		</ul>
 	</div>
-	<Footer is_queue_page />
+	<Footer />
 </main>
 {#if show_player}
 	<Player player_store={player} queue_store={queue} spotify_access_token={spotify_access_token ?? ''} />

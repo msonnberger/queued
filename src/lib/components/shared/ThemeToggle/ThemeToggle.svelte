@@ -69,7 +69,7 @@
 
 <div class="flex  flex-col items-center justify-center">
 	<div class="relative text-right">
-		<div class="relative inline-block text-left">
+		<div class="relative inline-block text-left pt-1.5">
 			<button use:menu.button on:select={on_select} disabled={switch_disabled} class:invisible={switch_disabled}>
 				<svelte:component
 					this={is_dark_shown ? Moon : SunDim}

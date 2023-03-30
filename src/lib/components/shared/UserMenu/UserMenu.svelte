@@ -11,7 +11,7 @@
 
 <div class="flex flex-col items-center justify-center">
 	<div class="relative text-right">
-		<div class="relative inline-block text-left">
+		<div class="relative inline-block text-left pt-1">
 			<button use:menu.button>
 				<User class="stroke-slate-700 dark:stroke-slate-300" />
 				<span class="sr-only">Toggle User menu</span>

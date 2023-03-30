@@ -3,8 +3,7 @@
 
 	import { page } from '$app/stores';
 	import type { TrackObject } from '$lib/api/spotify';
-	import Messages from '$lib/components/icons/Messages.svelte';
-	import WhatsApp from '$lib/components/icons/WhatsApp.svelte';
+	import { Messages, WhatsApp } from '$lib/components/icons';
 	import { is_mobile_browser } from '$lib/utils';
 
 	export let queue_name: string;

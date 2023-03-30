@@ -4,8 +4,7 @@
 	import { fade, fly } from 'svelte/transition';
 
 	import { page } from '$app/stores';
-	import Messages from '$lib/components/icons/Messages.svelte';
-	import WhatsApp from '$lib/components/icons/WhatsApp.svelte';
+	import { Messages, WhatsApp } from '$lib/components/icons';
 	import { get_focusable_elements, is_mobile_browser } from '$lib/utils';
 
 	function trap_focus(element: HTMLElement) {

@@ -55,6 +55,8 @@
 
 <svelte:head>
 	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
+	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
+	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
 	<script>
 		if (
 			localStorage.theme === 'dark' ||
@@ -67,7 +69,7 @@
 	</script>
 </svelte:head>
 
-<div class="flex  flex-col items-center justify-center">
+<div class="flex flex-col items-center justify-center">
 	<div class="relative text-right">
 		<div class="relative inline-block text-left pt-1.5">
 			<button use:menu.button on:select={on_select} disabled={switch_disabled} class:invisible={switch_disabled}>
@@ -91,7 +93,7 @@
 			>
 				<div
 					use:menu.items
-					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 z-10 focus:outline-none"
 				>
 					<div class="px-1 py-1">
 						{#each options as option}

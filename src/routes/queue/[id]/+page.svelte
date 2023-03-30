@@ -11,7 +11,7 @@
 </script>
 
 <Sidebar queue_name={$queue.name} queue_currently_playing={$queue.currently_playing} />
-<main class="ml-sidebar flex flex-col flex-1" class:mb-40={show_player}>
+<main class="lg:ml-sidebar flex flex-col flex-1 px-2 lg:px-0" class:mb-40={show_player}>
 	<div class="flex-1 flex flex-col items-center">
 		<TrackSearch add_track={queue.add_track} delete_track={queue.delete_track} />
 

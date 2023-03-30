@@ -10,12 +10,17 @@
 	$: show_player = spotify_access_token && $queue.owner_id === session?.user.id;
 </script>
 
-<Sidebar queue_name={$queue.name} queue_currently_playing={$queue.currently_playing} />
-<main class="ml-sidebar flex flex-col flex-1" class:mb-40={show_player}>
-	<div class="flex-1 flex flex-col items-center">
+<svelte:head>
+	<title>Queued • {$queue.id}</title>
+</svelte:head>
+
+<Sidebar queue_currently_playing={$queue.currently_playing} />
+<main class="ml-sidebar flex flex-col flex-1 items-center" class:mb-40={show_player}>
+	<div class="flex-1 flex flex-col max-w-lg w-full">
+		<h1 class="text-5xl font-bold mb-20">{$queue.name}</h1>
 		<TrackSearch add_track={queue.add_track} delete_track={queue.delete_track} />
 
-		<ul class="flex flex-col gap-5 mt-8 w-full max-w-md">
+		<ul class="flex flex-col gap-5 mt-8">
 			{#each $queue.tracks as track (track.supabase_id)}
 				<li animate:flip={{ duration: 300 }}>
 					<Track

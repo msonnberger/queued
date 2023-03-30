@@ -19,7 +19,7 @@
 </script>
 
 <div
-	class="flex justify-between items-center gap-3 bg-slate-200 dark:bg-slate-700 p-4 rounded-md shadow-md"
+	class="flex justify-between items-center gap-3 bg-slate-50 dark:bg-slate-800 p-4 rounded-md shadow-md"
 	class:bg-red-200={is_up_next}
 	data-testid="track-item"
 >

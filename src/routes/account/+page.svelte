@@ -7,6 +7,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>Queued • Account</title>
+</svelte:head>
+
 <main class="max-w-2xl w-full mt-10">
 	<h1 class="text-6xl font-bold mb-20 mt-4">My Account</h1>
 
@@ -15,7 +19,7 @@
 	{#if data.queues.length > 0}
 		<ul class="max-w-sm flex flex-col gap-3">
 			{#each data.queues as queue}
-				<li class="flex justify-between items-center bg-white py-2 pl-4 pr-2 rounded-lg">
+				<li class="flex justify-between items-center bg-slate-50 dark:bg-slate-800 py-2 pl-4 pr-2 rounded-lg shadow-sm">
 					<a href="/queue/{queue.id}" class="hover:underline">
 						{queue.name}
 					</a>

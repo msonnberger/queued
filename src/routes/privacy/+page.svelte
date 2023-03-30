@@ -2,6 +2,10 @@
 	import { Link } from '$lib/components';
 </script>
 
+<svelte:head>
+	<title>Queued • Privacy</title>
+</svelte:head>
+
 <main class="w-full max-w-2xl mb-20 mt-10">
 	<h1 class="font-bold text-6xl mt-4 mb-8">Privacy Policy</h1>
 	<p>

@@ -48,7 +48,7 @@
 	};
 </script>
 
-<div class="flex w-full max-w-md flex-col items-center justify-center">
+<div class="flex flex-col items-center justify-center">
 	<div class="relative mt-1 w-full">
 		<div
 			class="relative w-full cursor-default overflow-hidden rounded-lg text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300"
@@ -76,7 +76,7 @@
 			>
 				<ul
 					use:combobox.items
-					class="absolute mt-1 w-full overflow-auto rounded-md bg-neutral-50 dark:bg-slate-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+					class="absolute mt-1 w-full overflow-auto rounded-md bg-neutral-50 dark:bg-slate-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 				>
 					{#each search_results as result}
 						{@const active = $combobox.active === result}

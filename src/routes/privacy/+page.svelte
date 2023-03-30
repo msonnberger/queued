@@ -6,8 +6,8 @@
 	<title>Queued • Privacy</title>
 </svelte:head>
 
-<main class="w-full max-w-2xl mb-20 mt-10">
-	<h1 class="font-bold text-6xl mt-4 mb-8">Privacy Policy</h1>
+<main class="w-full max-w-2xl px-5 lg:px-0 mb-20 mt-10">
+	<h1 class="font-bold text-5xl lg:text-6xl mt-4 mb-8">Privacy Policy</h1>
 	<p>
 		This Privacy Policy describes how we collect, use, and share your personal information when you use our website,
 		which is hosted on Vercel, and powered by Supabase. We also use Spotify's APIs for our audio player, and this policy

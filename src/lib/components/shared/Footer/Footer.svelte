@@ -3,7 +3,7 @@
 	import { GitHub } from '$lib/components/icons';
 </script>
 
-<hr class="w-full dark:border-slate-700" />
+<hr class="w-full mt-12 dark:border-slate-700" />
 <footer class="w-full flex justify-between items-center px-3 lg:px-8 py-5 text-sm text-slate-400">
 	<nav class="flex gap-2 lg:gap-5 items-center">
 		<a href="https://github.com/msonnberger/queued" rel="noopener noreferrer" target="_blank">

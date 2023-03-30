@@ -7,8 +7,8 @@
 	export let data;
 </script>
 
-<main class="max-w-2xl w-full">
-	<h1 class="text-5xl font-bold mb-20">My Account</h1>
+<main class="max-w-2xl w-full mt-10">
+	<h1 class="text-6xl font-bold mb-20 mt-4">My Account</h1>
 
 	<h2 class="text-xl font-bold mb-4">Queues</h2>
 

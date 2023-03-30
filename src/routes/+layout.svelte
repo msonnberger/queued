@@ -27,8 +27,8 @@
 <Toaster />
 
 <div class="flex flex-col min-h-screen supports-[min-height:100dvh]:min-h-[100dvh]">
-	<header class="flex py-4 px-8 bg-slate-200 justify-between" class:ml-sidebar={is_queue_page}>
-		<a href="/" class="font-extrabold text-3xl">Q</a>
+	<header class="flex justify-between items-center px-8 py-4" class:lg:ml-sidebar={is_queue_page}>
+		<a href="/" class="font-extrabold text-3xl text-slate-700 dark:text-slate-300">Q</a>
 		<div class="flex gap-5">
 			<ThemeToggle />
 			<UserMenu session={data.session} />
@@ -40,6 +40,6 @@
 	</div>
 
 	{#if !is_queue_page}
-		<Footer {is_queue_page} />
+		<Footer />
 	{/if}
 </div>

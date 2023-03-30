@@ -19,18 +19,18 @@
 </script>
 
 <div
-	class="flex justify-between items-center gap-3 bg-slate-200 dark:bg-slate-700 p-4 rounded-md shadow-md"
+	class="flex justify-between items-center gap-3 bg-slate-50 dark:bg-slate-800 p-4 rounded-md shadow-md"
 	class:bg-red-200={is_up_next}
 	data-testid="track-item"
 >
 	<div class="flex items-center">
 		<img src={track?.album?.images[2].url} alt="Album cover" />
-		<div class="pl-2 max-w-[14rem]">
+		<div class="pl-2 max-w-[12rem] lg:max-w-[14rem]">
 			<p class="truncate text-base font-bold leading-6">{track.name}</p>
 			<p class="cate text-sm font-normal text-slate-500 dark:text-slate-400">{format_artists(track.artists)}</p>
 		</div>
 	</div>
-	<div class="flex gap-2">
+	<div class="flex gap-2 flex-col lg:flex-row">
 		<VoteButton
 			on:click={() => handle_vote(track.supabase_id, 'up', track.votes.own_vote)}
 			vote_type="up"

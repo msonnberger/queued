@@ -11,7 +11,7 @@
 
 <div class="flex flex-col items-center justify-center">
 	<div class="relative text-right">
-		<div class="relative inline-block text-left">
+		<div class="relative inline-block text-left pt-1">
 			<button use:menu.button>
 				<User class="stroke-slate-700 dark:stroke-slate-300" />
 				<span class="sr-only">Toggle User menu</span>
@@ -28,7 +28,7 @@
 			>
 				<div
 					use:menu.items
-					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 z-10 focus:outline-none"
 				>
 					<div class="px-1 py-1 w-max">
 						{#if !session}

@@ -17,7 +17,7 @@
 <aside
 	class="bg-neutral-50 border-r p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar dark:bg-slate-700"
 >
-	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8" />
+	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8 dark:invert" />
 
 	<div>
 		<p

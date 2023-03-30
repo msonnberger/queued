@@ -50,6 +50,18 @@
 		disable cookies in your browser settings, although this may affect your ability to use some features of our website
 		and services.
 	</p>
+	<h2 class="font-bold text-3xl mt-6 mb-3">Third party APIs</h2>
+	<ul>
+		<li>
+			All data is provided by Spotify and therefore, their privacy policy, which can be found <Link
+				href="https://www.spotify.com/legal/privacy-policy/">here</Link
+			> applies as well.
+		</li>
+		<li>
+			Additionally Supabase is used in this project and therefore their privacy policy applies too and can be found
+			<Link href="https://supabase.com/privacy">here</Link>.
+		</li>
+	</ul>
 	<h2 class="font-bold text-3xl mt-6 mb-3">Changes to this policy</h2>
 	<p>
 		We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. We

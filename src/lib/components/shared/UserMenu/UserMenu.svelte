@@ -28,7 +28,7 @@
 			>
 				<div
 					use:menu.items
-					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 z-10 focus:outline-none"
 				>
 					<div class="px-1 py-1 w-max">
 						{#if !session}

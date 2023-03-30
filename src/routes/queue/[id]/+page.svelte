@@ -15,7 +15,7 @@
 </svelte:head>
 
 <Sidebar queue_currently_playing={$queue.currently_playing} />
-<main class="ml-sidebar flex flex-col flex-1 items-center" class:mb-40={show_player}>
+<main class="lg:ml-sidebar flex flex-col flex-1 px-2 lg:px-0" class:mb-40={show_player}>
 	<div class="flex-1 flex flex-col max-w-lg w-full">
 		<h1 class="text-5xl font-bold mb-20">{$queue.name}</h1>
 		<TrackSearch add_track={queue.add_track} delete_track={queue.delete_track} />

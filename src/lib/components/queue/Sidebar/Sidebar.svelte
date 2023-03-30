@@ -15,8 +15,10 @@
 	$: sms_url = `sms:?&body=${encoded_text}`;
 </script>
 
-<aside class="bg-neutral-50 border-x border-y p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar">
-	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8" />
+<aside
+	class="bg-neutral-50 border-r p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar dark:bg-slate-700"
+>
+	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8 dark:invert" />
 	<h1 class="text-3xl text-center mb-8">{queue_name}</h1>
 
 	<div>
@@ -44,7 +46,7 @@
 		</div>
 
 		<section class="mt-6">
-			<h2 class="font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>
+			<h2 class="font-mono text-sm font-medium leading-7 text-slate-900 dark:text-slate-200">Share this Queue</h2>
 
 			<ul class="mt-2 flex flex-col gap-3">
 				<li class="flex">

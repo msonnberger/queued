@@ -20,7 +20,7 @@
 		<form on:submit|preventDefault={() => goto(`/queue/${qid}`)}>
 			<input
 				bind:this={qid_input}
-				class="text-lg focus:outline-slate-900 block h-12 w-36 border-2 border-slate-900 bg-slate-50 px-2 font-mono rounded-r-3xl rounded-l-md"
+				class="text-lg focus:outline-slate-900 block h-12 w-36 border-2 border-slate-900 bg-slate-50 px-2 font-mono rounded-r-3xl rounded-l-md dark:bg-transparent dark:border-slate-100"
 				type="text"
 				name="qid"
 				id="qid"

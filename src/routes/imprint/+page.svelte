@@ -6,8 +6,8 @@
 	<title>Queued • Imprint</title>
 </svelte:head>
 
-<main class="w-full max-w-2xl mb-20 mt-10 text-lg">
-	<h1 class="font-bold text-6xl mt-4 mb-8">Imprint</h1>
+<main class="w-full max-w-2xl px-5 lg:px-0 mb-20 mt-10 text-lg">
+	<h1 class="font-bold text-5xl lg:text-6xl mt-4 mb-8">Imprint</h1>
 	<h2 class="italic text-slate-500 dark:text-slate-400 text-xl mb-8">
 		Disclosure and information obligation pursuant to §25&nbsp;Mediengesetz and §5&nbsp;E-Commerce-Gesetz.
 	</h2>

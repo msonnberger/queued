@@ -40,6 +40,6 @@
 	</div>
 
 	{#if !is_queue_page}
-		<Footer {is_queue_page} />
+		<Footer />
 	{/if}
 </div>

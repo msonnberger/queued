@@ -7,6 +7,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>Queued • New Queue</title>
+</svelte:head>
+
 <main class="w-full max-w-2xl pt-10">
 	{#if data.user_has_premium}
 		<h1 class="text-2xl mb-5">What should we name your Queue?</h1>

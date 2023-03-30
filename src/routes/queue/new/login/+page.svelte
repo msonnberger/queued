@@ -2,6 +2,10 @@
 	import { Button } from '$lib/components';
 </script>
 
+<svelte:head>
+	<title>Queued • New Queue</title>
+</svelte:head>
+
 <main class="w-full max-w-2xl pt-10">
 	<h1 class="text-5xl font-bold mb-10">Sign in to continue</h1>
 	<p class="text-xl mb-10">To create your own Queue, you need to sign in with your Spotify Premium account.</p>

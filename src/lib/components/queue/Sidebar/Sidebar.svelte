@@ -7,7 +7,6 @@
 	import { Messages, WhatsApp } from '$lib/components/icons';
 	import { is_mobile_browser } from '$lib/utils';
 
-	export let queue_name: string;
 	export let queue_currently_playing: TrackObject | undefined;
 
 	$: encoded_text = encodeURIComponent('Join my Queue!\n' + $page.url.href);
@@ -18,8 +17,7 @@
 <aside
 	class="bg-neutral-50 border-r p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar dark:bg-slate-700"
 >
-	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8 dark:invert" />
-	<h1 class="text-3xl text-center mb-8">{queue_name}</h1>
+	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8" />
 
 	<div>
 		<p

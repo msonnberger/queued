@@ -7,7 +7,7 @@
 	<title>Queued</title>
 </svelte:head>
 
-<div class="grow grid place-items-center">
+<div class="grow grid place-items-center px-4 lg:px-0">
 	<div class="max-w-2xl text-center">
 		<h1 class="text-5xl sm:text-7xl font-extrabold mb-10">Meet Queued, your collaborative DJ.</h1>
 		<h2 class="text-xl text-slate-500 dark:text-slate-400 mb-10">

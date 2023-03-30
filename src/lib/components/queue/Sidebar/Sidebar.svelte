@@ -15,7 +15,7 @@
 </script>
 
 <aside
-	class="bg-neutral-50 border-r p-12 row-span-2 overflow-hidden hidden lg:fixed lg:block inset-y-0 left-0 w-sidebar dark:bg-slate-700"
+	class="bg-neutral-50 border-r dark:border-slate-600 p-12 row-span-2 overflow-hidden hidden lg:fixed lg:block inset-y-0 left-0 w-sidebar dark:bg-slate-700"
 >
 	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8 dark:invert" />
 

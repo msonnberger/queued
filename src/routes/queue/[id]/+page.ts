@@ -1,19 +1,13 @@
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
-import { create_player_store, create_queue_store } from '$lib/stores';
+
 import type { TrackObject } from '$lib/api/spotify';
-import type { SupabaseTrack, SupabaseVote, QueueStore } from '$lib/types';
-import { browser } from '$app/environment';
-import type { Readable } from 'svelte/store';
+import { create_player_store, create_queue_store } from '$lib/stores';
+import type { Queue, SupabaseTrack, SupabaseVote } from '$lib/types';
 
-let queue_store: Readable<QueueStore>;
+export async function load({ params, fetch, data, parent }) {
+	const { supabase } = await parent();
 
-export const load = (async (event) => {
-	const { params, fetch, data } = event;
-	const { supabaseClient } = await getSupabase(event);
-
-	const { data: queue, error: err } = await supabaseClient
+	const { data: queue, error: err } = await supabase
 		.from('queues')
 		.select('*, tracks!tracks_qid_fkey(*, votes(*))')
 		.eq('id', params.id)
@@ -31,7 +25,7 @@ export const load = (async (event) => {
 		spotify_track_ids = spotify_track_ids ? `${currently_playing_id},${spotify_track_ids}` : currently_playing_id;
 	}
 
-	const initial_value: Partial<QueueStore> = { name: queue.name, id: queue.id, owner_id: queue.owner_id, tracks: [] };
+	const initial_value: Queue = { name: queue.name, id: queue.id, owner_id: queue.owner_id, tracks: [] };
 	let currently_playing_track: TrackObject | undefined;
 
 	if (spotify_track_ids) {
@@ -72,9 +66,8 @@ export const load = (async (event) => {
 	initial_value.currently_playing = currently_playing_track;
 
 	return {
-		queue: browser
-			? queue_store || (queue_store = create_queue_store(initial_value, data.voter_id))
-			: create_queue_store(initial_value, data.voter_id),
-		player: create_player_store()
+		queue: create_queue_store(initial_value, data.voter_id),
+		player: create_player_store(),
+		spotify_access_token: data.spotify_access_token
 	};
-}) satisfies PageLoad;
+}

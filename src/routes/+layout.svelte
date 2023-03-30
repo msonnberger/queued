@@ -1,72 +1,45 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
-	import { supabase } from '$lib/api/supabase';
-	import { Button, ThemeToggle } from '$lib/components';
+	import '../app.css';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import '../app.css';
-	import type { PageData } from './$types';
-	import * as spotify_api from '$lib/api/spotify';
-	import { spotify_tokens } from '$lib/stores';
+
+	import { invalidate } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { Footer, ThemeToggle, UserMenu } from '$lib/components';
 
 	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange(() => {
-			invalidateAll();
+		const {
+			data: { subscription }
+		} = data.supabase.auth.onAuthStateChange((_, _session) => {
+			if (_session?.expires_at !== data.session?.expires_at) {
+				invalidate('supabase:auth');
+			}
 		});
 
-		spotify_api.defaults.fetch = async (...args) => {
-			const [resource, config] = args;
-			let response = await fetch(resource, config);
-
-			if (response.status === 401) {
-				const new_token_res = await fetch('/api/spotify-access-token', {
-					method: 'POST',
-					body: JSON.stringify({ refresh_token: $spotify_tokens.refresh_token })
-				});
-
-				if (!new_token_res.ok) {
-					return Promise.reject(new_token_res);
-				}
-
-				$spotify_tokens.access_token = await new_token_res.text();
-				response = await fetch(resource, config);
-			}
-
-			return response;
-		};
-
-		return () => data.subscription.unsubscribe();
+		return () => subscription.unsubscribe();
 	});
 
-	export let data: PageData;
+	$: is_queue_page = $page.route.id === '/queue/[id]';
 
-	$: {
-		$spotify_tokens.access_token = data.session?.provider_token ?? $spotify_tokens.access_token;
-		$spotify_tokens.refresh_token = data.session?.provider_refresh_token ?? $spotify_tokens.refresh_token;
-	}
-
-	$: {
-		if ($spotify_tokens.access_token) {
-			spotify_api.defaults.headers = {
-				Authorization: `Bearer ${$spotify_tokens.access_token}`
-			};
-		}
-	}
+	export let data;
 </script>
 
 <Toaster />
-<header class="self-end p-4 flex gap-5">
-	<Button href="/">Home</Button>
-	<ThemeToggle />
-	{#if data.session}
-		<h2>Hi, {data.session.user.email}</h2>
-		<form action="/auth/logout" method="post">
-			<Button type="submit">Logout</Button>
-		</form>
-	{:else}
-		<form action="/auth/login" method="post">
-			<Button type="submit">Continue with Spotify</Button>
-		</form>
+
+<div class="flex flex-col min-h-screen supports-[min-height:100dvh]:min-h-[100dvh]">
+	<header class="flex py-4 px-8 bg-slate-200 justify-between" class:ml-sidebar={is_queue_page}>
+		<a href="/" class="font-extrabold text-3xl">Q</a>
+		<div class="flex gap-5">
+			<ThemeToggle />
+			<UserMenu session={data.session} />
+		</div>
+	</header>
+
+	<div class="flex-1 flex flex-col {is_queue_page ? 'items-stretch' : 'items-center'}">
+		<slot />
+	</div>
+
+	{#if !is_queue_page}
+		<Footer {is_queue_page} />
 	{/if}
-</header>
-<slot />
+</div>

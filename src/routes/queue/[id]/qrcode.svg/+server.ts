@@ -1,18 +1,17 @@
-import type { RequestHandler } from './$types';
-import Colors from 'tailwindcss/colors';
 import QRCode from 'qrcode';
-import type { Config } from '@sveltejs/adapter-vercel';
+import Colors from 'tailwindcss/colors';
 
-export const config: Config = {
+export const config = {
 	runtime: 'edge',
 	regions: 'all'
 };
 
-export const GET = (async ({ params, url }) => {
+export async function GET({ params, url }) {
 	const queue_url = new URL('/queue/' + params.id, url);
 	const svg = await QRCode.toString(queue_url.href, {
 		type: 'svg',
 		errorCorrectionLevel: 'H',
+		margin: 0,
 		color: {
 			dark: Colors.slate[900],
 			light: '#00000000'
@@ -24,4 +23,4 @@ export const GET = (async ({ params, url }) => {
 			'cache-control': 'private, max-age=3600'
 		}
 	});
-}) satisfies RequestHandler;
+}

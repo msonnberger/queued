@@ -1,6 +1,7 @@
+import Pusher from 'pusher-http-edge';
+
 import { PUSHER_SECRET } from '$env/static/private';
 import { PUBLIC_PUSHER_CLUSTER, PUBLIC_PUSHER_KEY } from '$env/static/public';
-import Pusher from 'pusher-http-edge';
 
 export const pusher = new Pusher({
 	appId: 'queued',

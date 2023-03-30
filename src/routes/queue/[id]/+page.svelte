@@ -1,46 +1,35 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { PageData } from './$types';
-	import { Player, Track, TrackSearch } from '$lib/components/queue';
 	import { flip } from 'svelte/animate';
-	import { spotify_tokens } from '$lib/stores';
 
-	$: ({ id } = $page.params);
-	$: ({ queue, player, session } = data);
+	import { Footer } from '$lib/components';
+	import { Player, Sidebar, Track, TrackSearch } from '$lib/components/queue';
 
-	export let data: PageData;
+	export let data;
 
-	const handle_vote = (track_id: number, value: 1 | -1) => {
-		fetch('/api/queue/vote', {
-			method: 'POST',
-			body: JSON.stringify({ supabase_id: track_id, value, queue_id: id })
-		});
-	};
+	$: ({ queue, player, session, spotify_access_token } = data);
+	$: show_player = spotify_access_token && $queue.owner_id === session?.user.id;
 </script>
 
-{#if $queue?.currently_playing?.name}
-	<div class="flex items-center gap-2">
-		<span class="relative flex h-2 w-2">
-			<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-			<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
-		</span>
-		<span>Currently playing: {$queue.currently_playing.name}</span>
+<Sidebar queue_name={$queue.name} queue_currently_playing={$queue.currently_playing} />
+<main class="ml-sidebar flex flex-col flex-1" class:mb-40={show_player}>
+	<div class="flex-1 flex flex-col items-center">
+		<TrackSearch add_track={queue.add_track} delete_track={queue.delete_track} />
+
+		<ul class="flex flex-col gap-5 mt-8 w-full max-w-md">
+			{#each $queue.tracks as track (track.supabase_id)}
+				<li animate:flip={{ duration: 300 }}>
+					<Track
+						{track}
+						add_vote={queue.add_vote}
+						delete_vote={queue.delete_vote}
+						is_up_next={track.uri === $player.up_next_uri}
+					/>
+				</li>
+			{/each}
+		</ul>
 	</div>
-{/if}
-
-<h1>{$queue.name}</h1>
-<img src="/queue/{id}/qrcode.svg" alt="QR Code" class="w-80 dark:invert" />
-
-<TrackSearch {id} />
-
-<ul class="flex flex-col gap-5 mt-8 w-full max-w-md">
-	{#each $queue.tracks as track (track.supabase_id)}
-		<li animate:flip={{ duration: 300 }}>
-			<Track {track} {handle_vote} is_up_next={track.uri === $player.up_next_uri} />
-		</li>
-	{/each}
-</ul>
-
-{#if $spotify_tokens.access_token && $queue.owner_id === session?.user.id}
-	<Player player_store={player} queue_store={queue} />
+	<Footer is_queue_page />
+</main>
+{#if show_player}
+	<Player player_store={player} queue_store={queue} spotify_access_token={spotify_access_token ?? ''} />
 {/if}

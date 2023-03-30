@@ -1,29 +1,27 @@
-import { chromium } from '@playwright/test';
 import { createClient } from '@supabase/supabase-js';
+import fs from 'node:fs';
 
 const global_setup = async () => {
-	const browser = await chromium.launch();
-	const page = await browser.newPage();
-
 	const { access_token, refresh_token } = await get_supabase_tokens();
-	const spotify_access_token = await get_spotify_access_token();
+	const spotify_access_token_non_premium = await get_spotify_access_token({
+		refresh_token: process.env.TEST_SPOTIFY_REFRESH_TOKEN ?? ''
+	});
 
-	page.context().addCookies([
-		{
-			name: 'supabase-auth-token',
-			value: JSON.stringify([
-				access_token,
-				refresh_token,
-				spotify_access_token,
-				process.env.TEST_SPOTIFY_REFRESH_TOKEN
-			]),
-			path: '/',
-			domain: 'localhost'
-		}
-	]);
-	// save cookies to reuse across tests
-	await page.context().storageState({ path: './tests/storage-state.json' });
-	await browser.close();
+	const spotify_access_token_premium = await get_spotify_access_token({
+		refresh_token: process.env.TEST_SPOTIFY_PREMIUM_REFRESH_TOKEN ?? ''
+	});
+
+	const cookies = {
+		non_premium: [
+			access_token,
+			refresh_token,
+			spotify_access_token_non_premium,
+			process.env.TEST_SPOTIFY_REFRESH_TOKEN
+		],
+		premium: [access_token, refresh_token, spotify_access_token_premium, process.env.TEST_SPOTIFY_PREMIUM_REFRESH_TOKEN]
+	};
+
+	fs.writeFileSync('tests/auth-cookies.json', JSON.stringify(cookies), { encoding: 'utf-8' });
 };
 
 const get_supabase_tokens = async () => {
@@ -47,7 +45,7 @@ const get_supabase_tokens = async () => {
 	return { access_token, refresh_token };
 };
 
-const get_spotify_access_token = async () => {
+const get_spotify_access_token = async ({ refresh_token }: { refresh_token: string }) => {
 	const res = await fetch('https://accounts.spotify.com/api/token', {
 		method: 'POST',
 		headers: {
@@ -58,7 +56,7 @@ const get_spotify_access_token = async () => {
 		},
 		body: new URLSearchParams({
 			grant_type: 'refresh_token',
-			refresh_token: process.env.TEST_SPOTIFY_REFRESH_TOKEN ?? ''
+			refresh_token
 		})
 	});
 

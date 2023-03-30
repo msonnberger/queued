@@ -1,9 +1,10 @@
 import { error, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
 
 export const actions = {
 	create_queue: async ({ locals, request }) => {
-		if (!locals.session) {
+		const session = await locals.get_session();
+
+		if (!session) {
 			throw error(401, 'Unauthorized');
 		}
 
@@ -12,7 +13,7 @@ export const actions = {
 
 		const { data: queue, error: err } = await locals.supabase
 			.from('queues')
-			.insert({ name, owner_id: locals.session.user.id, id: get_random_string(7) })
+			.insert({ name, owner_id: session.user.id, id: get_random_string(7) })
 			.select()
 			.single();
 
@@ -20,9 +21,9 @@ export const actions = {
 			throw error(500, err.message);
 		}
 
-		throw redirect(303, `/queue/${queue.id}`);
+		throw redirect(303, `/queue/${queue.id}?share=true`);
 	}
-} satisfies Actions;
+};
 
 const get_random_string = (length: number) => {
 	const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

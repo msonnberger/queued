@@ -1,7 +1,6 @@
 import { error, redirect } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
 
-export const POST = (async ({ locals }) => {
+export async function POST({ locals }) {
 	const { error: err } = await locals.supabase.auth.signOut();
 
 	if (err) {
@@ -9,4 +8,4 @@ export const POST = (async ({ locals }) => {
 	}
 
 	throw redirect(303, '/');
-}) satisfies RequestHandler;
+}

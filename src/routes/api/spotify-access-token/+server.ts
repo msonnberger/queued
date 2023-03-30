@@ -1,14 +1,20 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
+import type { Config } from '@sveltejs/adapter-vercel';
 import { error, text } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
 
-export const POST = (async ({ request, fetch }) => {
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
+
+export const config: Config = {
+	runtime: 'edge',
+	regions: 'all'
+};
+
+export async function POST({ request, fetch }) {
 	const { refresh_token } = await request.json();
 	const token_res = await fetch('https://accounts.spotify.com/api/token', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
-			Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`
+			Authorization: `Basic ${btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`)}`
 		},
 		body: new URLSearchParams({
 			grant_type: 'refresh_token',
@@ -23,4 +29,4 @@ export const POST = (async ({ request, fetch }) => {
 	}
 
 	return text(access_token);
-}) satisfies RequestHandler;
+}

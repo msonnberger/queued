@@ -1,8 +1,14 @@
-import type { RequestHandler } from './$types';
-import { search } from '$lib/api/spotify';
+import type { Config } from '@sveltejs/adapter-vercel';
 import { json } from '@sveltejs/kit';
 
-export const GET = (async ({ url, fetch }) => {
+import { search } from '$lib/api/spotify';
+
+export const config: Config = {
+	runtime: 'edge',
+	regions: 'all'
+};
+
+export async function GET({ url, fetch }) {
 	const q = url.searchParams.get('q');
 
 	if (q === null) {
@@ -24,4 +30,4 @@ export const GET = (async ({ url, fetch }) => {
 	);
 
 	return json(result.tracks?.items);
-}) satisfies RequestHandler;
+}

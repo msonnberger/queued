@@ -1,8 +1,13 @@
-import { getServerSession } from '@supabase/auth-helpers-sveltekit';
-import type { LayoutServerLoad } from './$types';
+export async function load({ locals, depends, cookies }) {
+	depends('supabase:auth');
+	const session = await locals.get_session();
 
-export const load = (async (event) => {
+	if (session?.provider_refresh_token) {
+		cookies.set('spotify-refresh-token', session.provider_refresh_token, { path: '/' });
+	}
+
 	return {
-		session: await getServerSession(event)
+		session,
+		spotify_refresh_token: cookies.get('spotify-refresh-token')
 	};
-}) satisfies LayoutServerLoad;
+}

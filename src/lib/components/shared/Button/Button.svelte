@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type VariantProps, cva } from 'class-variance-authority';
+	import { cva, type VariantProps } from 'class-variance-authority';
 	import { twMerge } from 'tailwind-merge';
 
 	const button_variants = cva(['inline-flex', 'items-center', 'justify-center', 'font-medium', 'transition-colors'], {
@@ -23,7 +23,8 @@
 					'dark:bg-slate-900',
 					'dark:border-slate-50',
 					'dark:hover:bg-slate-800'
-				]
+				],
+				danger: ['bg-red-600', 'hover:bg-red-800', 'text-red-50']
 			},
 			circle: {
 				true: ['rounded-full'],
@@ -77,14 +78,28 @@
 
 {#if href}
 	<a
+		on:click
+		on:mouseenter
+		on:touchstart
 		{href}
+		{target}
+		{rel}
 		class:pointer-events-none={disabled}
 		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
-		{target}
-		{rel}><slot /></a
+		{...$$restProps}
 	>
+		<slot />
+	</a>
 {:else}
-	<button {type} {disabled} class="{twMerge(button_variants({ variant, circle, size }))} {classNames}" on:click>
+	<button
+		on:click
+		on:mouseenter
+		on:touchstart
+		{type}
+		{disabled}
+		class="{twMerge(button_variants({ variant, circle, size }))} {classNames}"
+		{...$$restProps}
+	>
 		<slot />
 	</button>
 {/if}

@@ -1,36 +1,15 @@
 import { derived, writable } from 'svelte/store';
-import type { PlayerStore, PusherVoteEvent, QueueStore, QueueTrack } from './types';
-import { sorted_queue } from './utils';
-import { PUBLIC_PUSHER_CLUSTER, PUBLIC_PUSHER_KEY } from '$env/static/public';
-import Pusher from 'pusher-js';
+
+import { pusher_client } from './api/pusher/client';
 import type { TrackObject } from './api/spotify';
+import type { PlayerStore, PusherVoteEvent, Queue, QueueStore, QueueTrack } from './types';
+import { sorted_queue } from './utils';
 
-const pusher_client = new Pusher(PUBLIC_PUSHER_KEY, {
-	cluster: PUBLIC_PUSHER_CLUSTER,
-	wsHost: 'ws.queued.live',
-	wsPort: 80,
-	wssPort: 443,
-	enabledTransports: ['ws', 'wss'],
-	forceTLS: true
-});
+export const create_queue_store = (initial_value: Queue, current_voter_id: string): QueueStore => {
+	const qid = initial_value.id;
 
-export const create_queue_store = (initial_value: Partial<QueueStore>, current_voter_id: string) => {
-	initial_value.remove_track = (uri: string) => {
-		fetch('/api/queue/remove-track', {
-			method: 'DELETE',
-			body: JSON.stringify({ uri, queue_id: initial_value.id })
-		});
-	};
-
-	initial_value.update_current_track = (uri: string) => {
-		fetch('/api/queue/update-current-track', {
-			method: 'POST',
-			body: JSON.stringify({ uri, qid: initial_value.id })
-		});
-	};
-
-	const queue_writable = writable<QueueStore>(initial_value as QueueStore, () => {
-		const channel = pusher_client.subscribe(`queue-${initial_value.id}`);
+	const queue_writable = writable<Queue>(initial_value, () => {
+		const channel = pusher_client.subscribe(`queue-${qid}`);
 
 		channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
 			const new_track = { ...data, votes: { up: 0, down: 0, own_vote: null } };
@@ -73,7 +52,41 @@ export const create_queue_store = (initial_value: Partial<QueueStore>, current_v
 		return () => channel.unbind_all();
 	});
 
-	return derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
+	const { subscribe } = derived(queue_writable, ($queue_writeable) => sorted_queue($queue_writeable));
+
+	return {
+		subscribe,
+		add_track: async (track: TrackObject) => {
+			return fetch(`/api/queue/${qid}/track`, {
+				method: 'POST',
+				body: JSON.stringify({ track })
+			});
+		},
+		delete_track: async (uri: string) => {
+			return fetch(`/api/queue/${qid}/track`, {
+				method: 'DELETE',
+				body: JSON.stringify({ uri })
+			});
+		},
+		add_vote: async (track_id: number, value: 1 | -1, is_vote_flipped: boolean) => {
+			return fetch(`/api/queue/${qid}/vote`, {
+				method: 'POST',
+				body: JSON.stringify({ supabase_track_id: track_id, value, is_vote_flipped })
+			});
+		},
+		delete_vote: async (track_id: number) => {
+			return fetch(`/api/queue/${qid}/vote`, {
+				method: 'DELETE',
+				body: JSON.stringify({ supabase_track_id: track_id })
+			});
+		},
+		update_current_track: async (uri: string | null) => {
+			return fetch(`/api/queue/${qid}/update-current-track`, {
+				method: 'POST',
+				body: JSON.stringify({ uri })
+			});
+		}
+	};
 };
 
 export const create_player_store = () =>
@@ -87,7 +100,6 @@ export const create_player_store = () =>
 		volume: 1
 	});
 
-export const spotify_tokens = writable<{ access_token: string | null; refresh_token: string | null }>({
-	access_token: null,
-	refresh_token: null
+export const add_track_store = writable<{ track: TrackObject | null; delete_track?: QueueStore['delete_track'] }>({
+	track: null
 });

@@ -18,9 +18,10 @@
 	}
 </script>
 
-<div>
-	<span class="font-bold">{$add_track_store?.track?.name}</span>
-	<span class="mr-6">added to Queue</span>
+<div class="flex items-center">
+	<div class="mr-6">
+		<span class="font-bold">{$add_track_store?.track?.name}</span> added to Queue
+	</div>
 	<button on:click={() => undo_track()} class="p-1.5 rounded-md font-medium text-red-800 hover:bg-red-50">
 		Undo
 	</button>

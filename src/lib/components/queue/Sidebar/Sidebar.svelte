@@ -15,69 +15,61 @@
 	$: sms_url = `sms:?&body=${encoded_text}`;
 </script>
 
-<aside class="fixed inset-y-0 left-0 bg-neutral-50 border-x w-[30rem] max-w-[30rem]">
-	<div class="max-w-full min-h-full p-12">
-		<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="px-20 pb-8" />
-		<p class="text-3xl text-center">{queue_name}</p>
+<aside class="bg-neutral-50 border-x border-y p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar">
+	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8" />
+	<h1 class="text-3xl text-center mb-8">{queue_name}</h1>
 
-		<div class="py-6 px-4 flex flex-col justify-center">
-			<p
-				title="Queue ID"
-				id="queue-id"
-				class="cursor-default px-4 text-center bg-slate-100 dark:bg-slate-500 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-100 border-2 rounded-xl font-mono font-medium text-xl tracking-[0.2em] h-14 leading-[3.5rem]"
-			>
-				{$page.params.id}
-			</p>
+	<div>
+		<p
+			title="Queue ID"
+			id="queue-id"
+			class="cursor-default px-4 text-center bg-slate-100 dark:bg-slate-500 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-100 border-2 rounded-xl font-mono font-medium text-xl tracking-[0.2em] h-14 leading-[3.5rem]"
+		>
+			{$page.params.id}
+		</p>
 
-			<div class="flex items-center gap-2 mt-6">
-				<span class="relative flex h-2 w-2">
-					<span
-						class:animate-ping={queue_currently_playing}
-						class="absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"
-					/>
-					<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
-				</span>
-				{#if queue_currently_playing?.name}
-					<span>Current song: {queue_currently_playing?.name}</span>
-				{:else}
-					<span>Currently nothing is playing</span>
-				{/if}
-			</div>
-
-			<section class="mt-4">
-				<h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>
-
-				<ul class="mt-2">
-					<li class="flex">
-						<a href={whatsapp_url} target="_blank" class="flex items-center py-3 px-5 rounded-lg hover:bg-slate-100">
-							<WhatsApp width={25} height={25} />
-							<span class="ml-3">WhatsApp</span></a
-						>
-					</li>
-					<li class="flex">
-						<a href={sms_url} target="_blank" class="flex items-center py-3 px-5 rounded-lg hover:bg-slate-100">
-							<Messages width={25} height={25} />
-							<span class="ml-3">Messages</span></a
-						>
-					</li>
-
-					<!-- bg-slate-400 rounded-xl p-3 block aspect-square w-14 h-14 -->
-
-					<li class="flex">
-						<button
-							class="flex px-5 py-3 rounded-lg hover:bg-slate-100"
-							on:click={() => navigator.clipboard.writeText(decodeURIComponent(encoded_text))}
-						>
-							<Files class="w-full h-full slate-500" />
-							<span class="ml-3">Copy</span>
-						</button>
-					</li>
-
-					<!--
-					<li>
-					</li> -->
-				</ul>
-			</section>
+		<div class="flex items-center gap-2 mt-6">
+			<span class="relative flex h-2 w-2">
+				<span
+					class:animate-ping={queue_currently_playing}
+					class="absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"
+				/>
+				<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+			</span>
+			{#if queue_currently_playing?.name}
+				<span>Current song: {queue_currently_playing?.name}</span>
+			{:else}
+				<span>Currently nothing is playing</span>
+			{/if}
 		</div>
+
+		<section class="mt-6">
+			<h2 class="font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>
+
+			<ul class="mt-2 flex flex-col gap-3">
+				<li class="flex">
+					<a href={whatsapp_url} target="_blank" class="flex items-center rounded-lg hover:bg-slate-100">
+						<WhatsApp width={25} height={25} />
+						<span class="ml-3">WhatsApp</span></a
+					>
+				</li>
+				<li class="flex">
+					<a href={sms_url} target="_blank" class="flex items-center rounded-lg hover:bg-slate-100">
+						<Messages width={25} height={25} />
+						<span class="ml-3">Messages</span></a
+					>
+				</li>
+
+				<li class="flex">
+					<button
+						class="flex rounded-lg hover:bg-slate-100"
+						on:click={() => navigator.clipboard.writeText(decodeURIComponent(encoded_text))}
+					>
+						<Files class="w-full h-full stroke-slate-500" />
+						<span class="ml-3">Copy Link</span>
+					</button>
+				</li>
+			</ul>
+		</section>
 	</div>
 </aside>

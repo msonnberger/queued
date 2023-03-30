@@ -150,29 +150,28 @@
 	$: player?.setVolume($player_store.volume);
 </script>
 
-<div class="fixed inset-x-0 bottom-0 z-10">
-	<div
-		class="flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 shadow shadow-slate-200/80 ring-1 ring-slate-900/5 backdrop-blur-sm"
-	>
-		<div class="block aspect-square w-40 bg-slate-200">
-			{#if $player_store.track?.album.images[0].url}
-				<img src={$player_store.track.album.images[0].url} alt="Album cover" />
-			{:else}
-				<svg
-					class="w-full h-full p-5"
-					version="1.1"
-					id="Capa_1"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					viewBox="0 0 55.334 55.334"
-					xml:space="preserve"
-				>
+<div
+	class="fixed left-sidebar right-0 bottom-0 z-10 h-40 flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 ring-1 ring-slate-900/5 backdrop-blur-sm"
+>
+	<div class="block aspect-square w-40 bg-slate-200">
+		{#if $player_store.track?.album.images[0].url}
+			<img src={$player_store.track.album.images[0].url} alt="Album cover" />
+		{:else}
+			<svg
+				class="w-full h-full p-5"
+				version="1.1"
+				id="Capa_1"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
+				viewBox="0 0 55.334 55.334"
+				xml:space="preserve"
+			>
+				<g>
 					<g>
-						<g>
-							<circle class="fill-slate-400" cx="27.667" cy="27.667" r="3.618" />
-							<path
-								class="fill-slate-400"
-								d="M27.667,0C12.387,0,0,12.387,0,27.667s12.387,27.667,27.667,27.667s27.667-12.387,27.667-27.667
+						<circle class="fill-slate-400" cx="27.667" cy="27.667" r="3.618" />
+						<path
+							class="fill-slate-400"
+							d="M27.667,0C12.387,0,0,12.387,0,27.667s12.387,27.667,27.667,27.667s27.667-12.387,27.667-27.667
 			S42.947,0,27.667,0z M17.118,6.881c3.167-1.61,6.752-2.518,10.549-2.518c0.223,0,0.444,0.003,0.665,0.009
 			c0.367,0.01,0.619,0.922,0.564,2.025l-0.282,5.677c-0.055,1.103-0.289,1.986-0.523,1.979c-0.141-0.004-0.282-0.006-0.424-0.006
 			c-1.997,0-3.894,0.43-5.603,1.202c-1.007,0.455-2.212,0.184-2.774-0.767l-2.896-4.897C15.832,8.634,16.133,7.382,17.118,6.881z
@@ -184,84 +183,83 @@
 			c1.022-0.42,2.275-0.144,2.877,0.782l3.101,4.77C39.426,46.747,39.156,47.977,38.17,48.476z M43.619,44.656
 			c-0.766,0.72-2.005,0.551-2.703-0.305l-3.59-4.407c-0.698-0.856-0.876-1.848-0.435-2.255c0.442-0.407,1.443-0.179,2.274,0.549
 			l4.28,3.744C44.277,42.709,44.386,43.936,43.619,44.656z"
-							/>
-						</g>
+						/>
 					</g>
-				</svg>
-			{/if}
+				</g>
+			</svg>
+		{/if}
+	</div>
+	<div class="flex flex-1 flex-col gap-4 overflow-hidden p-1">
+		<div class="flex w-full justify-between items-center">
+			<div class="flex w-1/2 justify-between">
+				<div class="flex flex-col w-4/5">
+					<span class="truncate text-base font-bold leading-6">{$player_store.track?.name ?? ''}</span>
+					<span class="truncate text-sm font-normal text-slate-500 dark:text-slate-400"
+						>{format_artists($player_store.track?.artists)}
+					</span>
+				</div>
+				<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
+					<SkipBack size={28} />
+				</button>
+			</div>
+
+			<Button
+				on:click={$player_store.track === null ? init_playback : () => player?.togglePlay()}
+				disabled={$player_store.device_id === null}
+				circle
+				size="lg"
+				class="mx-4"
+			>
+				{#if $player_store.is_playing}
+					<Pause size={24} class="fill-white dark:fill-slate-900" strokeWidth="1" />
+				{:else}
+					<Play
+						size={24}
+						strokeWidth="1"
+						class="fill-white dark:fill-slate-900 dark:stroke-slate-900 translate-x-0.5"
+					/>
+				{/if}
+			</Button>
+			<div class="w-1/2 flex gap-4 items-center">
+				<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
+					<SkipForward size={28} />
+				</button>
+				<div class="flex gap-2">
+					<label for="toggle_volume_slider" class="cursor-pointer">
+						{#if $player_store.volume === 0}
+							<Volume />
+						{:else if $player_store.volume < 0.5}
+							<Volume1 />
+						{:else}
+							<Volume2 />
+						{/if}
+					</label>
+					<input type="checkbox" id="toggle_volume_slider" class="peer sr-only" />
+
+					<input
+						bind:value={$player_store.volume}
+						type="range"
+						name="volume"
+						id="volume"
+						min="0"
+						max="1"
+						step="0.01"
+						class="accent-slate-900 dark:accent-slate-100 hidden peer-checked:block"
+					/>
+				</div>
+			</div>
 		</div>
-		<div class="flex flex-1 flex-col gap-4 overflow-hidden p-1">
-			<div class="flex w-full justify-between items-center">
-				<div class="flex w-1/2 justify-between">
-					<div class="flex flex-col w-4/5">
-						<span class="truncate text-base font-bold leading-6">{$player_store.track?.name ?? ''}</span>
-						<span class="truncate text-sm font-normal text-slate-500 dark:text-slate-400"
-							>{format_artists($player_store.track?.artists)}
-						</span>
-					</div>
-					<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
-						<SkipBack size={28} />
-					</button>
-				</div>
 
-				<Button
-					on:click={$player_store.track === null ? init_playback : () => player?.togglePlay()}
-					disabled={$player_store.device_id === null}
-					circle
-					size="lg"
-					class="mx-4"
-				>
-					{#if $player_store.is_playing}
-						<Pause size={24} class="fill-white dark:fill-slate-900" strokeWidth="1" />
-					{:else}
-						<Play
-							size={24}
-							strokeWidth="1"
-							class="fill-white dark:fill-slate-900 dark:stroke-slate-900 translate-x-0.5"
-						/>
-					{/if}
-				</Button>
-				<div class="w-1/2 flex gap-4 items-center">
-					<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
-						<SkipForward size={28} />
-					</button>
-					<div class="flex gap-2">
-						<label for="toggle_volume_slider" class="cursor-pointer">
-							{#if $player_store.volume === 0}
-								<Volume />
-							{:else if $player_store.volume < 0.5}
-								<Volume1 />
-							{:else}
-								<Volume2 />
-							{/if}
-						</label>
-						<input type="checkbox" id="toggle_volume_slider" class="peer sr-only" />
-
-						<input
-							bind:value={$player_store.volume}
-							type="range"
-							name="volume"
-							id="volume"
-							min="0"
-							max="1"
-							step="0.01"
-							class="accent-slate-900 dark:accent-slate-100 hidden peer-checked:block"
-						/>
-					</div>
-				</div>
-			</div>
-
-			<div class="flex justify-between gap-4">
-				<output
-					class="block rounded-md py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
-					>{ms_to_min_sec($player_store.position ?? 0)}</output
-				>
-				<ProgressBar progress={(($player_store.position ?? 0) / ($player_store.duration ?? 1)) * 100} />
-				<span
-					class="block rounded-md px-1 py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
-					>-{ms_to_min_sec(($player_store.duration ?? 0) - ($player_store.position ?? 0))}</span
-				>
-			</div>
+		<div class="flex justify-between gap-4">
+			<output
+				class="block rounded-md py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
+				>{ms_to_min_sec($player_store.position ?? 0)}</output
+			>
+			<ProgressBar progress={(($player_store.position ?? 0) / ($player_store.duration ?? 1)) * 100} />
+			<span
+				class="block rounded-md px-1 py-0.5 tracking-wide font-mono text-sm leading-6 text-slate-500 dark:text-slate-400"
+				>-{ms_to_min_sec(($player_store.duration ?? 0) - ($player_store.position ?? 0))}</span
+			>
 		</div>
 	</div>
 </div>

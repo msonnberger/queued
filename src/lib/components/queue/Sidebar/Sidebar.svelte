@@ -53,14 +53,18 @@
 					<a
 						href={whatsapp_url}
 						target="_blank"
-						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100"
+						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
 					>
 						<WhatsApp width={25} height={25} />
 						<span class="ml-3">WhatsApp</span></a
 					>
 				</li>
 				<li class="flex">
-					<a href={sms_url} target="_blank" class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100">
+					<a
+						href={sms_url}
+						target="_blank"
+						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
+					>
 						<Messages width={25} height={25} />
 						<span class="ml-3">Messages</span></a
 					>
@@ -68,7 +72,7 @@
 
 				<li class="flex">
 					<button
-						class=" flex rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100"
+						class=" flex rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
 						on:click={() => {
 							navigator.clipboard.writeText(decodeURIComponent(encoded_text));
 							toast.success('Copied Queue Link', { duration: 1250 });

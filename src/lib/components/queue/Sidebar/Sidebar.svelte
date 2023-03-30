@@ -15,8 +15,10 @@
 	$: sms_url = `sms:?&body=${encoded_text}`;
 </script>
 
-<aside class="bg-neutral-50 border-x border-y p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar">
-	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8" />
+<aside
+	class="bg-neutral-50 border-r p-12 row-span-2 overflow-hidden fixed inset-y-0 left-0 w-sidebar dark:bg-slate-700"
+>
+	<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8 dark:invert" />
 	<h1 class="text-3xl text-center mb-8">{queue_name}</h1>
 
 	<div>
@@ -44,21 +46,25 @@
 		</div>
 
 		<section class="mt-6">
-			<h2 class="font-mono text-sm font-medium leading-7 text-slate-900">Share this Queue</h2>
+			<h2 class="font-mono text-sm font-medium leading-7 text-slate-900 dark:text-slate-200">Share this Queue</h2>
 
 			<ul class="mt-2 flex flex-col gap-3">
 				<li class="flex">
 					<a
 						href={whatsapp_url}
 						target="_blank"
-						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100"
+						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
 					>
 						<WhatsApp width={25} height={25} />
 						<span class="ml-3">WhatsApp</span></a
 					>
 				</li>
 				<li class="flex">
-					<a href={sms_url} target="_blank" class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100">
+					<a
+						href={sms_url}
+						target="_blank"
+						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
+					>
 						<Messages width={25} height={25} />
 						<span class="ml-3">Messages</span></a
 					>
@@ -66,7 +72,7 @@
 
 				<li class="flex">
 					<button
-						class=" flex rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100"
+						class=" flex rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
 						on:click={() => {
 							navigator.clipboard.writeText(decodeURIComponent(encoded_text));
 							toast.success('Copied Queue Link', { duration: 1250 });

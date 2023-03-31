@@ -152,7 +152,7 @@
 </script>
 
 <div
-	class="fixed left-sidebar right-0 bottom-0 z-10 h-40 flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 ring-1 ring-slate-900/5 backdrop-blur-sm"
+	class="fixed left-0 lg:left-sidebar right-0 bottom-0 z-10 h-40 flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 ring-1 ring-slate-900/5 backdrop-blur-sm"
 >
 	<div class="block aspect-square w-40 bg-slate-200 dark:bg-slate-700">
 		{#if $player_store.track?.album.images[0].url}

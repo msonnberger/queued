@@ -48,7 +48,7 @@
 	};
 </script>
 
-<div class="flex flex-col items-center justify-center z-[0]">
+<div class="flex-1 flex flex-col items-center justify-center z-[0]">
 	<div class="relative mt-1 w-full">
 		<div
 			class="relative w-full cursor-default overflow-hidden rounded-lg text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300"

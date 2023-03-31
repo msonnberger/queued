@@ -21,7 +21,7 @@
 					type="text"
 					name="queue_name"
 					id="queue_name"
-					class="text-5xl font-bold bg-slate-100 dark:bg-slate-900"
+					class="text-4xl sm:text-5xl font-bold bg-slate-100 dark:bg-slate-900 w-full max-w-lg"
 					value="{data.user_name}'s Queue"
 					autocomplete="off"
 				/>

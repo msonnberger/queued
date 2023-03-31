@@ -11,7 +11,7 @@
 	<title>Queued • New Queue</title>
 </svelte:head>
 
-<main class="w-full max-w-2xl pt-10">
+<main class="w-full max-w-2xl px-4 lg:px-0 pt-10">
 	{#if data.user_has_premium}
 		<h1 class="text-2xl mb-5">What should we name your Queue?</h1>
 
@@ -21,7 +21,7 @@
 					type="text"
 					name="queue_name"
 					id="queue_name"
-					class="text-5xl font-bold bg-slate-100 dark:bg-slate-900"
+					class="text-4xl sm:text-5xl font-bold bg-slate-100 dark:bg-slate-900 w-full max-w-lg"
 					value="{data.user_name}'s Queue"
 					autocomplete="off"
 				/>

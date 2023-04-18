@@ -94,13 +94,14 @@
 				$player_store.position = position;
 				$player_store.duration = duration;
 				$player_store.is_playing = !paused;
+				$player_store.track = track_window.current_track;
 
-				if ($player_store.track?.uri === track_window.current_track.uri && paused && position === 0) {
-					$player_store.track = null;
-					queue_store.update_current_track(null);
-				} else {
-					$player_store.track = track_window.current_track;
-				}
+				// TODO: make this work again
+				// if ($player_store.track?.uri === track_window.current_track.uri && paused && position === 0) {
+				// 	$player_store.track = null;
+				// 	queue_store.update_current_track(null);
+				// } else {
+				// }
 
 				if ($player_store.track?.uri === $player_store.up_next_uri) {
 					queue_store.delete_track($player_store.up_next_uri);

@@ -7,6 +7,9 @@ export default {
 		extend: {
 			spacing: {
 				sidebar: default_theme.spacing[96]
+			},
+			fontFamily: {
+				sans: ['Inter var', ...default_theme.fontFamily.sans]
 			}
 		}
 	},

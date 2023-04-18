@@ -1,6 +1,6 @@
 <!-- TODO: Eventuell component löschen -->
 <script lang="ts">
-	import { Files, XIcon } from 'lucide-svelte';
+	import { Files } from 'lucide-svelte';
 	import toast from 'svelte-french-toast';
 	import { fade, fly } from 'svelte/transition';
 

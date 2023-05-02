@@ -37,7 +37,7 @@
 				type="email"
 				name="email"
 				id="email"
-				placeholder="taylor.perry@email.com"
+				placeholder="taylor@music.com"
 			/>
 			<Button type="submit" size="lg">Join Waitlist</Button>
 		</form>

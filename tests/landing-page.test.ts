@@ -3,7 +3,7 @@ import { expect, test } from './lib/playwright.js';
 test.beforeEach(async ({ page }) => await page.goto('/'));
 
 test('landing page has expected h1', async ({ page }) => {
-	await expect(page.getByText('Meet Queued, your collaborative DJ.')).toBeVisible();
+	await expect(page.getByText('Meet Queued, your collaborative music player.')).toBeVisible();
 });
 
 test('landing page has expected links', async ({ page }) => {

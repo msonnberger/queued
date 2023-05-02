@@ -100,6 +100,20 @@ export interface Database {
           voter_id?: string
         }
       }
+      waitlist: {
+        Row: {
+          email: string
+          id: number
+        }
+        Insert: {
+          email: string
+          id?: number
+        }
+        Update: {
+          email?: string
+          id?: number
+        }
+      }
     }
     Views: {
       [_ in never]: never
@@ -218,7 +232,7 @@ export interface Database {
         Args: {
           name: string
         }
-        Returns: string[]
+        Returns: unknown
       }
       get_size_by_bucket: {
         Args: Record<PropertyKey, never>

@@ -13,7 +13,7 @@ test.describe('create and join Queue', () => {
 		await page.goto('/');
 		await page.getByText('Create Queue').click();
 		await expect(page).not.toHaveURL(/.*login/);
-		await expect(page.getByText('HAS NO PREMIUM')).toBeVisible();
+		await expect(page.getByText('Spotify Premium required')).toBeVisible();
 	});
 
 	test('premium user can create Queue', async ({ page, auth, queue }) => {

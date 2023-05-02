@@ -20,8 +20,14 @@
 
 <div class="flex items-center justify-center grow px-4 lg:px-0">
 	<div class="max-w-2xl text-center">
+		<span
+			class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium mb-6 px-3 py-1 rounded-full dark:bg-indigo-900 dark:text-indigo-300"
+		>
+			Coming Soon
+		</span>
+
 		<h1 class="text-5xl sm:text-7xl font-extrabold mb-10">Meet Queued, your collaborative music player.</h1>
-		<h2 class="text-xl text-slate-500 dark:text-slate-400 mb-10">
+		<h2 class="text-xl text-slate-500 dark:text-slate-400 mb-20">
 			Tired of one person playing their playlist the whole night? With Queued, everyone votes on which song comes next
 			so that the next track will always be the best one.
 		</h2>
@@ -33,7 +39,7 @@
 				id="email"
 				placeholder="taylor.perry@email.com"
 			/>
-			<Button type="submit" size="lg">Get Notified</Button>
+			<Button type="submit" size="lg">Join Waitlist</Button>
 		</form>
 	</div>
 </div>

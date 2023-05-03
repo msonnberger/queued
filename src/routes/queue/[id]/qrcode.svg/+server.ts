@@ -2,8 +2,8 @@ import QRCode from 'qrcode';
 import Colors from 'tailwindcss/colors';
 
 export const config = {
-	runtime: 'edge',
-	regions: 'all'
+	// 	runtime: 'edge',
+	// 	regions: 'all'
 };
 
 export async function GET({ params, url }) {

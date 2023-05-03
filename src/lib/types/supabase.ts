@@ -34,27 +34,107 @@ export interface Database {
   }
   public: {
     Tables: {
+      auth_key: {
+        Row: {
+          expires: number | null
+          hashed_password: string | null
+          id: string
+          primary_key: boolean
+          user_id: string
+        }
+        Insert: {
+          expires?: number | null
+          hashed_password?: string | null
+          id: string
+          primary_key: boolean
+          user_id: string
+        }
+        Update: {
+          expires?: number | null
+          hashed_password?: string | null
+          id?: string
+          primary_key?: boolean
+          user_id?: string
+        }
+      }
+      auth_session: {
+        Row: {
+          active_expires: number
+          id: string
+          idle_expires: number
+          user_id: string
+        }
+        Insert: {
+          active_expires: number
+          id: string
+          idle_expires: number
+          user_id: string
+        }
+        Update: {
+          active_expires?: number
+          id?: string
+          idle_expires?: number
+          user_id?: string
+        }
+      }
+      auth_user: {
+        Row: {
+          id: string
+          name: string | null
+          product: string | null
+        }
+        Insert: {
+          id: string
+          name?: string | null
+          product?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string | null
+          product?: string | null
+        }
+      }
       queues: {
         Row: {
           created_at: string
           current_track_uri: string | null
           id: string
           name: string
-          owner_id: string
+          owner_id: string | null
         }
         Insert: {
           created_at?: string
           current_track_uri?: string | null
           id: string
           name: string
-          owner_id: string
+          owner_id?: string | null
         }
         Update: {
           created_at?: string
           current_track_uri?: string | null
           id?: string
           name?: string
-          owner_id?: string
+          owner_id?: string | null
+        }
+      }
+      spotify_tokens: {
+        Row: {
+          access_token: string
+          expires_in: number
+          refresh_token: string
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          expires_in: number
+          refresh_token: string
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          expires_in?: number
+          refresh_token?: string
+          user_id?: string
         }
       }
       tracks: {

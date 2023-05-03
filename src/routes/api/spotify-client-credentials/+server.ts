@@ -4,8 +4,8 @@ import { text } from '@sveltejs/kit';
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
 export const config: Config = {
-	runtime: 'edge',
-	regions: 'all'
+	// 	runtime: 'edge',
+	// 	regions: 'all'
 };
 
 export async function GET({ fetch }) {

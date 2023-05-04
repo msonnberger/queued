@@ -81,17 +81,14 @@ export interface Database {
         Row: {
           id: string
           name: string | null
-          product: string | null
         }
         Insert: {
           id: string
           name?: string | null
-          product?: string | null
         }
         Update: {
           id?: string
           name?: string | null
-          product?: string | null
         }
       }
       queues: {

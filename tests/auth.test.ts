@@ -1,14 +1,18 @@
 import { expect, test } from './lib/playwright.js';
 
-test('login works', async ({ page, auth }) => {
-	await auth.login({ premium: false });
+test.afterEach(({ users }) => users.delete_all());
+
+test('login works', async ({ page, users }) => {
+	const user = await users.create();
+	await user.login();
 	await page.goto('/');
 	await page.getByText('Toggle User menu').click();
-	await expect(page.getByText(process.env.TEST_NAME + "'s Account")).toBeVisible();
+	await expect(page.getByText(user.name + "'s Account")).toBeVisible();
 });
 
-test('logout works', async ({ page, auth }) => {
-	await auth.login({ premium: false });
+test('logout works', async ({ page, users }) => {
+	const user = await users.create();
+	await user.login();
 	await page.goto('/');
 	const user_menu_toggle = await page.getByText('Toggle User menu');
 	await user_menu_toggle.click();

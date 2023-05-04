@@ -4,7 +4,7 @@ import lucia from 'lucia-auth';
 import { sveltekit } from 'lucia-auth/middleware';
 import postgres from 'pg';
 
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SUPABASE_CONNECTION_STRING, VERCEL_URL } from '$env/static/private';
+import { LUCIA_URL, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SUPABASE_CONNECTION_STRING } from '$env/static/private';
 import { dev } from '$app/environment';
 import { getMe } from '$lib/api/spotify';
 
@@ -24,13 +24,12 @@ export type Auth = typeof auth;
 export const spotify_auth = provider(auth, {
 	providerId: 'spotify',
 	getAuthorizationUrl: async (state) => {
-		const origin = dev ? 'http://localhost:5173' : VERCEL_URL;
 		const url =
 			'https://accounts.spotify.com/authorize?' +
 			new URLSearchParams({
 				client_id: SPOTIFY_CLIENT_ID,
 				client_secret: SPOTIFY_CLIENT_SECRET,
-				redirect_uri: origin + '/auth/callback',
+				redirect_uri: new URL('/auth/callback', LUCIA_URL).href,
 				response_type: 'code',
 				state: state,
 				scope:

@@ -10,12 +10,18 @@
 			<GitHub />
 			<span class="sr-only">GitHub Repository</span>
 		</a>
-		<a class="hover:text-slate-700 dark:hover:text-slate-200 transition-colors" href="/privacy">Privacy</a>
-		<a class="hover:text-slate-700 dark:hover:text-slate-200 transition-colors" href="/imprint">Imprint</a>
+		<a
+			class="text-slate-600 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-slate-200 transition-colors"
+			href="/privacy">Privacy</a
+		>
+		<a
+			class="text-slate-600 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-slate-200 transition-colors"
+			href="/imprint">Imprint</a
+		>
 	</nav>
 
 	<div class="flex gap-3 lg:gap-5 items-center">
-		<span>Data by</span>
+		<span class="text-slate-600 dark:text-slate-400">Data by</span>
 		<img alt="Spotify Logo" src={spotify_logo} class="h-9" />
 	</div>
 </footer>

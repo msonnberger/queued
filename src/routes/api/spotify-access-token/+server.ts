@@ -22,14 +22,13 @@ export async function POST({ request, fetch }) {
 		}).toString()
 	});
 
-	const { access_token, expires_in } = await token_res.json();
+	const { access_token } = await token_res.json();
 
 	if (!access_token) {
 		throw error(500, 'Could not retrieve access token.');
 	}
 
 	return json({
-		access_token,
-		expires_in
+		access_token
 	});
 }

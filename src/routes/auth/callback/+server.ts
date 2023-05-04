@@ -29,14 +29,11 @@ export async function GET({ url, cookies, locals }) {
 
 		const { error: err } = await locals.supabase_admin.from('spotify_tokens').upsert({
 			user_id: user.id,
-			expires_in: tokens.expiresIn,
-			access_token: tokens.accessToken,
 			refresh_token: tokens.refreshToken
 		});
 
 		if (err) throw err;
 	} catch (err) {
-		console.error(err);
 		throw error(500, 'Something went wrong.');
 	}
 

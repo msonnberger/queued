@@ -116,20 +116,14 @@ export interface Database {
       }
       spotify_tokens: {
         Row: {
-          access_token: string
-          expires_in: number
           refresh_token: string
           user_id: string
         }
         Insert: {
-          access_token: string
-          expires_in: number
           refresh_token: string
           user_id: string
         }
         Update: {
-          access_token?: string
-          expires_in?: number
           refresh_token?: string
           user_id?: string
         }

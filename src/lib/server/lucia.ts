@@ -44,7 +44,7 @@ export const spotify_auth = provider(auth, {
 			body: new URLSearchParams({
 				grant_type: 'authorization_code',
 				code,
-				redirect_uri: 'http://localhost:5173/auth/callback'
+				redirect_uri: new URL('/auth/callback', LUCIA_URL).href
 			}),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -60,7 +60,7 @@ export const spotify_auth = provider(auth, {
 			scope: string;
 		};
 
-		return { accessToken: tokens.access_token, refreshToken: tokens.refresh_token, expiresIn: tokens.expires_in };
+		return { accessToken: tokens.access_token, refreshToken: tokens.refresh_token };
 	},
 	getProviderUser: async (access_token) => {
 		const user = await getMe({

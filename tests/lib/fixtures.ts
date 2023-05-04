@@ -45,22 +45,18 @@ export function create_users_fixture(page: Page, context: BrowserContext, worker
 			});
 
 			const tokens = JSON.parse(fs.readFileSync('tests/spotify-tokens.json', { encoding: 'utf-8' }));
-			let access_token;
+
 			let refresh_token;
 
 			if (opts?.product === 'premium') {
-				access_token = tokens.premium.access_token;
 				refresh_token = tokens.premium.refresh_token;
 			} else {
-				access_token = tokens.non_premium.access_token;
 				refresh_token = tokens.non_premium.refresh_token;
 			}
 
 			const { error } = await supabase.from('spotify_tokens').insert({
 				user_id: lucia_user.id,
-				access_token,
-				refresh_token,
-				expires_in: 60 * 60
+				refresh_token
 			});
 
 			if (error) {

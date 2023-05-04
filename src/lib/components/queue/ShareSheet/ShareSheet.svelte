@@ -1,12 +1,12 @@
 <!-- TODO: Eventuell component löschen -->
 <script lang="ts">
-	import { Files } from 'lucide-svelte';
+	import { Files, MessageCircle } from 'lucide-svelte';
 	import toast from 'svelte-french-toast';
 	import { fade, fly } from 'svelte/transition';
 
 	import { page } from '$app/stores';
 	import type { TrackObject } from '$lib/api/spotify';
-	import { Messages, WhatsApp } from '$lib/components/icons';
+	import { WhatsApp } from '$lib/components/icons';
 	import { get_focusable_elements, is_mobile_browser } from '$lib/utils';
 
 	function trap_focus(element: HTMLElement) {
@@ -128,7 +128,7 @@
 									target="_blank"
 									class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
 								>
-									<Messages width={25} height={25} />
+									<MessageCircle />
 									<span class="ml-3">Messages</span></a
 								>
 							</li>
@@ -148,45 +148,7 @@
 						</ul>
 					</section>
 				</div>
-				<!-- <div class="grid grid-cols-3 w-full">
-					<h3 class="font-bold col-start-2 justify-self-center uppercase text-sm tracking-wide" id="share-sheet-title">
-						Share Queue
-					</h3>
-					<button on:click={() => (open = false)} class="share-sheet-close-button justify-self-end">
-						<XIcon size={20} />
-					</button>
-				</div>
-				<div class="flex flex-col sm:flex-row mb-5 mt-6 gap-3 items-stretch justify-center">
-					<img
-						src="{$page.url.pathname}/qrcode.svg"
-						alt="QR Code"
-						class="w-full max-w-[16rem] sm:max-w-[12rem] aspect-square p-6 pb-4 sm:pr-4 dark:invert"
-					/>
-					<div class="bg-slate-300 dark:bg-slate-500 w-auto sm:w-[1.5px] sm:h-auto h-[1.5px] sm:mx-4 my-4" />
-					<div class="py-6 px-4 flex flex-col justify-center">
-						<p
-							title="Queue ID"
-							id="queue-id"
-							class="cursor-default px-4 text-center bg-slate-100 dark:bg-slate-500 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-100 border-2 rounded-xl font-mono font-medium text-xl tracking-[0.2em] h-14 leading-[3.5rem]"
-						>
-							{$page.params.id}
-						</p>
-						<div class="flex gap-3 mt-3 items-start h-min justify-between">
-							<a href={whatsapp_url} target="_blank" class="block p-2.5 rounded-xl bg-emerald-500 w-14 h-14">
-								<WhatsApp />
-							</a>
-							<a href={sms_url} target="_blank" class="block aspect-square w-14 h-14">
-								<Messages />
-							</a>
-							<button
-								class="bg-slate-400 rounded-xl p-3 block aspect-square w-14 h-14"
-								on:click={() => navigator.clipboard.writeText(decodeURIComponent(encoded_text))}
-							>
-								<Files color="#fff" class="w-full h-full" />
-							</button>
-						</div>
-					</div>
-				</div> -->
+				
 			</div>
 		</div>
 	</div>

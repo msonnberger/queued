@@ -1,8 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
 import fs from 'node:fs';
 
 const global_setup = async () => {
-	const { access_token, refresh_token } = await get_supabase_tokens();
 	const spotify_access_token_non_premium = await get_spotify_access_token({
 		refresh_token: process.env.TEST_SPOTIFY_REFRESH_TOKEN ?? ''
 	});
@@ -12,37 +10,17 @@ const global_setup = async () => {
 	});
 
 	const cookies = {
-		non_premium: [
-			access_token,
-			refresh_token,
-			spotify_access_token_non_premium,
-			process.env.TEST_SPOTIFY_REFRESH_TOKEN
-		],
-		premium: [access_token, refresh_token, spotify_access_token_premium, process.env.TEST_SPOTIFY_PREMIUM_REFRESH_TOKEN]
+		non_premium: {
+			access_token: spotify_access_token_non_premium,
+			refresh_token: process.env.TEST_SPOTIFY_REFRESH_TOKEN
+		},
+		premium: {
+			access_token: spotify_access_token_premium,
+			refresh_token: process.env.TEST_SPOTIFY_PREMIUM_REFRESH_TOKEN
+		}
 	};
 
-	fs.writeFileSync('tests/auth-cookies.json', JSON.stringify(cookies), { encoding: 'utf-8' });
-};
-
-const get_supabase_tokens = async () => {
-	const supabase = createClient(process.env.PUBLIC_SUPABASE_URL ?? '', process.env.PUBLIC_SUPABASE_ANON_KEY ?? '');
-
-	const { data, error } = await supabase.auth.signInWithPassword({
-		email: process.env.TEST_EMAIL ?? '',
-		password: process.env.TEST_PASSWORD ?? ''
-	});
-
-	if (error) {
-		throw error;
-	}
-
-	if (!data.session) {
-		throw new Error('No session returned from Supabase');
-	}
-
-	const { access_token, refresh_token } = data.session;
-
-	return { access_token, refresh_token };
+	fs.writeFileSync('tests/spotify-tokens.json', JSON.stringify(cookies), { encoding: 'utf-8' });
 };
 
 const get_spotify_access_token = async ({ refresh_token }: { refresh_token: string }) => {

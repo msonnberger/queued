@@ -1,8 +1,26 @@
 import { error, redirect } from '@sveltejs/kit';
 
+import { getMe } from '$lib/api/spotify';
+
+export async function load({ locals }) {
+	const { session, user } = await locals.auth.validateUser();
+
+	if (!session) {
+		throw redirect(303, '/queue/new/login');
+	}
+
+	const { access_token } = await locals.get_spotify_tokens();
+	const user_profile = await getMe({ headers: { Authorization: `Bearer ${access_token}` } });
+
+	return {
+		user_name: user.name,
+		user_has_premium: user_profile.product === 'premium'
+	};
+}
+
 export const actions = {
 	create_queue: async ({ locals, request }) => {
-		const session = await locals.get_session();
+		const session = await locals.auth.validate();
 
 		if (!session) {
 			throw error(401, 'Unauthorized');
@@ -11,9 +29,9 @@ export const actions = {
 		const data = await request.formData();
 		const name = data.get('queue_name') as string;
 
-		const { data: queue, error: err } = await locals.supabase
+		const { data: queue, error: err } = await locals.supabase_admin
 			.from('queues')
-			.insert({ name, owner_id: session.user.id, id: get_random_string(7) })
+			.insert({ name, owner_id: session.userId, id: get_random_string(7) })
 			.select()
 			.single();
 

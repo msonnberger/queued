@@ -1,19 +1,19 @@
 <script lang="ts">
-	import type { Session } from '@supabase/supabase-js';
-	import { Fingerprint, LogOut, User, UserCog } from 'lucide-svelte';
+	import type { User } from 'lucia-auth';
+	import { Fingerprint, LogOut, UserCog, UserIcon } from 'lucide-svelte';
 	import { createMenu } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
 
 	const menu = createMenu({ label: 'User Menu' });
 
-	export let session: Session | null;
+	export let user: User | null;
 </script>
 
 <div class="flex flex-col items-center justify-center">
 	<div class="relative text-right">
 		<div class="relative inline-block text-left pt-1">
 			<button use:menu.button>
-				<User class="stroke-slate-700 dark:stroke-slate-300" />
+				<UserIcon class="stroke-slate-700 dark:stroke-slate-300" />
 				<span class="sr-only">Toggle User menu</span>
 			</button>
 
@@ -31,16 +31,15 @@
 					class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 z-10 focus:outline-none"
 				>
 					<div class="px-1 py-1 w-max">
-						{#if !session}
-							<form use:menu.item action="/auth/login" method="post">
-								<button
-									type="submit"
-									class="flex rounded-md items-center w-full pl-2 pr-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
-								>
-									<Fingerprint class="w-5 h-5 mr-3" aria-hidden="true" />
-									Log in with Spotify
-								</button>
-							</form>
+						{#if !user}
+							<a
+								use:menu.item
+								href="/auth/login"
+								class="flex rounded-md items-center w-full pl-2 pr-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
+							>
+								<Fingerprint class="w-5 h-5 mr-3" aria-hidden="true" />
+								Log in with Spotify
+							</a>
 						{:else}
 							<a
 								use:menu.item
@@ -48,7 +47,7 @@
 								href="/account"
 							>
 								<UserCog class="w-5 h-5 mr-3" aria-hidden="true" />
-								{session.user.user_metadata.name}'s Account
+								{user.name}'s Account
 							</a>
 							<form use:menu.item action="/auth/logout" method="post">
 								<button

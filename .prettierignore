@@ -13,6 +13,6 @@ pnpm-lock.yaml
 package-lock.json
 yarn.lock
 
-/tests/auth-cookies.json
+/tests/spotify-tokens.json
 /src/lib/api/spotify.ts
 /src/lib/types/supabase.ts

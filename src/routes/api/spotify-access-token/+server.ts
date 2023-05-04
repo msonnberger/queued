@@ -1,11 +1,11 @@
 import type { Config } from '@sveltejs/adapter-vercel';
-import { error, text } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 
 export const config: Config = {
-	runtime: 'edge',
-	regions: 'all'
+	// 	runtime: 'edge',
+	// 	regions: 'all'
 };
 
 export async function POST({ request, fetch }) {
@@ -22,11 +22,14 @@ export async function POST({ request, fetch }) {
 		}).toString()
 	});
 
-	const { access_token } = await token_res.json();
+	const { access_token, expires_in } = await token_res.json();
 
 	if (!access_token) {
 		throw error(500, 'Could not retrieve access token.');
 	}
 
-	return text(access_token);
+	return json({
+		access_token,
+		expires_in
+	});
 }

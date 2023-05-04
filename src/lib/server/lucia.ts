@@ -8,8 +8,6 @@ import { LUCIA_URL, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SUPABASE_CONNECTIO
 import { dev } from '$app/environment';
 import { getMe } from '$lib/api/spotify';
 
-//import { getMe } from '$lib/api/spotify';
-
 const pool = new postgres.Pool({
 	connectionString: SUPABASE_CONNECTION_STRING
 });

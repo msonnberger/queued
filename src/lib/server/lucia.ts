@@ -8,6 +8,8 @@ import { LUCIA_URL, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SUPABASE_CONNECTIO
 import { dev } from '$app/environment';
 import { getMe } from '$lib/api/spotify';
 
+//import { getMe } from '$lib/api/spotify';
+
 const pool = new postgres.Pool({
 	connectionString: SUPABASE_CONNECTION_STRING
 });
@@ -44,7 +46,7 @@ export const spotify_auth = provider(auth, {
 			body: new URLSearchParams({
 				grant_type: 'authorization_code',
 				code,
-				redirect_uri: 'http://localhost:5173/auth/callback'
+				redirect_uri: new URL('/auth/callback', LUCIA_URL).href
 			}),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -60,7 +62,7 @@ export const spotify_auth = provider(auth, {
 			scope: string;
 		};
 
-		return { accessToken: tokens.access_token, refreshToken: tokens.refresh_token, expiresIn: tokens.expires_in };
+		return { accessToken: tokens.access_token, refreshToken: tokens.refresh_token };
 	},
 	getProviderUser: async (access_token) => {
 		const user = await getMe({

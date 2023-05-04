@@ -1,19 +1,19 @@
 import { test as base, expect } from '@playwright/test';
 
-import { create_auth_fixture, create_queue_fixture } from './fixtures.js';
+import { create_queue_fixture, create_users_fixture } from './fixtures.js';
 
 interface Fixtures {
-	auth: ReturnType<typeof create_auth_fixture>;
+	users: ReturnType<typeof create_users_fixture>;
 	queue: ReturnType<typeof create_queue_fixture>;
 }
 
 const test = base.extend<Fixtures>({
-	auth: async ({ context }, use) => {
-		const auth_fixture = create_auth_fixture(context);
-		await use(auth_fixture);
+	users: async ({ context, page }, use, workerInfo) => {
+		const users_fixture = create_users_fixture(page, context, workerInfo);
+		await use(users_fixture);
 	},
-	queue: async ({ page, auth }, use) => {
-		const queue_fixture = create_queue_fixture(page, auth);
+	queue: async ({ page, users }, use) => {
+		const queue_fixture = create_queue_fixture(page, users);
 		await use(queue_fixture);
 	}
 });

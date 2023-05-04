@@ -6,9 +6,9 @@ import { pusher } from '$lib/api/pusher/server';
 import type { PusherVoteEvent } from '$lib/types';
 
 export const config: Config = {
-	runtime: 'edge',
-	// frankfurt only to reduce latency for DB calls
-	regions: ['fra1']
+	// 	runtime: 'edge',
+	// 	// frankfurt only to reduce latency for DB calls
+	// 	regions: ['fra1']
 };
 
 const track_id_scheme = z.object({

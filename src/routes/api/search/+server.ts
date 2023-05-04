@@ -4,8 +4,8 @@ import { json } from '@sveltejs/kit';
 import { search } from '$lib/api/spotify';
 
 export const config: Config = {
-	runtime: 'edge',
-	regions: 'all'
+	// 	runtime: 'edge',
+	// 	regions: 'all'
 };
 
 export async function GET({ url, fetch }) {

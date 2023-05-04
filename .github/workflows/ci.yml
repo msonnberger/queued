@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18, 19]
+        node-version: [19, 20]
     steps:
       - run: git config --global core.autocrlf false
       - uses: actions/checkout@v3

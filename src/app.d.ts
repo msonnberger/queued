@@ -1,23 +1,24 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-import type { Session, SupabaseClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
+import type { AuthRequest } from 'lucia-auth';
 
+import type { Auth as LuciaAuth } from '$lib/server/lucia';
 import type { Database } from '$lib/types/supabase';
-import type { WebPlaybackPlayer } from '/types/web-player';
 
 // and what to do when importing types
 declare global {
 	declare namespace App {
 		// interface Error {}
 		interface Locals {
-			supabase: SupabaseClient<Database>;
 			supabase_admin: SupabaseClient<Database>;
-			get_session: () => Promise<Session | null>;
+			auth: AuthRequest;
+			get_spotify_tokens: () => Promise<{
+				access_token: string | null;
+			}>;
 		}
-		interface PageData {
-			session: Session | null;
-		}
+
 		// interface Platform {}
 	}
 
@@ -34,4 +35,13 @@ declare global {
 			Player: WebPlaybackPlayer;
 		};
 	}
+
+	namespace Lucia {
+		type Auth = LuciaAuth;
+		type UserAttributes = {
+			name: string | undefined;
+		};
+	}
 }
+
+export {};

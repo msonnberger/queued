@@ -5,9 +5,9 @@ import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
 
 export const config: Config = {
-	runtime: 'edge',
-	// frankfurt only to reduce latency for DB calls
-	regions: ['fra1']
+	// 	runtime: 'edge',
+	// 	// frankfurt only to reduce latency for DB calls
+	// 	regions: ['fra1']
 };
 
 export async function POST({ request, locals, fetch, params }) {

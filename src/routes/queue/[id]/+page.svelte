@@ -8,8 +8,8 @@
 
 	export let data;
 
-	$: ({ queue, player, session, spotify_access_token } = data);
-	$: show_player = spotify_access_token && $queue.owner_id === session?.user.id;
+	$: ({ queue, player, user, access_token } = data);
+	$: show_player = access_token && $queue.owner_id === user?.id;
 
 	let show_share_sheet = false;
 </script>
@@ -49,5 +49,5 @@
 	<Footer />
 </main>
 {#if show_player}
-	<Player player_store={player} queue_store={queue} spotify_access_token={spotify_access_token ?? ''} />
+	<Player player_store={player} queue_store={queue} spotify_access_token={access_token ?? ''} />
 {/if}

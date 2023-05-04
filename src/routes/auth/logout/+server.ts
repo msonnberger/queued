@@ -1,11 +1,15 @@
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+
+import { auth } from '$lib/server/lucia.js';
 
 export async function POST({ locals }) {
-	const { error: err } = await locals.supabase.auth.signOut();
+	const session = await locals.auth.validate();
 
-	if (err) {
-		throw error(500, 'Something went wrong. Please try again later.');
+	if (!session) {
+		throw redirect(303, '/');
 	}
+
+	await auth.invalidateSession(session?.sessionId);
 
 	throw redirect(303, '/');
 }

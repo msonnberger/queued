@@ -62,7 +62,12 @@
 				class="w-full border-none py-3 pl-4 pr-10 leading-5 text-gray-900 bg-neutral-50 dark:bg-slate-800 dark:text-slate-100 focus:ring-0 outline-0"
 				autocomplete="off"
 			/>
-			<button use:combobox.button class="absolute inset-y-0 right-0 flex items-center pr-2" type="button">
+			<button
+				use:combobox.button
+				class="absolute inset-y-0 right-0 flex items-center pr-2"
+				type="button"
+				aria-label="combobox-button"
+			>
 				<ChevronsUpDown class="h-5 w-5 text-gray-400" />
 			</button>
 		</div>

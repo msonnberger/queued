@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Files, MessageCircle } from 'lucide-svelte';
 	import toast from 'svelte-french-toast';
-	import { slate } from 'tailwindcss/colors';
 
 	import { page } from '$app/stores';
 	import type { TrackObject } from '$lib/api/spotify';
@@ -64,7 +63,7 @@
 						target="_blank"
 						class="flex items-center rounded-lg -ml-3 px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-600"
 					>
-						<MessageCircle color={slate[500]} size="28" class="-translate-x-0.5" />
+						<MessageCircle size="28" class="stroke-slate-500 -translate-x-0.5" />
 						<span class="ml-3 -translate-x-1">Messages</span></a
 					>
 				</li>

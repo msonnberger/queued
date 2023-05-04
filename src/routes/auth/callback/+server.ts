@@ -17,15 +17,6 @@ export async function GET({ url, cookies, locals }) {
 		const getUser = async () => {
 			if (existingUser) return existingUser;
 
-			const { error: err } = await locals.supabase_admin.from('spotify_tokens').insert({
-				user_id: user.id,
-				expires_in: tokens.expiresIn,
-				access_token: tokens.accessToken,
-				refresh_token: tokens.refreshToken
-			});
-
-			if (err) throw err;
-
 			return await createUser({
 				name: providerUser.display_name
 			});
@@ -35,6 +26,15 @@ export async function GET({ url, cookies, locals }) {
 		const session = await auth.createSession(user.id);
 
 		locals.auth.setSession(session);
+
+		const { error: err } = await locals.supabase_admin.from('spotify_tokens').upsert({
+			user_id: user.id,
+			expires_in: tokens.expiresIn,
+			access_token: tokens.accessToken,
+			refresh_token: tokens.refreshToken
+		});
+
+		if (err) throw err;
 	} catch (err) {
 		console.error(err);
 		throw error(500, 'Something went wrong.');

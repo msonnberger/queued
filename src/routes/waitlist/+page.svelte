@@ -1,6 +1,7 @@
 <script lang="ts">
 	import toast from 'svelte-french-toast';
 
+	import mockup from '$lib/assets/mockup.webp';
 	import { Button } from '$lib/components';
 
 	export let form;
@@ -18,16 +19,16 @@
 	<title>Queued</title>
 </svelte:head>
 
-<div class="flex items-center justify-center grow px-4 lg:px-0">
-	<div class="max-w-2xl text-center">
+<div class="flex flex-col items-center justify-center grow px-4 lg:px-0">
+	<div class="max-w-2xl text-center mt-20">
 		<span
 			class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium mb-6 px-3 py-1 rounded-full dark:bg-indigo-900 dark:text-indigo-300"
 		>
 			Coming Soon
 		</span>
 
-		<h1 class="text-5xl sm:text-7xl font-extrabold mb-10">Meet Queued, your collaborative music player.</h1>
-		<h2 class="text-xl text-slate-600 dark:text-slate-400 mb-20">
+		<h1 class="text-4xl sm:text-7xl font-extrabold mb-10">Meet Queued, your collaborative music player.</h1>
+		<h2 class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-20">
 			Tired of one person playing their playlist the whole night? With Queued, everyone votes on which song comes next
 			so that the next track will always be the best one.
 		</h2>
@@ -42,4 +43,5 @@
 			<Button type="submit" size="lg">Join Waitlist</Button>
 		</form>
 	</div>
+	<img src={mockup} alt="Queue Player on Desktop and iPhone" class="w-full max-w-6xl mt-20" />
 </div>

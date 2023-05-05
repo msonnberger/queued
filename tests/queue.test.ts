@@ -51,8 +51,8 @@ test.describe('create and join Queue', () => {
 	});
 });
 
-test.describe.skip('Queue functionality', () => {
-	test('add track', async ({ page, queue }) => {
+test.describe('Queue functionality', () => {
+	test.skip('add track', async ({ page, queue }) => {
 		const qid = await queue.create();
 		await page.goto(`/queue/${qid}`);
 		await page.getByPlaceholder('Search Songs').fill('Umbrella Rihanna');
@@ -60,6 +60,21 @@ test.describe.skip('Queue functionality', () => {
 		await page.getByTestId('add-track-button');
 		//await page.waitForLoadState('networkidle');
 		await expect(page.getByTestId('track-item').getByText('Umbrella')).toBeVisible();
+		await queue.delete(qid);
+	});
+
+	test('upvote track', async ({ page, queue }) => {
+		const qid = await queue.create();
+		await queue.add_songs(qid);
+
+		await page.goto(`/queue/${qid}`);
+		await page.waitForTimeout(1000);
+
+		await page.getByTestId('track-item-0').getByTestId('upvote').click();
+		await page.waitForTimeout(1000);
+
+		const value = await page.getByTestId('track-item-0').getByTestId('upvote-value').innerText();
+		await expect(value).toEqual('1');
 		await queue.delete(qid);
 	});
 });

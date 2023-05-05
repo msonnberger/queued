@@ -5,6 +5,7 @@
 
 	export let track: QueueTrack;
 	export let is_up_next = false;
+	export let testid: number;
 	export let add_vote: QueueStore['add_vote'];
 	export let delete_vote: QueueStore['delete_vote'];
 
@@ -21,7 +22,7 @@
 <div
 	class="flex justify-between items-center gap-3 bg-slate-50 dark:bg-slate-800 p-4 rounded-md shadow-md"
 	class:bg-red-200={is_up_next}
-	data-testid="track-item"
+	data-testid="track-item-{testid}"
 >
 	<div class="flex items-center">
 		<img src={track?.album?.images[2].url} alt="Album cover" />

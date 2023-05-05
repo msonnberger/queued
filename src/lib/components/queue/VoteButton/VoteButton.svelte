@@ -61,7 +61,7 @@
 	export let value: number;
 </script>
 
-<button type="button" class={buttonVariants({ has_voted, vote_type })} on:click>
+<button type="button" class={buttonVariants({ has_voted, vote_type })} on:click data-testid="{vote_type}vote">
 	<span>
 		{#if vote_type === 'up'}
 			<ThumbsUp size={16} />
@@ -69,7 +69,7 @@
 			<ThumbsDown size={16} />
 		{/if}
 	</span>
-	<span class="font-mono">
+	<span class="font-mono" data-testid="{vote_type}vote-value">
 		{value}
 	</span>
 </button>

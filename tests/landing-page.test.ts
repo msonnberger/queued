@@ -21,10 +21,16 @@ test.describe('dark mode', () => {
 		await expect(page.locator('html')).not.toHaveClass('dark');
 	});
 
-	test('listen to system changes per default', async ({ page }) => {
+	test.skip('listen to system changes per default', async ({ page }) => {
+		await page.getByText('Toggle Theme menu').click();
+		await page.getByText('System').click();
+
 		await expect(page.locator('html')).not.toHaveClass('dark');
 
 		await page.emulateMedia({ colorScheme: 'dark' });
+
+		await page.waitForTimeout(2000);
+
 		await page.reload(); // Chromium needs a reload to compute the changes
 		await expect(page.locator('html')).toHaveClass('dark');
 

@@ -97,7 +97,7 @@ function create_user_fixture(user: User, page: Page, context: BrowserContext) {
 		self,
 		login: async () => login({ ...(await self()) }, store.context),
 		logout: async () => {
-			await page.goto('/auth/logout');
+			await page.request.post('/auth/logout');
 		},
 		delete: async () => await auth.deleteUser(store.user.id)
 	};
@@ -137,6 +137,13 @@ export function create_queue_fixture(page: Page, users: ReturnType<typeof create
 			await user.logout();
 
 			return qid;
+		},
+		add_song: async (qid: string) => {
+			await supabase.from('tracks').insert([
+				{ spotify_uri: 'spotify:track:0iGckQFyv6svOfAbAY9aWJ', qid: qid }
+				// { spotify_uri: 'spotify:track:0V3wPSX9ygBnCm8psDIegu', qid: qid },
+				// { spotify_uri: 'spotify:track:5qaEfEh1AtSdrdrByCP7qR', qid: qid }
+			]);
 		},
 		delete: async (qid: string) => {
 			await supabase.from('queues').delete().eq('id', qid);

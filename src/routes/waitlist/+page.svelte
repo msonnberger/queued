@@ -32,13 +32,14 @@
 			Tired of one person playing their playlist the whole night? With Queued, everyone votes on which song comes next
 			so that the next track will always be the best one.
 		</h2>
-		<form method="post" class="flex justify-center items-center gap-4">
+		<form method="post" class="flex justify-center items-center gap-3">
 			<input
 				class="h-12 w-64 border-2 border-slate-900 focus:outline-slate-900 bg-slate-50 px-2 rounded-md dark:bg-transparent dark:border-slate-100"
 				type="email"
 				name="email"
 				id="email"
 				placeholder="taylor@music.com"
+				required
 			/>
 			<Button type="submit" size="lg">Join Waitlist</Button>
 		</form>

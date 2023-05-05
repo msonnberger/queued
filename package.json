@@ -1,6 +1,6 @@
 {
 	"name": "queued",
-	"version": "0.12.0",
+	"version": "0.13.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -54,6 +54,7 @@
 		"@lucia-auth/adapter-postgresql": "1.0.0",
 		"@lucia-auth/oauth": "1.0.1",
 		"@supabase/supabase-js": "2.21.0",
+		"@vercel/analytics": "1.0.1",
 		"class-variance-authority": "0.6.0",
 		"lucia-auth": "1.5.0",
 		"lucide-svelte": "0.206.0",

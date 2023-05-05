@@ -1,9 +1,13 @@
 <script lang="ts">
 	import '../app.css';
+	import { inject } from '@vercel/analytics';
 	import { Toaster } from 'svelte-french-toast';
 
+	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { Footer, ThemeToggle, UserMenu } from '$lib/components';
+
+	inject({ mode: dev ? 'development' : 'production' });
 
 	$: is_queue_page = $page.route.id === '/queue/[id]';
 

@@ -20,7 +20,9 @@
 		<a href="/" class="font-extrabold text-3xl text-slate-700 dark:text-slate-300">Q</a>
 		<div class="flex gap-5">
 			<ThemeToggle />
-			<UserMenu user={data.user} />
+			{#if $page.route.id !== '/waitlist'}
+				<UserMenu user={data.user} />
+			{/if}
 		</div>
 	</header>
 

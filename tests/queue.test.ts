@@ -65,7 +65,7 @@ test.describe('Queue functionality', () => {
 
 	test('upvote track', async ({ page, queue }) => {
 		const qid = await queue.create();
-		await queue.add_songs(qid);
+		await queue.add_song(qid);
 
 		await page.goto(`/queue/${qid}`);
 		await page.waitForTimeout(1000);
@@ -73,7 +73,22 @@ test.describe('Queue functionality', () => {
 		await page.getByTestId('track-item-0').getByTestId('upvote').click();
 		await page.waitForTimeout(1000);
 
-		const value = await page.getByTestId('track-item-0').getByTestId('upvote-value').innerText();
+		const value = await page.getByTestId('track-item-0').getByTestId('upvote').getByTestId('vote-value').innerText();
+		await expect(value).toEqual('1');
+		await queue.delete(qid);
+	});
+
+	test('downvote track', async ({ page, queue }) => {
+		const qid = await queue.create();
+		await queue.add_song(qid);
+
+		await page.goto(`/queue/${qid}`);
+		await page.waitForTimeout(1000);
+
+		await page.getByTestId('track-item-0').getByTestId('downvote').click();
+		await page.waitForTimeout(1000);
+
+		const value = await page.getByTestId('track-item-0').getByTestId('downvote').getByTestId('vote-value').innerText();
 		await expect(value).toEqual('1');
 		await queue.delete(qid);
 	});

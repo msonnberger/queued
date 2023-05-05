@@ -138,11 +138,11 @@ export function create_queue_fixture(page: Page, users: ReturnType<typeof create
 
 			return qid;
 		},
-		add_songs: async (qid: string) => {
+		add_song: async (qid: string) => {
 			await supabase.from('tracks').insert([
-				{ spotify_uri: 'spotify:track:0iGckQFyv6svOfAbAY9aWJ', qid: qid },
-				{ spotify_uri: 'spotify:track:0V3wPSX9ygBnCm8psDIegu', qid: qid },
-				{ spotify_uri: 'spotify:track:5qaEfEh1AtSdrdrByCP7qR', qid: qid }
+				{ spotify_uri: 'spotify:track:0iGckQFyv6svOfAbAY9aWJ', qid: qid }
+				// { spotify_uri: 'spotify:track:0V3wPSX9ygBnCm8psDIegu', qid: qid },
+				// { spotify_uri: 'spotify:track:5qaEfEh1AtSdrdrByCP7qR', qid: qid }
 			]);
 		},
 		delete: async (qid: string) => {

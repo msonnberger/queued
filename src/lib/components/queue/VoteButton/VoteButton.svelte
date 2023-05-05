@@ -69,7 +69,7 @@
 			<ThumbsDown size={16} />
 		{/if}
 	</span>
-	<span class="font-mono" data-testid="{vote_type}vote-value">
+	<span class="font-mono" data-testid="vote-value">
 		{value}
 	</span>
 </button>

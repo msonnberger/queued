@@ -8,7 +8,7 @@ export const config: Config = {
 	// 	regions: 'all'
 };
 
-export async function GET({ url, fetch }) {
+export async function GET({ url, fetch, setHeaders }) {
 	const q = url.searchParams.get('q');
 
 	if (q === null) {
@@ -25,6 +25,16 @@ export async function GET({ url, fetch }) {
 		{
 			headers: {
 				Authorization: `Bearer ${access_token}`
+			},
+			fetch: async (input, init) => {
+				const res = await fetch(input, init);
+				const cache_control = res.headers.get('cache-control');
+
+				if (cache_control !== null) {
+					setHeaders({ 'cache-control': cache_control });
+				}
+
+				return res;
 			}
 		}
 	);

@@ -1,11 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
+import { eq } from 'drizzle-orm';
 
-import { SUPABASE_SERVICE_KEY } from '$env/static/private';
-import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { db } from '$lib/server/db/db';
+import { spotify_tokens } from '$lib/server/db/schema';
 import { auth } from '$lib/server/lucia';
 
 export async function handle({ event, resolve }) {
-	event.locals.supabase_admin = createClient(PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_KEY);
 	event.locals.auth = auth.handleRequest(event);
 	event.locals.get_spotify_tokens = async () => {
 		const session = await event.locals.auth.validate();
@@ -14,28 +13,21 @@ export async function handle({ event, resolve }) {
 			return { access_token: null };
 		}
 
-		const { data, error } = await event.locals.supabase_admin
-			.from('spotify_tokens')
-			.select()
-			.eq('user_id', session.userId)
-			.maybeSingle();
+		const [data] = await db
+			.select({ refresh_token: spotify_tokens.refresh_token })
+			.from(spotify_tokens)
+			.where(eq(spotify_tokens.user_id, session.userId));
 
-		if (error) throw error;
-
-		if (data === null) {
+		if (data === undefined) {
 			return { access_token: null };
 		}
 
-		const { refresh_token } = data;
-
 		const new_token_res = await event.fetch('/api/spotify-access-token', {
 			method: 'POST',
-			body: JSON.stringify({ refresh_token })
+			body: JSON.stringify({ refresh_token: data.refresh_token })
 		});
 
 		const { access_token } = (await new_token_res.json()) as { access_token: string };
-
-		if (error) throw error;
 
 		return { access_token };
 	};

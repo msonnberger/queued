@@ -1,5 +1,7 @@
 import { error, redirect } from '@sveltejs/kit';
 
+import { db } from '$lib/server/db/db.js';
+import { spotify_tokens } from '$lib/server/db/schema.js';
 import { auth, spotify_auth } from '$lib/server/lucia.js';
 
 export async function GET({ url, cookies, locals }) {
@@ -27,13 +29,12 @@ export async function GET({ url, cookies, locals }) {
 
 		locals.auth.setSession(session);
 
-		const { error: err } = await locals.supabase_admin.from('spotify_tokens').upsert({
-			user_id: user.id,
-			refresh_token: tokens.refreshToken
-		});
-
-		if (err) throw err;
+		await db
+			.insert(spotify_tokens)
+			.values({ user_id: user.id, refresh_token: tokens.refreshToken })
+			.onConflictDoUpdate({ target: spotify_tokens.user_id, set: { refresh_token: tokens.refreshToken } });
 	} catch (err) {
+		console.error(err);
 		throw error(500, 'Something went wrong.');
 	}
 

@@ -6,8 +6,6 @@ import { sveltekit } from 'lucia-auth/middleware';
 import fs from 'node:fs';
 import postgres from 'pg';
 
-import type { Database } from '../../src/lib/types/supabase.js';
-
 const pool = new postgres.Pool({
 	connectionString: process.env.SUPABASE_CONNECTION_STRING
 });
@@ -19,7 +17,7 @@ const auth = lucia({
 	transformDatabaseUser: (user) => user
 });
 
-const supabase = createClient<Database>(process.env.PUBLIC_SUPABASE_URL ?? '', process.env.SUPABASE_SERVICE_KEY ?? '');
+const supabase = createClient(process.env.PUBLIC_SUPABASE_URL ?? '', process.env.SUPABASE_SERVICE_KEY ?? '');
 type UserFixture = ReturnType<typeof create_user_fixture>;
 type UserOpts = {
 	name?: string;

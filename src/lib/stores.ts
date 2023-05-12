@@ -32,7 +32,7 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 
 		channel.bind('vote', (data: PusherVoteEvent) => {
 			queue_writable.update((value) => {
-				const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
+				const track_index = value.tracks.findIndex((track) => track.db_id === data.supabase_track_id);
 
 				if (track_index === undefined) {
 					return value;

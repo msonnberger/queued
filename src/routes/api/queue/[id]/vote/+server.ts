@@ -15,7 +15,7 @@ export const config: Config = {
 };
 
 const track_id_scheme = z.object({
-	supabase_track_id: z.number().int().positive()
+	db_track_id: z.number().int().positive()
 });
 
 function get_voter_id(cookies: Cookies) {
@@ -36,17 +36,17 @@ export async function DELETE({ request, cookies, params }) {
 		throw error(400, 'Invalid data');
 	}
 
-	const { supabase_track_id } = parsed.data;
+	const { db_track_id } = parsed.data;
 	const voter_id = get_voter_id(cookies);
 
 	try {
 		const [deleted_vote] = await db
 			.delete(votes)
-			.where(and(eq(votes.track_id, supabase_track_id), eq(votes.voter_id, voter_id)))
+			.where(and(eq(votes.track_id, db_track_id), eq(votes.voter_id, voter_id)))
 			.returning();
 
 		return pusher.trigger(`queue-${params.id}`, 'vote', {
-			supabase_track_id,
+			db_track_id,
 			up_value: -Math.max(deleted_vote.value, 0),
 			down_value: -Math.min(deleted_vote.value, 0),
 			type_voted: null,
@@ -69,21 +69,21 @@ export async function POST({ request, cookies, params }) {
 		throw error(400, 'Invalid data');
 	}
 
-	const { supabase_track_id, value, is_vote_flipped } = parsed.data;
+	const { db_track_id, value, is_vote_flipped } = parsed.data;
 	const voter_id = get_voter_id(cookies);
 
 	try {
 		await db
 			.insert(votes)
 			.values({
-				track_id: supabase_track_id,
+				track_id: db_track_id,
 				value,
 				voter_id
 			})
 			.onConflictDoUpdate({ target: [votes.track_id, votes.voter_id], set: { value } });
 
 		return pusher.trigger(`queue-${params.id}`, 'vote', {
-			supabase_track_id,
+			db_track_id,
 			up_value: is_vote_flipped ? value : Math.max(value, 0),
 			down_value: is_vote_flipped ? value : Math.min(value, 0),
 			type_voted: value > 0 ? 'up' : 'down',

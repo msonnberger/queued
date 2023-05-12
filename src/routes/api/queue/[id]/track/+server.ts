@@ -8,6 +8,7 @@ import { pusher } from '$lib/api/pusher/server';
 import type { TrackObject } from '$lib/api/spotify';
 import { db } from '$lib/server/db/db.js';
 import { tracks } from '$lib/server/db/schema.js';
+import type { PusherAddTrackEvent, PusherDeleteTrackEvent } from '$lib/types';
 
 export const config: Config = {
 	// 	runtime: 'edge',
@@ -26,7 +27,10 @@ export async function POST({ request, params }) {
 
 	try {
 		const [row] = await db.insert(tracks).values({ spotify_uri: track.uri, qid }).returning({ id: tracks.id });
-		await pusher.trigger(`queue-${qid}`, 'track-added', { ...track, supabase_id: row.id });
+		await pusher.trigger(`queue-${qid}`, 'track-added', {
+			...track,
+			db_id: row.id
+		} satisfies PusherAddTrackEvent);
 	} catch (e) {
 		if (e instanceof postgres.DatabaseError && e.code === '23505') {
 			throw error(409, 'Track already exists.');
@@ -54,7 +58,7 @@ export async function DELETE({ request, params }) {
 
 	try {
 		await db.delete(tracks).where(and(eq(tracks.spotify_uri, result.data.uri), eq(tracks.qid, qid)));
-		await pusher.trigger(`queue-${qid}`, 'track-removed', { uri: result.data.uri });
+		await pusher.trigger(`queue-${qid}`, 'track-removed', { uri: result.data.uri } satisfies PusherDeleteTrackEvent);
 	} catch (e) {
 		throw error(500, 'Something went wrong.');
 	}

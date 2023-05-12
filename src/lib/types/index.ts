@@ -36,9 +36,15 @@ export interface PlayerStore {
 }
 
 export interface PusherVoteEvent {
-	supabase_track_id: number;
+	db_track_id: number;
 	up_value: number;
 	down_value: number;
 	type_voted: 'up' | 'down' | null;
 	voter_id: string;
+}
+
+export type PusherAddTrackEvent = Omit<QueueTrack, 'votes'>;
+
+export interface PusherDeleteTrackEvent {
+	uri: string;
 }

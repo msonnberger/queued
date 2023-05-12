@@ -10,7 +10,7 @@ import postgres from 'pg';
 import { queues, spotify_tokens, tracks } from '../../src/lib/server/db/schema.js';
 
 const pool = new postgres.Pool({
-	connectionString: process.env.SUPABASE_CONNECTION_STRING,
+	connectionString: process.env.DB_CONNECTION_STRING,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	log: () => {}
 });

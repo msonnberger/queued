@@ -1,6 +1,6 @@
 import { expect, test } from './lib/playwright.js';
 
-test.afterEach(({ users }) => users.delete_all());
+test.afterEach(async ({ users }) => await users.delete_all());
 
 test('login works', async ({ page, users }) => {
 	const user = await users.create();

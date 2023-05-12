@@ -46,8 +46,10 @@ export const actions = {
 
 		try {
 			await db.transaction(async (tx) => {
-				await tx.delete(votes).where(eq(votes.voter_id, session.userId));
-				await tx.delete(queues).where(eq(queues.owner_id, session.userId));
+				if (cookies.get('voter-id') !== undefined) {
+					await tx.delete(votes).where(eq(votes.voter_id, cookies.get('voter-id') as string));
+				}
+
 				await auth.deleteUser(session.userId);
 				cookies.delete('voter-id', { path: '/' });
 			});

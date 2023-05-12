@@ -54,7 +54,6 @@
 	"dependencies": {
 		"@lucia-auth/adapter-postgresql": "1.0.0",
 		"@lucia-auth/oauth": "1.0.1",
-		"@supabase/supabase-js": "2.21.0",
 		"@vercel/analytics": "1.0.1",
 		"class-variance-authority": "0.6.0",
 		"drizzle-orm": "0.25.4",

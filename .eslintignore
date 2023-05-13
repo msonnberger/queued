@@ -14,4 +14,3 @@ package-lock.json
 yarn.lock
 
 /src/lib/api/spotify.ts
-/src/lib/api/supabase.types.ts

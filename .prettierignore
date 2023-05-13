@@ -15,4 +15,4 @@ yarn.lock
 
 /tests/spotify-tokens.json
 /src/lib/api/spotify.ts
-/src/lib/types/supabase.ts
+/src/lib/server/db/migrations

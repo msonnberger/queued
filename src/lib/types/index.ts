@@ -1,19 +1,18 @@
+import type { InferModel } from 'drizzle-orm';
 import type { Readable } from 'svelte/store';
 
+import type { queues } from '$lib/server/db/schema';
 import type { TrackObject } from '../api/spotify';
-import type { Database } from './supabase';
 import type { WebPlaybackTrack } from './web-player';
 
-export type SupabaseQueue = Database['public']['Tables']['queues']['Row'];
-export type SupabaseTrack = Database['public']['Tables']['tracks']['Row'];
-export type SupabaseVote = Database['public']['Tables']['votes']['Row'];
-
 export interface QueueTrack extends TrackObject {
-	supabase_id: number;
+	db_id: number;
 	votes: { up: number; down: number; own_vote: 'up' | 'down' | null };
 }
 
-export interface Queue extends Pick<SupabaseQueue, 'name' | 'id' | 'owner_id'> {
+type DbQueue = InferModel<typeof queues>;
+
+export interface Queue extends Pick<DbQueue, 'name' | 'id' | 'owner_id'> {
 	tracks: Array<QueueTrack>;
 	currently_playing?: TrackObject;
 }
@@ -37,9 +36,15 @@ export interface PlayerStore {
 }
 
 export interface PusherVoteEvent {
-	supabase_track_id: number;
+	db_track_id: number;
 	up_value: number;
 	down_value: number;
 	type_voted: 'up' | 'down' | null;
 	voter_id: string;
+}
+
+export type PusherAddTrackEvent = Omit<QueueTrack, 'votes'>;
+
+export interface PusherDeleteTrackEvent {
+	uri: string;
 }

@@ -1,18 +1,116 @@
-import { error } from '@sveltejs/kit';
+import { eq, type InferModel } from 'drizzle-orm';
 
-export async function load({ cookies, locals }) {
-	try {
-		if (cookies.get('voter-id') === undefined) {
-			cookies.set('voter-id', crypto.randomUUID(), { path: '/', maxAge: 60 * 60 * 24 * 365 });
+import type { TrackObject } from '$lib/api/spotify';
+import { db } from '$lib/server/db/db';
+import { queues, tracks, votes } from '$lib/server/db/schema';
+import type { Queue as StoreQueue } from '$lib/types';
+
+type Queue = InferModel<typeof queues>;
+type Track = InferModel<typeof tracks>;
+type Vote = InferModel<typeof votes>;
+
+interface Result {
+	queue: Queue;
+	tracks: Record<number, Track & { votes: Vote[] }>;
+}
+
+export async function load({ cookies, locals, params, fetch }) {
+	if (cookies.get('voter-id') === undefined) {
+		cookies.set('voter-id', crypto.randomUUID(), { path: '/', maxAge: 60 * 60 * 24 * 365 });
+	}
+
+	const voter_id = cookies.get('voter-id') as string;
+
+	const { access_token } = await locals.get_spotify_tokens();
+
+	const data = await db
+		.select({
+			queue: queues,
+			track: tracks,
+			vote: votes
+		})
+		.from(queues)
+		.leftJoin(tracks, eq(tracks.qid, queues.id))
+		.leftJoin(votes, eq(votes.track_id, tracks.id))
+		.where(eq(queues.id, params.id));
+
+	const result = data.reduce<Result>(
+		(acc, row) => {
+			const track = row.track;
+			const vote = row.vote;
+
+			if (track && Object.keys(track).length > 0) {
+				if (!acc.tracks[track.id]) {
+					acc.tracks[track.id] = { ...track, votes: [] };
+				}
+
+				if (vote) {
+					acc.tracks[track.id].votes.push(vote);
+				}
+			}
+
+			return acc;
+		},
+		{ queue: data[0].queue, tracks: [] }
+	);
+
+	const currently_playing_id = result.queue.current_track_uri?.split(':').at(-1);
+	let spotify_track_ids = Object.values(result.tracks)
+		.map((track) => track.spotify_uri.split(':').at(-1))
+		.join(',');
+
+	if (currently_playing_id) {
+		spotify_track_ids = spotify_track_ids ? `${currently_playing_id},${spotify_track_ids}` : currently_playing_id;
+	}
+
+	const store_queue: StoreQueue = {
+		name: result.queue.name,
+		id: result.queue.id,
+		owner_id: result.queue.owner_id,
+		tracks: []
+	};
+	let currently_playing_track: TrackObject | undefined;
+
+	if (spotify_track_ids) {
+		const spotify_tracks_response = await fetch(`/api/get-tracks?track_ids=${spotify_track_ids}`);
+		let spotify_tracks = (await spotify_tracks_response.json()) as TrackObject[];
+
+		if (currently_playing_id) {
+			currently_playing_track = spotify_tracks[0];
+			spotify_tracks = spotify_tracks.slice(1);
 		}
 
-		const { access_token } = await locals.get_spotify_tokens();
-
-		return {
-			access_token,
-			voter_id: cookies.get('voter-id') as string
-		};
-	} catch (err) {
-		throw error(500, err as string);
+		store_queue.tracks =
+			Object.values(result.tracks).map((db_track, i) => {
+				const votes = db_track.votes;
+				return {
+					...spotify_tracks[i],
+					db_id: db_track.id,
+					votes: {
+						// TODO: fix this
+						up: votes
+							.map((vote) => vote.value)
+							.filter((value) => value > 0)
+							.reduce((acc: number, curr: number) => acc + curr, 0),
+						down: votes
+							.map((vote) => vote.value)
+							.filter((value) => value < 0)
+							.reduce((acc: number, curr: number) => acc + curr, 0),
+						own_vote: votes.some((vote) => vote.value > 0 && vote.voter_id === voter_id)
+							? 'up'
+							: votes.some((vote) => vote.value < 0 && vote.voter_id === voter_id)
+							? 'down'
+							: null
+					}
+				};
+			}) ?? [];
 	}
+
+	store_queue.currently_playing = currently_playing_track;
+
+	return {
+		store_queue,
+		access_token,
+		voter_id
+	};
 }

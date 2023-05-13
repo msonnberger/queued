@@ -1,9 +1,9 @@
-import { type PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
 
-const config: PlaywrightTestConfig = {
+const config = defineConfig({
 	globalSetup: './tests/lib/global-setup',
 	webServer: {
 		command: 'pnpm build && pnpm preview',
@@ -11,6 +11,6 @@ const config: PlaywrightTestConfig = {
 		reuseExistingServer: false
 	},
 	testDir: 'tests'
-};
+});
 
 export default config;

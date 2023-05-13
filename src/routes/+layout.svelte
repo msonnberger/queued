@@ -5,7 +5,6 @@
 
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
-	import logo from '$lib/assets/logo.svg';
 	import { Footer, ThemeToggle, UserMenu } from '$lib/components';
 	import { Logo } from '$lib/components/icons';
 

@@ -34,8 +34,8 @@ To get a local copy up and running, follow these simple steps.
 
 Here is what you need to be able to run Queued:
 
-- Node.js (Version 18 or higher)
-- Supabase Project
+- Node.js (Version 19 or higher)
+- Postgres Database
 - Spotify OAuth App
 - Pusher Server
 - pnpm _(recommended)_
@@ -65,7 +65,7 @@ Here is what you need to be able to run Queued:
 1. Set up your .env file
 
    - Duplicate `.env.example` to `.env`
-   - Fill in values for Supabase, Spotify and Pusher API keys
+   - Fill in values for the database, Spotify and Pusher API keys
 
 1. Start dev server
 

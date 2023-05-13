@@ -1,6 +1,7 @@
 <script lang="ts">
 	import toast from 'svelte-french-toast';
 
+	import { enhance } from '$app/forms';
 	import mockup from '$lib/assets/mockup.webp';
 	import { Button } from '$lib/components';
 
@@ -10,7 +11,11 @@
 		if (form?.success) {
 			toast.success("You'll hear from us soon :)", { position: 'top-center' });
 		} else if (form?.success === false) {
-			toast.error('Oops, somthing went wrong...', { position: 'top-center' });
+			if (form.reason === 'duplicate') {
+				toast.error('You are already signed up!', { position: 'top-center' });
+			} else {
+				toast.error('Oops, somthing went wrong...', { position: 'top-center' });
+			}
 		}
 	}
 </script>
@@ -32,7 +37,7 @@
 			Tired of one person playing their playlist the whole night? With Queued, everyone votes on which song comes next
 			so that the next track will always be the best one.
 		</h2>
-		<form method="post" class="flex justify-center items-center gap-3">
+		<form method="post" class="flex justify-center items-center gap-3" use:enhance>
 			<input
 				class="h-12 w-64 border-2 border-slate-900 focus:outline-slate-900 bg-slate-50 px-2 rounded-md dark:bg-transparent dark:border-slate-100"
 				type="email"

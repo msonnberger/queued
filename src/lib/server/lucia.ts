@@ -2,18 +2,14 @@ import { pg } from '@lucia-auth/adapter-postgresql';
 import { provider } from '@lucia-auth/oauth';
 import lucia from 'lucia-auth';
 import { sveltekit } from 'lucia-auth/middleware';
-import postgres from 'pg';
 
-import { LUCIA_URL, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SUPABASE_CONNECTION_STRING } from '$env/static/private';
+import { LUCIA_URL, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { dev } from '$app/environment';
 import { getMe } from '$lib/api/spotify';
-
-const pool = new postgres.Pool({
-	connectionString: SUPABASE_CONNECTION_STRING
-});
+import { connection_pool } from './db/db';
 
 export const auth = lucia({
-	adapter: pg(pool),
+	adapter: pg(connection_pool),
 	env: dev ? 'DEV' : 'PROD',
 	middleware: sveltekit(),
 	transformDatabaseUser: (user) => user

@@ -37,28 +37,28 @@ test('sorted_queue', () => {
 	expect(sorted_queue(queue)).toEqual(queue);
 
 	queue.tracks = [
-		{ supabase_id: 1, votes: { up: 1, down: 0, own_vote: null } },
-		{ supabase_id: 2, votes: { up: 2, down: 0, own_vote: null } },
-		{ supabase_id: 3, votes: { up: 3, down: 0, own_vote: null } }
+		{ db_id: 1, votes: { up: 1, down: 0, own_vote: null } },
+		{ db_id: 2, votes: { up: 2, down: 0, own_vote: null } },
+		{ db_id: 3, votes: { up: 3, down: 0, own_vote: null } }
 	];
 
-	expect(sorted_queue(queue).tracks.map((t) => t.supabase_id)).toEqual([3, 2, 1]);
+	expect(sorted_queue(queue).tracks.map((t) => t.db_id)).toEqual([3, 2, 1]);
 
 	queue.tracks = [
-		{ supabase_id: 1, votes: { up: 0, down: -3, own_vote: null } },
-		{ supabase_id: 2, votes: { up: 0, down: -2, own_vote: null } },
-		{ supabase_id: 3, votes: { up: 0, down: -1, own_vote: null } }
+		{ db_id: 1, votes: { up: 0, down: -3, own_vote: null } },
+		{ db_id: 2, votes: { up: 0, down: -2, own_vote: null } },
+		{ db_id: 3, votes: { up: 0, down: -1, own_vote: null } }
 	];
 
-	expect(sorted_queue(queue).tracks.map((t) => t.supabase_id)).toEqual([3, 2, 1]);
+	expect(sorted_queue(queue).tracks.map((t) => t.db_id)).toEqual([3, 2, 1]);
 
 	queue.tracks = [
-		{ supabase_id: 1, votes: { up: 2, down: 0, own_vote: null } },
-		{ supabase_id: 2, votes: { up: 3, down: -1, own_vote: null } },
-		{ supabase_id: 3, votes: { up: 5, down: 0, own_vote: null } }
+		{ db_id: 1, votes: { up: 2, down: 0, own_vote: null } },
+		{ db_id: 2, votes: { up: 3, down: -1, own_vote: null } },
+		{ db_id: 3, votes: { up: 5, down: 0, own_vote: null } }
 	];
 
-	expect(sorted_queue(queue).tracks.map((t) => t.supabase_id)).toEqual([3, 2, 1]);
+	expect(sorted_queue(queue).tracks.map((t) => t.db_id)).toEqual([3, 2, 1]);
 });
 
 test('debounce', async () => {

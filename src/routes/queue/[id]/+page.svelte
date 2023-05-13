@@ -34,7 +34,7 @@
 		</div>
 
 		<ul class="flex flex-col gap-5 mt-8">
-			{#each $queue.tracks as track, i (track.supabase_id)}
+			{#each $queue.tracks as track, i (track.db_id)}
 				<li animate:flip={{ duration: 300 }}>
 					<Track
 						{track}

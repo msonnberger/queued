@@ -1,15 +1,18 @@
 import { pg } from '@lucia-auth/adapter-postgresql';
 import type { BrowserContext, Page, WorkerInfo } from '@playwright/test';
-import { createClient } from '@supabase/supabase-js';
+import { eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import lucia, { type User } from 'lucia-auth';
 import { sveltekit } from 'lucia-auth/middleware';
 import fs from 'node:fs';
 import postgres from 'pg';
 
-import type { Database } from '../../src/lib/types/supabase.js';
+import { queues, spotify_tokens, tracks } from '../../src/lib/server/db/schema.js';
 
 const pool = new postgres.Pool({
-	connectionString: process.env.SUPABASE_CONNECTION_STRING
+	connectionString: process.env.DB_CONNECTION_STRING,
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	log: () => {}
 });
 
 const auth = lucia({
@@ -19,7 +22,8 @@ const auth = lucia({
 	transformDatabaseUser: (user) => user
 });
 
-const supabase = createClient<Database>(process.env.PUBLIC_SUPABASE_URL ?? '', process.env.SUPABASE_SERVICE_KEY ?? '');
+const db = drizzle(pool);
+
 type UserFixture = ReturnType<typeof create_user_fixture>;
 type UserOpts = {
 	name?: string;
@@ -54,14 +58,10 @@ export function create_users_fixture(page: Page, context: BrowserContext, worker
 				refresh_token = tokens.non_premium.refresh_token;
 			}
 
-			const { error } = await supabase.from('spotify_tokens').insert({
+			await db.insert(spotify_tokens).values({
 				user_id: lucia_user.id,
 				refresh_token
 			});
-
-			if (error) {
-				throw error;
-			}
 
 			const user_fixture = create_user_fixture(lucia_user, store.page, store.context);
 			store.users.push(user_fixture);
@@ -81,6 +81,7 @@ export function create_users_fixture(page: Page, context: BrowserContext, worker
 		},
 		delete: async (id: string) => {
 			await auth.deleteUser(id);
+
 			store.users = store.users.filter((u) => u.id !== id);
 		}
 	};
@@ -139,17 +140,17 @@ export function create_queue_fixture(page: Page, users: ReturnType<typeof create
 			return qid;
 		},
 		add_song: async (qid: string) => {
-			await supabase.from('tracks').insert([
+			await db.insert(tracks).values([
 				{ spotify_uri: 'spotify:track:0iGckQFyv6svOfAbAY9aWJ', qid: qid }
 				// { spotify_uri: 'spotify:track:0V3wPSX9ygBnCm8psDIegu', qid: qid },
 				// { spotify_uri: 'spotify:track:5qaEfEh1AtSdrdrByCP7qR', qid: qid }
 			]);
 		},
 		delete: async (qid: string) => {
-			await supabase.from('queues').delete().eq('id', qid);
+			await db.delete(queues).where(eq(queues.id, qid));
 		},
 		delete_all: async () => {
-			await supabase.from('queues').delete().eq('name', 'Test Queue');
+			await db.delete(queues).where(eq(queues.name, 'Test Queue'));
 		}
 	};
 }

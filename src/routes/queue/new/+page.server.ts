@@ -1,6 +1,8 @@
 import { error, redirect } from '@sveltejs/kit';
 
 import { getMe } from '$lib/api/spotify';
+import { db } from '$lib/server/db/db.js';
+import { queues } from '$lib/server/db/schema.js';
 
 export async function load({ locals }) {
 	const { session, user } = await locals.auth.validateUser();
@@ -29,15 +31,10 @@ export const actions = {
 		const data = await request.formData();
 		const name = data.get('queue_name') as string;
 
-		const { data: queue, error: err } = await locals.supabase_admin
-			.from('queues')
-			.insert({ name, owner_id: session.userId, id: get_random_string(7) })
-			.select()
-			.single();
-
-		if (err) {
-			throw error(500, err.message);
-		}
+		const [queue] = await db
+			.insert(queues)
+			.values({ name, owner_id: session.userId, id: get_random_string(7) })
+			.returning();
 
 		throw redirect(303, `/queue/${queue.id}?share=true`);
 	}

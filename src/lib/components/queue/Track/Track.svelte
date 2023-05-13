@@ -33,13 +33,13 @@
 	</div>
 	<div class="flex gap-2 flex-col lg:flex-row">
 		<VoteButton
-			on:click={() => handle_vote(track.supabase_id, 'up', track.votes.own_vote)}
+			on:click={() => handle_vote(track.db_id, 'up', track.votes.own_vote)}
 			vote_type="up"
 			value={track.votes.up}
 			has_voted={track.votes.own_vote === 'up'}
 		/>
 		<VoteButton
-			on:click={() => handle_vote(track.supabase_id, 'down', track.votes.own_vote)}
+			on:click={() => handle_vote(track.db_id, 'down', track.votes.own_vote)}
 			vote_type="down"
 			value={-track.votes.down}
 			has_voted={track.votes.own_vote === 'down'}

@@ -2,7 +2,14 @@ import { derived, writable } from 'svelte/store';
 
 import { pusher_client } from './api/pusher/client';
 import type { TrackObject } from './api/spotify';
-import type { PlayerStore, PusherVoteEvent, Queue, QueueStore, QueueTrack } from './types';
+import type {
+	PlayerStore,
+	PusherAddTrackEvent,
+	PusherDeleteTrackEvent,
+	PusherVoteEvent,
+	Queue,
+	QueueStore
+} from './types';
 import { sorted_queue } from './utils';
 
 export const create_queue_store = (initial_value: Queue, current_voter_id: string): QueueStore => {
@@ -11,12 +18,12 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 	const queue_writable = writable<Queue>(initial_value, () => {
 		const channel = pusher_client.subscribe(`queue-${qid}`);
 
-		channel.bind('track-added', (data: Omit<QueueTrack, 'votes'>) => {
+		channel.bind('track-added', (data: PusherAddTrackEvent) => {
 			const new_track = { ...data, votes: { up: 0, down: 0, own_vote: null } };
 			queue_writable.update((value) => ({ ...value, tracks: [...value.tracks, new_track] }));
 		});
 
-		channel.bind('track-removed', (data: { uri: string }) => {
+		channel.bind('track-removed', (data: PusherDeleteTrackEvent) => {
 			queue_writable.update((old) => ({
 				...old,
 				tracks: old.tracks.filter((track) => track.uri !== data.uri)
@@ -32,7 +39,7 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 
 		channel.bind('vote', (data: PusherVoteEvent) => {
 			queue_writable.update((value) => {
-				const track_index = value.tracks.findIndex((track) => track.supabase_id === data.supabase_track_id);
+				const track_index = value.tracks.findIndex((track) => track.db_id === data.db_track_id);
 
 				if (track_index === undefined) {
 					return value;
@@ -71,13 +78,13 @@ export const create_queue_store = (initial_value: Queue, current_voter_id: strin
 		add_vote: async (track_id: number, value: 1 | -1, is_vote_flipped: boolean) => {
 			return fetch(`/api/queue/${qid}/vote`, {
 				method: 'POST',
-				body: JSON.stringify({ supabase_track_id: track_id, value, is_vote_flipped })
+				body: JSON.stringify({ db_track_id: track_id, value, is_vote_flipped })
 			});
 		},
 		delete_vote: async (track_id: number) => {
 			return fetch(`/api/queue/${qid}/vote`, {
 				method: 'DELETE',
-				body: JSON.stringify({ supabase_track_id: track_id })
+				body: JSON.stringify({ db_track_id: track_id })
 			});
 		},
 		update_current_track: async (uri: string | null) => {

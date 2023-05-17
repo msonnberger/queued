@@ -11,7 +11,7 @@
 	<title>Queued • Account</title>
 </svelte:head>
 
-<main class="max-w-2xl w-full mt-10">
+<main class="max-w-2xl w-full mt-10 px-4 lg:px-0">
 	<h1 class="text-6xl font-bold mb-20 mt-4">My Account</h1>
 
 	<h2 class="text-xl font-bold mb-4">Queues</h2>

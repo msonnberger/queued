@@ -21,7 +21,11 @@
 <Sidebar queue_currently_playing={$queue.currently_playing} />
 <ShareSheet bind:open={show_share_sheet} queue_currently_playing={$queue.currently_playing} />
 
-<main class="lg:ml-sidebar flex flex-col items-center flex-1 px-4 lg:px-0" class:mb-40={show_player}>
+<main
+	class="lg:ml-sidebar flex flex-col items-center flex-1 px-4 lg:px-0"
+	class:sm:mb-40={show_player}
+	class:mb-24={show_player}
+>
 	<div class="flex-1 flex flex-col max-w-lg w-full">
 		<h1 class="text-5xl text-center font-bold mt-4 lg:mt-10 mb-10 lg:mb-20">{$queue.name}</h1>
 

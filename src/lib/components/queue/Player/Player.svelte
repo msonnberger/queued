@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Pause, Play, SkipBack, SkipForward, Volume, Volume1, Volume2 } from 'lucide-svelte';
 	import { onDestroy, onMount } from 'svelte';
-	import toast from 'svelte-french-toast';
 	import type { Writable } from 'svelte/store';
+	import default_theme from 'tailwindcss/defaultTheme';
 
 	import { browser } from '$app/environment';
 	import { postMePlayerQueue, putMePlayerPlay } from '$lib/api/spotify';
@@ -84,6 +84,18 @@
 				$player_store.device_id = state.device_id;
 			});
 
+			player.addListener('initialization_error', ({ message }) => {
+				console.error(message);
+			});
+
+			player.addListener('authentication_error', ({ message }) => {
+				console.error(message);
+			});
+
+			player.addListener('account_error', ({ message }) => {
+				console.error(message);
+			});
+
 			player.addListener('player_state_changed', (state) => {
 				if (!state) {
 					return;
@@ -122,7 +134,7 @@
 		}
 	});
 
-	const init_playback = async () => {
+	async function init_playback() {
 		if ($queue_store.tracks.length === 0) {
 			return;
 		}
@@ -147,31 +159,31 @@
 		} catch (error) {
 			console.error(error);
 		}
-	};
+	}
 
 	$: player?.setVolume($player_store.volume);
 </script>
 
 <div
-	class="fixed left-0 lg:left-sidebar right-0 bottom-0 z-10 h-40 flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 ring-1 ring-slate-900/5 backdrop-blur-sm"
+	class="fixed left-0 lg:left-sidebar right-0 bottom-0 z-10 h-24 sm:h-40 flex items-center gap-6 bg-white/90 dark:bg-slate-800/90 pr-6 ring-1 ring-slate-900/5 backdrop-blur-sm"
 >
-	<div class="block aspect-square w-40 bg-slate-200 dark:bg-slate-700">
+	<div class="block aspect-square w-24 sm:w-40 bg-slate-200 dark:bg-slate-700">
 		{#if $player_store.track?.album.images[0].url}
 			<img src={$player_store.track.album.images[0].url} alt="Album cover" />
 		{:else}
 			<Vinyl />
 		{/if}
 	</div>
-	<div class="flex flex-1 flex-col gap-4 overflow-hidden p-1">
+	<div class="flex flex-1 flex-col gap-4 overflow-hidden">
 		<div class="flex w-full justify-between items-center">
-			<div class="flex w-1/2 justify-between">
-				<div class="flex flex-col w-4/5">
+			<div class="flex sm:w-1/2 justify-between">
+				<div class="flex flex-col sm:w-4/5">
 					<span class="truncate text-base font-bold leading-6">{$player_store.track?.name ?? ''}</span>
 					<span class="truncate text-sm font-normal text-slate-500 dark:text-slate-400"
 						>{format_artists($player_store.track?.artists)}
 					</span>
 				</div>
-				<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
+				<button class="hidden sm:block" disabled={$player_store.track === null} on:click={() => player?.seek(0)}>
 					<SkipBack size={28} />
 				</button>
 			</div>
@@ -180,8 +192,8 @@
 				on:click={$player_store.track === null ? init_playback : () => player?.togglePlay()}
 				disabled={$player_store.device_id === null}
 				circle
-				size="lg"
-				class="mx-4"
+				size={browser && window.matchMedia(`screen and (min-width: ${default_theme.screens.sm}`).matches ? 'lg' : 'md'}
+				class="sm:mx-4"
 			>
 				{#if $player_store.is_playing}
 					<Pause size={24} class="fill-white dark:fill-slate-900" strokeWidth="1" />
@@ -193,11 +205,11 @@
 					/>
 				{/if}
 			</Button>
-			<div class="w-1/2 flex gap-4 items-center">
-				<button on:click={() => toast.error('Oops. Not implemented yet.', { position: 'bottom-center' })}>
+			<div class="hidden sm:w-1/2 sm:flex gap-4 items-center">
+				<button disabled={$queue_store.tracks.length < 1} on:click={init_playback}>
 					<SkipForward size={28} />
 				</button>
-				<div class="flex gap-2">
+				<div class="gap-2 flex">
 					<label for="toggle_volume_slider" class="cursor-pointer">
 						{#if $player_store.volume === 0}
 							<Volume />

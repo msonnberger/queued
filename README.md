@@ -24,7 +24,6 @@ Queued was done as a final year project for the
 
 - [Martin Sonnberger](https://github.com/msonnberger)
 - [Maximilian Hajek](https://github.com/Bluuax)
-- Simon Hagn
 
 ## Getting Started
 

@@ -12,9 +12,9 @@
 		<p class="italic text-slate-500 dark:text-slate-400 text-xl mb-8">Last updated May 16, 2023</p>
 		<section role="contentinfo" aria-label="Purpose of the Privacy Policy">
 			<p>
-				Thank you for choosing to be part of our community at Queued.<br />Queued is a project by Martin Sonnberger,
-				Maximilian Hajek and Simon Hagn. When the website says "Queued", "we", "us" or "our", it is meant that
-				statements are made on behalf of all three co-creators.
+				Thank you for choosing to be part of our community at Queued.<br />Queued is a project by Martin Sonnberger and
+				Maximilian Hajek. When the website says "Queued", "we", "us" or "our", it is meant that statements are made on
+				behalf of all three co-creators.
 			</p>
 			<p class="mt-8">
 				We are committed to protecting your personal information and your right to privacy. If you have any questions or

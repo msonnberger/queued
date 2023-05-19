@@ -22,9 +22,8 @@
 	<h2 class="font-bold text-2xl mt-10 mb-4">Meet the Team</h2>
 	<ul class="list-disc list-inside flex flex-col gap-1">
 		<li>
-			<Link href="https://github.com/msonnberger">Martin Sonnberger</Link> (Concept & Development)
+			<Link href="https://github.com/msonnberger">Martin Sonnberger</Link> (Interface Design, Concept & Development)
 		</li>
-		<li><Link href="https://github.com/Bluuax">Maximilian Hajek</Link> (Concept & Development)</li>
-		<li>Simon Hagn (Interface Design)</li>
+		<li><Link href="https://github.com/Bluuax">Maximilian Hajek</Link> (Interface Design, Concept & Development)</li>
 	</ul>
 </main>

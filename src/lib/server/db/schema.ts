@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
 	bigint,
 	boolean,
@@ -97,3 +98,16 @@ export const votes = pgTable(
 		cpk: primaryKey(votes.voter_id, votes.track_id)
 	})
 );
+
+export const queues_relations = relations(queues, ({ many }) => ({
+	tracks: many(tracks)
+}));
+
+export const tracks_relations = relations(tracks, ({ many, one }) => ({
+	votes: many(votes),
+	queue: one(queues, { fields: [tracks.qid], references: [queues.id] })
+}));
+
+export const votes_relations = relations(votes, ({ one }) => ({
+	track: one(tracks, { fields: [votes.track_id], references: [tracks.id] })
+}));

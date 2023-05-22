@@ -14,7 +14,7 @@
 			<p>
 				Thank you for choosing to be part of our community at Queued.<br />Queued is a project by Martin Sonnberger and
 				Maximilian Hajek. When the website says "Queued", "we", "us" or "our", it is meant that statements are made on
-				behalf of all three co-creators.
+				behalf of all two co-creators.
 			</p>
 			<p class="mt-8">
 				We are committed to protecting your personal information and your right to privacy. If you have any questions or

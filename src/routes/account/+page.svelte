@@ -11,7 +11,7 @@
 	<title>Queued • Account</title>
 </svelte:head>
 
-<main class="max-w-2xl w-full mt-10">
+<main class="max-w-2xl w-full mt-10 px-4 lg:px-0">
 	<h1 class="text-6xl font-bold mb-20 mt-4">My Account</h1>
 
 	<h2 class="text-xl font-bold mb-4">Queues</h2>
@@ -31,13 +31,14 @@
 			{/each}
 		</ul>
 	{:else}
-		<p>You have no Queues yet.</p>
+		<p class="mb-3">You have no Queues yet.</p>
 		<Button href="/queue/new">Create Queue</Button>
 	{/if}
 
 	<h2 class="text-xl font-bold mt-10 mb-4">Danger Zone</h2>
 
-	<form action="?/delete_account" method="post">
+	<form action="?/delete_account" method="post" class="flex gap-5 items-center flex-wrap">
 		<Button type="submit" variant="danger"><span>Delete account</span></Button>
+		<p class="italic text-red-500 text-sm">This action is irreversible.</p>
 	</form>
 </main>

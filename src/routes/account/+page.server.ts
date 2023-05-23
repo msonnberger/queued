@@ -45,18 +45,16 @@ export const actions = {
 		}
 
 		try {
-			await db.transaction(async (tx) => {
-				if (cookies.get('voter-id') !== undefined) {
-					await tx.delete(votes).where(eq(votes.voter_id, cookies.get('voter-id') as string));
-				}
-
-				await auth.deleteUser(session.userId);
-				cookies.delete('voter-id', { path: '/' });
-			});
-
-			throw redirect(303, '/');
+			if (cookies.get('voter-id') !== undefined) {
+				await db.delete(votes).where(eq(votes.voter_id, cookies.get('voter-id') as string));
+			}
+			await db.delete(queues).where(eq(queues.owner_id, session.userId));
+			await auth.deleteUser(session.userId);
+			cookies.delete('voter-id', { path: '/' });
 		} catch (err) {
 			return fail(500, { message: 'Could not delete your Account' });
 		}
+
+		throw redirect(303, '/');
 	}
 };

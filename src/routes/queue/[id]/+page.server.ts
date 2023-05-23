@@ -1,18 +1,8 @@
-import { eq, type InferModel } from 'drizzle-orm';
+import { error } from '@sveltejs/kit';
 
 import type { TrackObject } from '$lib/api/spotify';
 import { db } from '$lib/server/db/db';
-import { queues, tracks, votes } from '$lib/server/db/schema';
 import type { Queue as StoreQueue } from '$lib/types';
-
-type Queue = InferModel<typeof queues>;
-type Track = InferModel<typeof tracks>;
-type Vote = InferModel<typeof votes>;
-
-interface Result {
-	queue: Queue;
-	tracks: Record<number, Track & { votes: Vote[] }>;
-}
 
 export async function load({ cookies, locals, params, fetch }) {
 	if (cookies.get('voter-id') === undefined) {
@@ -23,50 +13,32 @@ export async function load({ cookies, locals, params, fetch }) {
 
 	const { access_token } = await locals.get_spotify_tokens();
 
-	const data = await db
-		.select({
-			queue: queues,
-			track: tracks,
-			vote: votes
-		})
-		.from(queues)
-		.leftJoin(tracks, eq(tracks.qid, queues.id))
-		.leftJoin(votes, eq(votes.track_id, tracks.id))
-		.where(eq(queues.id, params.id));
-
-	const result = data.reduce<Result>(
-		(acc, row) => {
-			const track = row.track;
-			const vote = row.vote;
-
-			if (track && Object.keys(track).length > 0) {
-				if (!acc.tracks[track.id]) {
-					acc.tracks[track.id] = { ...track, votes: [] };
-				}
-
-				if (vote) {
-					acc.tracks[track.id].votes.push(vote);
+	const queue = await db.query.queues.findFirst({
+		with: {
+			tracks: {
+				with: {
+					votes: true
 				}
 			}
-
-			return acc;
 		},
-		{ queue: data[0].queue, tracks: [] }
-	);
+		where: (queues, { eq }) => eq(queues.id, params.id)
+	});
 
-	const currently_playing_id = result.queue.current_track_uri?.split(':').at(-1);
-	let spotify_track_ids = Object.values(result.tracks)
-		.map((track) => track.spotify_uri.split(':').at(-1))
-		.join(',');
+	if (queue === undefined) {
+		throw error(404, 'This Queue does not exist.');
+	}
+
+	const currently_playing_id = queue.current_track_uri?.split(':').at(-1);
+	let spotify_track_ids = queue.tracks.map((track) => track.spotify_uri.split(':').at(-1)).join(',');
 
 	if (currently_playing_id) {
 		spotify_track_ids = spotify_track_ids ? `${currently_playing_id},${spotify_track_ids}` : currently_playing_id;
 	}
 
 	const store_queue: StoreQueue = {
-		name: result.queue.name,
-		id: result.queue.id,
-		owner_id: result.queue.owner_id,
+		name: queue.name,
+		id: queue.id,
+		owner_id: queue.owner_id,
 		tracks: []
 	};
 	let currently_playing_track: TrackObject | undefined;
@@ -81,7 +53,7 @@ export async function load({ cookies, locals, params, fetch }) {
 		}
 
 		store_queue.tracks =
-			Object.values(result.tracks).map((db_track, i) => {
+			queue.tracks.map((db_track, i) => {
 				const votes = db_track.votes;
 				return {
 					...spotify_tracks[i],

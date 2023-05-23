@@ -5,6 +5,9 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			screens: {
+				xs: '530px'
+			},
 			spacing: {
 				sidebar: default_theme.spacing[96]
 			},

@@ -51,7 +51,7 @@
 		};
 	}
 
-	$: encoded_text = encodeURIComponent('Join my Queue!\n' + $page.url.href);
+	$: encoded_text = encodeURIComponent('Join me on Queued!\n' + $page.url.href);
 	$: whatsapp_url = `https://${is_mobile_browser() ? 'api' : 'web'}.whatsapp.com/send?text=${encoded_text}`;
 	$: sms_url = `sms:?&body=${encoded_text}`;
 

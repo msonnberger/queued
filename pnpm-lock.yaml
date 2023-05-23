@@ -3,10 +3,10 @@ lockfileVersion: '6.0'
 dependencies:
   '@lucia-auth/adapter-postgresql':
     specifier: 1.0.1
-    version: 1.0.1(lucia-auth@1.6.0)(pg@8.11.0)
+    version: 1.0.1(lucia-auth@1.7.0)(pg@8.11.0)
   '@lucia-auth/oauth':
     specifier: 1.1.0
-    version: 1.1.0(lucia-auth@1.6.0)
+    version: 1.1.0(lucia-auth@1.7.0)
   '@vercel/analytics':
     specifier: 1.0.1
     version: 1.0.1
@@ -15,16 +15,16 @@ dependencies:
     version: 0.6.0(typescript@5.0.4)
   drizzle-orm:
     specifier: 0.26.0
-    version: 0.26.0(@types/pg@8.6.6)(pg@8.11.0)
+    version: 0.26.0(@types/pg@8.10.1)(pg@8.11.0)
   lucia-auth:
-    specifier: 1.6.0
-    version: 1.6.0
+    specifier: 1.7.0
+    version: 1.7.0
   lucide-svelte:
     specifier: 0.220.0
     version: 0.220.0(svelte@3.59.1)
   oazapfts:
     specifier: 4.7.1
-    version: 4.7.1(openapi-types@12.1.0)
+    version: 4.7.1(openapi-types@12.1.1)
   pg:
     specifier: 8.11.0
     version: 8.11.0
@@ -58,8 +58,8 @@ devDependencies:
     specifier: 3.7.2
     version: 3.7.2(prettier@2.8.8)
   '@playwright/test':
-    specifier: 1.34.0
-    version: 1.34.0
+    specifier: 1.34.1
+    version: 1.34.1
   '@sveltejs/adapter-vercel':
     specifier: 3.0.0
     version: 3.0.0(@sveltejs/kit@1.18.0)
@@ -73,17 +73,17 @@ devDependencies:
     specifier: 3.2.2
     version: 3.2.2(svelte@3.59.1)
   '@types/pg':
-    specifier: 8.6.6
-    version: 8.6.6
+    specifier: 8.10.1
+    version: 8.10.1
   '@types/qrcode':
     specifier: 1.5.0
     version: 1.5.0
   '@typescript-eslint/eslint-plugin':
-    specifier: 5.59.6
-    version: 5.59.6(@typescript-eslint/parser@5.59.6)(eslint@8.41.0)(typescript@5.0.4)
+    specifier: 5.59.7
+    version: 5.59.7(@typescript-eslint/parser@5.59.7)(eslint@8.41.0)(typescript@5.0.4)
   '@typescript-eslint/parser':
-    specifier: 5.59.6
-    version: 5.59.6(eslint@8.41.0)(typescript@5.0.4)
+    specifier: 5.59.7
+    version: 5.59.7(eslint@8.41.0)(typescript@5.0.4)
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.23)
@@ -106,8 +106,8 @@ devDependencies:
     specifier: 22.0.0
     version: 22.0.0
   openapi-types:
-    specifier: 12.1.0
-    version: 12.1.0
+    specifier: 12.1.1
+    version: 12.1.1
   postcss:
     specifier: 8.4.23
     version: 8.4.23
@@ -178,7 +178,7 @@ packages:
     resolution: {integrity: sha512-QAkD5kK2b1WfjDS/UQn/qQkbwF31uqRjPTrsCs5ZG9BQGAkjwvqGFjjPqAuzac/IYzpPtRzjCP1WrTuAIjMrXg==}
     dev: false
 
-  /@apidevtools/swagger-parser@10.1.0(openapi-types@12.1.0):
+  /@apidevtools/swagger-parser@10.1.0(openapi-types@12.1.1):
     resolution: {integrity: sha512-9Kt7EuS/7WbMAUv2gSziqjvxwDbFSg3Xeyfuj5laUODX8o/k/CpsAKiQ8W7/R88eXFTMbJYg6+7uAmOWNKmwnw==}
     peerDependencies:
       openapi-types: '>=7'
@@ -190,7 +190,7 @@ packages:
       ajv: 8.12.0
       ajv-draft-04: 1.0.0(ajv@8.12.0)
       call-me-maybe: 1.0.2
-      openapi-types: 12.1.0
+      openapi-types: 12.1.1
     dev: false
 
   /@babel/code-frame@7.18.6:
@@ -762,7 +762,7 @@ packages:
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
     dev: false
 
-  /@lucia-auth/adapter-postgresql@1.0.1(lucia-auth@1.6.0)(pg@8.11.0):
+  /@lucia-auth/adapter-postgresql@1.0.1(lucia-auth@1.7.0)(pg@8.11.0):
     resolution: {integrity: sha512-+5A5Yyl8itjHB2bqNQWIJAxNAMBkQsk/kad+WGBRkXmdDTwj+854fmC4nTYprsO2M0q92KfjNZhdCBh4UD2Sgg==}
     peerDependencies:
       lucia-auth: ^1.4.0
@@ -771,16 +771,16 @@ packages:
       pg:
         optional: true
     dependencies:
-      lucia-auth: 1.6.0
+      lucia-auth: 1.7.0
       pg: 8.11.0
     dev: false
 
-  /@lucia-auth/oauth@1.1.0(lucia-auth@1.6.0):
+  /@lucia-auth/oauth@1.1.0(lucia-auth@1.7.0):
     resolution: {integrity: sha512-x/XTbguX2sdbMo6xhAUlWUUdFpvCjT52z/o6E3i5WWfGmn6UT32qNMLZc22KPK+lWHmybK4yzGhXkQtmiSoDFg==}
     peerDependencies:
       lucia-auth: 1.x
     dependencies:
-      lucia-auth: 1.6.0
+      lucia-auth: 1.7.0
     dev: false
 
   /@mapbox/node-pre-gyp@1.0.10:
@@ -822,13 +822,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test@1.34.0:
-    resolution: {integrity: sha512-GIALJVODOIrMflLV54H3Cow635OfrTwOu24ZTDyKC66uchtFX2NcCRq83cLdakMjZKYK78lODNLQSYBj2OgaTw==}
+  /@playwright/test@1.34.1:
+    resolution: {integrity: sha512-hKBpxD79vGkmeqLkJwPBjd4DMUahf1W7ra+83lDNL4JPmLhjITMiy0HoR0WM/PGU6nqnl1cisHc3yKQQgKMxOQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.34.0
+      playwright-core: 1.34.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -1013,12 +1013,12 @@ packages:
   /@types/node@18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
 
-  /@types/pg@8.6.6:
-    resolution: {integrity: sha512-O2xNmXebtwVekJDD+02udOncjVcMZQuTEQEMpKJ0ZRf5E7/9JJX3izhKUcUifBkyKpljyUM6BTgy2trmviKlpw==}
+  /@types/pg@8.10.1:
+    resolution: {integrity: sha512-AmEHA/XxMxemQom5iDwP62FYNkv+gDDnetRG7v2N2dPtju7UKI7FknUimcZo7SodKTHtckYPzaTqUEvUKbVJEA==}
     dependencies:
       '@types/node': 18.11.18
       pg-protocol: 1.6.0
-      pg-types: 2.2.0
+      pg-types: 4.0.1
 
   /@types/pug@2.0.6:
     resolution: {integrity: sha512-SnHmG9wN1UVmagJOnyo/qkk0Z7gejYxOYYmaAwr5u2yFYfsupN3sg10kyzN8Hep/2zbHxCnsumxOoRIRMBwKCg==}
@@ -1062,8 +1062,8 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: true
 
-  /@typescript-eslint/eslint-plugin@5.59.6(@typescript-eslint/parser@5.59.6)(eslint@8.41.0)(typescript@5.0.4):
-    resolution: {integrity: sha512-sXtOgJNEuRU5RLwPUb1jxtToZbgvq3M6FPpY4QENxoOggK+UpTxUBpj6tD8+Qh2g46Pi9We87E+eHnUw8YcGsw==}
+  /@typescript-eslint/eslint-plugin@5.59.7(@typescript-eslint/parser@5.59.7)(eslint@8.41.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-BL+jYxUFIbuYwy+4fF86k5vdT9lT0CNJ6HtwrIvGh0PhH8s0yy5rjaKH2fDCrz5ITHy07WCzVGNvAmjJh4IJFA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       '@typescript-eslint/parser': ^5.0.0
@@ -1074,10 +1074,10 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.4.0
-      '@typescript-eslint/parser': 5.59.6(eslint@8.41.0)(typescript@5.0.4)
-      '@typescript-eslint/scope-manager': 5.59.6
-      '@typescript-eslint/type-utils': 5.59.6(eslint@8.41.0)(typescript@5.0.4)
-      '@typescript-eslint/utils': 5.59.6(eslint@8.41.0)(typescript@5.0.4)
+      '@typescript-eslint/parser': 5.59.7(eslint@8.41.0)(typescript@5.0.4)
+      '@typescript-eslint/scope-manager': 5.59.7
+      '@typescript-eslint/type-utils': 5.59.7(eslint@8.41.0)(typescript@5.0.4)
+      '@typescript-eslint/utils': 5.59.7(eslint@8.41.0)(typescript@5.0.4)
       debug: 4.3.4
       eslint: 8.41.0
       grapheme-splitter: 1.0.4
@@ -1090,8 +1090,8 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/parser@5.59.6(eslint@8.41.0)(typescript@5.0.4):
-    resolution: {integrity: sha512-7pCa6al03Pv1yf/dUg/s1pXz/yGMUBAw5EeWqNTFiSueKvRNonze3hma3lhdsOrQcaOXhbk5gKu2Fludiho9VA==}
+  /@typescript-eslint/parser@5.59.7(eslint@8.41.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-VhpsIEuq/8i5SF+mPg9jSdIwgMBBp0z9XqjiEay+81PYLJuroN+ET1hM5IhkiYMJd9MkTz8iJLt7aaGAgzWUbQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -1100,9 +1100,9 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/scope-manager': 5.59.6
-      '@typescript-eslint/types': 5.59.6
-      '@typescript-eslint/typescript-estree': 5.59.6(typescript@5.0.4)
+      '@typescript-eslint/scope-manager': 5.59.7
+      '@typescript-eslint/types': 5.59.7
+      '@typescript-eslint/typescript-estree': 5.59.7(typescript@5.0.4)
       debug: 4.3.4
       eslint: 8.41.0
       typescript: 5.0.4
@@ -1110,16 +1110,16 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/scope-manager@5.59.6:
-    resolution: {integrity: sha512-gLbY3Le9Dxcb8KdpF0+SJr6EQ+hFGYFl6tVY8VxLPFDfUZC7BHFw+Vq7bM5lE9DwWPfx4vMWWTLGXgpc0mAYyQ==}
+  /@typescript-eslint/scope-manager@5.59.7:
+    resolution: {integrity: sha512-FL6hkYWK9zBGdxT2wWEd2W8ocXMu3K94i3gvMrjXpx+koFYdYV7KprKfirpgY34vTGzEPPuKoERpP8kD5h7vZQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
-      '@typescript-eslint/types': 5.59.6
-      '@typescript-eslint/visitor-keys': 5.59.6
+      '@typescript-eslint/types': 5.59.7
+      '@typescript-eslint/visitor-keys': 5.59.7
     dev: true
 
-  /@typescript-eslint/type-utils@5.59.6(eslint@8.41.0)(typescript@5.0.4):
-    resolution: {integrity: sha512-A4tms2Mp5yNvLDlySF+kAThV9VTBPCvGf0Rp8nl/eoDX9Okun8byTKoj3fJ52IJitjWOk0fKPNQhXEB++eNozQ==}
+  /@typescript-eslint/type-utils@5.59.7(eslint@8.41.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-ozuz/GILuYG7osdY5O5yg0QxXUAEoI4Go3Do5xeu+ERH9PorHBPSdvD3Tjp2NN2bNLh1NJQSsQu2TPu/Ly+HaQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '*'
@@ -1128,8 +1128,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/typescript-estree': 5.59.6(typescript@5.0.4)
-      '@typescript-eslint/utils': 5.59.6(eslint@8.41.0)(typescript@5.0.4)
+      '@typescript-eslint/typescript-estree': 5.59.7(typescript@5.0.4)
+      '@typescript-eslint/utils': 5.59.7(eslint@8.41.0)(typescript@5.0.4)
       debug: 4.3.4
       eslint: 8.41.0
       tsutils: 3.21.0(typescript@5.0.4)
@@ -1138,13 +1138,13 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/types@5.59.6:
-    resolution: {integrity: sha512-tH5lBXZI7T2MOUgOWFdVNUILsI02shyQvfzG9EJkoONWugCG77NDDa1EeDGw7oJ5IvsTAAGVV8I3Tk2PNu9QfA==}
+  /@typescript-eslint/types@5.59.7:
+    resolution: {integrity: sha512-UnVS2MRRg6p7xOSATscWkKjlf/NDKuqo5TdbWck6rIRZbmKpVNTLALzNvcjIfHBE7736kZOFc/4Z3VcZwuOM/A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree@5.59.6(typescript@5.0.4):
-    resolution: {integrity: sha512-vW6JP3lMAs/Tq4KjdI/RiHaaJSO7IUsbkz17it/Rl9Q+WkQ77EOuOnlbaU8kKfVIOJxMhnRiBG+olE7f3M16DA==}
+  /@typescript-eslint/typescript-estree@5.59.7(typescript@5.0.4):
+    resolution: {integrity: sha512-4A1NtZ1I3wMN2UGDkU9HMBL+TIQfbrh4uS0WDMMpf3xMRursDbqEf1ahh6vAAe3mObt8k3ZATnezwG4pdtWuUQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       typescript: '*'
@@ -1152,8 +1152,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/types': 5.59.6
-      '@typescript-eslint/visitor-keys': 5.59.6
+      '@typescript-eslint/types': 5.59.7
+      '@typescript-eslint/visitor-keys': 5.59.7
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
@@ -1164,8 +1164,8 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/utils@5.59.6(eslint@8.41.0)(typescript@5.0.4):
-    resolution: {integrity: sha512-vzaaD6EXbTS29cVH0JjXBdzMt6VBlv+hE31XktDRMX1j3462wZCJa7VzO2AxXEXcIl8GQqZPcOPuW/Z1tZVogg==}
+  /@typescript-eslint/utils@5.59.7(eslint@8.41.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-yCX9WpdQKaLufz5luG4aJbOpdXf/fjwGMcLFXZVPUz3QqLirG5QcwwnIHNf8cjLjxK4qtzTO8udUtMQSAToQnQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -1173,9 +1173,9 @@ packages:
       '@eslint-community/eslint-utils': 4.2.0(eslint@8.41.0)
       '@types/json-schema': 7.0.11
       '@types/semver': 7.3.13
-      '@typescript-eslint/scope-manager': 5.59.6
-      '@typescript-eslint/types': 5.59.6
-      '@typescript-eslint/typescript-estree': 5.59.6(typescript@5.0.4)
+      '@typescript-eslint/scope-manager': 5.59.7
+      '@typescript-eslint/types': 5.59.7
+      '@typescript-eslint/typescript-estree': 5.59.7(typescript@5.0.4)
       eslint: 8.41.0
       eslint-scope: 5.1.1
       semver: 7.3.8
@@ -1184,11 +1184,11 @@ packages:
       - typescript
     dev: true
 
-  /@typescript-eslint/visitor-keys@5.59.6:
-    resolution: {integrity: sha512-zEfbFLzB9ETcEJ4HZEEsCR9HHeNku5/Qw1jSS5McYJv5BR+ftYXwFFAH5Al+xkGaZEqowMwl7uoJjQb1YSPF8Q==}
+  /@typescript-eslint/visitor-keys@5.59.7:
+    resolution: {integrity: sha512-tyN+X2jvMslUszIiYbF0ZleP+RqQsFVpGrKI6e0Eet1w8WmhsAtmzaqm8oM8WJQ1ysLwhnsK/4hYHJjOgJVfQQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
-      '@typescript-eslint/types': 5.59.6
+      '@typescript-eslint/types': 5.59.7
       eslint-visitor-keys: 3.4.1
     dev: true
 
@@ -1937,7 +1937,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.26.0(@types/pg@8.6.6)(pg@8.11.0):
+  /drizzle-orm@0.26.0(@types/pg@8.10.1)(pg@8.11.0):
     resolution: {integrity: sha512-ztjhHehcuG5+lpGYxfT/L5I+yd/Z0dOf0fV3cS2ywBU01wkpxjwl4EJZVT7kVzjYfM8kwMGDghAPRPBCK0vULA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -1996,7 +1996,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@types/pg': 8.6.6
+      '@types/pg': 8.10.1
       pg: 8.11.0
     dev: false
 
@@ -3311,8 +3311,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucia-auth@1.6.0:
-    resolution: {integrity: sha512-LDk191i/b8ARy+m24CJEd4DbAPeXDOIMVEzSNq/beHSKHqyAAn96E/kcKnDW/8ts4pDQtVT2UTjpJgZRIeNIpw==}
+  /lucia-auth@1.7.0:
+    resolution: {integrity: sha512-JisZE50dlvVdX726TSxUH0uoI/bwBrgSjO/+Ts/Yrk7TseKtcK8ezDNCAYUCI1XK3PHm37jgobklELpxeAmYLw==}
     dev: false
 
   /lucide-svelte@0.220.0(svelte@3.59.1):
@@ -3618,11 +3618,11 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /oazapfts@4.7.1(openapi-types@12.1.0):
+  /oazapfts@4.7.1(openapi-types@12.1.1):
     resolution: {integrity: sha512-htQLs46aeuV0DTuVoBKH2AgAudhXDSWm+q41SFPu3O3VvaJV77Jz8yroCEouFp/+7fKIU4RC5wbOgcqKftaEFw==}
     hasBin: true
     dependencies:
-      '@apidevtools/swagger-parser': 10.1.0(openapi-types@12.1.0)
+      '@apidevtools/swagger-parser': 10.1.0(openapi-types@12.1.1)
       lodash: 4.17.21
       minimist: 1.2.8
       swagger2openapi: 7.0.8
@@ -3669,14 +3669,17 @@ packages:
       object-keys: 1.1.1
     dev: true
 
+  /obuf@1.1.2:
+    resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
+
   /once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
     dev: true
 
-  /openapi-types@12.1.0:
-    resolution: {integrity: sha512-XpeCy01X6L5EpP+6Hc3jWN7rMZJ+/k1lwki/kTmWzbVhdPie3jd5O2ZtedEx8Yp58icJ0osVldLMrTB/zslQXA==}
+  /openapi-types@12.1.1:
+    resolution: {integrity: sha512-m/DJaEqOUDSU8KoI74E6A3TokccuDOJ81ewZ6kLFwUT1KEIE0GDWvErtnJJDU4sySx8JKF5kk2GzHUuK6f+VHA==}
 
   /optionator@0.9.1:
     resolution: {integrity: sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==}
@@ -3792,6 +3795,10 @@ packages:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
 
+  /pg-numeric@1.0.2:
+    resolution: {integrity: sha512-BM/Thnrw5jm2kKLE5uJkXqqExRUY/toLHda65XgFTBTFYZyopbKjBe29Ii3RbkvlsMoFwD+tHeGaCjjv0gHlyw==}
+    engines: {node: '>=4'}
+
   /pg-pool@3.6.0(pg@8.11.0):
     resolution: {integrity: sha512-clFRf2ksqd+F497kWFyM21tMjeikn60oGDmqMT8UBrynEwVEX/5R5xd2sdvdo1cZCFlguORNpVuqxIj+aK4cfQ==}
     peerDependencies:
@@ -3812,6 +3819,19 @@ packages:
       postgres-bytea: 1.0.0
       postgres-date: 1.0.7
       postgres-interval: 1.2.0
+    dev: false
+
+  /pg-types@4.0.1:
+    resolution: {integrity: sha512-hRCSDuLII9/LE3smys1hRHcu5QGcLs9ggT7I/TCs0IE+2Eesxi9+9RWAAwZ0yaGjxoWICF/YHLOEjydGujoJ+g==}
+    engines: {node: '>=10'}
+    dependencies:
+      pg-int8: 1.0.1
+      pg-numeric: 1.0.2
+      postgres-array: 3.0.2
+      postgres-bytea: 3.0.0
+      postgres-date: 2.0.1
+      postgres-interval: 3.0.0
+      postgres-range: 1.1.3
 
   /pg@8.11.0:
     resolution: {integrity: sha512-meLUVPn2TWgJyLmy7el3fQQVwft4gU5NGyvV0XbD41iU9Jbg8lCH4zexhIkihDzVHJStlt6r088G6/fWeNjhXA==}
@@ -3866,9 +3886,10 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core@1.34.0:
-    resolution: {integrity: sha512-fMUY1+iR6kYbJF/EsOOqzBA99ZHXbw9sYPNjwA4X/oV0hVF/1aGlWYBGPVUEqxBkGANDKMziYoOdKGU5DIP5Gg==}
+  /playwright-core@1.34.1:
+    resolution: {integrity: sha512-4Y5hGLoSrnB/BXj2NFKBNWP/bI9uVejTVbso1ZBtkKZ+O2KiVIeCJ3R4c7Cf2PbP7htjLolHXY+mImt2IWOlEg==}
     engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /pngjs@5.0.0:
@@ -3949,20 +3970,45 @@ packages:
   /postgres-array@2.0.0:
     resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
     engines: {node: '>=4'}
+    dev: false
+
+  /postgres-array@3.0.2:
+    resolution: {integrity: sha512-6faShkdFugNQCLwucjPcY5ARoW1SlbnrZjmGl0IrrqewpvxvhSLHimCVzqeuULCbG0fQv7Dtk1yDbG3xv7Veog==}
+    engines: {node: '>=12'}
 
   /postgres-bytea@1.0.0:
     resolution: {integrity: sha512-xy3pmLuQqRBZBXDULy7KbaitYqLcmxigw14Q5sj8QBVLqEwXfeybIKVWiqAXTlcvdvb0+xkOtDbfQMOf4lST1w==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /postgres-bytea@3.0.0:
+    resolution: {integrity: sha512-CNd4jim9RFPkObHSjVHlVrxoVQXz7quwNFpz7RY1okNNme49+sVyiTvTRobiLV548Hx/hb1BG+iE7h9493WzFw==}
+    engines: {node: '>= 6'}
+    dependencies:
+      obuf: 1.1.2
 
   /postgres-date@1.0.7:
     resolution: {integrity: sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /postgres-date@2.0.1:
+    resolution: {integrity: sha512-YtMKdsDt5Ojv1wQRvUhnyDJNSr2dGIC96mQVKz7xufp07nfuFONzdaowrMHjlAzY6GDLd4f+LUHHAAM1h4MdUw==}
+    engines: {node: '>=12'}
 
   /postgres-interval@1.2.0:
     resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       xtend: 4.0.2
+    dev: false
+
+  /postgres-interval@3.0.0:
+    resolution: {integrity: sha512-BSNDnbyZCXSxgA+1f5UU2GmwhoI0aU5yMxRGO8CdFEcY2BQF9xm/7MqKnYoM1nJDk8nONNWDk9WeSmePFhQdlw==}
+    engines: {node: '>=12'}
+
+  /postgres-range@1.1.3:
+    resolution: {integrity: sha512-VdlZoocy5lCP0c/t66xAfclglEapXPCIVhqqJRncYpvbCgImF0w67aPKfbqUMr72tO2k5q0TdTZwCLjPTI6C9g==}
 
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -5161,6 +5207,7 @@ packages:
   /xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
     engines: {node: '>=0.4'}
+    dev: false
 
   /y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}

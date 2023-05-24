@@ -82,7 +82,13 @@
 				aria-labelledby="share-sheet-title"
 				class="py-6 px-7 bg-slate-50 dark:bg-slate-700 rounded-t-2xl w-full max-w-xl shadow-xl flex flex-col items-center"
 			>
-				<img src="{$page.url.pathname}/qrcode.svg" alt="QR Code" class="aspect-square mb-8 dark:invert max-w-[13rem]" />
+				<img
+					src="{$page.url.pathname}/qrcode.svg"
+					alt="QR Code"
+					class="aspect-square mb-8 dark:invert max-w-[13rem]"
+					width="290"
+					height="290"
+				/>
 
 				<div>
 					<p

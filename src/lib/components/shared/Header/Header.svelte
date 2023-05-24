@@ -15,7 +15,7 @@
 	class:lg:ml-sidebar={$page.route.id === '/queue/[id]'}
 >
 	<div class="flex justify-center flex-[1] order-1">
-		<a href="/" class="w-9 h-9 mr-auto"><Logo /></a>
+		<a href="/" class="w-9 h-9 mr-auto" aria-label="Home"><Logo /></a>
 	</div>
 	{#if qid}
 		<div class="flex justify-center grow order-3 xs:order-2 xs:w-auto w-full">

@@ -25,7 +25,7 @@
 	data-testid="track-item-{testid}"
 >
 	<div class="flex items-center">
-		<img src={track?.album?.images[2].url} alt="Album cover" />
+		<img src={track?.album?.images[2].url} alt="Album cover" width="64" height="64" />
 		<div class="pl-2 max-w-[12rem] lg:max-w-[14rem]">
 			<p class="truncate text-base font-bold leading-6">{track.name}</p>
 			<p class="cate text-sm font-normal text-slate-500 dark:text-slate-400">{format_artists(track.artists)}</p>

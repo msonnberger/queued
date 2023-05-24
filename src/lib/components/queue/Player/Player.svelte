@@ -169,7 +169,7 @@
 >
 	<div class="block aspect-square w-24 sm:w-40 bg-slate-200 dark:bg-slate-700">
 		{#if $player_store.track?.album.images[0].url}
-			<img src={$player_store.track.album.images[0].url} alt="Album cover" />
+			<img src={$player_store.track.album.images[0].url} alt="Album cover" width="100" height="100" />
 		{:else}
 			<Vinyl />
 		{/if}

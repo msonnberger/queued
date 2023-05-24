@@ -22,6 +22,6 @@
 
 	<div class="flex gap-3 lg:gap-5 items-center">
 		<span class="text-slate-600 dark:text-slate-400">Data by</span>
-		<img alt="Spotify Logo" src={spotify_logo} class="h-9" />
+		<img alt="Spotify Logo" src={spotify_logo} class="h-9" width="120" height="36" />
 	</div>
 </footer>

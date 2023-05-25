@@ -14,17 +14,17 @@ dependencies:
     specifier: 0.6.0
     version: 0.6.0(typescript@5.0.4)
   drizzle-orm:
-    specifier: 0.26.0
-    version: 0.26.0(@types/pg@8.10.1)(pg@8.11.0)
+    specifier: 0.26.1
+    version: 0.26.1(@types/pg@8.10.1)(pg@8.11.0)
   lucia-auth:
     specifier: 1.7.0
     version: 1.7.0
   lucide-svelte:
-    specifier: 0.220.0
-    version: 0.220.0(svelte@3.59.1)
+    specifier: 0.221.0
+    version: 0.221.0(svelte@3.59.1)
   oazapfts:
     specifier: 4.7.1
-    version: 4.7.1(openapi-types@12.1.1)
+    version: 4.7.1(openapi-types@12.1.3)
   pg:
     specifier: 8.11.0
     version: 8.11.0
@@ -58,8 +58,8 @@ devDependencies:
     specifier: 3.7.2
     version: 3.7.2(prettier@2.8.8)
   '@playwright/test':
-    specifier: 1.34.2
-    version: 1.34.2
+    specifier: 1.34.3
+    version: 1.34.3
   '@sveltejs/adapter-vercel':
     specifier: 3.0.0
     version: 3.0.0(@sveltejs/kit@1.18.0)
@@ -106,8 +106,8 @@ devDependencies:
     specifier: 22.0.0
     version: 22.0.0
   openapi-types:
-    specifier: 12.1.1
-    version: 12.1.1
+    specifier: 12.1.3
+    version: 12.1.3
   postcss:
     specifier: 8.4.23
     version: 8.4.23
@@ -178,7 +178,7 @@ packages:
     resolution: {integrity: sha512-QAkD5kK2b1WfjDS/UQn/qQkbwF31uqRjPTrsCs5ZG9BQGAkjwvqGFjjPqAuzac/IYzpPtRzjCP1WrTuAIjMrXg==}
     dev: false
 
-  /@apidevtools/swagger-parser@10.1.0(openapi-types@12.1.1):
+  /@apidevtools/swagger-parser@10.1.0(openapi-types@12.1.3):
     resolution: {integrity: sha512-9Kt7EuS/7WbMAUv2gSziqjvxwDbFSg3Xeyfuj5laUODX8o/k/CpsAKiQ8W7/R88eXFTMbJYg6+7uAmOWNKmwnw==}
     peerDependencies:
       openapi-types: '>=7'
@@ -190,7 +190,7 @@ packages:
       ajv: 8.12.0
       ajv-draft-04: 1.0.0(ajv@8.12.0)
       call-me-maybe: 1.0.2
-      openapi-types: 12.1.1
+      openapi-types: 12.1.3
     dev: false
 
   /@babel/code-frame@7.18.6:
@@ -822,13 +822,13 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@playwright/test@1.34.2:
-    resolution: {integrity: sha512-v/LBnwzD0225q8xEv3t9DmNPX61yvNnEbiA8PoNk1fbkxApJFCWYLPpQbdVWzHaARdZD9g1PYBoOvnffortfKw==}
+  /@playwright/test@1.34.3:
+    resolution: {integrity: sha512-zPLef6w9P6T/iT6XDYG3mvGOqOyb6eHaV9XtkunYs0+OzxBtrPAAaHotc0X+PJ00WPPnLfFBTl7mf45Mn8DBmw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.34.2
+      playwright-core: 1.34.3
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -1937,8 +1937,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.26.0(@types/pg@8.10.1)(pg@8.11.0):
-    resolution: {integrity: sha512-ztjhHehcuG5+lpGYxfT/L5I+yd/Z0dOf0fV3cS2ywBU01wkpxjwl4EJZVT7kVzjYfM8kwMGDghAPRPBCK0vULA==}
+  /drizzle-orm@0.26.1(@types/pg@8.10.1)(pg@8.11.0):
+    resolution: {integrity: sha512-PgHPBJ4BUi/xWEjBbaYo4eiVC7hIwPtSEAVO3QuGMzLV+YwD2jPyV2Y7nvP1jHZlA4IV9wLmkcpicBO/255XFg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -3315,8 +3315,8 @@ packages:
     resolution: {integrity: sha512-JisZE50dlvVdX726TSxUH0uoI/bwBrgSjO/+Ts/Yrk7TseKtcK8ezDNCAYUCI1XK3PHm37jgobklELpxeAmYLw==}
     dev: false
 
-  /lucide-svelte@0.220.0(svelte@3.59.1):
-    resolution: {integrity: sha512-NkMuVgKDXZOc3slRGZq/yWOJiWXmp0dnminAVHlqw0ntgT+6XufRXAqSGzsEB7gBvuGozRv1tMciiX97jx/JQg==}
+  /lucide-svelte@0.221.0(svelte@3.59.1):
+    resolution: {integrity: sha512-QWkxMMBLFmlUsQpKtHKH9ujlNTz2YIbULfNTDTotzfImDwDvadw3NjBtjkZlYwfsXDyXDX/If/0WB3wEsAr7mw==}
     peerDependencies:
       svelte: ^3.49.0
     dependencies:
@@ -3618,11 +3618,11 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /oazapfts@4.7.1(openapi-types@12.1.1):
+  /oazapfts@4.7.1(openapi-types@12.1.3):
     resolution: {integrity: sha512-htQLs46aeuV0DTuVoBKH2AgAudhXDSWm+q41SFPu3O3VvaJV77Jz8yroCEouFp/+7fKIU4RC5wbOgcqKftaEFw==}
     hasBin: true
     dependencies:
-      '@apidevtools/swagger-parser': 10.1.0(openapi-types@12.1.1)
+      '@apidevtools/swagger-parser': 10.1.0(openapi-types@12.1.3)
       lodash: 4.17.21
       minimist: 1.2.8
       swagger2openapi: 7.0.8
@@ -3678,8 +3678,8 @@ packages:
       wrappy: 1.0.2
     dev: true
 
-  /openapi-types@12.1.1:
-    resolution: {integrity: sha512-m/DJaEqOUDSU8KoI74E6A3TokccuDOJ81ewZ6kLFwUT1KEIE0GDWvErtnJJDU4sySx8JKF5kk2GzHUuK6f+VHA==}
+  /openapi-types@12.1.3:
+    resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
 
   /optionator@0.9.1:
     resolution: {integrity: sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==}
@@ -3886,8 +3886,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core@1.34.2:
-    resolution: {integrity: sha512-MrkgGWLANc5qthXduvIY1a/tuafROyTORVd86fwKwgoYrmnBooN/GgeZSBm7ljTLV2FCWNSXV3se7qeScKn83g==}
+  /playwright-core@1.34.3:
+    resolution: {integrity: sha512-2pWd6G7OHKemc5x1r1rp8aQcpvDh7goMBZlJv6Co5vCNLVcQJdhxRL09SGaY6HcyHH9aT4tiynZabMofVasBYw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true

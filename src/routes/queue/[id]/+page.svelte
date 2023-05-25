@@ -57,6 +57,11 @@
 						testid={i}
 					/>
 				</li>
+			{:else}
+				<div class="text-center mt-8 text-slate-600 dark:text-slate-400">
+					<span class="font-bold">There are no songs in this Queue.</span><br />Try adding one using the search bar
+					above!
+				</div>
 			{/each}
 		</ul>
 	</div>

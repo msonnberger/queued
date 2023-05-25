@@ -36,7 +36,7 @@ export const actions = {
 			.values({ name, owner_id: session.userId, id: get_random_string(7) })
 			.returning();
 
-		throw redirect(303, `/queue/${queue.id}?share=true`);
+		throw redirect(303, `/queue/${queue.id}`);
 	}
 };
 

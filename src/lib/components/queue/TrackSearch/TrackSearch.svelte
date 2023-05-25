@@ -88,7 +88,7 @@
 						{@const selected = $combobox.selected === result}
 
 						<li class="relative select-none flex justify-between items-center pl-4 pr-4 py-2">
-							<img src={result?.album?.images[2].url} alt="Album cover" />
+							<img src={result?.album?.images[2].url} alt="Album cover" width="64" height="64" />
 							<div class="truncate pl-2 w-full">
 								<span class="block truncate text-base font-bold leading-6 {selected ? 'font-medium' : 'font-normal'}">
 									{result.name}

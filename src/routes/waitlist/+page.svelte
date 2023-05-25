@@ -49,5 +49,5 @@
 			<Button type="submit" size="lg">Join Waitlist</Button>
 		</form>
 	</div>
-	<img src={mockup} alt="Queue Player on Desktop and iPhone" class="w-full max-w-6xl mt-20" />
+	<img src={mockup} alt="Queue Player on Desktop and iPhone" class="w-full max-w-6xl mt-20" width="1150" height="800" />
 </div>

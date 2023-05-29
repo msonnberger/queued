@@ -1,10 +1,10 @@
+import fs from 'node:fs';
 import { pg } from '@lucia-auth/adapter-postgresql';
 import type { BrowserContext, Page, WorkerInfo } from '@playwright/test';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import lucia, { type User } from 'lucia-auth';
 import { sveltekit } from 'lucia-auth/middleware';
-import fs from 'node:fs';
 import postgres from 'pg';
 
 import { queues, spotify_tokens, tracks } from '../../src/lib/server/db/schema.js';

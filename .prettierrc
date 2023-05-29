@@ -13,8 +13,6 @@
 		"^\\$lib/(.*)$",
 		"^[./]"
 	],
-	"importOrderSortSpecifiers": true,
-	"importOrderMergeDuplicateImports": true,
-	"importOrderCombineTypeAndValueImports": true,
+	"importOrderTypeScriptVersion": "5.0.4",
 	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

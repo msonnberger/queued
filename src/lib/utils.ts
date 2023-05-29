@@ -58,7 +58,7 @@ export const ms_to_min_sec = (ms: number) => {
 export const get_focusable_elements = (element?: HTMLElement | Document) =>
 	[
 		...(element ?? document).querySelectorAll(
-			'a[href], area[href], input, select, textarea, button, details, iframe, object, embed, [tabindex]:not([tabindex="-1"], [contenteditable]'
+			'a[href], area[href], input, select, textarea, button, details, iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable]'
 		)
 	].filter((el) => !el.hasAttribute('disabled'));
 

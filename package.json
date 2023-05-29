@@ -46,7 +46,7 @@
 		"vite": "4.3.9",
 		"vitest": "0.31.1"
 	},
-	"packageManager": "pnpm@8.6.0",
+	"packageManager": "pnpm@8.5.1",
 	"engines": {
 		"pnpm": "^8.0.0"
 	},

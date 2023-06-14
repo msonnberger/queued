@@ -44,7 +44,7 @@
 		"tslib": "2.5.3",
 		"typescript": "5.1.3",
 		"vite": "4.3.9",
-		"vitest": "0.32.0"
+		"vitest": "0.31.4"
 	},
 	"packageManager": "pnpm@8.6.2",
 	"engines": {
@@ -66,7 +66,7 @@
 		"qrcode": "1.5.3",
 		"svelte-french-toast": "1.0.3",
 		"svelte-headlessui": "0.0.16",
-		"svelte-transition": "0.0.8",
+		"svelte-transition": "0.0.7",
 		"tailwind-merge": "1.13.1",
 		"zod": "3.21.4"
 	}

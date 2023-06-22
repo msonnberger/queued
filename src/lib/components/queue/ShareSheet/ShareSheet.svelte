@@ -72,7 +72,9 @@
 			on:click={() => (open = false)}
 			transition:fade={{ duration: 200 }}
 			class="bg-black/70 fixed z-50 inset-0 flex items-end justify-center"
+			aria-hidden="true"
 		>
+			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 			<div
 				use:trap_focus
 				on:click|stopPropagation

@@ -37,7 +37,6 @@
 
 			if (res.ok) {
 				$add_track_store = { track, delete_track };
-				// @ts-expect-error svelte-french-toast needs to fix the argument type
 				toast(AddTrackToast, { position: 'top-right', duration: 4000 });
 			} else if (res.status === 409) {
 				toast.error(`${track.name} is already in Queue`, { position: 'top-right', duration: 2000 });

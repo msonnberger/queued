@@ -52,7 +52,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@lucia-auth/adapter-postgresql": "1.0.1",
+		"@lucia-auth/adapter-postgresql": "2.0.2",
 		"@lucia-auth/oauth": "1.2.1",
 		"@vercel/analytics": "1.0.2",
 		"class-variance-authority": "0.7.0",

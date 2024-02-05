@@ -20,7 +20,7 @@
 		"@playwright/test": "1.37.1",
 		"@sveltejs/adapter-vercel": "3.0.3",
 		"@sveltejs/kit": "1.22.6",
-		"@testing-library/jest-dom": "5.17.0",
+		"@testing-library/jest-dom": "6.4.2",
 		"@testing-library/svelte": "4.0.3",
 		"@types/pg": "8.10.2",
 		"@types/qrcode": "1.5.1",
